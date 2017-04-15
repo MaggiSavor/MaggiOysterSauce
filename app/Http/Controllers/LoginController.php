@@ -98,7 +98,7 @@ class LoginController extends Controller
                 $audit_trail['user_role'] = Auth::user()->user_type;
                 $audit_trail->save();
                 if(Auth::user()->user_type == "Admin"){
-                    return 'test';
+                    return Redirect::route('dashboard');
                 }else{
                     return 'standard user';
                     // Alert::message("Error!", "Invalid Credentials", "error"); 

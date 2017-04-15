@@ -17,7 +17,12 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-
+Route::group(['middleware' => ['auth']], function(){
+	Route::group(array('prefix' => 'admin/'), function(){
+		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
+		
+	});
+});
 // Authentication Module
 Route::get('/login', array('uses' => 'LoginController@login', 'as' => 'login'));
 Route::get('/logout', array('uses' => 'LoginController@loggedOut', 'as' => 'loggedOut'));
