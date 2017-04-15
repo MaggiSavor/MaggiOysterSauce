@@ -1,0 +1,484 @@
+/*--------------start of Head navigation--------------*/
+.navbar-default {
+  background-color:#663300;
+  border-color: #663300;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
+ 
+ .navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #000;
+  background-color: transparent;
+}
+.table-responsive {
+  overflow-x: auto;
+  min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+
+  @media screen and (max-width: @screen-xs-max) {
+    width: 100%;
+    margin-bottom: (@line-height-computed * 0.75);
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid @table-border-color;
+
+    // Tighten up spacing
+    > .table {
+      margin-bottom: 0;
+
+      // Ensure the content doesn't wrap
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th,
+          > td {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    // Special overrides for the bordered tables
+    > .table-bordered {
+      border: 0;
+
+      // Nuke the appropriate borders so that the parent can handle them
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th:first-child,
+          > td:first-child {
+            border-left: 0;
+          }
+          > th:last-child,
+          > td:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      // Only nuke the last row's bottom-border in `tbody` and `tfoot` since
+      // chances are there will be only one `tr` in a `thead` and that would
+      // remove the border altogether.
+      > tbody,
+      > tfoot {
+        > tr:last-child {
+          > th,
+          > td {
+            border-bottom: 0;
+          }
+        }
+      }
+
+    }
+  }
+}
+.pagination-des{
+margin-top:320px;
+margin-left:450px;
+	}
+/*-------------start of Navigation------------------*/
+
+/* CONTAINERS
+-------------------------------------------------*/
+
+#container {
+    width: 100%;
+    height: 100%; 
+    position: relative;
+    overflow: hidden;
+}
+
+
+#canvas {
+    width: 100%;
+    height: 100%;
+    padding: 5.5% 0; 
+    position: relative;
+
+  -webkit-transform:translateX(0);
+   -moz-transform:translateX(0);
+    -ms-transform:translateX(0);
+     -o-transform:translateX(0);
+        transform:translateX(0);
+
+   -webkit-transition:.5s ease all;
+   -moz-transition:.5s ease all;
+     -o-transition:.5s ease all;
+        transition:.5s ease all;
+
+ 
+}
+
+#nav {
+    width: 300px;
+    height: 100%;
+    background: #212121;
+    position: absolute;
+    left: -300px;
+    top: 0;
+    
+    -webkit-transition:.5s ease all;
+   -moz-transition:.5s ease all;
+     -o-transition:.5s ease all;
+        transition:.5s ease all;
+    
+    /* By default, rotate the menu 90deg inwards */
+    -webkit-transform:rotateY(-90deg);
+   -moz-transform:rotateY(-90deg);
+    -ms-transform:rotateY(-90deg);
+     -o-transform:rotateY(-90deg);
+        transform:rotateY(-90deg);
+}
+
+#container.display-nav #canvas {
+   -webkit-transform:translateX(300px);
+   -moz-transform:translateX(300px);
+    -ms-transform:translateX(300px);
+     -o-transform:translateX(300px);
+        transform:translateX(300px);
+}
+
+/* transition the menu with perspective on "show-nav" */
+#container.display-nav #nav {
+    
+    -webkit-transform-origin:100% 50%;
+   -moz-transform-origin:100% 50%;
+    -ms-transform-origin:100% 50%;
+     -o-transform-origin:100% 50%;
+        transform-origin:100% 50%;
+    
+    -webkit-transform:perspective(600px) rotateY(0deg);
+   -moz-transform:perspective(600px) rotateY(0deg);
+    -ms-transform:perspective(600px) rotateY(0deg);
+     -o-transform:perspective(600px) rotateY(0deg);
+        transform:perspective(600px) rotateY(0deg);
+
+}
+
+
+/* UTILITIES
+-------------------------------------------------*/
+#title{
+	text-align: center;
+	margin: 0;
+	padding: 2em;
+	color: white;
+	text-shadow: 0 0 1px rgba(0,0,0,0.1);
+	font-weight: 200;
+	font-size: 2em;
+	font-family: "Times New Roman", Times, serif;
+}
+
+
+.border{
+	border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.a.back {
+   color: #38935f; 
+   width: 200px;
+   text-decoration: none; 
+   text-align: center;  
+   font-size: 9px;
+   font-weight: 100;
+   display: block;
+   margin: 50px auto 0 auto;
+   border: 2px solid #38935f;
+   padding: 10px;
+
+}
+
+.a.back:hover{
+   color: #663300; 
+   border: 2px solid #663300;
+}
+
+
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.table-des{
+	width:1100px;
+	padding-left:30px;
+
+	}
+
+/* TOGGLE NAV
+-------------------------------------------------*/
+
+#toggle {
+    list-style: none;
+    margin-top: 40px;
+}
+#toggle div:hover {
+	text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    border-left: #3b5998 3px solid;
+}
+#toggle div.active {
+    background: #3b5998;
+}
+#toggle div {
+
+    cursor: pointer;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+ span.menu-icons {
+    font-size: 20px;
+    height: 20px;
+    width: 22px;
+    float: left;
+    margin: 11px 0px 10px 37px;
+    color: #fff;
+}
+
+
+span.the-btn {
+    float: right;
+    font-size: 20px;
+    height: 30px;
+    width: 43px;
+    margin-top: 10px;
+	margin-right: 8px;
+    padding:0;
+    color: #fff;
+}
+
+#toggle ul {
+    list-style: disc;
+    display: none;
+    color: #fff;
+   background: rgba(0,0,0,0.2);
+	-webkit-box-shadow:inset 0 -1px rgba(0,0,0,0);
+   -moz-box-shadow:inset 0 -1px rgba(0,0,0,0);
+        box-shadow:inset 0 -1px rgba(0,0,0,0);
+
+}
+
+#toggle li a {
+    line-height: 41px;
+    color: #fff;
+    list-style: circle;
+    width: 240px;
+    padding: 0;
+  	 margin: 0 0 0 50px;
+
+}
+#toggle a {
+	  margin: 0 0 0 47px;
+    padding: 0;
+    font-mily: 'Lato';
+    color: #fff;
+    line-height: 41px;
+    font-weight: normal;
+    font-size: 18px;
+    text-decoration: none;
+
+}
+
+#toggle ul li {
+     margin-left: 109px;  
+}
+
+#toggle ul li:hover{
+	text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    border-left: #3b5998 4px solid;
+	border-radius:5px 0px 0px 5px;
+}
+
+#toggle ul li a {
+     margin-left: 0;   
+}
+
+/*------------------- Start of Add Ons-------------------*/
+
+.logContainer{
+	height: 170px;
+	width: 450px;
+	margin:0 auto;
+	position:relative;
+	top:150px;
+	}
+.logForm{
+	border-radius:5px;
+	height:170px;
+	width:450px;
+	padding-top:20px;
+	padding-left:30px;
+	background-color:#eaeaea;
+}
+
+.pages{
+	margin-left:370px;
+	}
+.footerPosition{
+	margin-top:150px;
+	}
+.allHeader{
+	height:80px;
+	font-mily: 'Raleway', Arial, sans-serif;
+	font-weight: normal;
+	font-size: 45px;
+	margin-top: 15px;
+	color: #000;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+#abc {
+width:100%;
+height:100%;
+opacity:.95;
+top:0;
+left:0;
+display:none;
+position:fixed;
+background-color:#313131;
+overflow:auto
+}
+img#close {
+position:absolute;
+right:-14px;
+top:-14px;
+cursor:pointer
+}
+div#popupContact {
+position:absolute;
+left:50%;
+top:17%;
+margin-left:-202px;
+font-family:'Raleway',sans-serif
+}
+.form {
+max-width:400px;
+min-width:250px;
+padding:10px 50px;
+border:2px solid gray;
+border-radius:10px;
+font-family:raleway;
+background-color:#fff
+}
+
+
+hr {
+margin:10px -50px;
+border:0;
+border-top:1px solid #ccc
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+
+.searchEngine{
+	margin-top:8px;
+	}
+.position{
+	width:450px;
+	}
+.inputStyle{
+	border:none;
+	border-radius:0px;
+	}	
+.container-fluid{
+	padding-right:0px;
+	padding-left:0px;
+	}
+	
+#def{
+	width: 100%;
+	height: 100%;
+	opacity: 0.95;
+	top: 0;
+	left: 0;
+	display: none;
+	position: fixed;			
+	background-color: #313131;
+	overflow:auto;
+}
+
+
+div#popupUpdate{
+	position:absolute;
+	left:30%;
+	top:17%;
+}
+
+.form2{
+	width: 500px;
+	height: 500px;
+	padding: 10px 50px;
+	border: 2px solid gray;
+	border-radius: 5px;
+	font-family:raleway;
+	background-color: #fff;
+}
+
+.notiContainer{
+	height:500px;
+	width:180px;
+	position:absolute;
+	top:15%;
+	left:84%;
+	
+}
+.rotator{
+    position: relative;
+	margin-top:-15px;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    -webkit-animation-delay: 0s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 2s;
+    animation-delay: 0s;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0% {top: 300px; }
+  100% {top: 0;}
+}
+
+/* Standard syntax */
+@keyframes example {
+   0% {top: 300px; }
+  100% {top: 0px;}
+}
+
+.printContainer{
+	height:100%;
+	width:100%;
+}
+
+.text{
+	height:70px;
+	width: 350px;
+}
