@@ -19,7 +19,7 @@
 						<li><a href="addUser.php"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
 						<li><a href="ManageUser.php"><span class="glyphicon glyphicon-edit"></span> Manage User</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="logout.php">Logout</a></li>
+						<li><a href="{{URL::Route('loggedOut')}}">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
