@@ -115,11 +115,13 @@ class LoginController extends Controller
 
     public function loggedOut()
     {
-        $audit_trail = new AuditTrail;
-        $audit_trail['user_id'] = Auth::user()->id;
-        $audit_trail['action'] = "Logged-out";
-        $audit_trail['user_role'] = Auth::user()->user_type;
-        $audit_trail->save();
+        // $audit_trail = new AuditTrail;
+        // $audit_trail['user_id'] = Auth::user()->id;
+        // $audit_trail['action'] = "Logged-out";
+        // $audit_trail['user_role'] = Auth::user()->user_type;
+        // $audit_trail->save();
+
+        
         Auth::logout();
         Alert::message("Success!", "Successfully logged out", "success"); 
         return redirect('login');

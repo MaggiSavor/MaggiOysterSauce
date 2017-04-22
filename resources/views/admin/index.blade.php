@@ -14,6 +14,9 @@
 	<link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 	<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 
+	<script src="{!! asset('assets/sweetalert-master/dist/sweetalert.min.js') !!}"></script>
+	<link rel="stylesheet" href="{!! asset('assets/sweetalert-master/dist/sweetalert.css') !!}">
+
 	<style>
 		div.carousel-inner img {
 			margin: auto;
@@ -84,12 +87,18 @@
 			<!--  -->
 			<br>
 			<br>
-		</div><!-- /.canvas -->
+			</div><!-- /.canvas -->
 	</div>
 </div>
-		<div id="footer">
-				<br><p align="center">&copy; <?php echo date("Y");?> All Rights Reserved</p>
-			</div>
+	<div id="footer">
+		<br><p align="center">&copy; <?php echo date("Y");?> All Rights Reserved</p>
+	</div>
+
+@if (Session::has('sweet_alert.alert'))
+	<script>
+		swal({!! Session::get('sweet_alert.alert') !!});
+	</script>
+@endif		
 	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../assets/js/jquery-1.11.3.min"></script>

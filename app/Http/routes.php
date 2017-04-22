@@ -23,13 +23,17 @@ Route::group(['middleware' => ['auth']], function(){
 		
 	});
 });
+Route::group(['middleware' => ['guest']], function(){
+	Route::get('/login', array('uses' => 'LoginController@login', 'as' => 'login'));
+	Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+	Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+	Route::post('password/reset', 'Auth\PasswordController@reset');
+});
 // Authentication Module
-Route::get('/login', array('uses' => 'LoginController@login', 'as' => 'login'));
-Route::get('/logout', array('uses' => 'LoginController@loggedOut', 'as' => 'loggedOut'));
+Route::get('logoutUser', ['as' => 'loggedOut', 'uses' => 'LoginController@loggedOut']);
+// Route::get('/logoutUser', array('uses' => 'LoginController@loggedOut', 'as' => 'loggedOut'));
 Route::post('/logged_in', array('uses' => 'LoginController@loggedIn', 'as' => 'loggedIn'));
 Route::post('/register', array('uses' => 'LoginController@register', 'as' => 'register'));
 
-Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-Route::post('password/reset', 'Auth\PasswordController@reset');
+
 // end of authentication modules

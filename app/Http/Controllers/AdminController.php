@@ -14,7 +14,8 @@ use Redirect;
 class AdminController extends Controller
 {
 public function dashboard(){
-    return view('admin.index');
+    // return view('admin.index');
+    return view('admin.home');
 }
 // public function laptopProfile(){
 //     return view('standardUser.laptopProfile');
