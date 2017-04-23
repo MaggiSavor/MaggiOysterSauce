@@ -22,6 +22,12 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/sample', array('uses' => 'AdminController@sample', 'as' => 'sample'));
 		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
 		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
+
+		//Officials
+			Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
+			Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
+			Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
+		// end of officials
 		
 	});
 });

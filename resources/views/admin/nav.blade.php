@@ -207,10 +207,10 @@
                             <a href="#"><i class="fa fa-table fa-fw"></i> Officials<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">View Officials</a>
+                                    <a href="{{URL::Route('officials')}}">View Officials</a>
                                 </li>
                                 <li>
-                                    <a href="#">Officials History</a>
+                                    <a href="{{URL::Route('officialsHistory')}}">Officials History</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
