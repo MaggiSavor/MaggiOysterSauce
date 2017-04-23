@@ -17,13 +17,14 @@ public function dashboard(){
     // return view('admin.index');
     return view('admin.home');
 }
-// public function laptopProfile(){
-//     return view('standardUser.laptopProfile');
-// }
 
-// public function profile(){
-//     return view('standardUser.profile');
-// }
+public function settings(){
+    return view('admin.settings');
+}
+
+public function sample(){
+    return view('admin.sample');
+}
 
 
 }

@@ -19,7 +19,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => ['auth']], function(){
 	Route::group(array('prefix' => 'admin/'), function(){
+		Route::get('/sample', array('uses' => 'AdminController@sample', 'as' => 'sample'));
 		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
+		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
 		
 	});
 });
