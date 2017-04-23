@@ -12,8 +12,7 @@
 
 <!-- Custom Fonts -->
 <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 <style type="text/css">
     div#page-wrapper{
         background: linear-gradient(0deg, rgba(255, 255, 0,0.5), rgba(51, 0, 128,0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed;
@@ -21,7 +20,7 @@
     }
 </style>
 
-<nav class="navbar navbar-default navbar-fixed-top" id="navbar" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" id="navbar" role="navigation" style="margin-bottom: 0;">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -193,7 +192,7 @@
     </ul>
     <!-- /.navbar-top-links -->
 
-    <div class="navbar-default sidebar" role="navigation">
+    <div class="navbar-default sidebar" >
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
