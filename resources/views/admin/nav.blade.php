@@ -15,8 +15,12 @@
 
 <style type="text/css">
     div#page-wrapper{
-        background: linear-gradient(0deg, rgba(255, 255, 0,0.5), rgba(51, 0, 128,0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed;
-        background-size: 100%;
+        /*background: linear-gradient(0deg, rgba(255, 255, 0,0.5), rgba(51, 0, 128,0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed;
+        background-size: cover;
+        height: 100%;*/
+    }
+    body{
+        background-color: ;
     }
 </style>
 
@@ -192,7 +196,8 @@
     </ul>
     <!-- /.navbar-top-links -->
 
-    <div class="navbar-default sidebar" >
+    <div class="navbar-default sidebar" style="background-color: ; min-height:100% !important;
+    " >
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>

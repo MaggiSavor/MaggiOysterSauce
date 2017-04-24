@@ -32,7 +32,7 @@
         @include('admin.nav')
         
 
-        <div id="page-wrapper" style="padding-top: 0%">
+        <div id="page-wrapper" style="padding-top: 0% ">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Settings</h1>
@@ -86,14 +86,14 @@
                                 <hr />
                                 <div class="col-lg-12" style="display: inline-block; border-top: 1px dotted #8c8b8b; ">
                                     
-                                    <label><h4>Filters</h4></label>
-                                    <a type="button" id="default" data-value="0, 3, 26" data-color="#F8F8F8" style="background-color: #F8F8F8;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="black" data-value="0, 3, 26" data-color="#00031a" style="background-color: #00031a;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="blue" data-value="0, 102, 255" data-color="#0066ff" style="background-color: #0066ff;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="red" data-value="255, 0, 0" data-color="#ff0000" style="background-color: #ff0000;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="green" data-value="51, 204, 51" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="orange" data-value="255, 102, 0" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="violet" data-value="204, 0, 204" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
+                                    <label><h4>Background Filter</h4></label>
+                                    <a type="button" id="default" data-value="248, 248, 248, 0" data-color="#f8f8f8" style="background-color: #f8f8f8;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="black" data-value="0, 3, 26, 0.5" data-color="#00031a" style="background-color: #00031a;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="blue" data-value="0, 102, 255, 0.5" data-color="#0066ff" style="background-color: #0066ff;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="red" data-value="255, 0, 0, 0.5" data-color="#ff0000" style="background-color: #ff0000;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="green" data-value="51, 204, 51, 0.5" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
+                                    <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
                                 </div>
                                 <button type="button" class="btn btn-success pull-right">Save Changes</button>
                             </div>
@@ -132,8 +132,9 @@
 
         $('.filters').on('click',function(){
             // alert($(this).data('color'));
+            var bg = ('loginbg.jpg');
             var bar = ($(this).data('value'));
-            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+',0.5), rgba('+bar+',0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed', 'background-size' : '100%'});
+            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") no-repeat center center fixed', 'background-size' : '100%'});
         });
     </script>
 
