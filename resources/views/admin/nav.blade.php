@@ -13,6 +13,10 @@
 <!-- Custom Fonts -->
 <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="">Back to Top</i></a>
+
+
 <style type="text/css">
     div#page-wrapper{
         /*background: linear-gradient(0deg, rgba(255, 255, 0,0.5), rgba(51, 0, 128,0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed;
@@ -22,6 +26,52 @@
     body{
         background-color: ;
     }
+    #return-to-top {
+   
+        z-index: 99; /* Make sure it does not overlap */
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: rgb(0, 0, 0);
+        background: rgba(0, 0, 0, 0.7);
+        width: 130px;
+        height: 40px;
+        display: block;
+        text-decoration: none;
+        -webkit-border-radius: 35px;
+        -moz-border-radius: 35px;
+        border-radius: 35px;
+        display: none;
+        -webkit-transition: all 0.3s linear;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    #return-to-top i {
+        color: #fff;
+        margin: 0;
+        position: relative;
+        left: 16px;
+        top: 13px;
+        font-size: 19px;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    #return-to-top:hover {
+        background: rgba(0, 0, 0, 0.9);
+    }
+    #return-to-top:hover i {
+        color: #fff;
+        top: 5px;
+    }
+
+
+/* Extra Things */
+body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px; font-weight: 400;text-align: center;margin-top: 50px;}h3 i{color: #444;}
 </style>
 
 <nav class="navbar navbar-default navbar-static-top" id="navbar" role="navigation" style="margin-bottom: 0;">
@@ -35,146 +85,56 @@
         <a class="navbar-brand" href="{{URL::Route('sample')}}">Barangay 5 Zone 1</a>
     </div>
     <!-- /.navbar-header -->
-
     <ul class="nav navbar-top-links navbar-right">
-        <!-- /.dropdown -->
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-tasks">
-                <li>
-                    <a href="#">
-                        <div>
-                            <p>
-                                <strong>Task 1</strong>
-                                <span class="pull-right text-muted">40% Complete</span>
-                            </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <p>
-                                <strong>Task 2</strong>
-                                <span class="pull-right text-muted">20% Complete</span>
-                            </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                    <span class="sr-only">20% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <p>
-                                <strong>Task 3</strong>
-                                <span class="pull-right text-muted">60% Complete</span>
-                            </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <p>
-                                <strong>Task 4</strong>
-                                <span class="pull-right text-muted">80% Complete</span>
-                            </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                    <span class="sr-only">80% Complete (danger)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>See All Tasks</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.dropdown-tasks -->
-        </li>
-        <!-- /.dropdown -->
-        <li class="dropdown" style="color: green;">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
-            <ul class="dropdown-menu dropdown-alerts">
+            <ul class="dropdown-menu dropdown-messages">
                 <li>
                     <a href="#">
                         <div>
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small">4 minutes ago</span>
+                            <strong>John Smith</strong>
+                            <span class="pull-right text-muted">
+                                <em>Yesterday</em>
+                            </span>
                         </div>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                     <a href="#">
                         <div>
-                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                            <span class="pull-right text-muted small">12 minutes ago</span>
+                            <strong>John Smith</strong>
+                            <span class="pull-right text-muted">
+                                <em>Yesterday</em>
+                            </span>
                         </div>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                     <a href="#">
                         <div>
-                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                            <span class="pull-right text-muted small">4 minutes ago</span>
+                            <strong>John Smith</strong>
+                            <span class="pull-right text-muted">
+                                <em>Yesterday</em>
+                            </span>
                         </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-tasks fa-fw"></i> New Task
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                     <a class="text-center" href="#">
-                        <strong>See All Alerts</strong>
+                        <strong>Read All Messages</strong>
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </li>
             </ul>
-            <!-- /.dropdown-alerts -->
+            <!-- /.dropdown-messages -->
         </li>
         <!-- /.dropdown -->
         <li class="dropdown">
@@ -192,7 +152,7 @@
             </ul>
             <!-- /.dropdown-user -->
         </li>
-        <!-- /.dropdown -->
+                <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
 
@@ -246,7 +206,7 @@
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> Documents<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">View Documents</a>
+                            <a href="{{URL::Route('documents')}}">List of Documents</a>
                         </li>
                         <li>
                             <a href="#">Issued Documents</a>
@@ -308,3 +268,20 @@
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="../assets/js/light-bootstrap-dashboard.js"></script>
+
+<!-- Back to top -->
+<script type="text/javascript">
+    // ===== Scroll to Top ==== 
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 350) {        // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+        $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+});
+$('#return-to-top').click(function() {      // When arrow is clicked
+    $('body,html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+});
+</script>

@@ -24,11 +24,14 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
 
 		//Officials
-			Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
-			Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
-			Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
+		Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
+		Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
+		Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
 		// end of officials
-		
+
+		//documents
+		Route::get('/documents', array('uses' => 'DocumentsController@documents', 'as' => 'documents'));
+		//end of documents
 	});
 });
 Route::group(['middleware' => ['guest']], function(){
