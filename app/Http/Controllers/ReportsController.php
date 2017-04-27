@@ -28,5 +28,11 @@ public function paymentReport(){
 public function certificateReport(){
     return view('admin.certificateReport');
 }
+public function barangayIdReport(){
+    return view('admin.barangayIdReport');
+}
+public function businessPermitReport(){
+    return view('admin.businessPermitReport');
+}
 
 }

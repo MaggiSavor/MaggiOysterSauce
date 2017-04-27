@@ -239,28 +239,28 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Reports<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Barangay Profile</a>
+                            <a href="{{URL::Route('barangayProfileReport')}}">Barangay Profile</a>
                         </li>
                         <li>
-                            <a href="#">Residents</a>
+                            <a href="{{URL::Route('residentReport')}}">Residents</a>
                         </li>
                         <li>
-                            <a href="#">Case</a>
+                            <a href="{{URL::Route('caseReport')}}">Case</a>
                         </li>
                         <li>
-                            <a href="#">Payments</a>
+                            <a href="{{URL::Route('paymentReport')}}">Payments</a>
                         </li>
                         <li>
                             <a href="#">Issued <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a href="#">Certificate</a>
+                                    <a href="{{URL::Route('certificateReport')}}">Certificate</a>
                                 </li>
                                 <li>
-                                    <a href="#">Barangay ID</a>
+                                    <a href="{{URL::Route('barangayIdReport')}}">Barangay ID</a>
                                 </li>
                                 <li>
-                                    <a href="#">Business Permit</a>
+                                    <a href="{{URL::Route('businessPermitReport')}}">Business Permit</a>
                                 </li>
                             </ul>
                             <!-- /.nav-third-level -->
