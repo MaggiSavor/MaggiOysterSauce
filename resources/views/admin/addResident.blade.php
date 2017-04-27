@@ -150,6 +150,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="InputFName">Role:</label>
                                         <select class="form-control" name="role" id="InputRole" >
+                                            <option hidden value="">--Select Role--</option>
                                             <option>Husband</option>
                                             <option>Wife</option>
                                             <option>Son</option>
@@ -298,6 +299,13 @@
                   validators: {
                     notEmpty: {
                       message: "This is required"
+                     }
+                  }
+                },
+                role: {
+                  validators: {
+                    notEmpty: {
+                      message: "Role is required"
                      }
                   }
                 },
