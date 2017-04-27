@@ -35,7 +35,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-md-9 text-right">
-                                        <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                        <div style="font-size: 30px"><i>{{$all}}</i></div>
                                         <div><b>All Residents</b></div>
                                     </div>
                                 </div>
@@ -57,12 +57,12 @@
                                         <i class="fa fa-home fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                        <div style="font-size: 30px"><i>{{$household}}</i></div>
                                         <div><b>Household</b><br>+Add Family<br>+View Household</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="HouseholdList.php">
+                            <a href="{{URL::Route('householdList')}}">
                                 <div class="panel-footer" style="color:#002a40;">
                                     <span class="pull-left">View List</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -79,12 +79,12 @@
                                         <i class="fa fa-list fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                        <div style="font-size: 30px"><i>{{$family}}</i></div>
                                         <div><b>Families</b><br>+Add Family Member<br>+View Family</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="FamilyList.php">
+                            <a href="{{URL::Route('familyList')}}">
                                 <div class="panel-footer" style="color:#002a40;">
                                     <span class="pull-left">View List</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -110,12 +110,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                    <div style="font-size: 30px"><i>{{$female}}/i></div>
                                     <div>Total Number of Female</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="FResidentList.php">
+                        <a href="{{URL::Route('femaleList')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -132,12 +132,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                    <div style="font-size: 30px"><i>{{$male}}</i></div>
                                     <div>Total Number of Male</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="MResidentList.php">
+                        <a href="{{URL::Route('maleList')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -154,12 +154,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                    <div style="font-size: 30px"><i>{{$voter}}</i></div>
                                     <div>Total Number of Voters</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="VotersList.php">
+                        <a href="{{URL::Route('voterList')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -180,12 +180,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                    <div style="font-size: 30px"><i>{{$senior}}</i></div>
                                     <div>Total Number of Senior Citizen</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="SCList.php">
+                        <a href="{{URL::Route('seniorList')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -202,12 +202,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>NUMBER HERE</i></div>
+                                    <div style="font-size: 30px"><i>{{$transfer}}</i></div>
                                     <div>Total Number of Transferred</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="Transferred.php">
+                        <a href="{{URL::Route('transferredList')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
