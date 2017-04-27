@@ -47,157 +47,130 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                       <form class="form-inline" id="resident">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <div class="form-group">
-                                        <div class="input-xs-10">
-                                            <label for="InputFName">Full Name:</label>
-                                            <input type="text" name="fname" class="form-control input-xs" id="InputFName" placeholder="First Name">
-                                            &nbsp;&nbsp;
-                                            <input type="text" name="mname" class="form-control input-xs" id="InputMName" placeholder="Middle Name">
-                                            &nbsp;&nbsp;
-                                            <input type="text" name="lname" class="form-control input-xs" id="InputLName" placeholder="Last Name">
-                                        </div>
+                        <form method="post" id="resident">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">First Name *</label>
+                                        <input type="text" name="fname" class="form-control input-xs" id="InputFName" placeholder="First Name">
                                     </div>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputHouseNo">Address:&nbsp;&nbsp;</label>
-                                            <input type="text" name="houseNo" class="form-control input-xs" id="InputHouseNo" placeholder="House No">
-                                            &nbsp;&nbsp;&nbsp;
-                                            <select class="form-control" name="street" id="InputStreet" >
-                                                <option hidden value="">Street</option>
-                                                <option>P. Ortega</option>
-                                                <option>Asuncion</option>
-                                                <option>Morga</option>
-                                                <option>Zamora</option>
-                                                <option>J. Nolasco</option>
-                                                <option>Sto. Cristo</option>
-                                            </select>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <label for="InputHouseID" id="householdID">Household ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$houseID['household_id']+1}}</label>
-                                            <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$houseID['household_id']+1}}">
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">Middle Name *</label>
+                                        <input type="text" name="mname" class="form-control input-xs" id="InputMName" placeholder="Middle Name">
                                     </div>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="Inputbirthdate">Birthday:&nbsp;&nbsp;</label>
-                                            <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs" id="bday">
-                                                <span id="resultBday" hidden></span>
-                                            </div>
-                                    </div>      
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputContact">Contact: (+63)</label>
-                                            <input type="number" min="999999999" max="9999999999" name="mobile" class="form-control input-xs" id="InputCellphone" placeholder="Mobile" >&nbsp;&nbsp;
-                                            <label for="InputContact">(2)</label>&nbsp;&nbsp;
-                                            <input type="number" min="999999" max="9999999" name="telno" class="form-control input-xs" id="InputTelephone" placeholder="Telephone" >
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">Last Name *</label>
+                                        <input type="text" name="lname" class="form-control input-xs" id="InputLName" placeholder="Last Name">
                                     </div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputStatus">Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">Address *</label>
+                                        <input type="text" name="houseNo" class="form-control input-xs" id="InputHouseNo" placeholder="House No">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">Street *</label>
+                                        <select class="form-control" name="street" id="InputStreet" >
+                                            <option hidden value="">--Select Street--</option>
+                                            <option>P. Ortega</option>
+                                            <option>Asuncion</option>
+                                            <option>Morga</option>
+                                            <option>Zamora</option>
+                                            <option>J. Nolasco</option>
+                                            <option>Sto. Cristo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputHouseID" id="householdID">Household ID:</label>
+                                        <br>
+                                        <label>{{$houseID['household_id']+1}}</label>
+                                        <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$houseID['household_id']+1}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for="Inputbirthdate">Birthday:&nbsp;&nbsp;</label>
+                                        <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs" id="bday">
+                                        <span id="resultBday" hidden></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputContact">Mobile</label>
+                                        <input type="number" min="999999999" max="9999999999" name="mobile" class="form-control input-xs" id="InputCellphone" placeholder="(+63)">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputContact">Telephone</label>
+                                        <input type="number" min="999999" max="9999999" name="telno" class="form-control input-xs" id="InputTelephone" placeholder="(2)" >
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for="InputStatus">Status</label>
                                             <select class="form-control" name="status" id="InputStatus" >
                                                 <option>Single</option>
                                                 <option>Married</option>
                                                 <option>Separated</option>
                                                 <option>Widowed</option>
                                             </select>
-                                        </div>
                                     </div>
-                                    
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="form-group">
-                                        
-                                            <label for="InputOccupation">Occupation:</label>
-
-                                            <input type="text" name="occupation" class="form-control input-xs" id="InputOccupation" placeholder="Occupation" >
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </div>                                  
-                                    <div class="form-group">
-                                        <div class="input-xs-6" id="voter" style="display:none">
-                                    <br>
-                                            <label for="InputVoter">Voter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="voter" id="voter" value="voter" >
-                                                    <strong>Yes</strong>
-                                                </label>
-                                            </div>
-                                            &nbsp;
-                                            <div class="radio">
-                                                  <label>
-                                                        <input type="radio" name="voter" id="voter" value="nonvoter" >
-                                                        <strong>No</strong>
-                                                  </label>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputOccupation">Occupation:</label>
+                                        <input type="text" name="occupation" class="form-control input-xs" id="InputOccupation" placeholder="Occupation" >
+                                    </div>
+                                    <div class="form-group col-md-4" id="voter" hidden>
+                                        <label class='col-lg-12 control-label'>
+                                            Voter *
+                                        </label>
+                                        <div class="col-md-12">
+                                            <div class='radio'>
+                                            <input type="radio" name="voter" id="voter" value="voter" >
+                                            <label for='male'>Yes</label>
+                                            <br>
+                                            <input type="radio" name="voter" id="voter" value="nonvoter" >
+                                            <label for='Female'>No</label>
                                             </div>
                                         </div>
-                                    </div>  
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputNation">Nationality:</label>
-                                            <input type="text" name="nationality" class="form-control input-xs" id="InputNation" placeholder="Nationality">
-                                        </div>
                                     </div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputReligion">Religion:</label>
-                                            <input type="text" name="religion" class="form-control input-xs" id="InputReligion" placeholder="Religion" >
-                                        </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for="InputContact">Nationality</label>
+                                        <input type="text" name="nationality" class="form-control input-xs" id="InputNation" placeholder="Nationality">
                                     </div>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputFamID" id="famID">Family ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$familyID['family_id']+1}}</label>
-                                            <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$familyID['family_id']+1}}">
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputReligion">Religion</label>
+                                        <input type="text" name="religion" class="form-control input-xs" id="InputReligion" placeholder="Religion" >
                                     </div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="form-group">
-                                        <div class="input-xs-10">
-                                            <label for="InputFName">Role:</label>
-                                            <select class="form-control" name="role" id="InputRole" >
-                                                <option>Husband</option>
-                                                <option>Wife</option>
-                                                <option>Son</option>
-                                                <option>Daughter</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group col-md-4"><br>
+                                        <label for="InputFamID" id="famID">Family ID:</label><br>
+                                        <label>{{$familyID['family_id']+1}}</label>
+                                        <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$familyID['family_id']+1}}">
                                     </div>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
-                                            <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
-                                        </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for="InputFName">Role:</label>
+                                        <select class="form-control" name="role" id="InputRole" >
+                                            <option>Husband</option>
+                                            <option>Wife</option>
+                                            <option>Son</option>
+                                            <option>Daughter</option>
+                                        </select>
                                     </div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="form-group">
-                                        <div class="input-xs-6">
-                                            <label for="InputFather">Father's Name:</label>
-                                            <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
+                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
                                     </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
-                                    <button id="register" type="submit" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputFather">Father's Name:</label>
+                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
+                                <button id="register" type="submit" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -233,10 +206,10 @@
         theBday.innerHTML = age;
 
         if(age >= 18){
-            $('#voter').css('display','block');
+            $('#voter').attr('hidden', false);
         }
         else if(age <18){
-            $('#voter').css('display','none');
+            $('#voter').attr('hidden', true);
         }
     })
      function validate(evt) {
@@ -256,7 +229,7 @@
             framework: 'bootstrap',
             // Only disabled elements are excluded
             // The invisible elements belonging to inactive tabs must be validated
-            // excluded: [':disabled'],
+            excluded: [':hidden'],
             fields: {
                 fname: {
                   validators: {
@@ -320,10 +293,17 @@
                       message: "Nationality is required"
                      }
                   }
-                }
+                },
+                voter: {
+                  validators: {
+                    notEmpty: {
+                      message: "This is required"
+                     }
+                  }
+                },
             }
     })
-    .on('success.field.fv', function(e, data) {
+    .on('err.field.fv', function(e, data) {
       e.preventDefault();
 
        var $form = $(e.target),
