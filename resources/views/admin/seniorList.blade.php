@@ -53,7 +53,7 @@
             <div class="row" style="padding-bottom: 5%;">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        All Residents
+                        Senior Citizen
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
