@@ -31,7 +31,7 @@
 
             <section class="card-box">
               <div class = "row">
-                <div id="search-input">
+                <!-- <div id="search-input">
                     <div class="input-group col-md-6">
                         <input type="text" name="termyear" class="search-query form-control" placeholder="Input Term Year" />
                         <span class="input-group-btn">
@@ -40,12 +40,29 @@
                             </button>
                         </span>
                     </div>
+                </div> -->
+                <div class="btn-group">
+                  <div class="col-sm-6">
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="yearFilter" data-toggle="dropdown"
+                        aria-haspopup="true" 
+                        aria-expanded="true">
+                        Select Term Year
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectYear">
+                        @foreach($terms as $term)
+                            <li id="{{$term['term_year']}}" value="{{$term['term_year']}}"><a href="#">{{$term['term_year']}}</a></li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <br>
-                
             </div>
+            <br>
+            <br>
             <div class="table-responsive">
-                  <table id="datatable" class="table table-hover mails m-0 table table-actions-bar">
+                  <table id="history" class="table table-hover mails m-0 table table-actions-bar">
                     <thead>
                       <tr>
                         <th>Barangay Officials</th>
@@ -56,54 +73,53 @@
                     <tbody>
                         <tr>
                             <td>Chairman</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$chairman['fullname']}}</td>
+                            <td>{{$chairman['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Secretary</td>
-                            <td>Name Name Name
-                            <!-- <button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span></button> --></td>
-                            <td></td>
+                            <td>{{$sec['fullname']}}</td>
+                            <td>{{$sec['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Treasurer</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$tre['fullname']}}</td>
+                            <td>{{$tre['term_year']}}</td>
                         </tr> 
                         <tr>
                             <td>Kagawad 1</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag1['fullname']}}</td>
+                            <td>{{$kag1['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 2</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag2['fullname']}}</td>
+                            <td>{{$kag2['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 3</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag3['fullname']}}</td>
+                            <td>{{$kag3['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 4</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag4['fullname']}}</td>
+                            <td>{{$kag4['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 5</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag5['fullname']}}</td>
+                            <td>{{$kag5['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 6</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag6['fullname']}}</td>
+                            <td>{{$kag6['term_year']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 7</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$kag7['fullname']}}</td>
+                            <td>{{$kag7['term_year']}}</td>
                         </tr> 
                     </tbody>
                   </table> 
@@ -115,12 +131,27 @@
 
     </div>
     <!-- /#wrapper -->
+    <br>
+    <br>
+    <br>
+    <br>
     
 
     <!-- Morris Charts JavaScript -->
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+    <script>
+        $selectYear = $('#selectYear li'),
+        $liYear = $selectYear.find('li');
+
+        $selectYear.click(function() {
+          var filter = $(this);
+         $('#yearFilter').html(filter.text()+' <span class="caret"></span>');
+         console.log(filter.text())
+         })
+
+    </script>
 
 
 </body>

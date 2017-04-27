@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Officials</title>
+    <title>Officials</title>
 
 
 </head>
@@ -42,44 +42,44 @@
                     <tbody>
                         <tr>
                             <td>Chairman</td>
-                            <td></td>
+                            <td>{{$chairman['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Secretary</td>
-                            <td>Name Name Name
+                            <td>{{$sec['fullname']}}
                             <!-- <button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span></button> --></td>
                         </tr>
                         <tr>
                             <td>Treasurer</td>
-                            <td></td>
+                            <td>{{$tre['fullname']}}</td>
                         </tr> 
                         <tr>
                             <td>Kagawad 1</td>
-                            <td></td>
+                            <td>{{$kag1['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 2</td>
-                            <td></td>
+                            <td>{{$kag2['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 3</td>
-                            <td></td>
+                            <td>{{$kag3['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 4</td>
-                            <td></td>
+                            <td>{{$kag4['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 5</td>
-                            <td></td>
+                            <td>{{$kag5['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 6</td>
-                            <td></td>
+                            <td>{{$kag6['fullname']}}</td>
                         </tr>
                         <tr>
                             <td>Kagawad 7</td>
-                            <td></td>
+                            <td>{{$kag7['fullname']}}</td>
                         </tr> 
                     </tbody>
                   </table> 
