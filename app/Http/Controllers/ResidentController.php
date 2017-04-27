@@ -56,7 +56,12 @@ public function saveResident(){
     $saveInfo['fullname'] = $residentInfo['fname'].' '.$residentInfo['mname'].' '.$residentInfo['lname'];
     $saveInfo['household_head'] = 'yes';
     $saveInfo['family_head'] = 'yes';
- 	$saveInfo->save();  
+ 	$saveInfo->save(); 
+
+ 	if($saveInfo){
+      return response()->json(['success' =>'yes']);
+    }
+
 }
 public function residentList(){
 	$residentInfo = Resident::where('resident_status','=','active')->get();

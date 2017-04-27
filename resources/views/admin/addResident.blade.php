@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Settings</title>
+
+    <title>Add Resident</title>
 
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -46,7 +47,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                       <form class="form-inline" id="resident" Method="POST" action="{{URL::Route('saveResident')}}">
+                       <form class="form-inline" id="resident">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
                                         <div class="input-xs-10">
@@ -75,8 +76,8 @@
                                                 <option>Sto. Cristo</option>
                                             </select>
                                             &nbsp;&nbsp;&nbsp;
-                                            <label for="InputHouseID">Household ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$houseID['household_id']}}</label>
-                                            <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" value="{{$houseID['household_id']}}">
+                                            <label for="InputHouseID" id="householdID">Household ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$houseID['household_id']+1}}</label>
+                                            <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$houseID['household_id']+1}}">
                                         </div>
                                     </div>
                                     <br>
@@ -161,8 +162,8 @@
                                     <br>
                                     <div class="form-group">
                                         <div class="input-xs-6">
-                                            <label for="InputFamID">Family ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$familyID['family_id']}}</label>
-                                            <input type="hidden" name="familyID"class="form-control input-xs" id="InputFamID" placeholder="Family Id" value="{{$familyID['family_id']}}">
+                                            <label for="InputFamID" id="famID">Family ID:&nbsp;&nbsp;&nbsp;&nbsp;{{$familyID['family_id']+1}}</label>
+                                            <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$familyID['family_id']+1}}">
                                         </div>
                                     </div>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -195,8 +196,8 @@
                                     <br>
                                     <br>
                                     <br>
-                                    <button type="reset"class="btn btn-warning" name="reset" id="submit">Reset</button>
-                                    <button id="b1" type="submit" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                                    <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
+                                    <button id="register" type="submit" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -214,6 +215,14 @@
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script src="../assets/js/bootstrap-toggle.js"></script>
+
+    <!--     link for swal -->
+<script src="{!! asset('assets/sweetalert-master/dist/sweetalert.min.js')!!}"></script>
+<link rel="stylesheet" href="{!! asset('assets/sweetalert-master/dist/sweetalert.css')!!}">
+
+<!-- link for validation -->
+<script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>
+    <script src="http://formvalidation.io/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
     <script>
     $('#bday').change(function(){
         var Bdate =$('#bday').val();
@@ -240,6 +249,128 @@
             if(theEvent.preventDefault) theEvent.preventDefault();
           }
         }
+  </script>
+  <script>
+  $('document').ready(function(){
+    $('#resident').formValidation({
+            framework: 'bootstrap',
+            // Only disabled elements are excluded
+            // The invisible elements belonging to inactive tabs must be validated
+            // excluded: [':disabled'],
+            fields: {
+                fname: {
+                  validators: {
+                    notEmpty: {
+                      message: "Firstname is required"
+                     }
+                  }
+                },
+                mname: {
+                  validators: {
+                    notEmpty: {
+                      message: "Middlename is required"
+                     }
+                  }
+                },
+                lname: {
+                  validators: {
+                    notEmpty: {
+                      message: "Lastname is required"
+                     }
+                  }
+                },
+                houseNo: {
+                  validators: {
+                    notEmpty: {
+                      message: "House No is required"
+                     }
+                  }
+                },
+                status: {
+                  validators: {
+                    notEmpty: {
+                      message: 'Marital status is required'
+                    }
+                  }
+                },
+                street: {
+                  validators: {
+                    notEmpty: {
+                      message: "Street is required"
+                     }
+                  }
+                },
+                birthdate: {
+                  validators: {
+                    notEmpty: {
+                      message: "Birthdate is required"
+                     }
+                  }
+                },
+                religion: {
+                  validators: {
+                    notEmpty: {
+                      message: "Religion is required"
+                     }
+                  }
+                },
+                nationality: {
+                  validators: {
+                    notEmpty: {
+                      message: "Nationality is required"
+                     }
+                  }
+                }
+            }
+    })
+    .on('success.field.fv', function(e, data) {
+      e.preventDefault();
+
+       var $form = $(e.target),
+         fv    = $form.data('formValidation');
+        $('#register').focus(function(e){
+            e.preventDefault();
+            swal({
+              title: "Are you sure?",
+                text: "You are trying to save new officials.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm){
+              if(isConfirm){
+                var info = $('#resident').serialize()
+                $.ajax({
+                  method: 'POST',
+                  url: "{{URL::Route('saveResident')}}",
+                  headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                  dataType: 'JSON',
+                  data: info,
+                  success: function(data){
+                    if(data.success == "yes"){
+                      swal({
+                        title:"Saved!", 
+                        text: "New officials has been saved!",
+                        type: "success"
+                      });
+                      $('#householdID').text('Household ID: '+ (parseInt($('#houseID').val())+ 1));
+                      $('#famID').text('Household ID: ' + (parseInt($('#familyID').val())+ 1));
+                    }
+                  },error: function(data){
+                      swal("Error!", "Something went wrong", "error");
+                    }
+                });
+              }
+              else {
+                swal("Cancelled", "Something went wrong!", "error");
+              }
+            });
+          });
+        })  
+    });
   </script>
 </body>
 
