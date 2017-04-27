@@ -88,7 +88,7 @@ public function officialsHistory(){
     										->with('kag7', $kag7)
     											->with('terms', $terms);
 }
-public function addNewOfficials(){
+public function addNew(){
 	$chairman = new BarangayOfficial;
 	$chai = Request::all();
 	$chairman['fullname'] = $chai['chairman'];
@@ -97,11 +97,6 @@ public function addNewOfficials(){
 	$chairman['term_end'] = $chai['endyear'];
 	$chairman['term_year'] = $chai['termYear'];
 	$chairman->save();
-	if($chairman){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$secretary = new BarangayOfficial;
 	$sec = Request::all();
@@ -111,11 +106,6 @@ public function addNewOfficials(){
 	$secretary['term_end'] = $sec['endyear'];
 	$secretary['term_year'] = $sec['termYear'];
 	$secretary->save();
-	if($secretary){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$treasurer = new BarangayOfficial;
 	$tre = Request::all();
@@ -125,11 +115,6 @@ public function addNewOfficials(){
 	$treasurer['term_end'] = $tre['endyear'];
 	$treasurer['term_year'] = $tre['termYear'];
 	$treasurer->save();
-	if($treasurer){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad1 = new BarangayOfficial;
 	$kag1 = Request::all();
@@ -139,11 +124,6 @@ public function addNewOfficials(){
 	$kagawad1['term_end'] = $kag1['endyear'];
 	$kagawad1['term_year'] = $kag1['termYear'];
 	$kagawad1->save();
-	if($kagawad1){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad2 = new BarangayOfficial;
 	$kag2 = Request::all();
@@ -153,11 +133,6 @@ public function addNewOfficials(){
 	$kagawad2['term_end'] = $kag2['endyear'];
 	$kagawad2['term_year'] = $kag2['termYear'];
 	$kagawad2->save();
-	if($kagawad2){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad3 = new BarangayOfficial;
 	$kag3 = Request::all();
@@ -167,11 +142,6 @@ public function addNewOfficials(){
 	$kagawad3['term_end'] = $kag3['endyear'];
 	$kagawad3['term_year'] = $kag3['termYear'];
 	$kagawad3->save();
-	if($kagawad3){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad4 = new BarangayOfficial;
 	$kag4 = Request::all();
@@ -181,11 +151,6 @@ public function addNewOfficials(){
 	$kagawad4['term_end'] = $kag4['endyear'];
 	$kagawad4['term_year'] = $kag4['termYear'];
 	$kagawad4->save();
-	if($kagawad4){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad5 = new BarangayOfficial;
 	$kag5 = Request::all();
@@ -195,11 +160,6 @@ public function addNewOfficials(){
 	$kagawad5['term_end'] = $kag5['endyear'];
 	$kagawad5['term_year'] = $kag5['termYear'];
 	$kagawad5->save();
-	if($kagawad5){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
 
 	$kagawad6 = new BarangayOfficial;
 	$kag6 = Request::all();
@@ -209,12 +169,6 @@ public function addNewOfficials(){
 	$kagawad6['term_end'] = $kag6['endyear'];
 	$kagawad6['term_year'] = $kag6['termYear'];
 	$kagawad6->save();
-	if($kagawad6){              
-          return response()->json(["success" => "yes"] );
-    }else{
-          return response()->json(["error" => "yes"] );
-    }
-
 
 	$kagawad7 = new BarangayOfficial;
 	$kag7 = Request::all();
@@ -235,7 +189,6 @@ public function addNewOfficials(){
 	$audit_trail['action'] = "Add new officials";
 	$audit_trail['user_role'] = Auth::user()->user_type;
 	$audit_trail->save();
-	return redirect::back();
 }
 
 

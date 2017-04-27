@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function(){
 			Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
 			Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
 			Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
-			Route::post('/save_officials', array('uses' => 'OfficialsController@addNewOfficials', 'as' => 'addNewOfficials'));
+			Route::post('/save_officials', array('uses' => 'OfficialsController@addNew', 'as' => 'addNew'));
 		// end of officials
 
 		//documents
