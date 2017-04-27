@@ -33,6 +33,10 @@ Route::group(['middleware' => ['auth']], function(){
 		//documents
 		Route::get('/documents', array('uses' => 'DocumentsController@documents', 'as' => 'documents'));
 		//end of documents
+
+		//Resident
+			Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));
+		//end of resident
 	});
 });
 Route::group(['middleware' => ['guest']], function(){

@@ -167,7 +167,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Residents<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">View Residents</a>
+                            <a href="{{URL::Route('resident')}}">View Residents</a>
                         </li>
                         <li>
                             <a href="#">Add Resident</a>
