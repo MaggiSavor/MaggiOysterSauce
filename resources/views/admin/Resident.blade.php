@@ -110,7 +110,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div style="font-size: 30px"><i>{{$female}}/i></div>
+                                    <div style="font-size: 30px"><i>{{$female}}</i></div>
                                     <div>Total Number of Female</div>
                                 </div>
                             </div>

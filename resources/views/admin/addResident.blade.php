@@ -47,6 +47,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form method="post" id="resident">
                             <div class="row">
                                 <div class="col-md-12">
