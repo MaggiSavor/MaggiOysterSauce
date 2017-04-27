@@ -191,8 +191,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                             <a href="{{URL::Route('resident')}}">View Residents</a>
                         </li>
                         <li>
-                            
-                        <a href="{{URL::Route('addResident')}}">Add Resident</a>Add Resident</a>
+                            <a href="{{URL::Route('addResident')}}">Add Resident</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -213,13 +212,13 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-edit fa-fw"></i> Blotter<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">View Blotter</a>
+                            <a href="{{URL::Route('blotterList')}}">View Blotter</a>
                         </li>
                         <li>
-                            <a href="#">Add Case</a>
+                            <a href="{{URL::Route('addCase')}}">Add Case</a>
                         </li>
                         <li>
-                            <a href="#">Blotter Documents</a>
+                            <a href="{{URL::Route('blotterDocuments')}}">Blotter Documents</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

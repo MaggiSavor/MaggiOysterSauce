@@ -23,24 +23,31 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
 		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
 
+		//Resident
+		Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));
+		Route::get('/add_resident', array('uses' => 'ResidentController@addResident', 'as' => 'addResident'));
+		Route::post('/save_resident', array('uses' => 'ResidentController@saveResident', 'as' => 'saveResident'));
+		Route::get('/resident_list', array('uses' => 'ResidentController@residentList', 'as' => 'residentList'));
+			
+		//end of resident
+
 		//Officials
-			Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
-			Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
-			Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
-			Route::post('/save_officials', array('uses' => 'OfficialsController@addNew', 'as' => 'addNew'));
+		Route::get('/add_officials', array('uses' => 'OfficialsController@addOfficials', 'as' => 'addOfficials'));
+		Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
+		Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
+		Route::post('/save_officials', array('uses' => 'OfficialsController@addNew', 'as' => 'addNew'));
 		// end of officials
 
-		//documents
+		//Blotter
+		Route::get('/blotterList', array('uses' => 'BlotterController@blotterList', 'as' => 'blotterList'));
+		Route::get('/addCase', array('uses' => 'BlotterController@addCase', 'as' => 'addCase'));
+		Route::get('/blotterDocuments', array('uses' => 'BlotterController@blotterDocuments', 'as' => 'blotterDocuments'));	
+		// endo of blotter
+
+		//Documents
 		Route::get('/documents', array('uses' => 'DocumentsController@documents', 'as' => 'documents'));
 		//end of documents
 
-		//Resident
-			Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));
-			Route::get('/add_resident', array('uses' => 'ResidentController@addResident', 'as' => 'addResident'));
-			Route::post('/save_resident', array('uses' => 'ResidentController@saveResident', 'as' => 'saveResident'));
-			Route::get('/resident_list', array('uses' => 'ResidentController@residentList', 'as' => 'residentList'));
-			
-		//end of resident
 
 	});
 });
