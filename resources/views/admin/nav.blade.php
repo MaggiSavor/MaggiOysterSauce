@@ -13,6 +13,12 @@
 <!-- Custom Fonts -->
 <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+<!-- DataTables CSS -->
+<link href="../assets/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="../assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
 <!-- Return to Top -->
 <a href="javascript:" id="return-to-top"><i class="">Back to Top</i></a>
 
@@ -68,7 +74,22 @@
         color: #fff;
         top: 5px;
     }
-
+    .btn-barangay {
+      color: #fff;
+      background-color: #CA3AED;
+      border-color: #4cae4c;
+    }
+    .btn-barangay:focus,
+    .btn-barangay.focus {
+      color: #fff;
+      background-color: #AB31C8;
+      border-color: #982AB2 ;
+    }
+    .btn-barangay:hover {
+      color: #fff;
+      background-color: #AB31C8;
+      border-color: #982AB2;
+    }
 
 /* Extra Things */
 body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px; font-weight: 400;text-align: center;margin-top: 50px;}h3 i{color: #444;}
@@ -268,6 +289,11 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="../assets/js/light-bootstrap-dashboard.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../assets/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../assets/datatables-responsive/dataTables.responsive.js"></script>
 
 <!-- Back to top -->
 <script type="text/javascript">
