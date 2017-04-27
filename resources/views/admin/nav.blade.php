@@ -191,7 +191,8 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                             <a href="{{URL::Route('resident')}}">View Residents</a>
                         </li>
                         <li>
-                            <a href="#">Add Resident</a>
+                            
+                        <a href="{{URL::Route('addResident')}}">Add Resident</a>Add Resident</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

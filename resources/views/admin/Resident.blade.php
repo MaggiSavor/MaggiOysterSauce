@@ -43,7 +43,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="ResidentList.php">
+                                    <a href="{{URL::Route('residentList')}}">
                                         <div class="panel-footer" style="color:#002a40;">
                                             <span class="pull-left">View List</span>
                                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

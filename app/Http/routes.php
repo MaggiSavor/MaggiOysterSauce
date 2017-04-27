@@ -36,7 +36,12 @@ Route::group(['middleware' => ['auth']], function(){
 
 		//Resident
 			Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));
+			Route::get('/add_resident', array('uses' => 'ResidentController@addResident', 'as' => 'addResident'));
+			Route::post('/save_resident', array('uses' => 'ResidentController@saveResident', 'as' => 'saveResident'));
+			Route::get('/resident_list', array('uses' => 'ResidentController@residentList', 'as' => 'residentList'));
+			
 		//end of resident
+
 	});
 });
 Route::group(['middleware' => ['guest']], function(){
