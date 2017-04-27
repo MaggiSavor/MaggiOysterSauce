@@ -28,6 +28,13 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/add_resident', array('uses' => 'ResidentController@addResident', 'as' => 'addResident'));
 		Route::post('/save_resident', array('uses' => 'ResidentController@saveResident', 'as' => 'saveResident'));
 		Route::get('/resident_list', array('uses' => 'ResidentController@residentList', 'as' => 'residentList'));
+		Route::get('/household_list', array('uses' => 'ResidentController@householdList', 'as' => 'householdList'));
+		Route::get('/family_list', array('uses' => 'ResidentController@familyList', 'as' => 'familyList'));
+		Route::get('/female_list', array('uses' => 'ResidentController@femaleList', 'as' => 'femaleList'));
+		Route::get('/male_list', array('uses' => 'ResidentController@maleList', 'as' => 'maleList'));
+		Route::get('/voter_list', array('uses' => 'ResidentController@voterList', 'as' => 'voterList'));
+		Route::get('/senior_list', array('uses' => 'ResidentController@seniorList', 'as' => 'seniorList'));
+		Route::get('/transferred_list', array('uses' => 'ResidentController@transferredList', 'as' => 'transferredList'));
 			
 		//end of resident
 
