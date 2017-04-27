@@ -60,16 +60,18 @@
                                    </tr>
                                </thead>
                                <tbody>
-                                   <tr class="odd gradeX">
-                                       <td>Trident</td>
-                                       <td>Internet Explorer 4.0</td>
-                                       <td>Win 95+</td>
-                                       <td class="center">4</td>
-                                       <td class="center">X</td>
-                                       <td class="center">4</td>
-                                       <td class="center">X</td>
-                                       <td class="center">X</td>
-                                   </tr>
+                                    @foreach($blotterLists as $blotterList)
+                                    <tr>
+                                       <td>{{$blotterList->case_id}}</td>
+                                       <td>{{$blotterList->case_type}}</td>
+                                       <td>{{$blotterList->case_title}}</td>
+                                       <td>{{$blotterList->complainant_fullname}}</td>
+                                       <td>{{$blotterList->defendant_fullname}}</td>
+                                       <td>{{$blotterList->case_status}}</td>
+                                       <td>{{$blotterList->created_at}}</td>
+                                       <td></td>
+                                    </tr>
+                                    @endforeach
                                    
                                </tbody>
                            </table>
@@ -97,9 +99,17 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#dataTables-example').DataTable({
-                responsive: true
+                responsive: true,
+                searchHighlight: true,
+                "columnDefs": [
+                    { 
+                      "sortable" : false, "targets": [7],
+                      "searchable": false, "targets": [7]
+                    }
+                ]
             });
-        }); 
+        });
+
     </script>
 
 </body>

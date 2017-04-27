@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Case extends Model
+class Blotter extends Model
 {
-  protected $table = 'case';
+  protected $table = 'blotter';
 
 }

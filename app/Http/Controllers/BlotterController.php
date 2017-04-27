@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+use App\Models\Blotter;
 use Request;
 use Auth;
 use Redirect;
@@ -13,7 +14,9 @@ use Redirect;
 class BlotterController extends Controller
 {
 	public function blotterList(){
-	    return view('admin.blotter');
+	$blotterLists = Blotter::all();
+	return view('admin.blotter')
+		->with('blotterLists', $blotterLists);
 	}
 
 	public function addCase(){
@@ -23,5 +26,4 @@ class BlotterController extends Controller
 	public function blotterDocuments(){
 	    return view('admin.blotterDocuments');
 	}
-
 }

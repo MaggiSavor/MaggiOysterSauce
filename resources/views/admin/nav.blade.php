@@ -19,6 +19,10 @@
 <!-- DataTables Responsive CSS -->
 <link href="../assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
+<!-- DataTables Search Higlight CSS -->
+<link href="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+<link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+
 <!-- Return to Top -->
 <a href="javascript:" id="return-to-top"><i class="">Back to Top</i></a>
 
@@ -91,6 +95,26 @@
       border-color: #982AB2;
     }
 
+    .scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+    }
+
+    .scrollable-menu::-webkit-scrollbar {
+        width: 12px;
+    }
+     
+    .scrollable-menu::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        border-radius: 10px;
+    }
+     
+    .scrollable-menu::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+
 /* Extra Things */
 body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px; font-weight: 400;text-align: center;margin-top: 50px;}h3 i{color: #444;}
 </style>
@@ -111,7 +135,31 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
-            <ul class="dropdown-menu dropdown-messages">
+            <ul class="dropdown-menu dropdown-messages scrollable-menu">
+                <li>
+                    <a href="#">
+                        <div>
+                            <strong>John Smith</strong>
+                            <span class="pull-right text-muted">
+                                <em>Yesterday</em>
+                            </span>
+                        </div>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <strong>John Smith</strong>
+                            <span class="pull-right text-muted">
+                                <em>Yesterday</em>
+                            </span>
+                        </div>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                    </a>
+                </li>
+                <li class="divider"></li>
                 <li>
                     <a href="#">
                         <div>
@@ -294,7 +342,9 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 <script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../assets/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../assets/datatables-responsive/dataTables.responsive.js"></script>
-
+<script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js"></script>
+<script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js"></script>
+<script src="../assets/datatables-plugins/searchHighlight/jquery.highlight.js"></script>
 <!-- Back to top -->
 <script type="text/javascript">
     // ===== Scroll to Top ==== 
