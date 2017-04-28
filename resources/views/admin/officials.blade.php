@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>Secretary</td>
                                     <td>{{$sec['fullname']}}
-                                    <!-- <button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span></button> --></td>
+                                    <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#secModal{{$sec['id']}}" type="button"><span class="glyphicon glyphicon-edit"></span></button></td>
                                 </tr>
                                 <tr>
                                     <td>Treasurer</td>
@@ -99,6 +99,49 @@
 
     </div>
     <!-- /#wrapper -->
+          <form method="post" action="{{URL::Route('updateSecretary',$sec['id'])}}">
+            <div class="modal fade" id="secModal{{$sec['id']}}" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Barangay Officials</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive card-box">
+                    <h1 class="pull-left" style="font-size: 24px">Update Secretary</h1>
+                      <table class="table table-hover mails m-0 table table-actions-bar">
+                        <thead>
+                          <tr>
+                          </tr>
+                        </thead>
+                            <tbody>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Brgy Secretary</label>
+                                    <input type="text" name="secretary" class="form-control" id="Secretary" value="{{$sec['fullname']}}" list="selectOfficials" autocomplete="off">
+                                </div>
+                            </div>
+                                <datalist id="selectOfficials">
+                                @foreach($officials as $off)
+                                  <option>{{$off['fullname']}}</option>
+                                @endforeach
+                            </datalist>
+                            </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Update</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+         
+<!-- End of Modal -->
     
 
     <!-- Morris Charts JavaScript -->

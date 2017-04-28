@@ -40,7 +40,8 @@ public function officials(){
 	$kag6 = BarangayOfficial::where('position', '=', 'kagawad6')
 					->orderBy('term_year', 'desc')->first();
 	$kag7 = BarangayOfficial::where('position', '=', 'kagawad7')
-					->orderBy('term_year', 'desc')->first();	
+					->orderBy('term_year', 'desc')->first();
+	$officials = Resident::where('voter', '=', 'voter')->get();	
     return view('admin.officials')
     	->with('chairman', $chairman)
     		->with('sec', $sec)
@@ -51,7 +52,8 @@ public function officials(){
     							->with('kag4', $kag4)
     								->with('kag5', $kag5)
     									->with('kag6', $kag6)
-    										->with('kag7', $kag7);
+    										->with('kag7', $kag7)
+    											->with('officials', $officials);
 }
 public function officialsHistory(){
     $chairman = BarangayOfficial::where('position', '=', 'chairman')
@@ -190,6 +192,14 @@ public function addNew(){
 	$audit_trail['user_role'] = Auth::user()->user_type;
 	$audit_trail->save();
 }
+	public function updateSecretary($id){
+    $data= Request::all();
+    $update = BarangayOfficial::find($id);
+    $update['fullname'] = $data['secretary'];
+    $update->save();
+    return Redirect::back();
+
+    }
 
 
 }

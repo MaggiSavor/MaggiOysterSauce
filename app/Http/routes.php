@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/officials', array('uses' => 'OfficialsController@officials', 'as' => 'officials'));
 		Route::get('/officials_history', array('uses' => 'OfficialsController@officialsHistory', 'as' => 'officialsHistory'));
 		Route::post('/save_officials', array('uses' => 'OfficialsController@addNew', 'as' => 'addNew'));
+		Route::post('/update_officials/{id}', array('uses' => 'OfficialsController@updateSecretary', 'as' => 'updateSecretary'));
 		// end of officials
 
 		//Blotter
