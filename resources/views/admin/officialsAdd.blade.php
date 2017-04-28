@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <script src="{!! asset('assets/sweetalert-master/dist/sweetalert.min.js')!!}"></script>
     <link rel="stylesheet" href="{!! asset('assets/sweetalert-master/dist/sweetalert.css')!!}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet"/>
 
     <title>Add Officials</title>
 
@@ -123,6 +124,7 @@
     <script src="../assets/data/morris-data.js"></script>
     <script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>
     <script src="http://formvalidation.io/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.js"></script>
     <script>
         $(document).ready(function(){
         var start = $('#InputStart').val();
@@ -138,6 +140,38 @@
         });      
       });
     </script>
+    <!-- <script>
+        $('#Chairman, #Secretary, #Treasurer, #Kag1, #Kag2, #Kag3, #Kag4, #Kag5, #Kag6, #Kag7').on('change', function(){
+            var chair = $('#Chairman').val();
+            var sec = $('#Secretary').val();
+            var tre = $('#Treasurer').val();
+            var kag1 = $('#Kag1').val();
+            var kag2 = $('#Kag2').val();
+            var kag3 = $('#Kag3').val();
+            var kag4 = $('#Kag4').val();
+            var kag5 = $('#Kag5').val();
+            var kag6 = $('#Kag6').val();
+            var kag7 = $('#Kag7').val();
+
+            if (chair === sec || chair === tre || chair === kag1 || chair === kag2 || chair === kag3 || chair === kag4 || chair === kag5 || chair === kag6 || chair === kag7){
+                sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Duplicate Record!!',
+                  type:'error'
+                },function(isConfirm){
+                      // $('#Secretary').val("");
+                });
+            }else if (sec == tre || sec == kag1 || sec == kag2 || sec == kag3 || sec == kag4 || sec == kag5 || sec == kag6 || sec == kag7){
+                sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Duplicate Record!!',
+                  type:'error'
+                },function(isConfirm){
+                      // $('#Secretary').val("");
+                });
+            }
+        })
+    </script> -->
     <script>
     $('document').ready(function(){
     $('#addOfficials').formValidation({
@@ -145,83 +179,82 @@
             // Only disabled elements are excluded
             // The invisible elements belonging to inactive tabs must be validated
             // excluded: [':disabled'],
-            excluded: [':disabled'],
             icon: {
                 // valid: 'glyphicon glyphicon-ok',
                 // invalid: 'glyphicon glyphicon-remove',
                 // validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-              // chairman: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New chairman name is required"
-              //        }
-              //     }
-              //   },
-              //   secretary: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New secretary name is required"
-              //        }
-              //     }
-              //   },
-              //   treasurer: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New treasurer name is required"
-              //        }
-              //     }
-              //   },
-              //   kag1: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 1 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag2: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 2 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag3: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 3 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag4: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 4 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag5: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 5 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag6: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 6 name is required"
-              //        }
-              //     }
-              //   },
-              //   kag7: {
-              //     validators: {
-              //       notEmpty: {
-              //         message: "New Kagawad 7 name is required"
-              //        }
-              //     }
-              //   },
+              chairman: {
+                  validators: {
+                    notEmpty: {
+                      message: "New chairman name is required"
+                     }
+                  }
+                },
+                secretary: {
+                  validators: {
+                    notEmpty: {
+                      message: "New secretary name is required"
+                     }
+                  }
+                },
+                treasurer: {
+                  validators: {
+                    notEmpty: {
+                      message: "New treasurer name is required"
+                     }
+                  }
+                },
+                kag1: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 1 name is required"
+                     }
+                  }
+                },
+                kag2: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 2 name is required"
+                     }
+                  }
+                },
+                kag3: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 3 name is required"
+                     }
+                  }
+                },
+                kag4: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 4 name is required"
+                     }
+                  }
+                },
+                kag5: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 5 name is required"
+                     }
+                  }
+                },
+                kag6: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 6 name is required"
+                     }
+                  }
+                },
+                kag7: {
+                  validators: {
+                    notEmpty: {
+                      message: "New Kagawad 7 name is required"
+                     }
+                  }
+                },
             }
     })
     .on('err.field.fv', function(e, data) {
@@ -229,6 +262,7 @@
 
        var $form = $(e.target),
          fv    = $form.data('formValidation');
+
         $('#addOff').focus(function(e){
             e.preventDefault();
             swal({

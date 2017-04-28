@@ -226,14 +226,20 @@
         }
   </script>
   <script>
-  $('document').ready(function(){
+    $('document').ready(function(){
     $('#resident').formValidation({
             framework: 'bootstrap',
             // Only disabled elements are excluded
             // The invisible elements belonging to inactive tabs must be validated
+            // excluded: [':disabled'],
             excluded: [':hidden'],
+            icon: {
+                // valid: 'glyphicon glyphicon-ok',
+                // invalid: 'glyphicon glyphicon-remove',
+                // validating: 'glyphicon glyphicon-refresh'
+            },
             fields: {
-                fname: {
+              fname: {
                   validators: {
                     notEmpty: {
                       message: "Firstname is required"
@@ -317,50 +323,56 @@
 
        var $form = $(e.target),
          fv    = $form.data('formValidation');
-        $('#register').focus(function(e){
-            e.preventDefault();
-            swal({
-              title: "Are you sure?",
-                text: "You are trying to save new officials.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm){
-              if(isConfirm){
-                var info = $('#resident').serialize()
-                $.ajax({
-                  method: 'POST',
-                  url: "{{URL::Route('saveResident')}}",
-                  headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
-                  dataType: 'JSON',
-                  data: info,
-                  success: function(data){
-                    if(data.success == "yes"){
-                      swal({
-                        title:"Saved!", 
-                        text: "New officials has been saved!",
-                        type: "success"
-                      });
-                      $('#householdID').text('Household ID: '+ (parseInt($('#houseID').val())+ 1));
-                      $('#famID').text('Household ID: ' + (parseInt($('#familyID').val())+ 1));
-                    }
-                  },error: function(data){
-                      swal("Error!", "Something went wrong", "error");
-                    }
-                });
-              }
-              else {
-                swal("Cancelled", "Something went wrong!", "error");
-              }
+         
+      $('#register').focus(function(e){
+        e.preventDefault();
+        swal({
+          title: "Are you sure?",
+            text: "You are trying to register new resident.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm){
+          if(isConfirm){
+            $.ajax({
+              method: 'POST',
+              url: "{{URL::Route('saveResident')}}",
+              headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+              dataType: 'JSON',
+              processData : false,
+              contentType : false,
+              data: new FormData($("#resident")[0]),
+              success: function(data){
+                if(data.success == "yes"){
+                  swal({
+                    title:"Saved!", 
+                    text: "New resident has been registered!",
+                    type: "success",
+                    showConfirmButton: false
+                  });
+                  setTimeout(function(){
+                             location.reload();
+                        }, 2000); 
+                }
+              },error: function(data){
+                  swal("Error!", "Something went wrong", "error");
+                }
             });
-          });
-        })  
-    });
-  </script>
+          }
+          else {
+            swal("Cancelled", "Something went wrong!", "error");
+          }
+        });
+      });
+    })  
+});
+        
+    </script>
+  
 </body>
 
 </html>
