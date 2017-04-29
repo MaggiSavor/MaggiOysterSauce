@@ -73,9 +73,9 @@
                           </thead>
                           <tbody>
                            @foreach($residentInfo as $resident)
-                              <tr class="data" style="cursor:pointer">
+                              <tr class="data" data-toggle="tooltip" title="Click for more options!" style="cursor:pointer">
                                 <td></td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['resident_id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}" >{{$resident['resident_id']}}</td>
                                 <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['firstname']}} {{$resident['middlename']}} {{$resident['lastname']}}</td>
                                 <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['house_no']}} {{$resident['street']}} Tondo, Manila</td>
                                 <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['gender']}}</td>
@@ -97,124 +97,150 @@
     <!-- /#wrapper -->
     <!-- Modal -->
     
-      @foreach($residentInfo as $residentinfo)
-          <div class="modal fade" id="statusModal{{$residentinfo['resident_id']}}" role="dialog">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Details</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="table-responsive card-box">
-                  <h3>Personal Information</h3>
-                  <center><label>Household ID: {{$residentinfo['household_id']}}    </label>
-                  <label>Family ID: {{$residentinfo['family_id']}}</label></center>
-                    <table class="table table-hover mails m-0 table table-actions-bar">
-                      <thead>
-                        <tr>
-                        </tr>
-                      </thead>
-                        <tbody>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Resident ID</b></td>
-                            <td class="id" style="min-width: 350px">{{$residentinfo['resident_id']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Role</b></td>
-                            <td class="id" style="min-width: 350px">{{$residentinfo['role']}}</td>
-                          </tr>
-                           <tr class="">
-                            <td></td>
-                            <td><b>Name</b></td>
-                            <td style="min-width: 50px">{{$residentinfo['firstname']}} {{$residentinfo['middlename']}} {{$residentinfo['lastname']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td style="min-width: 50px"></td>
-                            <td><b>Address</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['house_no']}} {{$residentinfo['street']}} Tondo, Manila</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Gender</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['gender']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Birthday</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['birthdate']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Age</b></td>
-                            <td style="min-width: 350px"><?php $birthDate = explode("-", $residentinfo['birthdate']);
-                            $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[0], $birthDate[0]))) > date("md") ? ((date("Y") - $birthDate[0]) - 1) : (date("Y") - $birthDate[0]));
-                              echo $age;
-                             ?></td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Contact</b></td>
-                            <td style="min-width: 350px"></td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td>Mobile</td>
-                            <td style="min-width: 350px">{{$residentinfo['mobile']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td>Telephone</td>
-                            <td style="min-width: 350px">{{$residentinfo['telno']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Civil Status</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['status']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Occupation</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['occupation']}}</td>
-                          </tr>
-                           <tr class="">
-                            <td></td>
-                            <td><b>Nationality</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['nationality']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Religion</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['religion']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Mother</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['mothers_name']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Father</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['fathers_name']}}</td>
-                          </tr>
-                          <tr class="">
-                            <td></td>
-                            <td><b>Resident Status</b></td>
-                            <td style="min-width: 350px">{{$residentinfo['resident_status']}}</td>
-                          </tr>
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
+@foreach($residentInfo as $residentinfo)
+    <div class="modal fade" id="statusModal{{$residentinfo['resident_id']}}" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Details</h4>
+          </div>
+
+          <ul class="nav nav-tabs" id="tabContent">
+        <li class="active"><a href="#details" data-toggle="tab">Transfer Household</a></li>
+        <li><a href="#addMember" data-toggle="tab">Transfer Barangay</a></li>
+      </ul>
+  
+      <div class="tab-content">
+      
+        <div class="tab-pane active" id="details">
+          <div class="control-group">
+
+      
+          <div class="modal-body">
+            <div class="table-responsive card-box">
+            <h3>Personal Information</h3>
+            <center><label>Household ID: {{$residentinfo['household_id']}}    </label>
+            <label>Family ID: {{$residentinfo['family_id']}}</label></center>
+              <table class="table table-hover mails m-0 table table-actions-bar">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                  <tbody>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Resident ID</b></td>
+                      <td class="id" style="min-width: 350px">{{$residentinfo['resident_id']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Role</b></td>
+                      <td class="id" style="min-width: 350px">{{$residentinfo['role']}}</td>
+                    </tr>
+                     <tr class="">
+                      <td></td>
+                      <td><b>Name</b></td>
+                      <td style="min-width: 50px">{{$residentinfo['firstname']}} {{$residentinfo['middlename']}} {{$residentinfo['lastname']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td style="min-width: 50px"></td>
+                      <td><b>Address</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['house_no']}} {{$residentinfo['street']}} Tondo, Manila</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Gender</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['gender']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Birthday</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['birthdate']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Age</b></td>
+                      <td style="min-width: 350px"><?php $birthDate = explode("-", $residentinfo['birthdate']);
+                      $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[0], $birthDate[0]))) > date("md") ? ((date("Y") - $birthDate[0]) - 1) : (date("Y") - $birthDate[0]));
+                        echo $age;
+                       ?></td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Contact</b></td>
+                      <td style="min-width: 350px"></td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td>Mobile</td>
+                      <td style="min-width: 350px">{{$residentinfo['mobile']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td>Telephone</td>
+                      <td style="min-width: 350px">{{$residentinfo['telno']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Civil Status</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['status']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Occupation</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['occupation']}}</td>
+                    </tr>
+                     <tr class="">
+                      <td></td>
+                      <td><b>Nationality</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['nationality']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Religion</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['religion']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Mother</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['mothers_name']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Father</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['fathers_name']}}</td>
+                    </tr>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Resident Status</b></td>
+                      <td style="min-width: 350px">{{$residentinfo['resident_status']}}</td>
+                    </tr>
+                  </tbody>
+              </table>
             </div>
           </div>
-          @endforeach 
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+
+          </div>
+        </div>
+
+
+        <div class="tab-pane" id="addMember">
+          <div class="modal-body">
+            <p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p><p>adsfasdfasdfadsfadsf</p>
+          </div>   
+        </div>
+
+      </div> <!-- tab content -->
+
+        </div> <!-- modal content -->
+      </div> <!-- modal dialog -->
+    </div>
+@endforeach 
          
 <!-- End of Modal -->
 
@@ -243,6 +269,8 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+
           var oTable = $('#datatable').DataTable({
             "orderCellsTop": false,
             "searchHighlight" : true,
