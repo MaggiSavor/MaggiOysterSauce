@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
-use App\Models\User;
+use App\Models\RequestBorrowLaptop;
 use Request;
 use Auth;
 use Redirect;
@@ -19,9 +19,7 @@ public function dashboard(){
 }
 
 public function settings(){
-$users = User::all();
-    return view('admin.settings')
-    	->with('users', $users);
+    return view('admin.settings');
 }
 
 public function sample(){

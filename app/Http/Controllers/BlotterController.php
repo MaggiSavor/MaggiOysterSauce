@@ -15,7 +15,7 @@ class BlotterController extends Controller
 {
 	public function blotterList(){
 	$blotterLists = Blotter::all();
-	return view('admin.blotterList')
+	return view('admin.blotter')
 		->with('blotterLists', $blotterLists);
 	}
 

@@ -58,10 +58,10 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <!-- Nav tabs -->
-                        <table id="datatable" class="table table-hover mails m-0 table table-actions-bar" width="100%">
+                        <table id="datatable" class="table table-hover mails m-0 table table-actions-bar">
                           <thead>
                             <tr>
-                              <th></th>
+                              <th style="max-width: 10px;"></th>
                               <th style="max-width: 95px;">Resident ID</th>
                               <th>Name</th>
                               <th>Address</th>
@@ -242,25 +242,50 @@
         });
     </script>
     <script type="text/javascript">
-     $(document).ready(function() {
-            var t = $('#datatable').DataTable({
-                responsive: true,
-                searchHighlight: true,
-                "columnDefs": [
-                    { 
-                      "sortable" : false, 
-                      "searchable": false,
-                      "targets": 0
-                    }
-                ],
-                "order": [[ 1, 'asc' ]]
-            });
-            t.on( 'order.dt search.dt', function () {
-                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                    cell.innerHTML = i+1;
-                } );
-            } ).draw();
-        });
+      $(document).ready(function(){
+          var oTable = $('#datatable').DataTable({
+            "orderCellsTop": false,
+            "searchHighlight" : true,
+            // "columnDefs": [
+            //               { 
+            //                 "sortable" : false, "targets": [0, 8, 8],
+            //                 "searchable": false, "targets": [0, 8,  8]
+            //               }
+            //               ]
+          });
+          
+          oTable.on('order.dt search.dt', function(){
+            oTable.column(0, {search:'applied', order:'applied'}).nodes().each(
+             function (cell, i) {
+              cell.innerHTML = i+1;
+              } );
+          }).draw();
+
+          $('#search').keyup(function(){
+                oTable.search($(this).val()).draw() ;
+          });
+          $('#datatable-keytable').DataTable({keys: true});
+          $('#datatable-responsive').DataTable();
+          $('#datatable-colvid').DataTable({
+              "dom": 'C<"clear">lfrtip',
+              "colVis": {
+                  "buttonText": "Change columns"
+              }
+          });
+          
+          var table = $('#datatable-fixed-header').DataTable({fixedHeader: true});
+          var table = $('#datatable-fixed-col').DataTable({
+              scrollY: "300px",
+              scrollX: true,
+              scrollCollapse: true,
+              paging: false,
+              fixedColumns: {
+                  leftColumns: 1,
+                  rightColumns: 1
+              }
+          });
+      });
+      TableManageButtons.init();
     </script>
 
 </body>
