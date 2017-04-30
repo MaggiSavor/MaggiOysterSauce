@@ -342,6 +342,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 <script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../assets/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../assets/datatables-responsive/dataTables.responsive.js"></script>
+<script src="../assets/datatables-responsive/dataTables.responsive.min.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/jquery.highlight.js"></script>
