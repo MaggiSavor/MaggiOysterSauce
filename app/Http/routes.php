@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/sample', array('uses' => 'AdminController@sample', 'as' => 'sample'));
 		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
 		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
+		Route::post('/register_user', array('uses' => 'LoginController@registerUser', 'as' => 'registerUser'));
 
 		//Resident
 		Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));

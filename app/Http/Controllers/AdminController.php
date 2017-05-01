@@ -13,20 +13,23 @@ use Redirect;
 
 class AdminController extends Controller
 {
-public function dashboard(){
-    // return view('admin.index');
-    return view('admin.home');
-}
+	public function dashboard(){
+	    // return view('admin.index');
+	    return view('admin.home');
+	}
 
-public function settings(){
-	$users = User::all();
-	    return view('admin.settings')
-	    	->with('users', $users);
-}
+	public function settings(){
+		$users = User::all();
+		    return view('admin.settings')
+		    	->with('users', $users);
+	}
 
-public function sample(){
-    return view('admin.sample');
-}
+	public function sample(){
+	    return view('admin.sample');
+	}
 
+	// public function addUser(){
+	//     return view('admin.addUser');
+	// }
 
 }

@@ -23,6 +23,10 @@
 <link href="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
 <link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
 
+<!-- Sweet Alert -->
+<script src="{!! asset('assets/sweetalert-master/dist/sweetalert.min.js') !!}"></script>
+<link rel="stylesheet" href="{!! asset('assets/sweetalert-master/dist/sweetalert.css') !!}">
+
 <!-- Return to Top -->
 <a href="javascript:" id="return-to-top"><i class="">Back to Top</i></a>
 
@@ -346,6 +350,11 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/jquery.highlight.js"></script>
+
+<!-- form validation -->
+<script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>
+<script src="http://formvalidation.io/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
+
 <!-- Back to top -->
 <script type="text/javascript">
     // ===== Scroll to Top ==== 

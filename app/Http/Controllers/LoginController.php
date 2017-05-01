@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Resident;
 use App\Models\Employee;
 use App\Models\User;
 use App\Models\AuditTrail;
@@ -20,67 +21,106 @@ use Hash;
 class LoginController extends Controller
 {
     
-    public function addUser(){
+    public function registerUser(){
        
        $addUser = Request::all();
-       $empId = Employee::where('emp_id', $addUser['empID'])->exists();
-       $username = User::where('username', $addUser['username'])->exists();
-       $email = Employee::where('email', $addUser['emailAddress'])->exists();
-       if($empId){
-           return response()->json(array('error' =>'Employee ID Exists!'));
-       }
-       else if($email){
+       $username = User::where('username', $addUser['inputUsername'])->exists();
+       $resident = Resident::where('fullname', $addUser['SearchName'])->count() = 0;
+       $email = User::where('email', $addUser['inputEmail'])->exists();
+       if($email){
            return response()->json(array('error' =>'Email Exists!'));
-       }
-        else if($username){
+       }else if($username){
            return response()->json(array('error' =>'Username Exists!'));
+       }else if($resident){
+           return response()->json(array('error' =>'Resident does not Exists!'));
        }else{
-           try{
-       $employee = new Employee;
-       $photo = Request::file('file');
-       $destinationPath = base_path() . '/public/images';
-       if(!empty($photo)){
-           $photo->move($destinationPath, $photo->getClientOriginalName());
-           $picture = $photo->getClientOriginalName();
-           $image_size = $photo->getClientSize();
-       }else{
-           $picture = 'avatar.png';
-           $image_size = 'NULL';
-       }
        
-       $employee['emp_id'] = $addUser['empID'];
-       $employee['firstname'] = $addUser['fname'];
-       $employee['middlename'] = $addUser['mname'];
-       $employee['lastname'] = $addUser['lname'];
-       $employee['department'] = $addUser['department'];
-       $employee['role'] = $addUser['role'];
-       $employee['address'] = $addUser['address'];
-       $employee['contact_no'] = $addUser['contact'];
-       $employee['email'] = $addUser['emailAddress'];
-       $employee['image_size'] = $image_size;
-       $employee['image_name'] = $picture;
-       $employee->save();
-       //users
-       $addUser = Request::all();
-       $user = new User;
-       $user['emp_id'] = $addUser['empID'];
-       $user['username'] = $addUser['username'];
-       $user['email'] = $addUser['emailAddress'];
-       $user['password'] = bcrypt($addUser['password']);
-       $user['pass'] = $addUser['password'];
-       $user['user_type'] = $addUser['userType'];
-       $user['remember_token'] = $addUser['_token'];
-       $user->save();
-        if($employee){              
-                   return response()->json(["success" => "yes"]);
-               }else{
-                   return response()->json(["error" => "yes", "empID" => $employee['emp_id']]);
-               }
-               }catch(Exception $e){
+         try{
+            //users
+            $addUser = Request::all();
+            $user = new User;
+            $user['fullname'] = $addUser['SearchName'];
+            $user['user_type'] = $addUser['inputUserType'];
+            $user['username'] = $addUser['inputUsername'];
+            $user['email'] = $addUser['inputEmail'];
+            $user['password'] = bcrypt($addUser['password']);
+            $user['security_question'] = $addUser['inputSecQuestion'];
+            $user['security_answer'] = $addUser['inputSecAnswer'];
+            $user['remember_token'] = $addUser['_token'];
+            $user->save();            
+            return response()->json(["success" => "yes"]);
+              
+          }catch(Exception $e){
            return response()->json(array('error' =>'Error Occured!'));
-       }
+          }
        }
 
+   //     $credentials = Request::all();
+   //      $rules = array(
+   //          'SearchName'    => 'required|unique:Users,username',
+   //          'inputUsername' => 'required|unique:Users,username',
+   //          'emailAddress'  => 'required|unique:Users,email|email'
+
+   //      );
+   //      $validator = Validator::make(Request::all(), $rules);
+   //      if($validator->fails()){
+   //          return response()->json(array(
+   //              'success' => false,
+   //              'errors' => $validator->getMessageBag()->toArray(),
+   //              'message' => 'Please fill -up the required fields'
+
+   //          ), 400); // 400 being the HTTP code for an invalid request.
+   //      }
+   //      else{
+   //          $credentials = Request::all();
+   //          $user = new User;
+   //          $user['fullname'] = $addUser['SearchName'];
+   //          $user['user_type'] = $addUser['inputUserType'];
+   //          $user['username'] = $addUser['inputUsername'];
+   //          $user['email'] = $addUser['inputEmail'];
+   //          $user['password'] = bcrypt($addUser['password']);
+   //          $user['security_question'] = $addUser['inputSecQuestion'];
+   //          $user['security_answer'] = $addUser['inputSecAnswer'];
+   //          $user['remember_token'] = $addUser['_token'];
+   //          $user->save();               
+   //          return response()->json(array(
+   //              'success' =>'Successfully Saved!'
+   //              ));
+   //      }
+   //     $addUser = Request::all();
+   //     $username = User::where('username', $addUser['inputUsername'])->exists();
+   //     $resident = Resident::where('fullname', $addUser['SearchName'])->count() = 0;
+   //     $email = User::where('email', $addUser['inputEmail'])->exists();
+   //     if($email){
+   //         return response()->json(array('error' =>'Email Exists!'));
+   //     }else if($username){
+   //         return response()->json(array('error' =>'Username Exists!'));
+   //     }else if($resident){
+   //         return response()->json(array('error' =>'Resident does not Exists!'));
+   //     }else{
+       
+   //       try{
+   //          //users
+   //          $addUser = Request::all();
+   //          $user = new User;
+   //          $user['fullname'] = $addUser['SearchName'];
+   //          $user['user_type'] = $addUser['inputUserType'];
+   //          $user['username'] = $addUser['inputUsername'];
+   //          $user['email'] = $addUser['inputEmail'];
+   //          $user['password'] = bcrypt($addUser['inputPassword']);
+   //          $user['security_question'] = $addUser['inputSecQuestion'];
+   //          $user['security_answer'] = $addUser['inputSecAnswer'];
+   //          $user['remember_token'] = $addUser['_token'];
+   //          $user->save();
+   //          if($user){              
+   //                return response()->json(["success" => "yes"]);
+   //            }else{
+   //                return response()->json(["error" => "yes"]);
+   //            }
+   //        }catch(Exception $e){
+   //         return response()->json(array('error' =>'Error Occured!'));
+   //        }
+   //     }
    }
 
     public function login(){

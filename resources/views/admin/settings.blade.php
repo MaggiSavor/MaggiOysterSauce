@@ -65,6 +65,11 @@
         border-left: none;
         height: 100%;
     }
+
+    .password-progress {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
     </style>
 </head>
 
@@ -143,7 +148,7 @@
                                 <div style="padding-top: 20px;">
                                     <div class="tab">
                                       <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Manage Users</button>
-                                      <button class="tablinks" onclick="openCity(event, 'Paris')">Add Users</button>
+                                      <button class="tablinks" onclick="openCity(event, 'addUser')">Add Users</button>
                                       <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
                                     </div>
 
@@ -185,13 +190,92 @@
                                             <!-- /.panel-body -->
                                         </div>
                                         <!-- /.panel -->
-                                            
                                         
                                     </div>
 
-                                    <div id="Paris" class="tabcontent">
-                                      <h3>Paris</h3>
-                                      <p>Paris is the capital of France.</p> 
+                                    <div id="addUser" class="tabcontent">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                Add Account
+                                            </div>
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <form method="post" id="registerUser">
+                                                    <div class="form-horizontal" style="">
+                                                        <div class="form-group">
+                                                            <label for="SearchName" class="col-sm-3 control-label">Official's Name:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control" name="SearchName" id="rName" placeholder="Full Name" autocomplete="off">
+                                                            </div>
+                                                        </div>              
+                                                        <div class="form-group">
+                                                            <label for="inputEmail" class="col-sm-3 control-label">Email Address:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control" name="inputEmail" placeholder="Email Address" autocomplete="off">
+                                                            </div>
+                                                        </div>              
+                                                        <div class="form-group">
+                                                            <label for="inputUsername" class="col-sm-3 control-label">Username:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control" name="inputUsername" placeholder="Username" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password" class="col-sm-3 control-label">Password:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                                <div class="progress password-progress"  id="passwordMeter">
+                                                                    <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="confirmPassword" class="col-sm-3 control-label">Confirm Password:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
+                                                            </div>
+                                                        </div>                                                    
+                                                        <div class="form-group">
+                                                            <label for="inputUserType" class="col-sm-3 control-label">User Type:</label>
+                                                            <div class="col-sm-8">
+                                                                <select name="inputUserType" class="form-control">
+                                                                    <option value="Standard User">Standard User</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputSecQuestion" class="col-sm-3 control-label">Security Question:</label>
+                                                            <div class="col-sm-8">
+                                                                <select name="inputSecQuestion" class="form-control">
+                                                                    <option>In what city or town did your mother and father meet?</option>
+                                                                    <option>What is the name of your first pet?</option>
+                                                                    <option>What was your childhood nickname?</option>
+                                                                    <option>What is your favorite movie?</option>
+                                                                    <option>What was your favorite sport in high school?</option>
+                                                                    <option>What is the name of your favorite childhood friend?</option>
+                                                                    <option>Who is your childhood sports hero?</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputSecAnswer" class="col-sm-3 control-label">Security Answer:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control" name="inputSecAnswer" placeholder="Security Answer" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <div class="col-sm-12" style="padding-top: 3%;">
+                                                            <button type="submit" class="btn btn-success btn pull-right" name="AddUserSubmitBtn" id="AddUserSubmitBtn" >
+                                                                <span class="glyphicon glyphicon-plus"> </span> Add User
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <!-- /.panel -->
                                     </div>
 
                                     <div id="Tokyo" class="tabcontent">
@@ -264,7 +348,311 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
     </script>
+    <script type="text/javascript">
+    //     $('#AddUserSubmitBtn').focus(function(e){
+    //     e.preventDefault();
+    //     swal({
+    //     title: "Are you sure?",
+    //        text: "You are trying to save the event.",
+    //        type: "warning",
+    //        showCancelButton: true,
+    //        confirmButtonColor: "#DD6B55",
+    //        confirmButtonText: "Yes",
+    //        closeOnConfirm: false,
+    //        closeOnCancel: false
+    //     },
+    //     function(isConfirm){
+    //      var transfer = $("#registerUser");
+    //      var dataString = transfer.serialize();
+    //         if(isConfirm){
+    //             $.ajax({
+    //             method: 'POST',
+    //             url: "{{URL::Route('registerUser')}}",
+    //             headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+    //             dataType: 'JSON',
+    //             processData : false,
+    //             data: dataString,
+    //             success: function(data){
+    //                 if(data.success == "yes"){
+    //                     swal("Saved!", "User has been saved!", "success");
+    //                     $("#registerUser")[0].reset();
+    //                 }else if(data.error == "Resident does not Exists!"){
+    //                     swal("Error!", "Resident does not Exists", "error");
+    //                 }else if(data.error == "Username Exists!"){
+    //                     swal("Error!", "Username Already Exists", "error");
+    //                 }else if(data.error == "Email Exists!"){
+    //                     swal("Error!", "Email Already Exists", "error");
+    //                 }
+    //             },error: function(data){
+    //                 swal("Error!", "Something went wrong", "error");
+    //             }
+    //             });
+    //          }
+    //          else {
+    //            swal("Cancelled", "Something went wrong!", "error");
+    //          }
+    //     });
+    // })
+    
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#registerUser').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                SearchName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name of Official is required'
+                        }
+                    }
+                },
+                inputEmail: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Email is required'
+                        },
+                        emailAddress: {
+                            message: 'This is not a valid email address'
+                        },
+                        regexp: {
+                            regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                            message: 'The value is not a valid email address'
+                        }
+                    }
+                },
+                inputUsername: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Username is required'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 10,
+                            message: 'Username must be at 3-10 characters'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'Password must be atleast 6 characters'
+                        },
+                        callback: {
+                            callback: function(value, validator, $field) {
+                                var score = 0;
 
+                                if (value === '') {
+                                    return {
+                                        valid: true,
+                                        score: null
+                                    };
+                                }
+
+                                // Check the password strength
+                                score += ((value.length >= 8) ? 1 : -1);
+
+                                // The password contains uppercase character
+                                if (/[A-Z]/.test(value)) {
+                                    score += 1;
+                                }
+
+                                // The password contains uppercase character
+                                if (/[a-z]/.test(value)) {
+                                    score += 1;
+                                }
+
+                                // The password contains number
+                                if (/[0-9]/.test(value)) {
+                                    score += 1;
+                                }
+
+                                // The password contains special characters
+                                if (/[!#$%&^~*_]/.test(value)) {
+                                    score += 1;
+                                }
+
+                                return {
+                                    valid: true,
+                                    score: score    // We will get the score later
+                                };
+                            }
+                        }
+                    }
+                },
+                confirmPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please confirm password'
+                        },
+                        identical: {
+                            field: 'inputPassword',
+                            message: 'The password and its confirm are not the same'
+                        }
+                    }
+                },
+                inputSecAnswer: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Security Answer is required'
+                        }
+                    }
+                }
+            }
+        })
+        .on('err.validator.fv', function(e, data) {
+            // data.bv        --> The FormValidation.Base instance
+            // data.field     --> The field name
+            // data.element   --> The field element
+            // data.validator --> The current validator name
+
+            if (data.field === 'inputEmail') {
+                // The email field is not valid
+                data.element
+                    .data('fv.messages')
+                    // Hide all the messages
+                    .find('.help-block[data-fv-for="' + data.field + '"]').hide()
+                    // Show only message associated with current validator
+                    .filter('[data-fv-validator="' + data.validator + '"]').show();
+            }
+        })
+        .on('success.validator.fv', function(e, data) {
+            // The password passes the callback validator
+            if (data.field === 'password' && data.validator === 'callback') {
+                // Get the score
+                var score = data.result.score,
+                    $bar  = $('#passwordMeter').find('.progress-bar');
+
+                switch (true) {
+                    case (score === null):
+                        $bar.html('').css('width', '0%').removeClass().addClass('progress-bar');
+                        break;
+
+                    case (score <= 0):
+                        $bar.html('Very weak').css('width', '25%').removeClass().addClass('progress-bar progress-bar-danger');
+                        break;
+
+                    case (score > 0 && score <= 2):
+                        $bar.html('Weak').css('width', '50%').removeClass().addClass('progress-bar progress-bar-warning');
+                        break;
+
+                    case (score > 2 && score <= 4):
+                        $bar.html('Medium').css('width', '75%').removeClass().addClass('progress-bar progress-bar-info');
+                        break;
+
+                    case (score > 4):
+                        $bar.html('Strong').css('width', '100%').removeClass().addClass('progress-bar progress-bar-success');
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        })
+            .on('err.field.fv', function(e, data) {
+                e.preventDefault();
+
+                    var $form = $(e.target),
+                    fv = $form.data('formValidation');
+                    $('#AddUserSubmitBtn').focus(function(e){
+                       e.preventDefault();
+                       swal({
+                         title: "Are you sure?",
+                           text: "You are trying to save the event.",
+                           type: "warning",
+                           showCancelButton: true,
+                           confirmButtonColor: "#DD6B55",
+                           confirmButtonText: "Yes",
+                           closeOnConfirm: false,
+                           closeOnCancel: false
+                       },
+                       function(isConfirm){
+                         var transfer = $("#registerUser");
+                         var dataString = transfer.serialize();
+                         if(isConfirm){
+                           $.ajax({
+                             method: 'POST',
+                             url: "{{URL::Route('registerUser')}}",
+                             headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                             dataType: 'JSON',
+                             processData : false,
+                             data: dataString,
+                             success: function(data){
+                                if(data.success == "Successfully Saved!"){
+                                    swal("Saved!", "User has been saved!", "success");
+                                    $("#registerUser")[0].reset();
+                                }else if(data.error == "Resident does not Exists!"){
+                                    swal("Error!", "Resident does not Exists", "error");
+                                }else if(data.error == "Username Exists!"){
+                                    swal("Error!", "Username Already Exists", "error");
+                                }else if(data.error == "Email Exists!"){
+                                    swal("Error!", "Email Already Exists", "error");
+                                }
+                             },error: function(data){
+                                swal("Something went wrong!");
+                             }
+                           });
+                         }
+                         else {
+                           swal("Cancelled", "Something went wroasdasng!", "error");
+                         }
+                       });
+                    })
+            });
+
+    //   $('#AddUserSubmitBtn').click(function(e){
+    //   e.preventDefault();
+    //   swal({
+    //     title: "Are you sure?",
+    //     text: "You are trying to save the event.",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#DD6B55",
+    //     confirmButtonText: "Yes",
+    //     closeOnConfirm: false,
+    //     closeOnCancel: false
+    //   },
+    //   function(isConfirm){
+    //     if(isConfirm){
+    //       $.ajax({
+    //         type: 'POST',
+    //         url: "{{URL::Route('registerUser')}}",
+    //         processData : false,
+    //         contentType : false,
+    //         headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+    //         data: new FormData($("#registerUser")[0]),
+    //         success: function(data){
+    //             if(data.success == "yes"){
+    //                 swal("Saved!", "User has been saved!", "success");
+    //                 $("#registerUser")[0].reset();
+    //             }else if(data.error == "Resident does not Exists!"){
+    //                 swal("Error!", "Resident does not Exists", "error");
+    //             }else if(data.error == "Username Exists!"){
+    //                 swal("Error!", "Username Already Exists", "error");
+    //             }else if(data.error == "Email Exists!"){
+    //                 swal("Error!", "Email Already Exists", "error");
+    //             }
+    //         }, error: function(){
+    //             swal("Something went wrong!");
+    //         }
+    //       });
+    //     }
+    //     else {
+    //       swal("Cancelled", "Error Occured while enrolling ", "error");
+    //     }
+    //   });
+    // });
+    });
+    </script>
 </body>
 
 </html>
