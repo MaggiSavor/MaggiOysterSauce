@@ -142,17 +142,20 @@
                                     <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
                                     <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
                                 </div>
-                                <button type="button" class="btn btn-barangay pull-right">Save Changes</button>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default">Reset to Default</button>
+                                    <button type="button" class="btn btn-barangay">Save Changes</button>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="admin">
                                 <div style="padding-top: 20px;">
                                     <div class="tab">
-                                      <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Manage Users</button>
+                                      <button class="tablinks" onclick="openCity(event, 'manageUser')" id="defaultOpen">Manage Users</button>
                                       <button class="tablinks" onclick="openCity(event, 'addUser')">Add Users</button>
-                                      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+                                      <button class="tablinks" onclick="openCity(event, 'tab')">Tab</button>
                                     </div>
 
-                                    <div id="London" class="tabcontent">
+                                    <div id="manageUser" class="tabcontent">
 
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -179,7 +182,9 @@
                                                             <td>{{$user->fullname}}</td>
                                                             <td>{{$user->email}}</td>
                                                             <td>{{$user->username}}</td>
-                                                            <td>{{$user->username}}</td>
+                                                            <td><button type="button" class="btn btn-success" name="Update" id="Update" >
+                                                                <span class="glyphicon glyphicon-edit"> </span> Update
+                                                            </button></td>
                                                         </tr>
                                                         @endforeach
                                                     </tbody>
@@ -205,7 +210,13 @@
                                                         <div class="form-group">
                                                             <label for="SearchName" class="col-sm-3 control-label">Official's Name:</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" class="form-control" name="SearchName" id="rName" placeholder="Full Name" autocomplete="off">
+                                                                <input id="SearchName" name="SearchName" class="form-control" placeholder="Full Name" list="listid" autocomplete="auto">
+
+                                                                <datalist id='listid'>
+                                                                @foreach($residents as $resident)
+                                                                  <option value="{{$resident['fullname']}}">{{$resident['resident_id']}}</option>
+                                                                @endforeach
+                                                                </datalist>
                                                             </div>
                                                         </div>              
                                                         <div class="form-group">
@@ -278,7 +289,7 @@
                                         <!-- /.panel -->
                                     </div>
 
-                                    <div id="Tokyo" class="tabcontent">
+                                    <div id="tab" class="tabcontent">
                                       <h3>Tokyo</h3>
                                       <p>Tokyo is the capital of Japan.</p>
                                     </div>
@@ -324,7 +335,7 @@
                     { 
                       "sortable" : false, 
                       "searchable": false,
-                      "targets": 0
+                      "targets": 5
                     }
                 ]
             });
@@ -347,53 +358,6 @@
 
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
-    </script>
-    <script type="text/javascript">
-    //     $('#AddUserSubmitBtn').focus(function(e){
-    //     e.preventDefault();
-    //     swal({
-    //     title: "Are you sure?",
-    //        text: "You are trying to save the event.",
-    //        type: "warning",
-    //        showCancelButton: true,
-    //        confirmButtonColor: "#DD6B55",
-    //        confirmButtonText: "Yes",
-    //        closeOnConfirm: false,
-    //        closeOnCancel: false
-    //     },
-    //     function(isConfirm){
-    //      var transfer = $("#registerUser");
-    //      var dataString = transfer.serialize();
-    //         if(isConfirm){
-    //             $.ajax({
-    //             method: 'POST',
-    //             url: "{{URL::Route('registerUser')}}",
-    //             headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
-    //             dataType: 'JSON',
-    //             processData : false,
-    //             data: dataString,
-    //             success: function(data){
-    //                 if(data.success == "yes"){
-    //                     swal("Saved!", "User has been saved!", "success");
-    //                     $("#registerUser")[0].reset();
-    //                 }else if(data.error == "Resident does not Exists!"){
-    //                     swal("Error!", "Resident does not Exists", "error");
-    //                 }else if(data.error == "Username Exists!"){
-    //                     swal("Error!", "Username Already Exists", "error");
-    //                 }else if(data.error == "Email Exists!"){
-    //                     swal("Error!", "Email Already Exists", "error");
-    //                 }
-    //             },error: function(data){
-    //                 swal("Error!", "Something went wrong", "error");
-    //             }
-    //             });
-    //          }
-    //          else {
-    //            swal("Cancelled", "Something went wrong!", "error");
-    //          }
-    //     });
-    // })
-    
     </script>
     <script>
     $(document).ready(function() {
@@ -590,12 +554,14 @@
                                 if(data.success == "Successfully Saved!"){
                                     swal("Saved!", "User has been saved!", "success");
                                     $("#registerUser")[0].reset();
-                                }else if(data.error == "Resident does not Exists!"){
+                                }else if(data.error == "User Exists!"){
                                     swal("Error!", "Resident does not Exists", "error");
                                 }else if(data.error == "Username Exists!"){
                                     swal("Error!", "Username Already Exists", "error");
                                 }else if(data.error == "Email Exists!"){
                                     swal("Error!", "Email Already Exists", "error");
+                                }else if(data.error == "Not a Resident!"){
+                                    swal("Error!", "Official's Name is not a Resident", "error");
                                 }
                              },error: function(data){
                                 swal("Something went wrong!");
@@ -608,49 +574,6 @@
                        });
                     })
             });
-
-    //   $('#AddUserSubmitBtn').click(function(e){
-    //   e.preventDefault();
-    //   swal({
-    //     title: "Are you sure?",
-    //     text: "You are trying to save the event.",
-    //     type: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#DD6B55",
-    //     confirmButtonText: "Yes",
-    //     closeOnConfirm: false,
-    //     closeOnCancel: false
-    //   },
-    //   function(isConfirm){
-    //     if(isConfirm){
-    //       $.ajax({
-    //         type: 'POST',
-    //         url: "{{URL::Route('registerUser')}}",
-    //         processData : false,
-    //         contentType : false,
-    //         headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
-    //         data: new FormData($("#registerUser")[0]),
-    //         success: function(data){
-    //             if(data.success == "yes"){
-    //                 swal("Saved!", "User has been saved!", "success");
-    //                 $("#registerUser")[0].reset();
-    //             }else if(data.error == "Resident does not Exists!"){
-    //                 swal("Error!", "Resident does not Exists", "error");
-    //             }else if(data.error == "Username Exists!"){
-    //                 swal("Error!", "Username Already Exists", "error");
-    //             }else if(data.error == "Email Exists!"){
-    //                 swal("Error!", "Email Already Exists", "error");
-    //             }
-    //         }, error: function(){
-    //             swal("Something went wrong!");
-    //         }
-    //       });
-    //     }
-    //     else {
-    //       swal("Cancelled", "Error Occured while enrolling ", "error");
-    //     }
-    //   });
-    // });
     });
     </script>
 </body>

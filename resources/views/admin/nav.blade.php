@@ -37,9 +37,12 @@
         background-size: cover;
         height: 100%;*/
     }
-    body{
-        background-color: ;
+
+    div h1{
+        -webkit-text-stroke: 1px white;
+        color:  black;
     }
+
     #return-to-top {
    
         z-index: 99; /* Make sure it does not overlap */

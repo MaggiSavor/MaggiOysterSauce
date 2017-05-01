@@ -10,7 +10,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Resident;
-use App\Models\Employee;
 use App\Models\User;
 use App\Models\AuditTrail;
 use Request;
@@ -25,17 +24,20 @@ class LoginController extends Controller
        
        $addUser = Request::all();
        $username = User::where('username', $addUser['inputUsername'])->exists();
-       $resident = Resident::where('fullname', $addUser['SearchName'])->count() = 0;
+       $user = User::where('fullname', $addUser['SearchName'])->exists();
        $email = User::where('email', $addUser['inputEmail'])->exists();
+
        if($email){
            return response()->json(array('error' =>'Email Exists!'));
        }else if($username){
            return response()->json(array('error' =>'Username Exists!'));
-       }else if($resident){
-           return response()->json(array('error' =>'Resident does not Exists!'));
-       }else{
-       
-         try{
+       }else if($user){
+           return response()->json(array('error' =>'User Exists!'));
+       }
+       else{
+        $resident = Resident::where('fullname', $addUser['SearchName'])->exists();
+        if ($resident){
+          try{
             //users
             $addUser = Request::all();
             $user = new User;
@@ -48,11 +50,16 @@ class LoginController extends Controller
             $user['security_answer'] = $addUser['inputSecAnswer'];
             $user['remember_token'] = $addUser['_token'];
             $user->save();            
-            return response()->json(["success" => "yes"]);
+            return response()->json(array('success' =>'Successfully Saved!'));  
               
           }catch(Exception $e){
            return response()->json(array('error' =>'Error Occured!'));
           }
+
+        }else{
+          return response()->json(array('error' =>"Not a Resident!"));
+        }
+         
        }
 
    //     $credentials = Request::all();
