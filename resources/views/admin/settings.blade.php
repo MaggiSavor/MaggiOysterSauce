@@ -162,8 +162,8 @@
                                                 Users Table
                                             </div>
                                             <!-- /.panel-heading -->
-                                            <div class="panel-body">
-                                                    <table width="100%" class="table table-striped table-bordered table-hover" id="usersTable">
+                                            <div class="panel-body" width="100%">
+                                                    <table width="100%" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap" id="usersTable">
                                                     <thead>
                                                         <tr>
                                                             <th>User ID</th>
@@ -459,7 +459,7 @@
                             message: 'Please confirm password'
                         },
                         identical: {
-                            field: 'inputPassword',
+                            field: 'password',
                             message: 'The password and its confirm are not the same'
                         }
                     }

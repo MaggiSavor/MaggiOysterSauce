@@ -55,6 +55,11 @@ Route::group(['middleware' => ['auth']], function(){
 
 		//Documents
 		Route::get('/documents', array('uses' => 'DocumentsController@documents', 'as' => 'documents'));
+		Route::get('/certificate', array('uses' => 'DocumentsController@docuCertificate', 'as' => 'docuCertificate'));
+		Route::get('/good_moral', array('uses' => 'DocumentsController@docuGoodMoral', 'as' => 'docuGoodMoral'));
+		Route::get('/indigency', array('uses' => 'DocumentsController@docuIndigency', 'as' => 'docuIndigency'));
+		Route::get('/barangay_id', array('uses' => 'DocumentsController@docuID', 'as' => 'docuID'));
+		Route::get('/business_permit', array('uses' => 'DocumentsController@docuBusinessPermit', 'as' => 'docuBusinessPermit'));
 		//end of documents
 
 		//reports

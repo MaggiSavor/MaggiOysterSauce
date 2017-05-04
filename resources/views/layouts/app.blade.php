@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <!-- <a class="navbar-brand" href="{{ url('/') }}"> -->
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{URL::Route('dashboard')}}">
                     Barangay 5 Zone 1
                 </a>
             </div>

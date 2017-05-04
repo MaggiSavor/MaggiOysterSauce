@@ -42,7 +42,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="#" class="">
+                            <a href="{{URL::Route('docuCertificate')}}" class="">
                                 <div class="img" style="width: 100%; height:10%;"><img src="../assets/images/bclogo.jpg" alt="6"></div>
                                 <div class="info"><img src="../assets/images/cert.jpg" alt="6"></div>
                             </a>
@@ -52,7 +52,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="#" class="">
+                            <a href="{{URL::Route('docuGoodMoral')}}" class="">
                                 <div class="img"><img src="../assets/images/gmlogo.jpg" alt="6"></div>
                                 <div class="info"><img src="../assets/images/goodmoral.jpg" alt="6"></div>
                             </a>
@@ -62,7 +62,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="#" class="">
+                            <a href="{{URL::Route('docuIndigency')}}" class="">
                                 <div class="img"><img src="../assets/images/coilogo.jpg" alt="6"></div>
                                 <div class="info"><img src="../assets/images/indigency.jpg" alt="6"></div>
                             </a>
@@ -72,7 +72,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="#" class="">
+                            <a href="{{URL::Route('docuID')}}" class="">
                                 <div class="img"><img src="../assets/images/bidlogo.jpg" alt="6"></div>
                                 <div class="info"><img src="../assets/images/id1.jpg" alt="6"></div>
                             </a>
@@ -82,7 +82,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="#" class="">
+                            <a href="{{URL::Route('docuBusinessPermit')}}" class="">
                                 <div class="img"><img src="../assets/images/bpermitlogo.jpg" alt="6"></div>
                                 <div class="info"><img src="../assets/images/permit3.jpg" alt="6"></div>
                             </a>
