@@ -257,11 +257,11 @@
                 },
             }
     })
-    .on('err.field.fv', function(e, data) {
-      e.preventDefault();
+    .on('success.form.fv', function(e) {
+          e.preventDefault();
 
-       var $form = $(e.target),
-         fv    = $form.data('formValidation');
+          var $form = $(e.target),        // The form instance
+          fv = $(e.target).data('formValidation'); // FormValidation instance
 
         $('#addOff').focus(function(e){
             e.preventDefault();

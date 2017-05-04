@@ -522,11 +522,11 @@
                 }
             }
         })
-            .on('err.field.fv', function(e, data) {
+        .on('success.form.fv', function(e) {
                 e.preventDefault();
 
-                    var $form = $(e.target),
-                    fv = $form.data('formValidation');
+                    var $form = $(e.target),        // The form instance
+                    fv    = $(e.target).data('formValidation'); // FormValidation instance
                     $('#AddUserSubmitBtn').focus(function(e){
                        e.preventDefault();
                        swal({
@@ -569,7 +569,7 @@
                            });
                          }
                          else {
-                           swal("Cancelled", "Something went wroasdasng!", "error");
+                           swal("Cancelled", "", "error");
                          }
                        });
                     })
