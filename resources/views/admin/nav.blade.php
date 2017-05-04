@@ -303,9 +303,6 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                             <a href="{{URL::Route('caseReport')}}">Case</a>
                         </li>
                         <li>
-                            <a href="{{URL::Route('paymentReport')}}">Payments</a>
-                        </li>
-                        <li>
                             <a href="#">Issued <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>

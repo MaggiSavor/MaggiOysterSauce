@@ -30,132 +30,80 @@
         @include('admin.nav')
         
 
-        <div id="page-wrapper" style="padding-top: 0%;">
+        <div id="page-wrapper" style="padding-top: 0% ">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">ID Report</h1>
+                    <h1 class="page-header">Issued Barangay ID Report</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-           <div class= "container">
-                <div class = "row">
-                    <h1>Issued Barangay ID Report</h1>
-                    <hr>
-                    <div id="res"></div>
-                    <div id="result">
-                    <br>
-                    
-                    echo '<div class="col-md- col-md-offset-1">';
-                    echo '<div class="container">';
-                    echo '<div class="row">';
-                    //echo '<table>';
-                    //echo '<tr>';
-                    //echo '<td>';
-                    echo '<div class="col-md-5">';
-                        echo '<div class="panel panel-primary">';
-                            echo '<div class="panel-heading">';
-                            echo '</div>';
-                                    echo '<div class="panel-body">';
-                                        echo '<div class="form-group-sm">';
-                                echo '<div class="col-lg-10">
-                                    <label for="InputStart">Start Date:&nbsp;&nbsp;</label>
-                                  <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
-                                </div>';
-                                echo '<br>';
-                                echo '<br>'; echo '<br>';
-                                echo '<div class="col-lg-10">
-                                    <label for="InputEnd">End Date:&nbsp;&nbsp;</label>
-                                  <input type="date" id="dateEnd" style="width:300px;" class="form-control" required />
-                                </div>';
-                            echo '</div>';
-                                echo '<br>'; echo '<br>';
-                                echo '<br>';
-                                echo '<br>';
-                                echo '<div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" style="width:100px;" class="btn btn-primary btn pull-right" onclick="pass()" >Generate</button>
+            <div class="row" style="padding-bottom: 5%;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Barangay ID
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-4">
+                                <label for="InputStart">Start Date</label>
+                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="InputStart">End Date</label>
+                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label for="InputStart">Filter</label>
+                                <div class="dropdown">
+                                  <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
+                                    aria-haspopup="true" 
+                                    aria-expanded="true">
+                                    --
+                                    Select--
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
+                                        <li id="all" value="All"><a href="#">All</a></li>
+                                  </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>';
-                    echo '<div class="col-md-6">';
-                    echo '<form class="inline" method="POST">';;
-                        echo '<div class="panel panel-primary">';
-                            echo '<div class="panel-heading">';
-                            echo '</div>';
-                            echo '<div class="panel-body">';
-                            echo '<div class="form-group-sm">
-                                <label class="col-lg-10" control-label">ID List:</label>
-                                <div class="col-sm-7">
-                                        <select id ="filter" name="filter" class="form-control" style="width:300px;">
-                                            <option> All </option>';        
-                                        echo '</select><br><br><br>
-                                </div>';
-                                echo '<br>'; echo '<br>';
-                                echo '<br>'; echo '<br>';
-                                echo '<br>';echo '<br>';
-                                echo '<br>';
-                                echo '<button type="submit" class="btn btn-primary btn pull-right" name="generate">Generate</button>';      
-                        echo '</div>';
-                        echo '</div>';  
-                        echo '</div>';
-                    echo '</div>';
-                    echo '</form>';
-                echo '</div>';  
-                        echo '</div>';
-                        if(isset($_POST['generate'])){
-                            $value = $_POST['filter'];
-                            echo'<div id="printablediv">';
-                            echo '<h1>Barangay ID Report: '.$value.'</h1>';
-                            if($value=="All"){
-                                $results = $con->query("SELECT bid_id, id_no, name, date_issued, date_expired FROM barangay_id");
-                                    echo '<table class ="table table-bordered">';
-                                    echo '<thead>';
-                                        echo '<tr>';
-                                            echo '<th><label>Barangay ID</label></th>';
-                                            echo '<th><label>ID No</label></th>';
-                                            echo '<th><label>Name</label></th>';
-                                            echo '<th><label>date_issued</label></th>';
-                                            echo '<th><label>date_expired</label></th>';
-                                        echo '</tr>';
-                                    echo '</thead>';
-                                    echo '<tbody>';
-                                    while($row = $results->fetch_array())
-                                    {
-                                        echo '<tr>';
-                                            echo '<td>'.$row['bid_id'].'</td>';
-                                            echo '<td>'.$row['id_no'].'</td>';
-                                            echo '<td>'.$row['name'].'</td>';
-                                            echo '<td>'.$row['date_issued'].'</td>';
-                                            echo '<td>'.$row['date_expired'].'</td>';           
-                                        echo '</tr>';   
-                                    }                               
-                                    echo '</td>';
-                                    echo '</tr>';
-                                    echo '</table>';
-                                    $results = $con->query("SELECT COUNT(bid_id) as bid FROM barangay_id");
-                                            while($row = $results->fetch_array())
-                                                {
-                                                echo '<p>Total: '.$row["bid"].' </p>';
-                                                }
-                echo '<br>';
-                echo'</div>';
-            echo'';
-                            }
-                        }
-                    
-                    <button type="submit" class="btn btn-primary btn-small btn pull-right" onclick="javascript:printDiv('printablediv')" >
-                <span class = "glyphicon glyphicon-print"> Print</span>
-            </button>
-
-                    <br>
-                    <br>
-                    <br>    
+                        <div class="pull-right">
+                                <button type="button" class="btn btn-warning" >Generate</button>
+                            </div>
+                    </div>
+                    <hr>
+                    <!-- /.panel-body -->
+                    <div class="panel-body">
+                    <h4>Barangay ID Report: </h4>
+                           <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="barangayID">
+                               <thead>
+                                   <tr>
+                                    <th>Barangay ID</th>
+                                    <th>ID No.</th>
+                                    <th>Name</th>
+                                    <th>Date Issued</th>
+                                    <th>Date Expired</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>a</td>
+                                    <td>s</td>
+                                    <td>d</td>
+                                    <td>s</td>
+                                    <td>d</td>
+                                </tr> 
+                               </tbody>
+                           </table>
+                           <button type="submit" class="btn btn-danger btn-small btn pull-right">
+                            <span class = "glyphicon glyphicon-print"> Print</span>
+                           <!-- /.table-responsive -->
+                       </div>
+                       <!-- /.panel-body -->
                 </div>
-            <div>
-            <br>
-        </div><!-- /.canvas -->
-    </div>
+            </div>        
         </div>
         <!-- /#page-wrapper -->
 
@@ -168,7 +116,39 @@
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+    <script>
+        $selectFilter = $('#selectFilter li'),
+        $liYear = $selectFilter.find('li');
 
+        $selectFilter.click(function() {
+          var filter = $(this);
+         $('#filter').html(filter.text()+' <span class="caret"></span>');
+         })
+
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $(document).ready(function() {
+            var t = $('#barangayID').DataTable({
+                responsive: true,
+                searchHighlight: true,
+                "columnDefs": [
+                    { 
+                      "sortable" : false, 
+                      "searchable": false,
+                      "targets": 0
+                    }
+                ],
+                "order": [[ 1, 'asc' ]]
+            });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+        });
+      });
+    </script>
 
 </body>
 

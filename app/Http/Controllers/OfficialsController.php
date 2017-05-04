@@ -16,7 +16,8 @@ use Redirect;
 class OfficialsController extends Controller
 {
 public function addOfficials(){
-	$officials = Resident::where('voter', '=', 'voter')->get();
+	$officials = Resident::where('voter', '=', 'voter')
+							->where('resident_status', '=', 'Active')->get();
     return view('admin.officialsAdd')
     	->with('officials', $officials);
 }

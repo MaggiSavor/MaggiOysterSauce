@@ -28,81 +28,84 @@
 
         <!-- Navigation -->
         @include('admin.nav')
-        
 
-        <div id="page-wrapper" style="padding-top: 3%;">
+        <div id="page-wrapper" style="padding-top: 0% ">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Certificate</h1>
+                    <h1 class="page-header">Certificate Report</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-            <div class= "container">
-            <div class = "row">
-                <h1>Issued Certificate Report</h1>
-                <hr>
-                    <div id="res"></div>
-                    <div id="result">
-                    <br>
-                   
-                    echo '<table>';
-                    echo '<tr>';
-                    echo '<td>';
-                    echo '<form class="form-inline" method="post">';
-                    echo '<div class="col-md- col-md-offset-12">';
-                        echo '<div class="panel panel-primary">';
-                            echo '<div class="panel-heading">';
-                            echo '</div>';
-                                echo '<div class="panel-body">';
-                                echo '<div class="form-group-sm">
-                                <label class="col-lg-10" control-label">Filter:</label>
-                                <div class="col-sm-7">
-                                        <select id="filter" class="form-control" style="width:300px;">
-                                            <option>Certificate</option>
-                                            <option>Good Moral</option>
-                                            <option>Indigency</option>';
-                                        echo '</select><br><br><br>
-                                </div>';
-                                echo '<div class="form-group-sm">';
-                                echo '<div class="col-lg-10">
-                                    <label for="InputStart">Start Date:&nbsp;&nbsp;</label>
-                                  <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
-                                </div>';
-                                echo '<br>'; 
-                                echo '<br>'; echo '<br>';
-                                echo '<div class="col-lg-10">
-                                    <label for="InputEnd">End Date:&nbsp;&nbsp;</label>
-                                  <input type="date" id="dateEnd" style="width:300px;" class="form-control" required />
-                                </div>';
-                            echo '</div>';
-                                echo '<br>'; echo '<br>';
-                                echo '<br>'; echo '<br>';
-                                echo '<br>'; 
-                                echo '<div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" style="width:100px;" class="btn btn-primary btn pull-right" name="generate" onclick="pass()" >Generate</button>
+            <div class="row" style="padding-bottom: 5%;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Certificate
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-4">
+                                <label for="InputStart">Start Date</label>
+                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="InputStart">End Date</label>
+                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label for="InputStart">Filter</label>
+                                <div class="dropdown">
+                                  <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
+                                    aria-haspopup="true" 
+                                    aria-expanded="true">
+                                    --
+                                    Select--
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
+                                        <li id="cert" value="Certificate"><a href="#">Certificate</a></li>
+                                        <li id="goodMoral" value="Good Moral"><a href="#">Good Moral</a></li>
+                                        <li id="indigency" value="Indigency"><a href="#">Indigency</a></li>
+                                  </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>';
-                    echo '</form>';
-                    echo '</td>';
-                    echo '</tr>';
-                    echo '</table>';
-                    echo '</form>';
-                    
-                        
-                    
-                <br>
-                <br>
-                <br>    
-            </div>
-            <div>
-        </div><!-- /.canvas -->
-    </div>
+                        <div class="pull-right">
+                                <button type="button" class="btn btn-warning" >Generate</button>
+                            </div>
+                    </div>
+                    <hr>
+                    <!-- /.panel-body -->
+                    <div class="panel-body">
+                    <h4>Certificate Report: </h4>
+                           <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="certificate">
+                               <thead>
+                                   <tr>
+                                    <th>Certificate ID</th>
+                                    <th>Name</th>
+                                    <th>Date Issued</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>a</td>
+                                    <td>s</td>
+                                    <td>d</td>
+                                </tr> 
+                               </tbody>
+                           </table>
+                           <button type="submit" class="btn btn-danger btn-small btn pull-right">
+                            <span class = "glyphicon glyphicon-print"> Print</span>
+                           <!-- /.table-responsive -->
+                       </div>
+                       <!-- /.panel-body -->
+                </div>
+            </div>        
         </div>
         <!-- /#page-wrapper -->
+        
 
+        
     </div>
     <!-- /#wrapper -->
 
@@ -112,6 +115,39 @@
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+    <script>
+        $selectFilter = $('#selectFilter li'),
+        $liYear = $selectFilter.find('li');
+
+        $selectFilter.click(function() {
+          var filter = $(this);
+         $('#filter').html(filter.text()+' <span class="caret"></span>');
+         })
+
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $(document).ready(function() {
+            var t = $('#certificate').DataTable({
+                responsive: true,
+                searchHighlight: true,
+                "columnDefs": [
+                    { 
+                      "sortable" : false, 
+                      "searchable": false,
+                      "targets": 0
+                    }
+                ],
+                "order": [[ 1, 'asc' ]]
+            });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+        });
+      });
+    </script>
 
 
 </body>

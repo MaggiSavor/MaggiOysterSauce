@@ -32,133 +32,100 @@
 
         <!-- Navigation -->
         @include('admin.nav')
-        
-
-        <div id="page-wrapper" style="padding-top: 3%;">
+        <div id="page-wrapper" style="padding-top: 0% ">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Barangay Profile Report</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-            <div class= "container">
-        <div class = "row">
-        </div>
-    </div>
-    <br>
-    <br>
-        <div class="col-md- col-md-offset--2">
-            <div class="container">
-            <div class="row">
-            <div class="col-md-6">
-                        <div  class="panel panel-primary" style="width: 740px;">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">Graphical Representation</h2>
+            <div class="row" style="padding-bottom: 5%;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Graphical Representation / Barangay Profile
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">      
+                            <div class='col-md-12'>
+                                <div class='card-box pull-left'>
+                                  <input type="hidden" id="grade1" value="">
+                                  <input type="hidden" id="grade2" value="">
+                                  <input type="hidden" id="grade3" value="">
+                                  <input type="hidden" id="grade4" value="">
+                                  <input type="hidden" id="grade5" value="">
+                                  <input type="hidden" id="grade6" value="">
+                                  <input type="hidden" id="grade7" value="">
+                                  <input type="hidden" id="grade8" value="">
+                                  <input type="hidden" id="grade9" value="">
+                                  <input type="hidden" id="grade10" value="">
+                                  <input type="hidden" id="grade11" value="">
+                                  <input type="hidden" id="grade12" value="">
+                                    <h4 class='text-dark header-title m-t-0'>Student Per Grade Level</h4>
+                                    <div class='text-center'>
+                                      <ul class='list-inline chart-detail-list'>
+                                        <li>
+                                          <h5><i class='fa fa-circle m-r-5' style='color: #5fbeaa;'></i>Number of Students
+                                          </h5>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                    <div id='student-grade-breakdown' style='height: 372px;'></div>
                                 </div>
-                                <div class="panel-body">
-                            <div class="form-group-sm">
-                                
-                        <div class='col-lg-8'>
-                          <div class='card-box'>
-                          <input type="hidden" id="grade1" value="">
-                          <input type="hidden" id="grade2" value="">
-                          <input type="hidden" id="grade3" value="">
-                          <input type="hidden" id="grade4" value="">
-                          <input type="hidden" id="grade5" value="">
-                          <input type="hidden" id="grade6" value="">
-                          <input type="hidden" id="grade7" value="">
-                          <input type="hidden" id="grade8" value="">
-                          <input type="hidden" id="grade9" value="">
-                          <input type="hidden" id="grade10" value="">
-                          <input type="hidden" id="grade11" value="">
-                          <input type="hidden" id="grade12" value="">
-                            <h4 class='text-dark header-title m-t-0'>Student Per Grade Level</h4>
-                            <div class='text-center'>
-                              <ul class='list-inline chart-detail-list'>
-                                <li>
-                                  <h5><i class='fa fa-circle m-r-5' style='color: #5fbeaa;'></i>Number of Students
-                                  </h5>
-                                </li>
-                              </ul>
+                                <div class="card-box pull-right">
+                                    <table class="table table-hover mails m-0 table table-actions-bar">
+                                        <thead>
+                                            <tr>
+                                                <th>Total number of</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Resident Population</strong></td>
+                                                <td><i>{{$resident}}</i></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Male</strong></td>
+                                                <td><i>{{$male}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Female</strong></td>
+                                                <td><i>{{$female}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Senior Citizen</strong></td>
+                                                <td><i>{{$senior}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Voters</strong></td>
+                                                <td><i>{{$voter}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Number of Household</strong></td>
+                                                <td><i>{{$household['household_id']}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Number of Family</strong></td>
+                                                <td><i>{{$family['family_id']}}</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div id='student-grade-breakdown' style='height: 372px;'></div>
-                          </div>
-                        </div>
-
-                        </div>
-                            </div>
-
-                        </div>
-                    </div>
-            
-                <div class="col-md-6">
-                <form class="form-horizontal">    
-                    <div class="col-md- col-md-offset-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">Barangay Profile</h2>
-                            </div>
-                            <div class="panel-body">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th><strong>Total number of: </strong></th>
-                                            <th><strong>Total: </strong></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Resident Population:</strong></th>
-                                            <td></td>   
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Male:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Female:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Senior Citizen:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Voters:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Number of Household:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Number of Family:</strong></th>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="pull-right">
+                                <button type="reset" class="btn btn-danger" name="reset" id="reset"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                <button id="register" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"></span> Print Graph</button>
                             </div>
                         </div>
                     </div>
-                    
-                    </div>
-                    </div>
-                    <br>
-                    <br>
-                    <button class="btn pull-right btn-primary" type="button" onclick="printDiv('printableArea')"> Print Graph</button>
-                    <button class="btn pull-right btn-primary" type="button" onClick="window.print()"> Print </button>  
-                    <br>
-                    <br>
-                    <br>
-            </div>          
-            </div>
-            </div>
-        <div>
-        </div><!-- /.canvas -->
-    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>        
         </div>
         <!-- /#page-wrapper -->
+
+        
 
     </div>
     <!-- /#wrapper -->
