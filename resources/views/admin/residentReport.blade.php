@@ -40,8 +40,6 @@
 
             <div class= "container">
             <div class = "row">
-                    <h1>Resident Report</h1>
-                    <hr>
                     <div id="res"></div>
                     <div id="result">
                     <br>

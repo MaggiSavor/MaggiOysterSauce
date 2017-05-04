@@ -1,0 +1,1 @@
+jQuery(document).ready(function(e){e(".counter").counterUp({delay:100,time:1200}),e(".knob").knob()});
