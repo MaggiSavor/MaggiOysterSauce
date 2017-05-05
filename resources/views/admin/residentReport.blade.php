@@ -52,34 +52,36 @@
                                 <label for="InputStart">End Date</label>
                                 <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
                             </div>
-                            <div class="form-group col-md-4">
-                            <label for="InputStart">Filter</label>
-                                <div class="dropdown">
-                                  <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
-                                    aria-haspopup="true" 
-                                    aria-expanded="true">
-                                    --
-                                    Select--
-                                    <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
-                                        <li id="all" value="All"><a href="#">All Resident</a></li>
-                                        <li id="male" value="Male"><a href="#">Male</a></li>
-                                        <li id="female" value="Female"><a href="#">Female</a></li>
-                                        <li id="senior" value="Senior"><a href="#">Senior</a></li>
-                                        <li id="voter" value="Voter"><a href="#">Voter</a></li>
-                                  </ul>
-                                </div>
+                            <div class="form-group pull-right">
+                                <label for="InputStart">Filter</label>
+                                    <div class="dropdown">
+                                      <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
+                                        aria-haspopup="true" 
+                                        aria-expanded="true">
+                                        --
+                                        Select--
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
+                                            <li id="all" value="All"><a href="#">All Resident</a></li>
+                                            <li id="male" value="Male"><a href="#">Male</a></li>
+                                            <li id="female" value="Female"><a href="#">Female</a></li>
+                                            <li id="senior" value="Senior"><a href="#">Senior</a></li>
+                                            <li id="voter" value="Voter"><a href="#">Voter</a></li>
+                                      </ul>
+                                    </div>
                             </div>
                         </div>
-                        <div class="pull-right">
-                                <button type="button" class="btn btn-warning" >Generate</button>
-                            </div>
+                        <div class="col-md-4 pull-right">
+                            <button type="button" class="btn btn-warning" >Generate</button>
+                        </div>
+                        
+                        
                     </div>
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">
-                    <h4>Resident Report: </h4>
+                    <h3 class="title">Resident Report </h3>
                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="resident">
                                <thead>
                                    <tr>
@@ -88,17 +90,15 @@
                                     <th>Address</th>
                                     <th>Gender</th>
                                     <th>Status</th>
-                                    <th>Age</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>a</td>
-                                    <td>s</td>
-                                    <td>d</td>
-                                    <td>f</td>
-                                    <td>g</td>
-                                    <td>h</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
                                 </tr> 
                                </tbody>
                            </table>
@@ -125,10 +125,125 @@
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
-        $selectFilter.click(function() {
-          var filter = $(this);
-         $('#filter').html(filter.text()+' <span class="caret"></span>');
-         })
+        var counter=0;
+
+         $selectFilter.click(function() {
+            if(counter>-1)
+            {
+                $('#resident').dataTable().fnClearTable();
+            }
+            counter++;;
+           var report = $(this);
+            $('#filter').html(report.text()+' <span class="caret"></span>');
+            $('.title').html('Resident Report: '+ report.text());
+           var reports = report.text();
+           console.log(reports)
+
+           if(reports === "All Resident"){
+              $.ajax({
+               method: 'get',
+               url: '{{ URL::route("retunResidentReport")}}',
+               dataType:'json',
+               data: {
+                   all: reports,
+               },
+               success:function(data){
+                 for(i=0; i< data.all.length; i++){
+                  if(data.all.length != 0){
+                    $('#resident').dataTable().fnAddData([
+                        data.all[i]['resident_id'],
+                        data.all[i]['fullname'],
+                        data.all[i]['house_no']+' '+data.all[i]['street'],
+                        data.all[i]['gender'],
+                        data.all[i]['resident_status'],
+                        ]);
+                  }else{
+                    $('.myTable').append('<center>No data available</center>');
+                  }
+                }
+
+               }
+             })
+           }else if(reports === "Voter"){
+              $.ajax({
+               method: 'get',
+               url: '{{ URL::route("retunResidentReport")}}',
+               dataType:'json',
+               data: {
+                   voter: reports,
+               },
+               success:function(data){
+                 for(i=0; i< data.voter.length; i++){
+                   // console.log(data[i]['id'])
+                  if(data.voter.length != 0){
+                    $('#resident').dataTable().fnAddData([
+                        data.voter[i]['resident_id'],
+                        data.voter[i]['fullname'],
+                        data.voter[i]['house_no']+' '+data.voter[i]['street'],
+                        data.voter[i]['gender'],
+                        data.voter[i]['resident_status'],
+                        ]);
+                  }else{
+                    $('.myTable').append('<center>No data available</center>');
+                  }
+                }
+
+               }
+             })
+           }else if(reports === "Senior"){
+              $.ajax({
+               method: 'get',
+               url: '{{ URL::route("retunResidentReport")}}',
+               dataType:'json',
+               data: {
+                   senior: reports,
+               },
+               success:function(data){
+                 for(i=0; i< data.senior.length; i++){
+                   // console.log(data[i]['id'])
+                  if(data.senior.length != 0){
+                    $('#resident').dataTable().fnAddData([
+                        data.senior[i]['resident_id'],
+                        data.senior[i]['fullname'],
+                        data.senior[i]['house_no']+' '+data.senior[i]['street'],
+                        data.senior[i]['gender'],
+                        data.senior[i]['resident_status'],
+                        ]);
+                  }else{
+                    $('.myTable').append('<center>No data available</center>');
+                  }
+                }
+
+               }
+             })
+           }else{
+              $.ajax({
+               method: 'get',
+               url: '{{ URL::route("retunResidentReport")}}',
+               dataType:'json',
+               data: {
+                   gender: reports,
+               },
+               success:function(data){
+                 for(i=0; i< data.gender.length; i++){
+                   // console.log(data[i]['id'])
+                  if(data.gender.length != 0){
+                    $('#resident').dataTable().fnAddData([
+                        data.gender[i]['resident_id'],
+                        data.gender[i]['fullname'],
+                        data.gender[i]['house_no']+' '+data.gender[i]['street'],
+                        data.gender[i]['gender'],
+                        data.gender[i]['resident_status'],
+                        ]);
+                  }else{
+                    $('.myTable').append('<center>No data available</center>');
+                  }
+                }
+
+               }
+             })
+           }
+         }) 
 
     </script>
     <script type="text/javascript">

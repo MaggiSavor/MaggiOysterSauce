@@ -76,7 +76,7 @@
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">
-                    <h4>Business Permit Report: </h4>
+                    <h3 class="title">Business Permit Report: </h3>
                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="permit">
                                <thead>
                                    <tr>
@@ -90,12 +90,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>a</td>
-                                    <td>s</td>
-                                    <td>d</td>
-                                    <td>s</td>
-                                    <td>d</td>
-                                    <td>d</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
                                 </tr> 
                                </tbody>
                            </table>
@@ -122,10 +122,52 @@
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
-        $selectFilter.click(function() {
-          var filter = $(this);
-         $('#filter').html(filter.text()+' <span class="caret"></span>');
-         })
+        var counter=0;
+
+         $selectFilter.click(function() {
+            if(counter>-1)
+            {
+                $('#permit').dataTable().fnClearTable();
+            }
+            counter++;;
+           var report = $(this);
+            $('#filter').html(report.text()+' <span class="caret"></span>');
+            $('.title').html('Business Permit Report: '+ report.text());
+           var reports= report.text();
+
+           $.ajax({
+             method: 'get',
+             url: '{{ URL::route("returnPermitReport")}}',
+             // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+             dataType:'json',
+             data: {
+                 permit: reports,
+             },
+             success:function(data){
+               for(i=0; i< data.permit.length; i++){
+                 // console.log(data[i]['id'])
+                if(data.permit.length != 0){
+                  $('#permit').dataTable().fnAddData([
+                      data.permit[i]['permit_id'],
+                      data.permit[i]['name'],
+                      data.permit[i]['business_name'],
+                      data.permit[i]['business_kind'],
+                      data.permit[i]['date_issued'],
+                      data.permit[i]['date_expired'],
+                      ]);
+                }else{
+                  $('.myTable').append('<center>No data available</center>');
+                }
+              }
+
+             }
+           })
+         }) 
+
+        // $selectFilter.click(function() {
+        //   var filter = $(this);
+        //  $('#filter').html(filter.text()+' <span class="caret"></span>');
+        //  })
 
     </script>
     <script type="text/javascript">

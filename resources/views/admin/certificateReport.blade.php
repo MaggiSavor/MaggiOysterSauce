@@ -77,7 +77,7 @@
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">
-                    <h4>Certificate Report: </h4>
+                    <h3 class="title">Certificate Report </h3>
                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="certificate">
                                <thead>
                                    <tr>
@@ -119,10 +119,103 @@
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
-        $selectFilter.click(function() {
-          var filter = $(this);
-         $('#filter').html(filter.text()+' <span class="caret"></span>');
-         })
+        var counter=0;
+
+         $selectFilter.click(function() {
+            if(counter>-1)
+            {
+                $('#certificate').dataTable().fnClearTable();
+            }
+            counter++;;
+           var report = $(this);
+            $('#filter').html(report.text()+' <span class="caret"></span>');
+            $('.title').html(report.text()+' Report');
+           var reports = report.text();
+           console.log(reports)
+
+           if(reports === "Certificate"){
+                $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("returnCert")}}',
+                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+                 dataType:'json',
+                 data: {
+                     certification: reports,
+                 },
+                 success:function(data){
+                   for(i=0; i< data.certification.length; i++){
+                     // console.log(data[i]['id'])
+                    if(data.certification.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                          data.certification[i]['certificate_id'],
+                          data.certification[i]['name'],
+                          data.certification[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })
+            }else if(reports === "Indigency"){
+                $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("returnCert")}}',
+                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+                 dataType:'json',
+                 data: {
+                     indigency: reports,
+                 },
+                 success:function(data){
+                   for(i=0; i< data.indigency.length; i++){
+                     // console.log(data[i]['id'])
+                    if(data.certification.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                          data.indigency[i]['indigency_id'],
+                          data.indigency[i]['name'],
+                          data.indigency[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })
+            }else{
+                $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("returnCert")}}',
+                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+                 dataType:'json',
+                 data: {
+                     goodMoral: reports,
+                 },
+                 success:function(data){
+                   for(i=0; i< data.goodMoral.length; i++){
+                     // console.log(data[i]['id'])
+                    if(data.certification.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                          data.goodMoral[i]['goodmoral_id'],
+                          data.goodMoral[i]['name'],
+                          data.goodMoral[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })
+            }
+         }) 
+
+        // $selectFilter.click(function() {
+        //   var filter = $(this);
+        //  $('#filter').html(filter.text()+' <span class="caret"></span>');
+        //  $('.title').html(filter.text()+' Report');
+        //  })
 
     </script>
     <script type="text/javascript">

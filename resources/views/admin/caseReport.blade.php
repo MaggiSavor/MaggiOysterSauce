@@ -105,7 +105,7 @@
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">
-                    <h4>Case Report: </h4>
+                    <h3 class="title">Case Report </h3>
                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="case">
                                <thead>
                                    <tr>
@@ -118,11 +118,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>a</td>
-                                    <td>s</td>
-                                    <td>d</td>
-                                    <td>f</td>
-                                    <td>g</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
                                 </tr> 
                                </tbody>
                            </table>
@@ -150,10 +150,51 @@
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
-        $selectFilter.click(function() {
-          var filter = $(this);
-         $('#filter').html(filter.text()+' <span class="caret"></span>');
-         })
+        var counter=0;
+
+         $selectFilter.click(function() {
+            if(counter>-1)
+            {
+                $('#case').dataTable().fnClearTable();
+            }
+            counter++;;
+           var report = $(this);
+            $('#filter').html(report.text()+' <span class="caret"></span>');
+            $('.title').html('Case Report: '+ report.text());
+           var reports= report.text();
+
+           $.ajax({
+             method: 'get',
+             url: '{{ URL::route("returnCaseReport")}}',
+             // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+             dataType:'json',
+             data: {
+                 case: reports,
+             },
+             success:function(data){
+               for(i=0; i< data.case.length; i++){
+                 // console.log(data[i]['id'])
+                if(data.case.length != 0){
+                  $('#case').dataTable().fnAddData([
+                      data.case[i]['case_id'],
+                      data.case[i]['case_title'],
+                      data.case[i]['complainant_fullname'],
+                      data.case[i]['defendant_fullname'],
+                      data.case[i]['case_date'],
+                      ]);
+                }else{
+                  $('.myTable').append('<center>No data available</center>');
+                }
+              }
+
+             }
+           })
+         }) 
+
+        // $selectFilter.click(function() {
+        //   var filter = $(this);
+        //  $('#filter').html(filter.text()+' <span class="caret"></span>');
+        //  })
 
     </script>
     <script type="text/javascript">

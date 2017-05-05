@@ -69,6 +69,11 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('certificate_report', array('uses' => 'ReportsController@certificateReport', 'as' => 'certificateReport'));
 		Route::get('barangay_id_report', array('uses' => 'ReportsController@barangayIdReport', 'as' => 'barangayIdReport'));
 		Route::get('business_permit_report', array('uses' => 'ReportsController@businessPermitReport', 'as' => 'businessPermitReport'));
+		Route::get('resident_reports', array('uses' => 'ReportsController@retunResidentReport', 'as' => 'retunResidentReport'));
+		Route::get('case_reports', array('uses' => 'ReportsController@returnCaseReport', 'as' => 'returnCaseReport'));
+		Route::get('id_reports', array('uses' => 'ReportsController@returnIdReport', 'as' => 'returnIdReport'));
+		Route::get('permit_reports', array('uses' => 'ReportsController@returnPermitReport', 'as' => 'returnPermitReport'));
+		Route::get('cert_reports', array('uses' => 'ReportsController@returnCert', 'as' => 'returnCert'));
 
 	});
 });
