@@ -60,16 +60,19 @@ public function businessPermitReport(){
 }
 public function retunResidentReport(){
 	$gender = Request::all();
-	$returnGender = Resident::where('gender','=',$gender)->get();
+	$returnGender = Resident::where('gender','=',$gender)
+								->where('resident_status', '=', 'Active')->get();
 
 	$voter = Request::all();
-	$returnVoter = Resident::where('voter','=', 'voter')->get();
+	$returnVoter = Resident::where('voter','=', 'voter')
+									->where('resident_status', '=', 'Active')->get();
 
 	$senior = Request::all();
-	$returnSenior = Resident::whereYear('birthdate', '<', 1955);
+	$returnSenior = Resident::whereYear('birthdate', '<', 1955)
+											->where('resident_status', '=', 'Active')->get();
 
 	$all = Request::all();
-	$returnResident = Resident::all();
+	$returnResident = Resident::where('resident_status', '=', 'Active')->get();
 
 	return response()->json(["gender" => $returnGender, "voter" => $returnVoter, "senior" => $returnSenior, "all" => $returnResident]);
 }
@@ -77,7 +80,10 @@ public function returnCaseReport(){
 	$case = Request::all();
 	$returnCase = Blotter::where('case_status','=',$case)->get();
 
-	return response()->json(["case" => $returnCase]);
+	$all = Request::all();
+	$returnAll = Blotter::all();
+
+	return response()->json(["case" => $returnCase, "all" => $returnAll]);
 }
 public function returnIdReport(){
 	$barangay = Request::all();

@@ -67,13 +67,13 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group pull-right">
                             <label for="InputStart">Filter</label>
                                 <div class="dropdown">
                                   <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
@@ -98,8 +98,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pull-right">
-                                <button type="button" class="btn btn-warning" >Generate</button>
+                        <div class="col-md-4 pull-right">
+                                <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                             </div>
                     </div>
                     <hr>
@@ -147,6 +147,38 @@
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script>
+      $('#generate').click(function() {
+        var dateEnd = $('#dateEnd').val();
+        var dateStart = $('#dateStart').val();
+
+          if(dateStart > dateEnd){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'The end date can not be less than the start date',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("");
+            });
+          }else if(dateEnd == "" && dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }else if(dateEnd == "" || dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }
+      })
+    </script>
+    <script>
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
@@ -163,10 +195,36 @@
             $('.title').html('Case Report: '+ report.text());
            var reports= report.text();
 
-           $.ajax({
+           if(reports === "All Case"){
+              $.ajax({
              method: 'get',
              url: '{{ URL::route("returnCaseReport")}}',
-             // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
+             dataType:'json',
+             data: {
+                 all: reports,
+             },
+             success:function(data){
+               for(i=0; i< data.all.length; i++){
+                 // console.log(data[i]['id'])
+                if(data.all.length != 0){
+                  $('#case').dataTable().fnAddData([
+                      data.all[i]['case_id'],
+                      data.all[i]['case_title'],
+                      data.all[i]['complainant_fullname'],
+                      data.all[i]['defendant_fullname'],
+                      data.all[i]['case_date'],
+                      ]);
+                }else{
+                  $('.myTable').append('<center>No data available</center>');
+                }
+              }
+
+             }
+           })
+           }else{
+              $.ajax({
+             method: 'get',
+             url: '{{ URL::route("returnCaseReport")}}',
              dataType:'json',
              data: {
                  case: reports,
@@ -189,13 +247,8 @@
 
              }
            })
+           }
          }) 
-
-        // $selectFilter.click(function() {
-        //   var filter = $(this);
-        //  $('#filter').html(filter.text()+' <span class="caret"></span>');
-        //  })
-
     </script>
     <script type="text/javascript">
       $(document).ready(function(){

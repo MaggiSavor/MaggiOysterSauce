@@ -46,11 +46,11 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group pull-right">
                                 <label for="InputStart">Filter</label>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 pull-right">
-                            <button type="button" class="btn btn-warning" >Generate</button>
+                            <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                         </div>
                         
                         
@@ -122,6 +122,38 @@
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script>
+      $('#generate').click(function() {
+        var dateEnd = $('#dateEnd').val();
+        var dateStart = $('#dateStart').val();
+
+          if(dateStart > dateEnd){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'The end date can not be less than the start date',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("");
+            });
+          }else if(dateEnd == "" && dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }else if(dateEnd == "" || dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }
+      })
+    </script>
+    <script>
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
@@ -155,7 +187,7 @@
                         data.all[i]['fullname'],
                         data.all[i]['house_no']+' '+data.all[i]['street'],
                         data.all[i]['gender'],
-                        data.all[i]['resident_status'],
+                        data.all[i]['status'],
                         ]);
                   }else{
                     $('.myTable').append('<center>No data available</center>');
@@ -174,14 +206,13 @@
                },
                success:function(data){
                  for(i=0; i< data.voter.length; i++){
-                   // console.log(data[i]['id'])
                   if(data.voter.length != 0){
                     $('#resident').dataTable().fnAddData([
                         data.voter[i]['resident_id'],
                         data.voter[i]['fullname'],
                         data.voter[i]['house_no']+' '+data.voter[i]['street'],
                         data.voter[i]['gender'],
-                        data.voter[i]['resident_status'],
+                        data.voter[i]['status'],
                         ]);
                   }else{
                     $('.myTable').append('<center>No data available</center>');
@@ -200,14 +231,13 @@
                },
                success:function(data){
                  for(i=0; i< data.senior.length; i++){
-                   // console.log(data[i]['id'])
                   if(data.senior.length != 0){
                     $('#resident').dataTable().fnAddData([
                         data.senior[i]['resident_id'],
                         data.senior[i]['fullname'],
                         data.senior[i]['house_no']+' '+data.senior[i]['street'],
                         data.senior[i]['gender'],
-                        data.senior[i]['resident_status'],
+                        data.senior[i]['status'],
                         ]);
                   }else{
                     $('.myTable').append('<center>No data available</center>');
@@ -226,14 +256,13 @@
                },
                success:function(data){
                  for(i=0; i< data.gender.length; i++){
-                   // console.log(data[i]['id'])
                   if(data.gender.length != 0){
                     $('#resident').dataTable().fnAddData([
                         data.gender[i]['resident_id'],
                         data.gender[i]['fullname'],
                         data.gender[i]['house_no']+' '+data.gender[i]['street'],
                         data.gender[i]['gender'],
-                        data.gender[i]['resident_status'],
+                        data.gender[i]['status'],
                         ]);
                   }else{
                     $('.myTable').append('<center>No data available</center>');
@@ -252,6 +281,8 @@
             var t = $('#resident').DataTable({
                 responsive: true,
                 searchHighlight: true,
+                // searching: false,
+                // paging: false,
                 "columnDefs": [
                     { 
                       "sortable" : false, 

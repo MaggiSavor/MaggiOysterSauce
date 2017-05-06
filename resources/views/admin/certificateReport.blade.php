@@ -32,7 +32,7 @@
         <div id="page-wrapper" style="padding-top: 0% ">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Certificate Report</h1>
+                    <h1 class="page-header">Issued Certificate Report</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -46,13 +46,13 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateStart" style="width:300px;" class="form-control" required />
+                                <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group pull-right">
                             <label for="InputStart">Filter</label>
                                 <div class="dropdown">
                                   <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
@@ -70,8 +70,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pull-right">
-                                <button type="button" class="btn btn-warning" >Generate</button>
+                        <div class="col-md-4 pull-right">
+                                <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                             </div>
                     </div>
                     <hr>
@@ -88,9 +88,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>a</td>
-                                    <td>s</td>
-                                    <td>d</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
                                 </tr> 
                                </tbody>
                            </table>
@@ -116,6 +116,38 @@
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script>
+      $('#generate').click(function() {
+        var dateEnd = $('#dateEnd').val();
+        var dateStart = $('#dateStart').val();
+
+          if(dateStart > dateEnd){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'The end date can not be less than the start date',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("");
+            });
+          }else if(dateEnd == "" && dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }else if(dateEnd == "" || dateStart == ""){
+            sweetAlert({
+                  title:'ERROR!!!',
+                  text: 'Input Date!',
+                  type:'error'
+            },function(isConfirm){
+                  $('#dateEnd').val("") ;
+            });
+          }
+      })
+    </script>
+    <script>
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
@@ -137,14 +169,12 @@
                 $.ajax({
                  method: 'get',
                  url: '{{ URL::route("returnCert")}}',
-                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
                  dataType:'json',
                  data: {
                      certification: reports,
                  },
                  success:function(data){
                    for(i=0; i< data.certification.length; i++){
-                     // console.log(data[i]['id'])
                     if(data.certification.length != 0){
                       $('#certificate').dataTable().fnAddData([
                           data.certification[i]['certificate_id'],
@@ -162,14 +192,12 @@
                 $.ajax({
                  method: 'get',
                  url: '{{ URL::route("returnCert")}}',
-                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
                  dataType:'json',
                  data: {
                      indigency: reports,
                  },
                  success:function(data){
                    for(i=0; i< data.indigency.length; i++){
-                     // console.log(data[i]['id'])
                     if(data.certification.length != 0){
                       $('#certificate').dataTable().fnAddData([
                           data.indigency[i]['indigency_id'],
@@ -187,14 +215,12 @@
                 $.ajax({
                  method: 'get',
                  url: '{{ URL::route("returnCert")}}',
-                 // headers: {'X-CSRF-Token': '{{ Session::token() }}' },
                  dataType:'json',
                  data: {
                      goodMoral: reports,
                  },
                  success:function(data){
                    for(i=0; i< data.goodMoral.length; i++){
-                     // console.log(data[i]['id'])
                     if(data.certification.length != 0){
                       $('#certificate').dataTable().fnAddData([
                           data.goodMoral[i]['goodmoral_id'],
@@ -210,13 +236,6 @@
                })
             }
          }) 
-
-        // $selectFilter.click(function() {
-        //   var filter = $(this);
-        //  $('#filter').html(filter.text()+' <span class="caret"></span>');
-        //  $('.title').html(filter.text()+' Report');
-        //  })
-
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
