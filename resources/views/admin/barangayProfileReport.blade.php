@@ -72,7 +72,7 @@
                                     </div>
                                     <div id='student-grade-breakdown' style='height: 372px;'></div>
                                 </div>
-                                <div class="card-box pull-right">
+                                <div class="card-box pull-right" style="background-color: #eeeeee;">
                                     <table class="table table-hover mails m-0 table table-actions-bar">
                                         <thead>
                                             <tr>

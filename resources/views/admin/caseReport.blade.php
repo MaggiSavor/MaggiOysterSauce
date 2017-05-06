@@ -63,15 +63,16 @@
                         Cases
                     </div>
                     <!-- /.panel-heading -->
+                  <form method="get" action="{{URL::Route('caseDate')}}">
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
                             <div class="form-group pull-right">
                             <label for="InputStart">Filter</label>
@@ -99,9 +100,10 @@
                             </div>
                         </div>
                         <div class="col-md-4 pull-right">
-                                <button type="button" id="generate" class="btn btn-warning" >Generate</button>
+                                <button type="submit" id="generate" class="btn btn-warning" >Generate</button>
                             </div>
                     </div>
+                  </form>
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">

@@ -113,5 +113,37 @@ public function returnCert(){
 
 	return response()->json(["certification" => $returnCert, "goodMoral" => $returnGood, "indigency" => $returnIndigency]);
 }
+public function resDate(){
+	$from = Request::get('dateStart');
+	$to = Request::get('dateEnd');
+	
+	$residentDate = Resident::whereBetween('date_registered', [$from, $to])->get();
+
+	return response()->json(["resident" => $residentDate]);
+}
+public function caseDate(){
+	$from = Request::get('dateStart');
+	$to = Request::get('dateEnd');
+	
+	$caseDate = Blotter::whereBetween('case_date', [$from, $to])->get();
+
+	return response()->json(["case" => $caseDate]);
+}
+public function IdDate(){
+	$from = Request::get('dateStart');
+	$to = Request::get('dateEnd');
+	
+	$IdDate = BarangayId::whereBetween('date_issued', [$from, $to])->get();
+
+	return response()->json(["bid" => $IdDate]);
+}
+public function permitDate(){
+	$from = Request::get('dateStart');
+	$to = Request::get('dateEnd');
+	
+	$PermitDate = BusinessPermit::whereBetween('date_issued', [$from, $to])->get();
+
+	return response()->json(["bid" => $PermitDate]);
+}
 
 }

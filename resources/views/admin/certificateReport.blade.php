@@ -52,7 +52,7 @@
                                 <label for="InputStart">End Date</label>
                                 <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
                             </div>
-                            <div class="form-group pull-right">
+                            <div class="form-group col-md-4">
                             <label for="InputStart">Filter</label>
                                 <div class="dropdown">
                                   <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 pull-right">
+                        <div class="pull-right">
                                 <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                             </div>
                     </div>
