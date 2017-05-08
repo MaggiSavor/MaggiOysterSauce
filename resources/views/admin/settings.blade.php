@@ -399,9 +399,13 @@
             $('#navbarColor').val('#F8F8F8');
             $('#colorFilter').val('255,255,255,1');
             $('#bg_toggle').bootstrapToggle('off');
+            if($('#colorFilter').val() == '255,255,255,0'){
+                $('#colorFilter').val('255,255,255,1')
+            }else if($('#colorFilter').val() == '255,255,255,1'){
+                $('#colorFilter').val('255,255,255,0')
+            }
 
-
-
+            
             var bg = $('#background_image').val();
             var bar = ('255,255,255,1');
             $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") '});
