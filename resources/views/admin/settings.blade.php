@@ -327,6 +327,11 @@
                 $('#background_image').val('');
                 $('.cj_bg').prop('disabled', true);
                 $('#default').data('value', '255,255,255,1');
+                if($('#colorFilter').val() == '255,255,255,0'){
+                    $('#colorFilter').val('255,255,255,1')
+                }else if($('#colorFilter').val() == '255,255,255,1'){
+                    $('#colorFilter').val('255,255,255,0')
+                }
 
                 var bar = $('#colorFilter').val();
                 $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+''+'")!!}") ', "background-position": "center center", "background-repeat": "no-repeat", "background-attachment": "fixed", "background-size": "cover", "height": "100%"});
@@ -336,6 +341,11 @@
                 $('.cj_bg').prop('disabled', false);
                 $('#default').attr('data-value', '255, 255, 255, 0');
                 $('#default').data('value', '255,255,255,0');
+                if($('#colorFilter').val() == '255,255,255,1'){
+                    $('#colorFilter').val('255,255,255,0')
+                }else if ($('#colorFilter').val() == '255,255,255,0'){
+                    $('#colorFilter').val('255,255,255,1')
+                }
             }
         });
 
