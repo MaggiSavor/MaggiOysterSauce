@@ -106,46 +106,50 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="themes">
-                                <div class="col-lg-12" style="display: inline-block; padding-top: 2%;">  
-                                    <label><h4>Navigation Bar Color</h4></label>
-                                        <input id="navbarColor" type="color" name="favcolor" value="#F8F8F8">
-                                        <!-- <button type="button" id="ok" class="btn btn-default btn-circle"><i class="fa fa-check"></i> -->
-                                </button>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="col-lg-12" style=" border-top: 1px dotted #8c8b8b; padding-bottom: 1%">  
-                                    <label><h4>Background Image</h4></label>
-                                        <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-width="90" data-height="15">
-                                    <br>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                    <button type="button" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" >
-                                    </button>
-                                </div>
-                                <hr />
-                                <div class="col-lg-12" style="display: inline-block; border-top: 1px dotted #8c8b8b; ">
-                                    
-                                    <label><h4>Background Filter</h4></label>
-                                    <a type="button" id="default" data-value="248, 248, 248, 0" data-color="#f8f8f8" style="background-color: #f8f8f8;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="black" data-value="0, 3, 26, 0.5" data-color="#00031a" style="background-color: #00031a;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="blue" data-value="0, 102, 255, 0.5" data-color="#0066ff" style="background-color: #0066ff;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="red" data-value="255, 0, 0, 0.5" data-color="#ff0000" style="background-color: #ff0000;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="green" data-value="51, 204, 51, 0.5" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
-                                    <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
-                                </div>
-                                <div class="pull-right">
-                                    <button type="button" class="btn btn-default">Reset to Default</button>
-                                    <button type="button" class="btn btn-barangay">Save Changes</button>
-                                </div>
+                                <form method="post" id="updateSettings">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="col-lg-12" style="display: inline-block; padding-top: 2%;">
+                                        <label><h4>Navigation Bar Color</h4></label>
+                                            <input id="navbarColor" type="color" name="navbarColor" value="{{$settings->navbar}}">
+                                            <!-- <button type="button" id="ok" class="btn btn-default btn-circle"><i class="fa fa-check"></i> -->
+                                   
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="col-lg-12" style="padding-bottom: 1%">  
+                                        <label><h4>Background Image</h4></label>
+                                            <input type="checkbox" class="cj_toggle" id="bg_toggle" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-width="90" data-height="15">
+
+                                            <input type="text" id="bg_image_toggle" name="bg_image_toggle" value="{{$settings->bg_image_toggle}}">
+                                        <br>
+                                        <button type="button" class="cj_bg" id="bg1" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" value="loginbg.jpg">
+                                        </button>
+                                        <button type="button" class="cj_bg" id="bg2" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/bg2.jpg')!!}'); background-size: 100%;" value="bg2.jpg">
+                                        </button>
+                                        <button type="button" class="cj_bg" id="bg3" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/vision.png')!!}'); background-size: 100%;" value="vision.png" >
+                                        </button>
+                                        <input type="text" name="background_image" id="background_image" value="{{$settings->bg_image}}">
+                                    </div>
+                                    <hr />
+                                    <div class="col-lg-12" style="display: inline-block; ">
+                                        
+                                        <label><h4>Background Filter</h4></label>
+                                        <a type="button" id="default" data-value="248, 248, 248, 0" data-color="#f8f8f8" style="background-color: #f8f8f8;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="black" data-value="0, 3, 26, 0.5" data-color="#00031a" style="background-color: #00031a;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="blue" data-value="0, 102, 255, 0.5" data-color="#0066ff" style="background-color: #0066ff;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="red" data-value="255, 0, 0, 0.5" data-color="#ff0000" style="background-color: #ff0000;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="green" data-value="51, 204, 51, 0.5" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
+                                        <input type="hidden" name="colorFilter" id="colorFilter" value="{{$settings->filter}}">
+
+                                    </div>
+                                    <hr/>
+                                    <div class="pull-right" style="pad">
+                                        <button type="button" id="reset" class="btn btn-default">Reset to Default</button>
+                                        <button type="submit" id="saveChanges"  class="btn btn-barangay">Save Changes</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="admin">
                                 <div style="padding-top: 20px;">
@@ -307,24 +311,71 @@
     <!-- /#wrapper -->
 
     
-
+    <script type="text/javascript">
+         
+    </script>
     <!-- Morris Charts JavaScript -->
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script src="../assets/js/bootstrap-toggle.js"></script>
     <script type="text/javascript">
+        //toggle background button 
+        $(document).ready(function() {
+            if(($('#bg_image_toggle').val()) == '0'){
+                $('#bg_toggle').bootstrapToggle('off')
+            }else{
+                $('#bg_toggle').bootstrapToggle('on')
+            }
+        });
+
+        $('#bg_toggle').on('change',function(){
+            // $('#bg_image_toggle').val($(this).prop('checked'))
+            if($(this).is(':checked')) {
+                ($('#bg_image_toggle').val('1'))
+            }else{
+                ($('#bg_image_toggle').val('0'))
+            }
+        });
+        //end toggle background button 
+
+        //background
+        $('.cj_bg').on('click',function(){
+            var foo = $(this).val();
+
+        });
+        //
+
+        //reset to default button
+        $('#reset').on('click',function(){
+            $('#bg_image_toggle').val('0')
+            $('#navbarColor').val('#F8F8F8')
+            $('#colorFilter').val('255,255,255,1')
+
+
+
+            var bg = ('');
+            var bar = ('255,255,255,1');
+            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") '});
+            $('#navbar').css('background-color', '#F8F8F8');
+            $('#bg_image_toggle').val('0')
+        });
+        
+
         $('#navbarColor').on('change',function(){
             // alert($(this).data('color'));
             var bar = ($(this).val());
             $('#navbar').css('background-color', bar);
+
         });
 
         $('.filters').on('click',function(){
             // alert($(this).data('color'));
-            var bg = ('loginbg.jpg');
+            var bg = $('#background_image').val();
             var bar = ($(this).data('value'));
-            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") no-repeat center center fixed', 'background-size' : '100%'});
+            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") ', "background-position": "center center", "background-repeat": "no-repeat", "background-attachment": "fixed", "background-size": "cover", "height": "100%"});
+            
+            $('#colorFilter').val(bar);
         });
 
         $(document).ready(function() {
@@ -339,7 +390,46 @@
                     }
                 ]
             });
-        }); 
+        });
+
+
+        $('#saveChanges').focus(function(e){
+           e.preventDefault();
+           swal({
+             title: "Are you sure?",
+               text: "You are trying to save the event.",
+               type: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "Yes",
+               closeOnConfirm: false,
+               closeOnCancel: false
+           },
+           function(isConfirm){
+             var transfer = $("#updateSettings");
+             var dataString = transfer.serialize();
+             if(isConfirm){
+               $.ajax({
+                 method: 'POST',
+                 url: "{{URL::Route('saveSettings', $settings['id'])}}",
+                 headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                 dataType: 'JSON',
+                 processData : false,
+                 data: dataString,
+                 success: function(data){
+                    if(data.success == "yes"){
+                        swal("Saved!", "Settings has been saved!", "success");
+                    }
+                 },error: function(data){
+                    swal("Something went wrong!");
+                 }
+               });
+             }
+             else {
+               swal("Cancelled", "", "error");
+             }
+           });
+        })
     </script>
     <script>
     function openCity(evt, cityName) {
@@ -576,6 +666,7 @@
             });
     });
     </script>
+
 </body>
 
 </html>

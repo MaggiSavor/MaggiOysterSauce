@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Models\User;
 use App\Models\Resident;
+use App\Models\Settings;
 use Request;
 use Auth;
 use Redirect;
@@ -20,19 +21,18 @@ class AdminController extends Controller
 	}
 
 	public function settings(){
+		$settings = Settings::where('id','=',(Auth::user()->id))->first();
 		$users = User::all();
 		$residents = Resident::all();
 		    return view('admin.settings')
 		    	->with('users', $users)
-		    		->with('residents', $residents);
+		    		->with('residents', $residents)
+		    			->with('settings', $settings);	
 	}
 
 	public function sample(){
 	    return view('admin.sample');
 	}
 
-	// public function addUser(){
-	//     return view('admin.addUser');
-	// }
 
 }

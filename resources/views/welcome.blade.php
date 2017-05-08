@@ -1,17 +1,13 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
-                <div class="panel-body">
-                    Your Application's Lansdsadding Page.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="0;url/login">
+<title>BRIMS</title>
+<script language="javascript">
+    window.location.href = "/login"
+</script>
+</head>
+<body>
+Go to <a href="/login">/login</a>
+</body>
+</html>

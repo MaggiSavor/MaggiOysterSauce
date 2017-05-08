@@ -1,3 +1,7 @@
+<?php 
+    use App\Models\Settings;
+    $settings = Settings::where('id','=',(Auth::user()->id))->first();
+?>
 <!-- Bootstrap Core CSS -->
 <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,9 +37,15 @@
 
 <style type="text/css">
     div#page-wrapper{
-        /*background: linear-gradient(0deg, rgba(255, 255, 0,0.5), rgba(51, 0, 128,0.5)), url("{!! asset('assets/images/loginbg.jpg')!!}") no-repeat center center fixed;
+        background: linear-gradient(0deg, rgba({{$settings->filter}}), rgba({{$settings->filter}})), url("{{ asset("assets/images/$settings->bg_image")}}");
+        background-position: center center;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
         background-size: cover;
-        height: 100%;*/
+        height: 100%;
+    }
+    #navbar{
+        background-color: {{$settings->navbar}};
     }
 
     div h1{
