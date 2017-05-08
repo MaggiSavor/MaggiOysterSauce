@@ -120,21 +120,21 @@
                                         <label><h4>Background Image</h4></label>
                                             <input type="checkbox" class="cj_toggle" id="bg_toggle" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-width="90" data-height="15">
 
-                                            <input type="text" id="bg_image_toggle" name="bg_image_toggle" value="{{$settings->bg_image_toggle}}">
+                                            <input type="hidden" id="bg_image_toggle" name="bg_image_toggle" value="{{$settings->bg_image_toggle}}">
                                         <br>
                                         <button type="button" class="cj_bg" id="bg1" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/loginbg.jpg')!!}'); background-size: 100%;" value="loginbg.jpg">
                                         </button>
                                         <button type="button" class="cj_bg" id="bg2" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/bg2.jpg')!!}'); background-size: 100%;" value="bg2.jpg">
                                         </button>
-                                        <button type="button" class="cj_bg" id="bg3" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/vision.png')!!}'); background-size: 100%;" value="vision.png" >
+                                        <button type="button" class="cj_bg" id="bg3" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/road.jpg')!!}'); background-size: 100%;" value="road.jpg" >
                                         </button>
-                                        <input type="text" name="background_image" id="background_image" value="{{$settings->bg_image}}">
+                                        <input type="hidden" name="background_image" id="background_image" value="{{$settings->bg_image}}">
                                     </div>
                                     <hr />
                                     <div class="col-lg-12" style="display: inline-block; ">
                                         
                                         <label><h4>Background Filter</h4></label>
-                                        <a type="button" id="default" data-value="248, 248, 248, 0" data-color="#f8f8f8" style="background-color: #f8f8f8;" class="btn btn-default btn-circle filters" ></a>
+                                        <a type="button" id="default" data-value="255, 255, 255, 0" data-color="#ffffff" style="background-color: #f8f8f8;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="black" data-value="0, 3, 26, 0.5" data-color="#00031a" style="background-color: #00031a;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="blue" data-value="0, 102, 255, 0.5" data-color="#0066ff" style="background-color: #0066ff;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="red" data-value="255, 0, 0, 0.5" data-color="#ff0000" style="background-color: #ff0000;" class="btn btn-default btn-circle filters" ></a>
@@ -323,18 +323,49 @@
         //toggle background button 
         $(document).ready(function() {
             if(($('#bg_image_toggle').val()) == '0'){
-                $('#bg_toggle').bootstrapToggle('off')
+                $('#bg_toggle').bootstrapToggle('off');
+                $('#background_image').val('');
+                $('.cj_bg').prop('disabled', true);
+                $('#default').data('value', '255,255,255,1');
+
+                var bar = $('#colorFilter').val();
+                $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+''+'")!!}") ', "background-position": "center center", "background-repeat": "no-repeat", "background-attachment": "fixed", "background-size": "cover", "height": "100%"});
+
             }else{
-                $('#bg_toggle').bootstrapToggle('on')
+                $('#bg_toggle').bootstrapToggle('on');
+                $('.cj_bg').prop('disabled', false);
+                $('#default').attr('data-value', '255, 255, 255, 0');
+                $('#default').data('value', '255,255,255,0');
             }
         });
 
         $('#bg_toggle').on('change',function(){
             // $('#bg_image_toggle').val($(this).prop('checked'))
             if($(this).is(':checked')) {
-                ($('#bg_image_toggle').val('1'))
+                ($('#bg_image_toggle').val('1'));
+                $('.cj_bg').prop('disabled', false);
+                $('#default').data('value', '255,255,255,0');
+                if($('#colorFilter').val() == '255,255,255,1'){
+                    $('#colorFilter').val('255,255,255,0')
+                }else if ($('#colorFilter').val() == '255,255,255,0'){
+                    $('#colorFilter').val('255,255,255,1')
+                }
+
             }else{
-                ($('#bg_image_toggle').val('0'))
+                ($('#bg_image_toggle').val('0'));
+                $('#background_image').val('');
+                $('.cj_bg').prop('disabled', true);
+                if($('#colorFilter').val() == '255,255,255,0'){
+                    $('#colorFilter').val('255,255,255,1')
+                }else if($('#colorFilter').val() == '255,255,255,1'){
+                    $('#colorFilter').val('255,255,255,0')
+                }
+
+                // var dataVal = $('#default').attr('data-value');
+                $('#default').data('value', '255,255,255,1');
+
+                var bar = $('#colorFilter').val();
+                $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+''+'")!!}") ', "background-position": "center center", "background-repeat": "no-repeat", "background-attachment": "fixed", "background-size": "cover", "height": "100%"});
             }
         });
         //end toggle background button 
@@ -342,19 +373,26 @@
         //background
         $('.cj_bg').on('click',function(){
             var foo = $(this).val();
+            $('#background_image').val(foo);
+            var bg = $('#background_image').val();
+            var bar = $('#colorFilter').val();
 
+            $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") ', "background-position": "center center", "background-repeat": "no-repeat", "background-attachment": "fixed", "background-size": "cover", "height": "100%"});
+            
+            $('#colorFilter').val(bar);
         });
         //
 
         //reset to default button
         $('#reset').on('click',function(){
-            $('#bg_image_toggle').val('0')
-            $('#navbarColor').val('#F8F8F8')
-            $('#colorFilter').val('255,255,255,1')
+            $('#bg_image_toggle').val('0');
+            $('#navbarColor').val('#F8F8F8');
+            $('#colorFilter').val('255,255,255,1');
+            $('#bg_toggle').bootstrapToggle('off');
 
 
 
-            var bg = ('');
+            var bg = $('#background_image').val();
             var bar = ('255,255,255,1');
             $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") '});
             $('#navbar').css('background-color', '#F8F8F8');

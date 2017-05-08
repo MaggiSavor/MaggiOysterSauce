@@ -42,6 +42,7 @@
         background-repeat:no-repeat;
         background-attachment:fixed;
         background-size: cover;
+        background-color: white;
         height: 100%;
     }
     #navbar{
@@ -130,6 +131,9 @@
     .scrollable-menu::-webkit-scrollbar-thumb {
         border-radius: 10px;
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    .panel{
+        background: rgba(255, 255, 255, 0.8)!important;
     }
 
 /* Extra Things */

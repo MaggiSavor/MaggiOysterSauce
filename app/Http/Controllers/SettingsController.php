@@ -18,7 +18,7 @@ class SettingsController extends Controller
 		$changes = Request::all();
 		$settings = Settings::find($id);
 		$settings['navbar'] = $changes['navbarColor'];
-		// $settings['bg_image_toggle'] = $changes['bg_image_toggle'];
+		$settings['bg_image_toggle'] = $changes['bg_image_toggle'];
 		$settings['bg_image'] = $changes['background_image'];
 		$settings['filter'] = $changes['colorFilter'];
 		$settings->save();
