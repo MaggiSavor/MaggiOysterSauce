@@ -42,9 +42,57 @@ public function addResident(){
     // return $familyID;
 }
 public function updateResident($id){
-	$info = Resident::where('resident_id','=',$id)->get();
+	$info = Resident::where('resident_id','=',$id)->first();
     return view('admin.updateResident')
     	->with('info', $info);
+}
+public function saveUpdate(){
+	$info = Request::all();
+
+	$saveInfo = Resident::where('resident_id','=', $info['residentId'])->first();
+    $saveInfo['lastname'] = $info['lname'];
+    $saveInfo['firstname'] = $info['fname'];
+    $saveInfo['middlename'] = $info['mname'];
+    $saveInfo['house_no'] = $info['houseNo'];
+    $saveInfo['street'] = $info['street'];
+    $saveInfo['household_id'] = $info['householdID'];
+    $saveInfo['telno'] = $info['telno'];
+    $saveInfo['mobile'] = $info['mobile'];
+    $saveInfo['status'] = $info['status'];
+    $saveInfo['occupation'] = $info['occupation'];
+    if(isset($info['voter'])){
+    	$saveInfo['voter'] = $info['voter'];   
+    }
+    else
+    {
+    	$saveInfo['voter'] = 'nonvoter';
+    }
+    $saveInfo['nationality'] = $info['nationality'];
+    $saveInfo['religion'] = $info['religion'];
+    $saveInfo['family_id'] = $info['familyID'];
+    $saveInfo['fullname'] = $info['fname'].' '.$info['mname'].' '.$info['lname'];
+    if(isset($info['houseHead'])){
+    	$saveInfo['household_head'] = $info['houseHead'];   
+    }
+    else
+    {
+    	$saveInfo['household_head'] = 'yes';
+    }
+    if(isset($info['familyHead'])){
+    	$saveInfo['family_head'] = $info['familyHead'];   
+    }
+    else
+    {
+    	$saveInfo['family_head'] = 'yes';
+    }
+ 	// $saveInfo->save(); 
+
+ 	// if($saveInfo){
+  //     return response()->json(['success' =>'yes']);
+  //   }
+
+
+	return response($info);
 }
 public function saveResident(){
     $residentInfo = Request::all();

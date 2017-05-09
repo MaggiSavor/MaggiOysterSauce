@@ -119,12 +119,13 @@
 
       
           <div class="modal-body">
-          <a href="{{URL::Route('updateResident', $residentinfo['resident_id'])}}"><button class="btn btn-success">Update</button></a>
+          <a href="{{URL::Route('updateResident',$residentinfo['resident_id'])}}"><button class="btn btn-success">Update</button></a>
             <div class="table-responsive card-box">
             <h3>Personal Information</h3>
             <center><label>Household ID: {{$residentinfo['household_id']}}</label>
             <label>Family ID: {{$residentinfo['family_id']}}</label></center>
               <table class="table table-hover mails m-0 table table-actions-bar">
+                <thead>
                 <thead>
                   <tr>
                   </tr>

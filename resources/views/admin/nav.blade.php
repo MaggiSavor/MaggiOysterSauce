@@ -3,29 +3,33 @@
     $settings = Settings::where('id','=',(Auth::user()->id))->first();
 ?>
 <!-- Bootstrap Core CSS -->
-<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="{{ URL::asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<!--  <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- MetisMenu CSS -->
-<link href="../assets/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="../assets/dist/css/sb-admin-2.css" rel="stylesheet">
-
+<link href="{{ URL::asset('assets/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+<!-- <link href="../assets/metisMenu/metisMenu.min.css" rel="stylesheet">
+ -->
+ <!-- Custom CSS -->
+<link href="{{ URL::asset('assets/dist/css/sb-admin-2.css') }}" rel="stylesheet">
+<!-- <link href="../assets/dist/css/sb-admin-2.css" rel="stylesheet"> -->
 <!-- Morris Charts CSS -->
-<link href="../assets/morrisjs/morris.css" rel="stylesheet">
-
+<link href="{{ URL::asset('assets/morrisjs/morris.css') }}" rel="stylesheet">
+<!-- <link href="../assets/morrisjs/morris.css" rel="stylesheet"> -->
 <!-- Custom Fonts -->
-<link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+<link href="{{ URL::asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+<!-- <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 <!-- DataTables CSS -->
-<link href="../assets/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
+<link href="{{ URL::asset('assets/datatables-plugins/dataTables.bootstrap.css') }}" rel="stylesheet">
+<!-- <link href="../assets/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet"> -->
 <!-- DataTables Responsive CSS -->
-<link href="../assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+<link href="{{ URL::asset('assets/datatables-responsive/dataTables.responsive.css') }}" rel="stylesheet">
+<!-- <link href="../assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet"> -->
 
 <!-- DataTables Search Higlight CSS -->
-<link href="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+<link href="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css') }}" rel="stylesheet">
 <link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+<!-- <link href="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+<link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet"> -->
 
 <!-- Sweet Alert -->
 <script src="{!! asset('assets/sweetalert-master/dist/sweetalert.min.js') !!}"></script>
@@ -342,28 +346,40 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 </nav>
 
 <!-- jQuery -->
-<script src="../assets/jquery/jquery.min.js"></script>
+<script src="{{ URL::asset('assets/jquery/jquery.min.js') }}"></script>
+<!-- <script src="../assets/jquery/jquery.min.js"></script> -->
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- <script src="../assets/bootstrap/js/bootstrap.min.js"></script> -->
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="../assets/metisMenu/metisMenu.min.js"></script>
+<script src="{{ URL::asset('assets/metisMenu/metisMenu.min.js') }}"></script>
+<!-- <script src="../assets/metisMenu/metisMenu.min.js"></script> -->
 
 <!-- Custom Theme JavaScript -->
-<script src="../assets/dist/js/sb-admin-2.js"></script>
+<script src="{{ URL::asset('assets/dist/js/sb-admin-2.js') }}"></script>
+<!-- <script src="../assets/dist/js/sb-admin-2.js"></script> -->
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="../assets/js/light-bootstrap-dashboard.js"></script>
+<script src="{{ URL::asset('assets/js/light-bootstrap-dashboard.js') }}"></script>
+<!-- <script src="../assets/js/light-bootstrap-dashboard.js"></script> -->
 
 <!-- DataTables JavaScript -->
-<script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ URL::asset('assets/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-responsive/dataTables.responsive.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-responsive/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/jquery.highlight.js') }}"></script>
+<!-- <script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../assets/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../assets/datatables-responsive/dataTables.responsive.js"></script>
 <script src="../assets/datatables-responsive/dataTables.responsive.min.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js"></script>
 <script src="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js"></script>
-<script src="../assets/datatables-plugins/searchHighlight/jquery.highlight.js"></script>
+<script src="../assets/datatables-plugins/searchHighlight/jquery.highlight.js"></script> -->
 
 <!-- form validation -->
 <script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>

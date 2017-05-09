@@ -33,7 +33,7 @@
         @include('admin.nav')
         
 
-        <div id="page-wrapper" style="padding-top: 0% ">
+        <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Add Resident</h1>
@@ -49,122 +49,116 @@
                     <div class="panel-body">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form method="post" id="resident">
+                          <input type="hidden" value="{{$info['resident_id']}}" name="residentId">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label class="control-label">First Name *</label>
-                                        <input type="text" name="fname" class="form-control input-xs" id="InputFName" placeholder="First Name">
+                                        <input type="text" name="fname" class="form-control input-xs" id="InputFName" placeholder="First Name" value="{{$info['firstname']}}">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Middle Name *</label>
-                                        <input type="text" name="mname" class="form-control input-xs" id="InputMName" placeholder="Middle Name">
+                                        <input type="text" name="mname" class="form-control input-xs" id="InputMName" placeholder="Middle Name" value="{{$info['middlename']}}">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Last Name *</label>
-                                        <input type="text" name="lname" class="form-control input-xs" id="InputLName" placeholder="Last Name">
+                                        <input type="text" name="lname" class="form-control input-xs" id="InputLName" placeholder="Last Name" value="{{$info['middlename']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Address *</label>
-                                        <input type="text" name="houseNo" class="form-control input-xs" id="InputHouseNo" placeholder="House No">
+                                        <input type="text" name="houseNo" class="form-control input-xs" id="InputHouseNo" value="{{$info['house_no']}}" placeholder="House No">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Street *</label>
                                         <select class="form-control" name="street" id="InputStreet" >
                                             <option hidden value="">--Select Street--</option>
-                                            <option>P. Ortega</option>
-                                            <option>Asuncion</option>
-                                            <option>Morga</option>
-                                            <option>Zamora</option>
-                                            <option>J. Nolasco</option>
-                                            <option>Sto. Cristo</option>
+                                            <option value="P. Ortega" <?php if($info['street'] == "P. Ortega"){ echo ' selected';} ?> >P. Ortega</option>
+                                            <option value="Asuncion" <?php if($info['street'] == "Asuncion"){ echo ' selected';} ?> >Asuncion</option>
+                                            <option value="Morga" <?php if($info['street'] == "Morga"){ echo ' selected';} ?> >Morga</option>
+                                            <option value="Zamora" <?php if($info['street'] == "Zamora"){ echo ' selected';} ?> >Zamora</option>
+                                            <option value="J. Nolasco" <?php if($info['street'] == "J. Nolasco"){ echo ' selected';} ?> >J. Nolasco</option>
+                                            <option value="Sto. Cristo" <?php if($info['street'] == "Sto. Cristo"){ echo ' selected';} ?> >Sto. Cristo</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="InputHouseID" id="householdID">Household ID:</label>
                                         <br>
-                                        <label></label>
-                                        <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group col-md-4">
-                                        <label for="Inputbirthdate">Birthday:&nbsp;&nbsp;</label>
-                                        <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs" id="bday">
-                                        <span id="resultBday" hidden></span>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="InputContact">Mobile</label>
-                                        <input type="number" min="999999999" max="9999999999" name="mobile" class="form-control input-xs" id="InputCellphone" placeholder="(+63)">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="InputContact">Telephone</label>
-                                        <input type="number" min="999999" max="9999999" name="telno" class="form-control input-xs" id="InputTelephone" placeholder="(2)" >
+                                        <label>{{$info['household_id']}}</label>
+                                        <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$info['household_id']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label for="InputStatus">Status</label>
                                             <select class="form-control" name="status" id="InputStatus" >
-                                                <option>Single</option>
-                                                <option>Married</option>
-                                                <option>Separated</option>
-                                                <option>Widowed</option>
+                                                <option value="Single" <?php if($info['status'] == "Single"){ echo ' selected';} ?> >Single</option>
+                                                <option value="Married" <?php if($info['status'] == "Married"){ echo ' selected';} ?> >Married</option>
+                                                <option value="Seperated" <?php if($info['status'] == "Separated"){ echo ' selected';} ?> >Separated</option>
+                                                <option value="Widowed" <?php if($info['status'] == "Widowed"){ echo ' selected';} ?> >Widowed</option>
                                             </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="InputOccupation">Occupation:</label>
-                                        <input type="text" name="occupation" class="form-control input-xs" id="InputOccupation" placeholder="Occupation" >
+                                        <label for="InputContact">Mobile</label>
+                                        <input type="number" min="999999999" max="9999999999" name="mobile" class="form-control input-xs" id="InputCellphone" value="{{$info['mobile']}}" placeholder="(+63)">
                                     </div>
-                                    <div class="form-group col-md-4" id="voter" hidden>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputContact">Telephone</label>
+                                        <input type="number" min="999999" max="9999999" name="telno" class="form-control input-xs" id="InputTelephone" value="{{$info['telno']}}" placeholder="(2)" >
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for="InputOccupation">Occupation:</label>
+                                        <input type="text" name="occupation" class="form-control input-xs" id="InputOccupation" value="{{$info['occupation']}}">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="InputContact">Nationality</label>
+                                        <input type="text" name="nationality" class="form-control input-xs" id="InputNation" value="{{$info['nationality']}}">
+                                    </div>
+                                    <div class="form-group col-md-4" id="voter">
+                                        <input type="hidden" id="votercheck" value="{{$info['voter']}}">
                                         <label class='col-lg-12 control-label'>
                                             Voter *
                                         </label>
                                         <div class="col-md-12">
                                             <div class='radio'>
-                                            <input type="radio" name="voter" id="voter" value="voter" >
-                                            <label for='male'>Yes</label>
-                                            <br>
-                                            <input type="radio" name="voter" id="voter" value="nonvoter" >
-                                            <label for='Female'>No</label>
+                                            <label for='voter'>
+                                            <input type="radio" name="voter" id="voter" value="voter">
+                                            <strong>Yes</strong>
+                                            </label>
+                                            <label for='nonvoter'>
+                                            <input type="radio" name="voter" id="nonvoter" value="nonvoter" >
+                                            <strong>No</strong>
+                                            </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
-                                        <label for="InputContact">Nationality</label>
-                                        <input type="text" name="nationality" class="form-control input-xs" id="InputNation" placeholder="Nationality">
-                                    </div>
-                                    <div class="form-group col-md-4">
                                         <label for="InputReligion">Religion</label>
-                                        <input type="text" name="religion" class="form-control input-xs" id="InputReligion" placeholder="Religion" >
+                                        <input type="text" name="religion" class="form-control input-xs" id="InputReligion" value="{{$info['religion']}}">
                                     </div>
                                     <div class="form-group col-md-4"><br>
                                         <label for="InputFamID" id="famID">Family ID:</label><br>
-                                        <label></label>
-                                        <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="">
+                                        <label>{{$info['family_id']}}</label>
+                                        <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$info['family_id']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
-                                        <label for="InputFName">Role:</label>
-                                        <select class="form-control" name="role" id="InputRole" >
-                                            <option hidden value="">--Select Role--</option>
-                                            <option>Husband</option>
-                                            <option>Wife</option>
-                                            <option>Son</option>
-                                            <option>Daughter</option>
-                                        </select>
+                                        <input type="hidden" value="{{$info['household_head']}}" id="househead">
+                                        <label for="householdhead"><input type="checkbox" name="househead" id="housecheck" value="yes">
+                                        <strong>Household Head</strong>
+                                        </label>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
-                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="InputFather">Father's Name:</label>
-                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
+                                        <input type="hidden" value="{{$info['family_head']}}" id="familyhead">
+                                        <label for="familyhead"><input type="checkbox" name="familyhead" id="familycheck" value="yes">
+                                        <strong>Family Head</strong>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -199,21 +193,6 @@
 <script src="http://formvalidation.io/vendor/formvalidation/js/formValidation.min.js"></script>
     <script src="http://formvalidation.io/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
     <script>
-    $('#bday').change(function(){
-        var Bdate =$('#bday').val();
-        var Bday = +new Date(Bdate);
-        //Q4A = Bdate + ". You are " + ~~ ((Date.now() - Bday) / (31557600000));
-        age = ~~ ((Date.now() - Bday) / (31557600000));  
-        var theBday = $('#resultBday');
-        theBday.innerHTML = age;
-
-        if(age >= 18){
-            $('#voter').attr('hidden', false);
-        }
-        else if(age <18){
-            $('#voter').attr('hidden', true);
-        }
-    })
      function validate(evt) {
           var theEvent = evt || window.event;
           var key = theEvent.keyCode || theEvent.which;
@@ -328,7 +307,7 @@
         e.preventDefault();
         swal({
           title: "Are you sure?",
-            text: "You are trying to register new resident.",
+            text: "You are trying to update this resident's information.",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -340,13 +319,14 @@
           if(isConfirm){
             $.ajax({
               method: 'POST',
-              url: "{{URL::Route('saveResident')}}",
+              url: "{{URL::Route('saveUpdate')}}",
               headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
               dataType: 'JSON',
               processData : false,
               contentType : false,
               data: new FormData($("#resident")[0]),
               success: function(data){
+                console.log(data)
                 if(data.success == "yes"){
                   swal({
                     title:"Saved!", 
@@ -354,9 +334,9 @@
                     type: "success",
                     showConfirmButton: false
                   });
-                  setTimeout(function(){
-                             location.reload();
-                        }, 2000); 
+                  // setTimeout(function(){
+                  //            location.reload();
+                  //       }, 2000); 
                 }
               },error: function(data){
                   swal("Error!", "Something went wrong", "error");
@@ -364,13 +344,31 @@
             });
           }
           else {
-            swal("Cancelled", "Something went wrong!", "error");
+            swal("Cancelled", "You cancelled!", "error");
           }
         });
       });
     })  
 });
         
+    </script>
+    <script>
+    $('document').ready(function(){
+        if($('#househead').val() == "yes"){
+            $('#housecheck').prop('checked', true);
+        }
+
+        if($('#familyhead').val() == "yes"){
+            $('#familycheck').prop('checked', true);
+        }
+
+        if($('#votercheck').val() == "yes"){
+            $('#voter').prop('checked', true);
+        }
+        else{
+            $('#nonvoter').prop('checked', true);   
+        }
+    })
     </script>
   
 </body>
