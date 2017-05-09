@@ -42,7 +42,7 @@
                         Residents
                     </div>
                     <!-- /.panel-heading -->
-                  <form method="get" action="{{URL::Route('resDate')}}">
+                  <form method="get">
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 pull-right">
-                          <button type="submit" id="generate" class="btn btn-warning">Generate</button>
+                          <button type="button" id="generate" class="btn btn-warning">Generate</button>
                         </div>     
                     </div>
                   </form> 
@@ -150,8 +150,62 @@
             },function(isConfirm){
                   $('#dateEnd').val("") ;
             });
+          }else{
+              var mydateStart = new Date($('#dateStart').val());
+              var monthStart = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateStart.getMonth()];
+              var start = monthStart + ' ' + mydateStart.getDate() + ', ' + mydateStart.getFullYear();
+
+              var mydateEnd = new Date($('#dateEnd').val());
+              var monthEnd = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateEnd.getMonth()];
+              var end = monthEnd + ' ' + mydateEnd.getDate() + ', ' + mydateEnd.getFullYear();
+
+              $('.title').html('Resident Report: ' + start + ' to ' + end);
           }
+
       })
+    </script>
+    <script>
+      var counter=0;
+
+         $('#generate').focus(function() {
+            if(counter>-1)
+            {
+                $('#resident').dataTable().fnClearTable();
+            }
+            counter++;;
+
+           var start = $('#dateStart').val();
+           var end = $('#dateEnd').val();
+
+           $.ajax({
+             method: 'get',
+             url: '{{ URL::route("resDate")}}',
+             dataType:'json',
+             data: {
+              'start':start,
+              'end':end
+             },
+             success:function(data){
+              console.log(data.resident.length)
+               for(i=0; i< data.resident.length; i++){
+                if(data.resident.length != 0){
+                  $('#resident').dataTable().fnAddData([
+                        data.resident[i]['resident_id'],
+                        data.resident[i]['fullname'],
+                        data.resident[i]['house_no']+' '+data.resident[i]['street'],
+                        data.resident[i]['gender'],
+                        data.resident[i]['status'],
+                      ]);
+                }else{
+                  $('.myTable').append('<center>No data available</center>');
+                }
+              }
+
+             }
+           })
+         }) 
     </script>
     <script>
         $selectFilter = $('#selectFilter li'),
@@ -174,7 +228,7 @@
            if(reports === "All Resident"){
               $.ajax({
                method: 'get',
-               url: '{{ URL::route("retunResidentReport")}}',
+               url: '{{ URL::route("returnResidentReport")}}',
                dataType:'json',
                data: {
                    all: reports,
@@ -199,7 +253,7 @@
            }else if(reports === "Voter"){
               $.ajax({
                method: 'get',
-               url: '{{ URL::route("retunResidentReport")}}',
+               url: '{{ URL::route("returnResidentReport")}}',
                dataType:'json',
                data: {
                    voter: reports,
@@ -224,7 +278,7 @@
            }else if(reports === "Senior"){
               $.ajax({
                method: 'get',
-               url: '{{ URL::route("retunResidentReport")}}',
+               url: '{{ URL::route("returnResidentReport")}}',
                dataType:'json',
                data: {
                    senior: reports,
@@ -249,7 +303,7 @@
            }else{
               $.ajax({
                method: 'get',
-               url: '{{ URL::route("retunResidentReport")}}',
+               url: '{{ URL::route("returnResidentReport")}}',
                dataType:'json',
                data: {
                    gender: reports,

@@ -58,7 +58,7 @@ public function barangayIdReport(){
 public function businessPermitReport(){
     return view('admin.businessPermitReport');
 }
-public function retunResidentReport(){
+public function returnResidentReport(){
 	$gender = Request::all();
 	$returnGender = Resident::where('gender','=',$gender)
 								->where('resident_status', '=', 'Active')->get();
@@ -114,36 +114,44 @@ public function returnCert(){
 	return response()->json(["certification" => $returnCert, "goodMoral" => $returnGood, "indigency" => $returnIndigency]);
 }
 public function resDate(){
-	$from = Request::get('dateStart');
-	$to = Request::get('dateEnd');
+	$res = Request::all();
+	// $to = Request::get('dateEnd');
 	
-	$residentDate = Resident::whereBetween('date_registered', [$from, $to])->get();
+	$residentDate = Resident::whereBetween('date_registered', [$res['start'], $res['end']])->get();
 
 	return response()->json(["resident" => $residentDate]);
 }
 public function caseDate(){
-	$from = Request::get('dateStart');
-	$to = Request::get('dateEnd');
+	$case = Request::all();
 	
-	$caseDate = Blotter::whereBetween('case_date', [$from, $to])->get();
+	$caseDate = Blotter::whereBetween('case_date', [$case['start'], $case['end']])->get();
 
 	return response()->json(["case" => $caseDate]);
 }
-public function IdDate(){
-	$from = Request::get('dateStart');
-	$to = Request::get('dateEnd');
+public function idDate(){
+	$id = Request::all();
 	
-	$IdDate = BarangayId::whereBetween('date_issued', [$from, $to])->get();
+	$IdDate = BarangayId::whereBetween('date_issued', [$id['start'], $id['end']])->get();
 
 	return response()->json(["bid" => $IdDate]);
 }
 public function permitDate(){
-	$from = Request::get('dateStart');
-	$to = Request::get('dateEnd');
+	$permit = Request::all();
 	
-	$PermitDate = BusinessPermit::whereBetween('date_issued', [$from, $to])->get();
+	$PermitDate = BusinessPermit::whereBetween('date_issued', [$permit['start'], $permit['end']])->get();
 
-	return response()->json(["bid" => $PermitDate]);
+	return response()->json(["bpermit" => $PermitDate]);
+}
+public function certDate(){
+	$cert = Request::all();
+
+	$certDate = Certification::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
+
+	$goodDate = GoodMoral::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
+
+	$indigencyDate = Indigency::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
+
+	return response()->json(["certification" => $certDate, "goodMoral" => $goodDate, "indigency" => $indigencyDate]);
 }
 
 }

@@ -43,16 +43,16 @@
                         Barangay ID
                     </div>
                     <!-- /.panel-heading -->
-                  <form method="get" action="{{URL::Route('idDate')}}">
+                  <form method="get">
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
                             </div>
                             <div class="form-group pull-right">
                             <label for="InputStart">Filter</label>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 pull-right">
-                            <button type="submit" id="generate" class="btn btn-warning" >Generate</button>
+                            <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                         </div>
                     </div>
                   </form>
@@ -147,8 +147,63 @@
             },function(isConfirm){
                   $('#dateEnd').val("") ;
             });
+          }else{
+              var mydateStart = new Date($('#dateStart').val());
+              var monthStart = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateStart.getMonth()];
+              var start = monthStart + ' ' + mydateStart.getDate() + ', ' + mydateStart.getFullYear();
+
+              var mydateEnd = new Date($('#dateEnd').val());
+              var monthEnd = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateEnd.getMonth()];
+              var end = monthEnd + ' ' + mydateEnd.getDate() + ', ' + mydateEnd.getFullYear();
+
+              $('.title').html('Barangay ID Report: ' + start + ' to ' + end);
           }
+
+          
       })
+    </script>
+    <script>
+      var counter=0;
+
+         $('#generate').focus(function() {
+            if(counter>-1)
+            {
+                $('#barangayID').dataTable().fnClearTable();
+            }
+            counter++;;
+
+           var start = $('#dateStart').val();
+           var end = $('#dateEnd').val();
+
+           $.ajax({
+             method: 'get',
+             url: '{{ URL::route("idDate")}}',
+             dataType:'json',
+             data: {
+              'start':start,
+              'end':end
+             },
+             success:function(data){
+              console.log(data.bid.length)
+               for(i=0; i< data.bid.length; i++){
+                if(data.bid.length != 0){
+                  $('#barangayID').dataTable().fnAddData([
+                        data.bid[i]['bid_id'],
+                        data.bid[i]['id_no'],
+                        data.bid[i]['name'],
+                        data.bid[i]['date_issued'],
+                        data.bid[i]['date_expired'],
+                      ]);
+                }else{
+                  $('.myTable').append('<center>No data available</center>');
+                }
+              }
+
+             }
+           })
+         }) 
     </script>
     <script>
         $selectFilter = $('#selectFilter li'),

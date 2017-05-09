@@ -119,6 +119,7 @@
       $('#generate').click(function() {
         var dateEnd = $('#dateEnd').val();
         var dateStart = $('#dateStart').val();
+        var cert = $('#filter');
 
           if(dateStart > dateEnd){
             sweetAlert({
@@ -144,8 +145,111 @@
             },function(isConfirm){
                   $('#dateEnd').val("") ;
             });
+          }else{
+              var mydateStart = new Date($('#dateStart').val()); 
+              var monthStart = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateStart.getMonth()];
+              var start = monthStart + ' ' + mydateStart.getDate() + ', ' + mydateStart.getFullYear();
+
+              var mydateEnd = new Date($('#dateEnd').val());
+              var monthEnd = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"][mydateEnd.getMonth()];
+              var end = monthEnd + ' ' + mydateEnd.getDate() + ', ' + mydateEnd.getFullYear();
+
+              $('.title').html(cert.text()+ ' Report: ' + start + ' to ' + end);
           }
       })
+    </script>
+    <script>
+      var counter=0;
+
+         $('#generate').focus(function() {
+            if(counter>-1)
+            {
+                $('#certificate').dataTable().fnClearTable();
+            }
+            counter++;;
+
+           var start = $('#dateStart').val();
+           var end = $('#dateEnd').val();
+
+           if(reports === "Certificate"){
+                $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("certDate")}}',
+                 dataType:'json',
+                 data: {
+                  'start':start,
+                  'end':end
+                 },
+                 success:function(data){
+                  console.log(data.certification.length)
+                   for(i=0; i< data.certification.length; i++){
+                    if(data.certification.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                            data.certification[i]['certificate_id'],
+                            data.certification[i]['name'],
+                            data.certification[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })   
+            }else if(reports === "Indigency"){
+                $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("certDate")}}',
+                 dataType:'json',
+                 data: {
+                  'start':start,
+                  'end':end
+                 },
+                 success:function(data){
+                  console.log(data.indigency.length)
+                   for(i=0; i< data.indigency.length; i++){
+                    if(data.indigency.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                          data.indigency[i]['indigency_id'],
+                          data.indigency[i]['name'],
+                          data.indigency[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })
+            }else{
+               $.ajax({
+                 method: 'get',
+                 url: '{{ URL::route("certDate")}}',
+                 dataType:'json',
+                 data: {
+                  'start':start,
+                  'end':end
+                 },
+                 success:function(data){
+                  console.log(data.goodMoral.length)
+                   for(i=0; i< data.goodMoral.length; i++){
+                    if(data.goodMoral.length != 0){
+                      $('#certificate').dataTable().fnAddData([
+                          data.goodMoral[i]['goodmoral_id'],
+                          data.goodMoral[i]['name'],
+                          data.goodMoral[i]['date_issued'],
+                          ]);
+                    }else{
+                      $('.myTable').append('<center>No data available</center>');
+                    }
+                  }
+
+                 }
+               })
+            }
+         }) 
     </script>
     <script>
         $selectFilter = $('#selectFilter li'),

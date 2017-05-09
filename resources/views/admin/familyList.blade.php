@@ -108,7 +108,7 @@
 
           <ul class="nav nav-tabs" id="tabContent">
         <li><a href="#details" data-toggle="tab">Personal Information</a></li>
-        <li><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
+        <li id="listmember"><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
         <li class="active"><a href="#members" data-toggle="tab">Family Members</a></li>
       </ul>
   
@@ -509,6 +509,11 @@
     </script>
     <script>
     
+    </script>
+    <script>
+      $('#listmember').click(function(){
+        alert('pls work')
+      })
     </script>
     <script>
     // $('document').ready(function(){

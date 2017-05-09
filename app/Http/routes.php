@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('certificate_report', array('uses' => 'ReportsController@certificateReport', 'as' => 'certificateReport'));
 		Route::get('barangay_id_report', array('uses' => 'ReportsController@barangayIdReport', 'as' => 'barangayIdReport'));
 		Route::get('business_permit_report', array('uses' => 'ReportsController@businessPermitReport', 'as' => 'businessPermitReport'));
-		Route::get('resident_reports', array('uses' => 'ReportsController@retunResidentReport', 'as' => 'retunResidentReport'));
+		Route::get('resident_reports', array('uses' => 'ReportsController@returnResidentReport', 'as' => 'returnResidentReport'));
 		Route::get('case_reports', array('uses' => 'ReportsController@returnCaseReport', 'as' => 'returnCaseReport'));
 		Route::get('id_reports', array('uses' => 'ReportsController@returnIdReport', 'as' => 'returnIdReport'));
 		Route::get('permit_reports', array('uses' => 'ReportsController@returnPermitReport', 'as' => 'returnPermitReport'));
@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('date_case', array('uses' => 'ReportsController@caseDate', 'as' => 'caseDate'));
 		Route::get('date_id', array('uses' => 'ReportsController@idDate', 'as' => 'idDate'));
 		Route::get('date_permit', array('uses' => 'ReportsController@permitDate', 'as' => 'permitDate'));
+		Route::get('date_cert', array('uses' => 'ReportsController@certDate', 'as' => 'certDate'));
 		// end of reports
 
 	});
