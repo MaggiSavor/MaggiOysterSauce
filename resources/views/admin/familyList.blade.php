@@ -108,7 +108,8 @@
 
           <ul class="nav nav-tabs" id="tabContent">
         <li><a href="#details" data-toggle="tab">Personal Information</a></li>
-        <li class="active"><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
+        <li><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
+        <li class="active"><a href="#members" data-toggle="tab">Family Members</a></li>
       </ul>
   
       <div class="tab-content">
@@ -228,11 +229,43 @@
           </div>
         </div>
 
+        <div class="tab-pane active" id="members">
+          <div class="control-group">
 
-        <div class="tab-pane active" id="addMember">
+      
           <div class="modal-body">
-             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <form id="resident">
+            <div class="table-responsive card-box">
+            <h3>Family Members</h3>
+            <center><label>Household ID: {{$residentinfo['household_id']}}    </label>
+            <label>Family ID: {{$residentinfo['family_id']}}</label></center>
+              <table class="table table-hover mails m-0 table table-actions-bar">
+                  <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                  <tbody>
+                    <tr class="">
+                      <td></td>
+                      <td><b>Resident ID</b></td>
+                      <td class="id" style="min-width: 350px">{{$residentinfo['resident_id']}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+
+          </div>
+        </div>
+
+
+        <div class="tab-pane" id="addMember">
+          <div class="modal-body">
+                        <form id="resident" method="POST" action="{{URL::Route('addMember')}}">
+                        
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
@@ -286,13 +319,9 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
-                                        <label for="InputStatus">Status</label>
-                                            <select class="form-control" name="status" id="InputStatus" >
-                                                <option value="Single" >Single</option>
-                                                <option value="Married" >Married</option>
-                                                <option value="Seperated">Separated</option>
-                                                <option value="Widowed">Widowed</option>
-                                            </select>
+                                        <label for="Inputbirthdate">Birthday:&nbsp;&nbsp;</label>
+                                        <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs" id="bday">
+                                        <span id="resultBday" hidden></span>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="InputContact">Mobile</label>
@@ -312,7 +341,7 @@
                                         <label for="InputContact">Nationality</label>
                                         <input type="text" name="nationality" class="form-control input-xs" id="InputNation" value="">
                                     </div>
-                                    <div class="form-group col-md-4" id="voter">
+                                    <div class="form-group col-md-4" id="voter" hidden>
                                         <label class='col-lg-12 control-label'>
                                             Voter *
                                         </label>
@@ -332,6 +361,15 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
+                                        <label for="InputStatus">Status</label>
+                                            <select class="form-control" name="status" id="InputStatus" >
+                                                <option value="Single" >Single</option>
+                                                <option value="Married" >Married</option>
+                                                <option value="Seperated">Separated</option>
+                                                <option value="Widowed">Widowed</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="InputReligion">Religion</label>
                                         <input type="text" name="religion" class="form-control input-xs" id="InputReligion" value="">
                                     </div>
@@ -340,6 +378,7 @@
                                         <label>{{$residentinfo['family_id']}}</label>
                                         <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$residentinfo['family_id']}}">
                                     </div>
+
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
@@ -351,15 +390,30 @@
                                         <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
                                     </div>
                                 </div>
-                            
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label for='householdhead'>
+                                        <input type="checkbox" name="houseHead" id="houseHead" value="yes">
+                                        <strong>Household Head</strong>
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for='familyhead'>
+                                        <input type="checkbox" name="familyHead" id="familyHead" value="yes" >
+                                        <strong>Family Head</strong>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="pull-right">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
-                                <button id="register" type="button" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                                <button id="register" type="submit" name="" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
                             </div>
                         </form>
           </div>   
         </div>
+
 
       </div> <!-- tab content -->
 
@@ -373,9 +427,6 @@
     
 
     <!-- Morris Charts JavaScript -->
-    <script src="../assets/raphael/raphael.min.js"></script>
-    <script src="../assets/morrisjs/morris.min.js"></script>
-    <script src="../assets/data/morris-data.js"></script>
     <script src="../assets/js/bootstrap-toggle.js"></script>
     <script src="{!! asset('assets/plugins/bootstrap-select/js/bootstrap-select.min.js')!!}" type="text/javascript"></script>
 
@@ -392,6 +443,23 @@
             var bar = ($(this).data('value'));
             $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") no-repeat center center fixed', 'background-size' : '100%'});
         });
+    </script>
+    <script>
+    $('#bday').change(function(){
+        var Bdate =$('#bday').val();
+        var Bday = +new Date(Bdate);
+        //Q4A = Bdate + ". You are " + ~~ ((Date.now() - Bday) / (31557600000));
+        age = ~~ ((Date.now() - Bday) / (31557600000));  
+        var theBday = $('#resultBday');
+        theBday.innerHTML = age;
+
+        if(age >= 18){
+            $('#voter').attr('hidden', false);
+        }
+        else if(age <18){
+            $('#voter').attr('hidden', true);
+        }
+      })
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -438,6 +506,9 @@
           });
       });
       TableManageButtons.init();
+    </script>
+    <script>
+    
     </script>
     <script>
     // $('document').ready(function(){
@@ -538,44 +609,45 @@
     //    var $form = $(e.target),
     //      fv    = $form.data('formValidation');
          
-      $('#register').focus(function(e){
-        e.preventDefault();
-        swal({
-          title: "Are you sure?",
-            text: "You are trying to register new resident.",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-        function(isConfirm){
-          if(isConfirm){
-            $.ajax({
-              method: 'POST',
-              url: "{{URL::Route('saveResident')}}",
-              headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
-              dataType: 'JSON',
-              data: new FormData($("#resident")[0]),
-              success: function(data){
-                if(data.success == "yes"){
-                  swal({
-                    title:"Saved!", 
-                    text: "New resident has been registered!",
-                    type: "success"
-                  });
-                }
-              },error: function(data){
-                  swal("Error!", "Something went wrong", "error");
-                }
-            });
-          }
-          else {
-            swal("Cancelled", "Something went wrong!", "error");
-          }
-        });
-      });
+      // $('#register').focus(function(e){
+      //   e.preventDefault();
+      //   swal({
+      //     title: "Are you sure?",
+      //       text: "You are trying to register new resident.",
+      //       type: "warning",
+      //       showCancelButton: true,
+      //       confirmButtonColor: "#DD6B55",
+      //       confirmButtonText: "Yes",
+      //       closeOnConfirm: false,
+      //       closeOnCancel: false
+      //   },
+      //   function(isConfirm){
+      //     if(isConfirm){
+      //       var info = $('#resident').serialize()
+      //       $.ajax({
+      //         method: 'POST',
+      //         url: "{{URL::Route('saveResident')}}",
+      //         headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+      //         dataType: 'JSON',
+      //         data: info,
+      //         success: function(data){
+      //           if(data.success == "yes"){
+      //             swal({
+      //               title:"Saved!", 
+      //               text: "New resident has been registered!",
+      //               type: "success"
+      //             });
+      //           }
+      //         },error: function(data){
+      //             swal("Error!", "Something went wrong", "error");
+      //           }
+      //       });
+      //     }
+      //     else {
+      //       swal("Cancelled", "Something went wrong!", "error");
+      //     }
+      //   });
+      // });
 // });        
     </script>
 

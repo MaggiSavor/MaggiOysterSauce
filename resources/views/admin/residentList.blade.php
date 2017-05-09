@@ -107,13 +107,13 @@
           </div>
 
           <ul class="nav nav-tabs" id="tabContent">
-        <li><a href="#details" data-toggle="tab">Personal Information</a></li>
-        <li class="active"><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
+        <li  class="active"><a href="#details" data-toggle="tab">Personal Information</a></li>
+        <li><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
       </ul>
   
       <div class="tab-content">
       
-        <div class="tab-pane" id="details">
+        <div class="tab-pane active" id="details">
           <div class="control-group">
 
       
@@ -229,7 +229,7 @@
         </div>
 
 
-        <div class="tab-pane active" id="addMember">
+        <div class="tab-pane" id="addMember">
           <div class="modal-body">
              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form method="post" id="resident">

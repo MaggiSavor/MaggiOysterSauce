@@ -76,13 +76,84 @@ public function saveResident(){
     $saveInfo['mothers_name'] = $residentInfo['mother'];
     $saveInfo['fathers_name'] = $residentInfo['father'];
     $saveInfo['fullname'] = $residentInfo['fname'].' '.$residentInfo['mname'].' '.$residentInfo['lname'];
-    $saveInfo['household_head'] = 'yes';
-    $saveInfo['family_head'] = 'yes';
+    if(isset($residentInfo['houseHead'])){
+    	$saveInfo['household_head'] = $residentInfo['houseHead'];   
+    }
+    else
+    {
+    	$saveInfo['household_head'] = 'yes';
+    }
+    if(isset($residentInfo['familyHead'])){
+    	$saveInfo['family_head'] = $residentInfo['familyHead'];   
+    }
+    else
+    {
+    	$saveInfo['family_head'] = 'yes';
+    }
  	$saveInfo->save(); 
 
  	if($saveInfo){
       return response()->json(['success' =>'yes']);
     }
+
+}
+public function addMember(){
+  
+    $residentInfo = Request::all();
+// return $residentInfo;
+    $saveInfo = New Resident;
+    $saveInfo['lastname'] = $residentInfo['lname'];
+    $saveInfo['firstname'] = $residentInfo['fname'];
+    $saveInfo['middlename'] = $residentInfo['mname'];
+    $saveInfo['house_no'] = $residentInfo['houseNo'];
+    $saveInfo['street'] = $residentInfo['street'];
+    $saveInfo['household_id'] = $residentInfo['householdID'];
+    $saveInfo['birthdate'] = $residentInfo['birthdate'];
+    $saveInfo['telno'] = $residentInfo['telno'];
+    $saveInfo['mobile'] = $residentInfo['mobile'];
+    $saveInfo['status'] = $residentInfo['status'];
+    $saveInfo['occupation'] = $residentInfo['occupation'];
+    if(isset($residentInfo['voter'])){
+    	$saveInfo['voter'] = $residentInfo['voter'];   
+    }
+    else
+    {
+    	$saveInfo['voter'] = 'nonvoter';
+    }
+    $saveInfo['nationality'] = $residentInfo['nationality'];
+    $saveInfo['religion'] = $residentInfo['religion'];
+    $saveInfo['family_id'] = $residentInfo['familyID'];
+    $saveInfo['role'] = $residentInfo['role'];
+    if($residentInfo['role'] == 'Husband' || $residentInfo['role'] == 'Son'){
+    	$saveInfo['gender'] = 'Male';
+    }
+    else{
+    	$saveInfo['gender'] = 'Female';
+    }
+    $saveInfo['mothers_name'] = $residentInfo['mother'];
+    $saveInfo['fathers_name'] = $residentInfo['father'];
+    $saveInfo['fullname'] = $residentInfo['fname'].' '.$residentInfo['mname'].' '.$residentInfo['lname'];
+    $saveInfo['household_head'] = 'no';
+    $saveInfo['family_head'] = 'no';
+    // if(isset($residentInfo['houseHead'])){
+    // 	$saveInfo['household_head'] = $residentInfo['houseHead'];   
+    // }
+    // else
+    // {
+    // 	$saveInfo['household_head'] = 'yes';
+    // }
+    // if(isset($residentInfo['familyHead'])){
+    // 	$saveInfo['family_head'] = $residentInfo['familyHead'];   
+    // }
+    // else
+    // {
+    // 	$saveInfo['family_head'] = 'yes';
+    // }
+ 	$saveInfo->save(); 
+
+ 	// if($saveInfo){
+      return back();
+    // }
 
 }
 public function residentList(){

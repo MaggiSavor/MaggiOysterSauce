@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/voter_list', array('uses' => 'ResidentController@voterList', 'as' => 'voterList'));
 		Route::get('/senior_list', array('uses' => 'ResidentController@seniorList', 'as' => 'seniorList'));
 		Route::get('/transferred_list', array('uses' => 'ResidentController@transferredList', 'as' => 'transferredList'));
+		Route::post('/add_member', array('uses' => 'ResidentController@addMember', 'as' => 'addMember'));
 			
 		//end of resident
 
