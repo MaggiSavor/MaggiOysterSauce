@@ -41,6 +41,11 @@ public function addResident(){
     		->with('familyID',$familyID);
     // return $familyID;
 }
+public function updateResident($id){
+	$info = Resident::where('resident_id','=',$id)->get();
+    return view('admin.updateResident')
+    	->with('info', $info);
+}
 public function saveResident(){
     $residentInfo = Request::all();
 

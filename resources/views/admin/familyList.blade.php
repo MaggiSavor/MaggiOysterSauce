@@ -107,21 +107,22 @@
           </div>
 
           <ul class="nav nav-tabs" id="tabContent">
-        <li><a href="#details" data-toggle="tab">Personal Information</a></li>
+        <li class="active"><a href="#details" data-toggle="tab">Personal Information</a></li>
         <li id="listmember"><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
-        <li class="active"><a href="#members" data-toggle="tab">Family Members</a></li>
+        <li><a href="#members" data-toggle="tab">Family Members</a></li>
       </ul>
   
       <div class="tab-content">
       
-        <div class="tab-pane" id="details">
+        <div class="tab-pane active" id="details">
           <div class="control-group">
 
       
           <div class="modal-body">
+          <a href="{{URL::Route('updateResident', $residentinfo['resident_id'])}}"><button class="btn btn-success">Update</button></a>
             <div class="table-responsive card-box">
             <h3>Personal Information</h3>
-            <center><label>Household ID: {{$residentinfo['household_id']}}    </label>
+            <center><label>Household ID: {{$residentinfo['household_id']}}</label>
             <label>Family ID: {{$residentinfo['family_id']}}</label></center>
               <table class="table table-hover mails m-0 table table-actions-bar">
                 <thead>
@@ -229,7 +230,7 @@
           </div>
         </div>
 
-        <div class="tab-pane active" id="members">
+        <div class="tab-pane" id="members">
           <div class="control-group">
 
       

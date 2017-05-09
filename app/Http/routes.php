@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/senior_list', array('uses' => 'ResidentController@seniorList', 'as' => 'seniorList'));
 		Route::get('/transferred_list', array('uses' => 'ResidentController@transferredList', 'as' => 'transferredList'));
 		Route::post('/add_member', array('uses' => 'ResidentController@addMember', 'as' => 'addMember'));
+		Route::get('/update_resident/{id}', array('uses' => 'ResidentController@updateResident', 'as' => 'updateResident'));
 			
 		//end of resident
 
