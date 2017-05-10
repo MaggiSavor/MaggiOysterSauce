@@ -49,7 +49,13 @@ class LoginController extends Controller
             $user['security_question'] = $addUser['inputSecQuestion'];
             $user['security_answer'] = $addUser['inputSecAnswer'];
             $user['remember_token'] = $addUser['_token'];
-            $user->save();            
+            $user->save();
+            $settings = new Settings;
+            $settings['navbar'] = '#F8F8F8';
+            $settings['bg_image_toggle'] = '0';
+            $settings['bg_image'] = '';
+            $settings['filter'] = '';
+            $settings->save();
             return response()->json(array('success' =>'Successfully Saved!'));  
               
           }catch(Exception $e){
