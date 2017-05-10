@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/blotter_fileaction', array('uses' => 'BlotterController@blotterFileAction', 'as' => 'blotterFileAction'));	
 		Route::get('/blotter_details', array('uses' => 'BlotterController@blotterDetails', 'as' => 'blotterDetails'));	
 		Route::get('/blotter_agreement', array('uses' => 'BlotterController@blotterAgreement', 'as' => 'blotterAgreement'));
+		Route::get('/summon_print/{id}', array('uses' => 'BlotterController@summonPrint', 'as' => 'summonPrint'));
+		Route::get('/file_action_print/{id}', array('uses' => 'BlotterController@fileActionPrint', 'as' => 'fileActionPrint'));
+		Route::get('/blotter_details_print/{id}', array('uses' => 'BlotterController@blotterDetailsPrint', 'as' => 'blotterDetailsPrint'));
+		Route::get('/agreement_print/{id}', array('uses' => 'BlotterController@agreementPrint', 'as' => 'agreementPrint'));
 		// endo of blotter
 
 		//Documents

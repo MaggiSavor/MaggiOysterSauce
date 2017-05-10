@@ -69,7 +69,7 @@
                                        <td>{{$summons['defendant_fullname']}}</td>
                                        <td>{{$summons['case_status']}}</td>
                                        <td>{{$summons['case_date']}}</td>
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Summon Letter</button></td>
+                                       <td><a href="{{URL::Route('summonPrint', $summons['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Summon Letter</button></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

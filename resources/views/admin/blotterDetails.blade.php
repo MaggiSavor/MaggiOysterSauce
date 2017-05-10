@@ -69,7 +69,7 @@
                                        <td>{{$details['defendant_fullname']}}</td>
                                        <td>{{$details['case_status']}}</td>
                                        <td>{{$details['case_date']}}</td>
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Blotter Details</button></td>
+                                       <td><a href="{{URL::Route('blotterDetailsPrint', $details['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Blotter Details</button></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

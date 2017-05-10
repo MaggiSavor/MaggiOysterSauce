@@ -50,4 +50,28 @@ class BlotterController extends Controller
 	    return view('admin.blotterAgreement')
 	    	->with('agreement', $agreement);
 	}
+
+	public function summonPrint($id){
+		$summondetails = Blotter::where('case_id', '=', $id)->first();
+	    return view('admin.blotterSummonPrint')
+	    	->with('summondetails', $summondetails);
+	}
+
+	public function fileActionPrint($id){
+		$fileaction = Blotter::where('case_id', '=', $id)->first();
+	    return view('admin.blotterFileActionPrint')
+	    	->with('fileaction', $fileaction);
+	}
+
+	public function blotterDetailsPrint($id){
+		$details = Blotter::where('case_id', '=', $id)->first();
+	    return view('admin.blotterDetailsPrint')
+	    	->with('details', $details);
+	}
+
+	public function agreementPrint($id){
+		$agree = Blotter::where('case_id', '=', $id)->first();
+	    return view('admin.blotterAgreementPrint')
+	    	->with('agree', $agree);
+	}
 }

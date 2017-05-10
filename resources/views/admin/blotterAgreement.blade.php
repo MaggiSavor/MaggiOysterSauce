@@ -69,7 +69,7 @@
                                        <td>{{$agreements['defendant_fullname']}}</td>
                                        <td>{{$agreements['case_status']}}</td>
                                        <td>{{$agreements['case_date']}}</td>
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Agreement Letter</button></td>
+                                       <td><a href="{{URL::Route('agreementPrint', $agreements['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Agreement Letter</button></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

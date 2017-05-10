@@ -69,7 +69,7 @@
                                        <td>{{$fileactions['defendant_fullname']}}</td>
                                        <td>{{$fileactions['case_status']}}</td>
                                        <td>{{$fileactions['case_date']}}</td>
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Letter of File Action</button></td>
+                                       <td><a href="{{URL::Route('fileActionPrint', $fileactions['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Create Letter of File Action</button></a></td>
                                     </tr>
                                      @endforeach
                                 </tbody>

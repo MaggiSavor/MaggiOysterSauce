@@ -54,6 +54,7 @@
                                         <th>Name</th>
                                         <th>Business Name</th>
                                         <th>Date Issued</th>
+                                        <th>Date Expired</th>
                                    </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,7 @@
                                        <td>{{$permits['name']}}</td>
                                        <td>{{$permits['business_name']}}</td>
                                        <td>{{$permits['date_issued']}}</td>
+                                       <td>{{$permits['date_expired']}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
