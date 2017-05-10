@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/get_house_id', array('uses' => 'ResidentController@getHouseId', 'as' => 'getHouseId'));
 		Route::get('/get_family_id', array('uses' => 'ResidentController@getFamilyId', 'as' => 'getFamilyId'));
 		Route::get('/check_head', array('uses' => 'ResidentController@checkHead', 'as' => 'checkHead'));
+		Route::get('/get_members', array('uses' => 'ResidentController@getMembers', 'as' => 'getMembers'));
+		Route::get('/get_family', array('uses' => 'ResidentController@getFamily', 'as' => 'getFamily'));
 			
 		//end of resident
 

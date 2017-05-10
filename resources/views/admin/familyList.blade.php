@@ -107,19 +107,19 @@
           </div>
 
           <ul class="nav nav-tabs" id="tabContent">
-        <li class="active"><a href="#details" data-toggle="tab">Personal Information</a></li>
-        <li id="listmember"><a href="#addMember" data-toggle="tab">Add Family Member</a></li>
-        <li><a href="#members" data-toggle="tab">Family Members</a></li>
-      </ul>
+            <li class="active"><a href="#details{{$residentinfo['id']}}" data-toggle="tab">Personal Information</a></li>
+            <li class="listmember"   value="{{$residentinfo['family_id']}}"><a href="#members{{$residentinfo['id']}}" data-toggle="tab">Family Members</a></li>
+            <li><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family Member</a></li>
+          </ul>
   
       <div class="tab-content">
       
-        <div class="tab-pane active" id="details">
+        <div class="tab-pane active" id="details{{$residentinfo['id']}}">
           <div class="control-group">
 
       
           <div class="modal-body">
-          <a href="{{URL::Route('updateResident',$residentinfo['id'])}}"><button class="btn btn-success">Update</button></a>
+          <a href="{{URL::Route('updateResident',$residentinfo['id'])}}"><button class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right">Update</button></a>
             <div class="table-responsive card-box">
             <h3>Personal Information</h3>
             <center><label>Household ID: {{$residentinfo['household_id']}}</label>
@@ -231,7 +231,7 @@
           </div>
         </div>
 
-        <div class="tab-pane" id="members">
+        <div class="tab-pane" id="members{{$residentinfo['id']}}">
           <div class="control-group">
 
       
@@ -245,11 +245,9 @@
                   <tr>
                   </tr>
                 </thead>
-                  <tbody>
-                    <tr class="">
-                      <td></td>
-                      <td><b>Resident ID</b></td>
-                      <td class="id" style="min-width: 350px">{{$residentinfo['id']}}</td>
+                  <tbody class="row{{$residentinfo['family_id']}}">
+                    <tr>
+                      
                     </tr>
                   </tbody>
               </table>
@@ -264,7 +262,7 @@
         </div>
 
 
-        <div class="tab-pane" id="addMember">
+        <div class="tab-pane" id="addMember{{$residentinfo['id']}}">
           <div class="modal-body">
                         <form id="resident" method="POST" action="{{URL::Route('addMember')}}">
                         
@@ -292,7 +290,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Last Name *</label>
-                                        <input type="text" name="lname" class="form-control input-xs" id="InputLName" value="" placeholder="Last Name">
+                                        <input type="text" name="lname" class="form-control input-xs" id="InputLName" value="" placeholder="Last Name" value="{{$residentinfo['lastname']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -322,8 +320,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label for="Inputbirthdate">Birthday:&nbsp;&nbsp;</label>
-                                        <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs" id="bday">
-                                        <span id="resultBday" hidden></span>
+                                        <input type="date" name="birthdate" min="1954-10-01" max="<?php echo date('Y-m-d'); ?>" class="form-control input-xs bday" id="bday">
+                                        <span id="resultBday" class="resultBday" hidden></span>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="InputContact">Mobile</label>
@@ -343,7 +341,7 @@
                                         <label for="InputContact">Nationality</label>
                                         <input type="text" name="nationality" class="form-control input-xs" id="InputNation" value="">
                                     </div>
-                                    <div class="form-group col-md-4" id="voter" hidden>
+                                    <div class="form-group col-md-4" id="voter" class="voter" hidden>
                                         <label class='col-lg-12 control-label'>
                                             Voter *
                                         </label>
@@ -449,22 +447,23 @@
     <script>
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip(); 
-    });
-    $('#bday').change(function(){
-        var Bdate =$('#bday').val();
+    
+    $('.bday').change(function(){
+        var Bdate =$('.bday').val();
         var Bday = +new Date(Bdate);
         //Q4A = Bdate + ". You are " + ~~ ((Date.now() - Bday) / (31557600000));
         age = ~~ ((Date.now() - Bday) / (31557600000));  
-        var theBday = $('#resultBday');
+        var theBday = $('.resultBday');
         theBday.innerHTML = age;
 
         if(age >= 18){
-            $('#voter').attr('hidden', false);
+            $('.voter').attr('hidden', false);
         }
         else if(age <18){
-            $('#voter').attr('hidden', true);
+            $('.voter').attr('hidden', true);
         }
       })
+    });
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -513,11 +512,37 @@
       TableManageButtons.init();
     </script>
     <script>
-    
-    </script>
-    <script>
-      $('#listmember').click(function(){
-        alert('pls work')
+      $('.listmember').click(function(){
+        var famId = this.value;
+        // var row = $(this).closest( 'tr');
+        $.ajax({
+            method: 'GET',
+            url: '{{ URL::route("getMembers")}}',
+            data:{
+              'id' : famId,
+            },
+            success:function(data)
+            {
+              console.log(data)
+              var row = $('.row'+famId ).find('tr');
+              row.remove();
+
+              for(i=0;i<data.length;i++){
+                if(data[i]['role'] == 'Husband'){
+                  $('.row'+famId ).append('<tr><td></td><td><b>Husband</b></td><td class="id" style="min-width: 350px">'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
+                }
+                else if(data[i]['role'] == 'Wife'){
+                  $('.row'+famId ).append('<tr><td></td><td><b>Wife</b></td><td class="id" style="min-width: 350px">'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
+                }
+                else if(data[i]['role'] == 'Son'){
+                  $('.row'+famId ).append('<tr><td></td><td><b>Son</b></td><td class="id" style="min-width: 350px">'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
+                }
+                else{
+                  $('.row'+famId ).append('<tr><td></td><td><b>Daugther</b></td><td class="id" style="min-width: 350px">'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
+                }
+              }
+            }
+        })
       })
     </script>
     <script>

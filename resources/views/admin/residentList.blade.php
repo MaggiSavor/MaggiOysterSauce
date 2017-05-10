@@ -104,7 +104,7 @@
                   <h4 class="modal-title">Details</h4>
                 </div>
                 <div class="modal-body">
-                <a href="{{URL::Route('updateResident',$residentinfo['id'])}}"><button class="btn btn-success">Update</button></a>
+                <a href="{{URL::Route('updateResident',$residentinfo['id'])}}"><button class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right">Update</button></a>
                   <div class="table-responsive card-box">
                   <h3>Personal Information</h3>
                   <center><label>Household ID: {{$residentinfo['household_id']}}    </label>

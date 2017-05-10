@@ -273,11 +273,28 @@ class ResidentController extends Controller
 	    return view('admin.householdList')
 	    	->with('residentInfo', $residentInfo);
 	}
+	public function getFamily(){
+		$data = Request::all();
+
+		$families = Resident::where('resident_status','=','active')
+			->where('household_id','=', $data['id'])
+				->where('family_head','=', 'yes')->get();
+
+		return response($families);
+	}
 	public function familyList(){
 		$residentInfo = Resident::where('resident_status','=','active')
 			->where('family_head','=','yes')->get();
 	    return view('admin.familyList')
 	    	->with('residentInfo', $residentInfo);
+	}
+	public function getMembers(){
+		$data = Request::all();
+
+		$family = Resident::where('resident_status','=','active')
+			->where('family_id','=', $data['id'])->get();
+
+		return response($family);
 	}
 	public function femaleList(){
 		$residentInfo = Resident::where('resident_status','=','active')
