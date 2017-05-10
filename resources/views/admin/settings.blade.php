@@ -130,7 +130,7 @@
                                         </button>
                                         <button type="button" class="cj_bg" id="bg4" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/road.jpg')!!}'); background-size: 100%;" value="road.jpg" >
                                         </button>
-                                        <input type="text" name="background_image" id="background_image" value="{{$settings->bg_image}}">
+                                        <input type="hidden" name="background_image" id="background_image" value="{{$settings->bg_image}}">
                                     </div>
                                     <hr />
                                     <div class="col-lg-12" style="display: inline-block; ">
@@ -143,7 +143,7 @@
                                         <a type="button" id="green" data-value="51, 204, 51, 0.5" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
-                                        <input type="text" name="colorFilter" id="colorFilter" value="{{$settings->filter}}">
+                                        <input type="hidden" name="colorFilter" id="colorFilter" value="{{$settings->filter}}">
 
                                     </div>
                                     <hr/>
@@ -172,6 +172,7 @@
                                                     <table width="100%" cellspacing="0" class="table table-striped table-bordered dt-responsive nowrap" id="usersTable">
                                                     <thead>
                                                         <tr>
+                                                            <th></th>
                                                             <th>User ID</th>
                                                             <th>User Type</th>
                                                             <th>Resident Name</th>
@@ -183,6 +184,7 @@
                                                     <tbody>
                                                         @foreach($users as $user)
                                                         <tr>
+                                                            <td></td>
                                                             <td>{{$user->id}}</td>
                                                             <td>{{$user->user_type}}</td>
                                                             <td>{{$user->fullname}}</td>
@@ -433,19 +435,24 @@
         });
 
         $(document).ready(function() {
-            $('#usersTable').DataTable({
+            var t = $('#usersTable').DataTable({
                 responsive: true,
                 searchHighlight: true,
                 "columnDefs": [
                     { 
                       "sortable" : false, 
                       "searchable": false,
-                      "targets": 5
+                      "targets": 6
                     }
-                ]
+                ],
+                "order": [[ 1, 'asc' ]]
             });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
         });
-
 
         $('#saveChanges').focus(function(e){
            e.preventDefault();
