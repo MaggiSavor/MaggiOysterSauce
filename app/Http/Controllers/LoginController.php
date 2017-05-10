@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Resident;
+use App\Models\Settings;
 use App\Models\User;
 use App\Models\AuditTrail;
 use Request;
@@ -50,11 +51,12 @@ class LoginController extends Controller
             $user['security_answer'] = $addUser['inputSecAnswer'];
             $user['remember_token'] = $addUser['_token'];
             $user->save();
+
             $settings = new Settings;
             $settings['navbar'] = '#F8F8F8';
             $settings['bg_image_toggle'] = '0';
             $settings['bg_image'] = '';
-            $settings['filter'] = '';
+            $settings['filter'] = '255,255,255,1';
             $settings->save();
             return response()->json(array('success' =>'Successfully Saved!'));  
               

@@ -130,7 +130,7 @@
                                         </button>
                                         <button type="button" class="cj_bg" id="bg4" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/road.jpg')!!}'); background-size: 100%;" value="road.jpg" >
                                         </button>
-                                        <input type="hidden" name="background_image" id="background_image" value="{{$settings->bg_image}}">
+                                        <input type="text" name="background_image" id="background_image" value="{{$settings->bg_image}}">
                                     </div>
                                     <hr />
                                     <div class="col-lg-12" style="display: inline-block; ">
@@ -143,7 +143,7 @@
                                         <a type="button" id="green" data-value="51, 204, 51, 0.5" data-color="#33cc33" style="background-color: #33cc33;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="orange" data-value="255, 102, 0, 0.5" data-color="#ff6600" style="background-color: #ff6600;" class="btn btn-default btn-circle filters" ></a>
                                         <a type="button" id="violet" data-value="204, 0, 204, 0.5" data-color="#cc00cc" style="background-color: #cc00cc;" class="btn btn-default btn-circle filters" ></a>
-                                        <input type="hidden" name="colorFilter" id="colorFilter" value="{{$settings->filter}}">
+                                        <input type="text" name="colorFilter" id="colorFilter" value="{{$settings->filter}}">
 
                                     </div>
                                     <hr/>
@@ -666,7 +666,7 @@
                 }
             }
         })
-        .on('success.form.fv', function(e) {
+        .on('err.field.fv', function(e) {
                 e.preventDefault();
 
                     var $form = $(e.target),        // The form instance
