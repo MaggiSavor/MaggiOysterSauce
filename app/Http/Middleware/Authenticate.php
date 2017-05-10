@@ -36,3 +36,32 @@ class Authenticate
         return $next($request);
     }
 }
+
+class Admin{
+    
+    public function handle($request, Closure $next){
+        if(Auth::check() && Auth::user()->user_type == 'Admin'){
+            return $next($request);
+        }
+        else{
+            Alert::message("Error!", "Access denied!", "error");
+            return redirect()->back();
+        }
+
+    }
+}
+/**
+* 
+*/
+class User{
+    
+    public function handle($request, Closure $next){
+        if(Auth::check() && Auth::user()->user_type == 'Standard User'){
+            return $next($request);
+        }
+        else{
+            Alert::message("Error!", "Access denied!", "error");
+            return redirect()->back();
+        }
+    }
+}

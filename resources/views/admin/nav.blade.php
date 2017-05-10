@@ -1,5 +1,9 @@
 <?php 
     use App\Models\Settings;
+    use App\Models\Blotter;
+    use Carbon\Carbon;
+    $today1 = Carbon::now();
+    $today = $today1->toDateString();
     $settings = Settings::where('id','=',(Auth::user()->id))->first();
 ?>
 <!-- Bootstrap Core CSS -->
@@ -139,6 +143,30 @@
     .panel{
         background: rgba(255, 255, 255, 0.8)!important;
     }
+    *.icon-blue {color: #0088cc}
+*.icon-grey {color: grey}
+    i {   
+        width:100px;
+        text-align:center;
+        vertical-align:middle;
+        position: relative;
+    }
+
+    .badge:after{
+        content:"2";
+        position: absolute;
+        background: rgba(0,0,255,1);
+        height:2rem;
+        top:1rem;
+        right:1.5rem;
+        width:2rem;
+        text-align: center;
+        line-height: 2rem;;
+        font-size: 1rem;
+        border-radius: 50%;
+        color:white;
+        border:1px solid blue;
+    }
 
 /* Extra Things */
 body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px; font-weight: 400;text-align: center;margin-top: 50px;}h3 i{color: #444;}
@@ -152,79 +180,44 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{URL::Route('sample')}}">Barangay 5 Zone 1</a>
+        <a class="navbar-brand" href="{{URL('/')}}">Barangay 5 Zone 21</a>
     </div>
     <!-- /.navbar-header -->
+    <?php
+
+      $caseHist = Blotter::where('summon_date', '=', $today)->orderBy('summon_time', 'DESC')->get();
+      $bilang = Blotter::where('summon_date', '=', $today)->count();
+      if($bilang == 0){
+        $message = '';
+      }else{
+        $message = 'none';
+      }
+    ?>
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" >
+                <i class="fa fa-envelope fa-5x fa-border icon-grey badge" style="color: red;"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-messages scrollable-menu">
+
+                @foreach($caseHist as $caseHis)
                 <li>
                     <a href="#">
                         <div>
-                            <strong>John Smith</strong>
+                            <strong>{{$caseHis->case_title}}</strong>
                             <span class="pull-right text-muted">
-                                <em>Yesterday</em>
+                                <em>{{$caseHis->summon_time}}</em>
                             </span>
                         </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        <div>{{$caseHis->complainant_fullname}}</div>
                     </a>
                 </li>
                 <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>Read All Messages</strong>
-                        <i class="fa fa-angle-right"></i>
+                @endforeach
+                <li style="display:{{$message}};">
+                    <a class="text-center" >
+                        <strong>No Hearing Scheduled Today.</strong>
+                        <i class=""></i>
                     </a>
                 </li>
             </ul>
