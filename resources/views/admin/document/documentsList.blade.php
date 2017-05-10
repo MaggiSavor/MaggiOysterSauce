@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link href="../assets/css/ihover.css" rel="stylesheet">
 
-    <title>Blotter Documents</title>
+    <title>Documents List</title>
 
     
 
@@ -34,7 +34,7 @@
         <div id="page-wrapper" style="padding-top: 0%;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blotter Documents</h1>
+                    <h1 class="page-header">Documents List</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -42,9 +42,8 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('blotterSummon')}}" class="">
-                                <div class="img"><img src="../assets/images/slogo.jpg" alt="6"></div>
-                                <div class="info"><img src="../assets/images/summon.jpg" alt="6"></div>
+                            <a href="{{URL::Route('certificateList')}}" class="">
+                                <div class="img" style="width: 100%; height:10%;"><img src="../assets/images/bclogo.jpg" alt="6"></div>
                             </a>
                         </div>
                     </div>
@@ -52,9 +51,8 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('blotterFileAction')}}" class="">
-                                <div class="img"><img src="../assets/images/falogo.jpg" alt="6"></div>
-                                <div class="info"><img src="../assets/images/fileaction.jpg" alt="6"></div>
+                            <a href="{{URL::Route('goodMoralList')}}" class="">
+                                <div class="img"><img src="../assets/images/gmlogo.jpg" alt="6"></div>
                             </a>
                         </div>
                     </div>
@@ -62,9 +60,8 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('blotterDetails')}}" class="">
-                                <div class="img"><img src="../assets/images/bdlogo.jpg" alt="6"></div>
-                                <div class="info"><img src="../assets/images/blotter.jpg" alt="6"></div>
+                            <a href="{{URL::Route('indigencyList')}}" class="">
+                                <div class="img"><img src="../assets/images/coilogo.jpg" alt="6"></div>
                             </a>
                         </div>
                     </div>
@@ -72,9 +69,17 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('blotterAgreement')}}" class="">
-                                <div class="img"><img src="../assets/images/alogo.jpg" alt="6"></div>
-                                <div class="info"><img src="../assets/images/agreement.jpg" alt="6"></div>
+                            <a href="{{URL::Route('idList')}}" class="">
+                                <div class="img"><img src="../assets/images/bidlogo.jpg" alt="6"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel panel-default">
+                        <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
+                            <a href="{{URL::Route('permitList')}}" class="">
+                                <div class="img"><img src="../assets/images/bpermitlogo.jpg" alt="6"></div>
                             </a>
                         </div>
                     </div>

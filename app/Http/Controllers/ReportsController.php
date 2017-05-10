@@ -115,7 +115,6 @@ public function returnCert(){
 }
 public function resDate(){
 	$res = Request::all();
-	// $to = Request::get('dateEnd');
 	
 	$residentDate = Resident::whereBetween('date_registered', [$res['start'], $res['end']])->get();
 
@@ -144,14 +143,21 @@ public function permitDate(){
 }
 public function certDate(){
 	$cert = Request::all();
+	$type = [$cert['type']];
 
-	$certDate = Certification::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
-
-	$goodDate = GoodMoral::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
-
-	$indigencyDate = Indigency::whereBetween('case_date', [$cert['start'], $cert['end']])->get();
-
-	return response()->json(["certification" => $certDate, "goodMoral" => $goodDate, "indigency" => $indigencyDate]);
+	if($type == "Certificate"){	
+		$certDate = Certification::whereBetween('date_issued', [$cert['start'], $cert['end']])->get();
+		return response()->json(["info1" => $certDate, "type" => "Certificate"]);
+	}
+	else if($type == "Good Moral"){
+		$goodDate = GoodMoral::whereBetween('date_issued', [$cert['start'], $cert['end']])->get();
+		return response()->json(["info2" => $goodDate, "type" => "Good Moral"]);
+	}
+	else{
+		$indigencyDate = Indigency::whereBetween('date_issued', [$cert['start'], $cert['end']])->get();
+		return response()->json(["info3" => $indigencyDate, "type" => "Indigency"]);
+	}
+	// return response($type);
 }
 
 }

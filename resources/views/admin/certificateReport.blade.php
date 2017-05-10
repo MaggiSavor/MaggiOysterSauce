@@ -42,15 +42,16 @@
                         Certificate
                     </div>
                     <!-- /.panel-heading -->
+                  <form method="get" action="{{URL::Route('certDate')}}">
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
                                 <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="InputStart">End Date</label>
-                                <input type="date" id="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control" required />
+                                <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
                             </div>
                             <div class="form-group col-md-4">
                             <label for="InputStart">Filter</label>
@@ -74,6 +75,7 @@
                                 <button type="button" id="generate" class="btn btn-warning" >Generate</button>
                             </div>
                     </div>
+                  </form>
                     <hr>
                     <!-- /.panel-body -->
                     <div class="panel-body">
@@ -161,6 +163,12 @@
       })
     </script>
     <script>
+        $('#selectFilter li').click(function(){
+              var report = $(this);
+              $('#filter').html(report.text());
+        })
+    </script>
+    <script>
       var counter=0;
 
          $('#generate').focus(function() {
@@ -172,86 +180,65 @@
 
            var start = $('#dateStart').val();
            var end = $('#dateEnd').val();
+           var reports = $('#filter').text();
 
-           if(reports === "Certificate"){
+           
                 $.ajax({
                  method: 'get',
                  url: '{{ URL::route("certDate")}}',
                  dataType:'json',
                  data: {
                   'start':start,
-                  'end':end
+                  'end':end,
+                  'type':reports
                  },
                  success:function(data){
-                  console.log(data.certification.length)
-                   for(i=0; i< data.certification.length; i++){
-                    if(data.certification.length != 0){
-                      $('#certificate').dataTable().fnAddData([
-                            data.certification[i]['certificate_id'],
-                            data.certification[i]['name'],
-                            data.certification[i]['date_issued'],
-                          ]);
-                    }else{
-                      $('.myTable').append('<center>No data available</center>');
-                    }
+                  console.log(data.type)
+                  if(data.type === "Certificate"){
+                    for(i=0; i< data.info1.length; i++){
+                       if(data.info1.length != 0){
+                         $('#certificate').dataTable().fnAddData([
+                               data.info1[i]['certificate_id'],
+                               data.info1[i]['name'],
+                               data.info1[i]['date_issued'],
+                             ]);
+                       }else{
+                         $('.myTable').append('<center>No data available</center>');
+                       }
+                     }
                   }
-
-                 }
-               })   
-            }else if(reports === "Indigency"){
-                $.ajax({
-                 method: 'get',
-                 url: '{{ URL::route("certDate")}}',
-                 dataType:'json',
-                 data: {
-                  'start':start,
-                  'end':end
-                 },
-                 success:function(data){
-                  console.log(data.indigency.length)
-                   for(i=0; i< data.indigency.length; i++){
-                    if(data.indigency.length != 0){
-                      $('#certificate').dataTable().fnAddData([
-                          data.indigency[i]['indigency_id'],
-                          data.indigency[i]['name'],
-                          data.indigency[i]['date_issued'],
-                          ]);
-                    }else{
-                      $('.myTable').append('<center>No data available</center>');
-                    }
+                  else if(data.type === "Good Moral"){
+                    for(i=0; i< data.info2.length; i++){
+                       if(data.info2.length != 0){
+                         $('#certificate').dataTable().fnAddData([
+                               data.info2[i]['goodmoral_id'],
+                               data.info2[i]['name'],
+                               data.info2[i]['date_issued'],
+                             ]);
+                       }else{
+                         $('.myTable').append('<center>No data available</center>');
+                       }
+                     }
                   }
-
-                 }
-               })
-            }else{
-               $.ajax({
-                 method: 'get',
-                 url: '{{ URL::route("certDate")}}',
-                 dataType:'json',
-                 data: {
-                  'start':start,
-                  'end':end
-                 },
-                 success:function(data){
-                  console.log(data.goodMoral.length)
-                   for(i=0; i< data.goodMoral.length; i++){
-                    if(data.goodMoral.length != 0){
-                      $('#certificate').dataTable().fnAddData([
-                          data.goodMoral[i]['goodmoral_id'],
-                          data.goodMoral[i]['name'],
-                          data.goodMoral[i]['date_issued'],
-                          ]);
-                    }else{
-                      $('.myTable').append('<center>No data available</center>');
-                    }
+                  else{
+                    for(i=0; i< data.info3.length; i++){
+                       if(data.info3.length != 0){
+                         $('#certificate').dataTable().fnAddData([
+                               data.info3[i]['indigency_id'],
+                               data.info3[i]['name'],
+                               data.info3[i]['date_issued'],
+                             ]);
+                       }else{
+                         $('.myTable').append('<center>No data available</center>');
+                       }
+                     }
                   }
 
                  }
                })
-            }
          }) 
     </script>
-    <script>
+    <!-- <script>
         $selectFilter = $('#selectFilter li'),
         $liYear = $selectFilter.find('li');
 
@@ -340,7 +327,7 @@
                })
             }
          }) 
-    </script>
+    </script> -->
     <script type="text/javascript">
       $(document).ready(function(){
           $(document).ready(function() {

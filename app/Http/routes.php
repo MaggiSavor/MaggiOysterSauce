@@ -52,9 +52,13 @@ Route::group(['middleware' => ['auth']], function(){
 		// end of officials
 
 		//Blotter
-		Route::get('/blotterList', array('uses' => 'BlotterController@blotterList', 'as' => 'blotterList'));
-		Route::get('/addCase', array('uses' => 'BlotterController@addCase', 'as' => 'addCase'));
-		Route::get('/blotterDocuments', array('uses' => 'BlotterController@blotterDocuments', 'as' => 'blotterDocuments'));	
+		Route::get('/blotter_list', array('uses' => 'BlotterController@blotterList', 'as' => 'blotterList'));
+		Route::get('/add_case', array('uses' => 'BlotterController@addCase', 'as' => 'addCase'));
+		Route::get('/blotter_documents', array('uses' => 'BlotterController@blotterDocuments', 'as' => 'blotterDocuments'));	
+		Route::get('/blotter_summon', array('uses' => 'BlotterController@blotterSummon', 'as' => 'blotterSummon'));	
+		Route::get('/blotter_fileaction', array('uses' => 'BlotterController@blotterFileAction', 'as' => 'blotterFileAction'));	
+		Route::get('/blotter_details', array('uses' => 'BlotterController@blotterDetails', 'as' => 'blotterDetails'));	
+		Route::get('/blotter_agreement', array('uses' => 'BlotterController@blotterAgreement', 'as' => 'blotterAgreement'));
 		// endo of blotter
 
 		//Documents
@@ -64,6 +68,12 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/indigency', array('uses' => 'DocumentsController@docuIndigency', 'as' => 'docuIndigency'));
 		Route::get('/barangay_id', array('uses' => 'DocumentsController@docuID', 'as' => 'docuID'));
 		Route::get('/business_permit', array('uses' => 'DocumentsController@docuBusinessPermit', 'as' => 'docuBusinessPermit'));
+		Route::get('/documents_list', array('uses' => 'DocumentsController@documentsList', 'as' => 'documentsList'));
+		Route::get('/certificate_list', array('uses' => 'DocumentsController@certificateList', 'as' => 'certificateList'));
+		Route::get('/good_moral_list', array('uses' => 'DocumentsController@goodMoralList', 'as' => 'goodMoralList'));
+		Route::get('/indigency_list', array('uses' => 'DocumentsController@indigencyList', 'as' => 'indigencyList'));
+		Route::get('/barangay_id_list', array('uses' => 'DocumentsController@idList', 'as' => 'idList'));
+		Route::get('/business_permit_list', array('uses' => 'DocumentsController@permitList', 'as' => 'permitList'));
 		//end of documents
 
 		//reports

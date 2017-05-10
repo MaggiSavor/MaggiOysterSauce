@@ -303,7 +303,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                             <a href="{{URL::Route('documents')}}">List of Documents</a>
                         </li>
                         <li>
-                            <a href="#">Issued Documents</a>
+                            <a href="{{URL::Route('documentsList')}}">Issued Documents</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
