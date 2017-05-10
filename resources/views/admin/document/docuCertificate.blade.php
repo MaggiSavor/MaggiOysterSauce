@@ -40,13 +40,13 @@
            <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-success">
                         <div class="panel-heading">
                             Residents Table
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="residentsTable">
+                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="residentsTable">
                                 <thead>
                                     <tr>
                                        <th></th>
@@ -60,10 +60,10 @@
                                     @foreach($residentLists as $residentList)
                                     <tr>
                                        <td></td>
-                                       <td>{{$residentList->resident_id}}</td>
+                                       <td>{{$residentList->id}}</td>
                                        <td>{{$residentList->fullname}}</td>
                                        <td>{{$residentList['house_no']}} {{$residentList['street']}} Tondo, Manila</td>
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></td>
+                                       <td><a href="{{URL::Route('certPrint', $residentList['id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></a></td>
                                     </tr>
                                     @endforeach
                                     

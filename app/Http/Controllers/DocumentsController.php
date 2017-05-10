@@ -47,9 +47,9 @@ class DocumentsController extends Controller
 	}
 
 	public function docuBusinessPermit(){
-		$residentLists = Resident::where('resident_status','=','active')->get();
+		$permit = BusinessPermit::all();
 	    return view('admin.document.docuBusinessPermit')
-	    	->with('residentLists', $residentLists);
+	    	->with('permit', $permit);
 	}
 
 	public function documentsList(){
@@ -86,6 +86,36 @@ class DocumentsController extends Controller
 	    	->with('permit', $permit);
 	}
 
+	public function certPrint($id){
+		$cert = Resident::where('id', '=', $id)->first();
+	    return view('admin.document.docuCertificatePrint')
+	    	->with('cert', $cert);
+	}
 
+	public function goodMoralPrint($id){
+		$gm = Resident::where('id', '=', $id)->first();
+	    return view('admin.document.docuGoodMoralPrint')
+	    	->with('gm', $gm);
+	}
+
+	public function indigencyPrint($id){
+		$indi = Resident::where('id', '=', $id)->first();
+	    return view('admin.document.docuIndigencyPrint')
+	    	->with('indi', $indi);
+	}
+
+	public function brgyIdPrint($id){
+		$bid = Resident::where('id', '=', $id)->first();
+		$res = Resident::where('resident_status', '=', 'Active')->get();
+	    return view('admin.document.docuIDPrint')
+	    	->with('bid', $bid)
+	    		->with('res', $res);
+	}
+
+	public function bPermitPrint($id){
+		$permit = BusinessPermit::where('permit_id', '=', $id)->first();
+	    return view('admin.document.docuRenewBusinessPermitPrint')
+	    	->with('permit', $permit);
+	}
 
 }

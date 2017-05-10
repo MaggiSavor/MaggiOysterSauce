@@ -80,6 +80,11 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/indigency_list', array('uses' => 'DocumentsController@indigencyList', 'as' => 'indigencyList'));
 		Route::get('/barangay_id_list', array('uses' => 'DocumentsController@idList', 'as' => 'idList'));
 		Route::get('/business_permit_list', array('uses' => 'DocumentsController@permitList', 'as' => 'permitList'));
+		Route::get('/certificate_print/{id}', array('uses' => 'DocumentsController@certPrint', 'as' => 'certPrint'));
+		Route::get('/good_moral_print/{id}', array('uses' => 'DocumentsController@goodMoralPrint', 'as' => 'goodMoralPrint'));
+		Route::get('/indigency_print/{id}', array('uses' => 'DocumentsController@indigencyPrint', 'as' => 'indigencyPrint'));
+		Route::get('/barangay_id_print/{id}', array('uses' => 'DocumentsController@brgyIdPrint', 'as' => 'brgyIdPrint'));
+		Route::get('/business_permit_print/{id}', array('uses' => 'DocumentsController@bPermitPrint', 'as' => 'bPermitPrint'));
 		//end of documents
 
 		//reports
