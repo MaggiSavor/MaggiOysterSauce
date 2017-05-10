@@ -34,8 +34,8 @@ class ResidentController extends Controller
 								    	->with('transfer', $transfer);
 		}
 	public function addResident(){
-		$houseID = Resident::select('household_id')->where('resident_status','=','active')->orderby('id', 'DESC')->first();
-		$familyID = Resident::select('family_id')->where('resident_status','=','active')->orderby('id', 'DESC')->first();
+		$houseID = Resident::select('household_id')->where('resident_status','=','active')->orderby('household_id', 'DESC')->first();
+		$familyID = Resident::select('family_id')->where('resident_status','=','active')->orderby('family_id', 'DESC')->first();
 	    return view('admin.addResident')
 	    	->with('houseID',$houseID)
 	    		->with('familyID',$familyID);

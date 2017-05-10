@@ -51,6 +51,10 @@
                         <form method="post" id="resident">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <p><i>*Required</i></p>
+                                    <p><i>**People registered here are automatically head of the household AND the family</i></p>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label class="control-label">First Name *</label>
                                         <input type="text" name="fname" class="form-control input-xs" id="InputFName" placeholder="First Name">
