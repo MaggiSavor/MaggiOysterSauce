@@ -130,215 +130,169 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Actions
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Action</a>
-                                        </li>
-                                        <li><a href="#">Another action</a>
-                                        </li>
-                                        <li><a href="#">Something else here</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
+                <div class="row" style="padding-bottom: 5%;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Graphical Representation / Barangay Profile
                     </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart Example
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Actions
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Action</a>
-                                        </li>
-                                        <li><a href="#">Another action</a>
-                                        </li>
-                                        <li><a href="#">Something else here</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a>
-                                        </li>
-                                    </ul>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">      
+                            <div class='col-md-12'>
+                                <div class='card-box'>
+                                  <input type="hidden" id="resident" value="{{$resident}}">
+                                  <input type="hidden" id="male" value="{{$male}}">
+                                  <input type="hidden" id="female" value="{{$female}}">
+                                  <input type="hidden" id="senior" value="{{$senior}}">
+                                  <input type="hidden" id="voter" value="{{$voter}}">
+                                  <input type="hidden" id="household" value="{{$household['household_id']}}">
+                                  <input type="hidden" id="family" value="{{$family['family_id']}}">
+                                    <h4 class='text-dark header-title m-t-0'>Residents Population</h4>
+                                    
                                 </div>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>$321.33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>$245.12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>$5663.54</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>$943.45</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </div>
-                                <!-- /.col-lg-4 (nested) -->
+
                                 <div class="col-lg-8">
-                                    <div id="morris-bar-chart"></div>
+                                    <div id="pie-chart"></div>
                                 </div>
-                                <!-- /.col-lg-8 (nested) -->
+                                <div class="card-box pull-right" style="background-color: #eeeeee;">
+                                    <table class="table table-hover mails m-0 table table-actions-bar">
+                                        <thead>
+                                            <tr>
+                                                <th>Total number of</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Resident Population</strong></td>
+                                                <td><i>{{$resident}}</i></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Male</strong></td>
+                                                <td><i>{{$male}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Female</strong></td>
+                                                <td><i>{{$female}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Senior Citizen</strong></td>
+                                                <td><i>{{$senior}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Voters</strong></td>
+                                                <td><i>{{$voter}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Number of Household</strong></td>
+                                                <td><i>{{$household['household_id']}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Number of Family</strong></td>
+                                                <td><i>{{$family['family_id']}}</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- /.row -->
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    
-                    <!-- /.panel -->
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
+                </div> 
+
+                <div class="row" style="padding-bottom: 5%;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Graphical Representation / Case
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">      
+                            <div class='col-md-12'>
+                                <div class='card-box'>
+                                  <input type="hidden" id="alarms" value="{{$alarms}}">
+                                  <input type="hidden" id="false" value="{{$false}}">
+                                  <input type="hidden" id="physical" value="{{$physical}}">
+                                  <input type="hidden" id="abandonment" value="{{$abandonment}}">
+                                  <input type="hidden" id="tresspass" value="{{$tresspass}}">
+                                  <input type="hidden" id="threats" value="{{$threats}}">
+                                  <input type="hidden" id="theft" value="{{$theft}}">
+                                  <input type="hidden" id="swindling" value="{{$swindling}}">
+                                  <input type="hidden" id="sexual" value="{{$sexual}}">
+                                  <input type="hidden" id="murder" value="{{$murder}}">
+                                  <input type="hidden" id="illegal" value="{{$illegal}}">
+                                    <h4 class='text-dark header-title m-t-0'>Case Rate</h4>
+                                    
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <div id="morris-bar-chart" style="width:120%"></div>
+                                </div>
+                                <div class="card-box pull-right" style="background-color: #eeeeee;">
+                                    <table class="table table-hover mails m-0 table table-actions-bar">
+                                        <thead>
+                                            <tr>
+                                                <th>Total number of</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Alarms and Scandals</strong></td>
+                                                <td><i>{{$alarms}}</i></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><strong>False Identities</strong></td>
+                                                <td><i>{{$false}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Physical Injury</strong></td>
+                                                <td><i>{{$physical}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Abandonment</strong></td>
+                                                <td><i>{{$abandonment}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tresspass</strong></td>
+                                                <td><i>{{$tresspass}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Threats</strong></td>
+                                                <td><i>{{$threats}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Theft</strong></td>
+                                                <td><i>{{$theft}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Swindling</strong></td>
+                                                <td><i>{{$swindling}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Sexual Assault</strong></td>
+                                                <td><i>{{$sexual}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Murder</strong></td>
+                                                <td><i>{{$murder}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Illegal Drug</strong></td>
+                                                <td><i>{{$illegal}}</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.col-lg-4 -->
+            </div> 
+
+                
             </div>
             <!-- /.row -->
         </div>
@@ -353,6 +307,63 @@
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+
+    <script type="text/javascript">
+        function graphDonut(colors) {
+                Morris.Donut({
+                element: 'pie-chart',
+                colors : colors,
+                data: [{label: 'Residents',value: $('#resident').val()}, 
+                {label: 'Male',value: $('#male').val()},
+                {label: 'Female',value: $('#female').val()}, 
+                {label: 'Seniors',value: $('#senior').val()}, 
+                {label: 'Voters',value: $('#voter').val()},
+                {label: 'Household',value: $('#household').val()},
+                {label: 'Family',value: $('#family').val()}]
+          
+        });  
+
+        }
+
+        graphDonut( ['#5ea9e8', '#5ee89d', '#e5484f', '#ffc0c0', '#fff867', '#fba16c','#4eeed3'] );
+    </script>
+
+    <script type="text/javascript">
+                Morris.Bar({
+                element: 'morris-bar-chart',
+                data: [{y: 'Alarms and Scandals',a: $('#alarms').val()}, 
+                {y: 'False Identities',a: $('#false').val()},
+                {y: 'Physical Injury',a: $('#physical').val()}, 
+                {y: 'Abandonment',a: $('#abandonment').val()}, 
+                {y: 'Tresspass',a: $('#tresspass').val()},
+                {y: 'Threats',a: $('#threats').val()},
+                {y: 'Theft',a: $('#theft').val()},
+                {y: 'Swindling',a: $('#swindling').val()},
+                {y: 'Sexual Assault',a: $('#sexual').val()},
+                {y: 'Murder',a: $('#murder').val()},
+                {y: 'Illegal Drug',a: $('#illegal').val()}],
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: ['Count'],
+                hideHover: 'auto',
+                resize: true,
+                numLines: 3,
+                barColors: function (row, series, type) {
+                  if(row.label == "Alarms and Scandals") return "#5ea9e8";
+                  else if(row.label == "False Identities") return "#5ee89d";
+                  else if(row.label == "Physical Injury") return "#e5484f";
+                  else if(row.label == "Abandonment") return "#ffc0c0";
+                  else if(row.label == "Tresspass") return "#CBA4FC";
+                  else if(row.label == "Threats") return "#647AC1";
+                  else if(row.label == "Theft") return "#fff867";
+                  else if(row.label == "Swindling") return "#FFF7BD";
+                  else if(row.label == "Sexual Assault") return "#fba16c";
+                  else if(row.label == "Murder") return "#95CFB7";
+                  else if(row.label == "Illegal Drug") return "#4eeed3";
+                  }
+         
+    });  
+    </script>
 
 
 </body>

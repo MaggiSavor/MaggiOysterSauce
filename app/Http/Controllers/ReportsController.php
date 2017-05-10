@@ -47,7 +47,30 @@ public function barangayProfileReport(){
 
 }
 public function caseReport(){
-    return view('admin.caseReport');
+	$alarms = Blotter::where('case_type','=','Alarms and Scandals')->count();
+	$false = Blotter::where('case_type','=','False Identities')->count();
+	$physical = Blotter::where('case_type','=','Physical Injury')->count();
+	$abandonment = Blotter::where('case_type','=','Abandonment')->count();
+	$tresspass = Blotter::where('case_type','=','Tresspass')->count();
+	$threats = Blotter::where('case_type','=','Threats')->count();
+	$theft = Blotter::where('case_type','=','Theft')->count();
+	$swindling = Blotter::where('case_type','=','Swindling')->count();
+	$sexual = Blotter::where('case_type','=','Sexual Assault')->count();
+	$murder = Blotter::where('case_type','=','Murder')->count();
+	$illegal  = Blotter::where('case_type','=','Illegal Drug')->count();
+    return view('admin.caseReport')
+    	->with('alarms',$alarms)
+    		->with('false',$false)
+    			->with('physical',$physical)
+    				->with('abandonment',$abandonment)
+    					->with('tresspass',$tresspass)
+    						->with('threats',$threats)
+    							->with('theft',$theft)
+	    							->with('swindling',$swindling)
+	    								->with('sexual',$sexual)
+	    									->with('murder',$murder)
+	    										->with('illegal',$illegal);
+
 }
 public function certificateReport(){
     return view('admin.certificateReport');

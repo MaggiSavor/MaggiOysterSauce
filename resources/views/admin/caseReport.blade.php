@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
     <title>Case Report</title>
 
@@ -36,27 +40,100 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div class="row" style="padding-bottom: 0%;">
+            <div class="row" style="padding-bottom: 5%;">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        Graphical Representation
+                        Graphical Representation / Case
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="form-group">      
                             <div class='col-md-12'>
                                 <div class='card-box'>
-                                    GRAPH HERE
+                                  <input type="hidden" id="alarms" value="{{$alarms}}">
+                                  <input type="hidden" id="false" value="{{$false}}">
+                                  <input type="hidden" id="physical" value="{{$physical}}">
+                                  <input type="hidden" id="abandonment" value="{{$abandonment}}">
+                                  <input type="hidden" id="tresspass" value="{{$tresspass}}">
+                                  <input type="hidden" id="threats" value="{{$threats}}">
+                                  <input type="hidden" id="theft" value="{{$theft}}">
+                                  <input type="hidden" id="swindling" value="{{$swindling}}">
+                                  <input type="hidden" id="sexual" value="{{$sexual}}">
+                                  <input type="hidden" id="murder" value="{{$murder}}">
+                                  <input type="hidden" id="illegal" value="{{$illegal}}">
+                                    <h4 class='text-dark header-title m-t-0'>Case Rate</h4>
+                                    
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <div id="morris-bar-chart" style="width:120%"></div>
+                                </div>
+                                <div class="card-box pull-right" style="background-color: #eeeeee;">
+                                    <table class="table table-hover mails m-0 table table-actions-bar">
+                                        <thead>
+                                            <tr>
+                                                <th>Total number of</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Alarms and Scandals</strong></td>
+                                                <td><i>{{$alarms}}</i></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><strong>False Identities</strong></td>
+                                                <td><i>{{$false}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Physical Injury</strong></td>
+                                                <td><i>{{$physical}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Abandonment</strong></td>
+                                                <td><i>{{$abandonment}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tresspass</strong></td>
+                                                <td><i>{{$tresspass}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Threats</strong></td>
+                                                <td><i>{{$threats}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Theft</strong></td>
+                                                <td><i>{{$theft}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Swindling</strong></td>
+                                                <td><i>{{$swindling}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Sexual Assault</strong></td>
+                                                <td><i>{{$sexual}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Murder</strong></td>
+                                                <td><i>{{$murder}}</i></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Illegal Drug</strong></td>
+                                                <td><i>{{$illegal}}</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="pull-right">
-                                <button id="register" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"></span> Print Graph</button>
+                                <button type="reset" class="btn btn-danger" name="reset" id="reset"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                
                             </div>
                         </div>
                     </div>
                     <!-- /.panel-body -->
                 </div>
-            </div>
+            </div> 
             <div class="row" style="padding-bottom: 5%;">
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -148,6 +225,43 @@
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+    <script type="text/javascript">
+                Morris.Bar({
+                element: 'morris-bar-chart',
+                data: [{y: 'Alarms and Scandals',a: $('#alarms').val()}, 
+                {y: 'False Identities',a: $('#false').val()},
+                {y: 'Physical Injury',a: $('#physical').val()}, 
+                {y: 'Abandonment',a: $('#abandonment').val()}, 
+                {y: 'Tresspass',a: $('#tresspass').val()},
+                {y: 'Threats',a: $('#threats').val()},
+                {y: 'Theft',a: $('#theft').val()},
+                {y: 'Swindling',a: $('#swindling').val()},
+                {y: 'Sexual Assault',a: $('#sexual').val()},
+                {y: 'Murder',a: $('#murder').val()},
+                {y: 'Illegal Drug',a: $('#illegal').val()}],
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: ['Count'],
+                hideHover: 'auto',
+                resize: true,
+                numLines: 3,
+                barColors: function (row, series, type) {
+                  if(row.label == "Alarms and Scandals") return "#5ea9e8";
+                  else if(row.label == "False Identities") return "#5ee89d";
+                  else if(row.label == "Physical Injury") return "#e5484f";
+                  else if(row.label == "Abandonment") return "#ffc0c0";
+                  else if(row.label == "Tresspass") return "#CBA4FC";
+                  else if(row.label == "Threats") return "#647AC1";
+                  else if(row.label == "Theft") return "#fff867";
+                  else if(row.label == "Swindling") return "#FFF7BD";
+                  else if(row.label == "Sexual Assault") return "#fba16c";
+                  else if(row.label == "Murder") return "#95CFB7";
+                  else if(row.label == "Illegal Drug") return "#4eeed3";
+                  }
+         
+    });  
+    </script>
+
     <script>
       $('#generate').click(function() {
         var dateEnd = $('#dateEnd').val();
@@ -330,6 +444,8 @@
         });
       });
     </script>
+
+    
 
 
 </body>

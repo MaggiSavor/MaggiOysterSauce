@@ -38,6 +38,7 @@
 			{y:"Grade 10",a:grade10},
 			{y:"Grade 11",a:grade11},
 			{y:"Grade 12",a:grade12}];
-		this.createStackedChart("student-grade-breakdown",a,"y",["a"],["Number of Students"],["#5fbeaa"])},
+	
+	this.createStackedChart("student-grade-breakdown",a,"y",["a"],["Number of Students"],["#5fbeaa"])},
 	e.GRAPHS=new a,e.GRAPHS.Constructor=a}
 	(window.jQuery),function(e){"use strict";e.GRAPHS.init()}(window.jQuery);

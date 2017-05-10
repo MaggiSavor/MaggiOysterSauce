@@ -48,29 +48,20 @@
                     <div class="panel-body">
                         <div class="form-group">      
                             <div class='col-md-12'>
-                                <div class='card-box pull-left'>
-                                  <input type="hidden" id="grade1" value="">
-                                  <input type="hidden" id="grade2" value="">
-                                  <input type="hidden" id="grade3" value="">
-                                  <input type="hidden" id="grade4" value="">
-                                  <input type="hidden" id="grade5" value="">
-                                  <input type="hidden" id="grade6" value="">
-                                  <input type="hidden" id="grade7" value="">
-                                  <input type="hidden" id="grade8" value="">
-                                  <input type="hidden" id="grade9" value="">
-                                  <input type="hidden" id="grade10" value="">
-                                  <input type="hidden" id="grade11" value="">
-                                  <input type="hidden" id="grade12" value="">
-                                    <h4 class='text-dark header-title m-t-0'>Student Per Grade Level</h4>
-                                    <div class='text-center'>
-                                      <ul class='list-inline chart-detail-list'>
-                                        <li>
-                                          <h5><i class='fa fa-circle m-r-5' style='color: #5fbeaa;'></i>Number of Students
-                                          </h5>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                    <div id='student-grade-breakdown' style='height: 372px;'></div>
+                                <div class='card-box'>
+                                  <input type="hidden" id="resident" value="{{$resident}}">
+                                  <input type="hidden" id="male" value="{{$male}}">
+                                  <input type="hidden" id="female" value="{{$female}}">
+                                  <input type="hidden" id="senior" value="{{$senior}}">
+                                  <input type="hidden" id="voter" value="{{$voter}}">
+                                  <input type="hidden" id="household" value="{{$household['household_id']}}">
+                                  <input type="hidden" id="family" value="{{$family['family_id']}}">
+                                    <h4 class='text-dark header-title m-t-0'>Residents Population</h4>
+                                    
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <div id="pie-chart"></div>
                                 </div>
                                 <div class="card-box pull-right" style="background-color: #eeeeee;">
                                     <table class="table table-hover mails m-0 table table-actions-bar">
@@ -115,13 +106,14 @@
                             </div>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-danger" name="reset" id="reset"><span class="glyphicon glyphicon-print"></span> Print</button>
-                                <button id="register" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"></span> Print Graph</button>
+                                
                             </div>
                         </div>
                     </div>
                     <!-- /.panel-body -->
                 </div>
-            </div>        
+            </div> 
+      
         </div>
         <!-- /#page-wrapper -->
 
@@ -135,9 +127,29 @@
     <!-- Morris Charts JavaScript -->
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
-    <script src="../assets/data/morris-data.js"></script>
+    <!-- <script src="../assets/data/morris-data.js"></script> -->
+    <script type="text/javascript"></script>
+    <script type="text/javascript">
+        function graphDonut(colors) {
+                Morris.Donut({
+                element: 'pie-chart',
+                colors : colors,
+                data: [{label: 'Residents',value: $('#resident').val()}, 
+                {label: 'Male',value: $('#male').val()},
+                {label: 'Female',value: $('#female').val()}, 
+                {label: 'Seniors',value: $('#senior').val()}, 
+                {label: 'Voters',value: $('#voter').val()},
+                {label: 'Household',value: $('#household').val()},
+                {label: 'Family',value: $('#family').val()}]
+          
+        });  
 
+        }
+
+        graphDonut( ['#5ea9e8', '#5ee89d', '#e5484f', '#ffc0c0', '#fff867', '#fba16c','#4eeed3'] );
+    </script>
 
 </body>
 
 </html>
+
