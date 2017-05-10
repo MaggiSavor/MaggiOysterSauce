@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <!-- <a class="navbar-brand" href="{{ url('/') }}"> -->
-                <a class="navbar-brand" href="{{URL::Route('dashboard')}}">
+                <a class="navbar-brand" href="{{url('/')}}">
                     Barangay 5 Zone 1
                 </a>
             </div>
@@ -54,11 +54,12 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <!-- <li><a href="{{ url('/login') }}">Login</a></li> -->
                     @if (Auth::guest())
-                        <!-- <li><a href="{{ url('/login') }}">Login</a></li> -->
-                       <!--  <li><a href="{{ url('/register') }}">Register</a></li> -->
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <!-- <li><a href="{{ url('/register') }}">Register</a></li> -->
                     @else
+                        <li><a href="{{URL::Route('dashboard')}}">Dashboard</a></li>
                         <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>

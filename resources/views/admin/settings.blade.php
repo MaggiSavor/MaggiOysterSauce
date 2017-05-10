@@ -126,7 +126,9 @@
                                         </button>
                                         <button type="button" class="cj_bg" id="bg2" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/bg2.jpg')!!}'); background-size: 100%;" value="bg2.jpg">
                                         </button>
-                                        <button type="button" class="cj_bg" id="bg3" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/road.jpg')!!}'); background-size: 100%;" value="road.jpg" >
+                                        <button type="button" class="cj_bg" id="bg3" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/bglogo.jpg')!!}'); background-size: 100%;" value="bglogo.jpg" >
+                                        </button>
+                                        <button type="button" class="cj_bg" id="bg4" style="height:60px; width:100px; background-image: url('{!! asset('assets/images/road.jpg')!!}'); background-size: 100%;" value="road.jpg" >
                                         </button>
                                         <input type="hidden" name="background_image" id="background_image" value="{{$settings->bg_image}}">
                                     </div>
@@ -405,7 +407,7 @@
                 $('#colorFilter').val('255,255,255,0')
             }
 
-            
+
             var bg = $('#background_image').val();
             var bar = ('255,255,255,1');
             $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") '});

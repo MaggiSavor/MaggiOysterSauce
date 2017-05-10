@@ -128,9 +128,9 @@
 <body>
 <div class="back-image"></div>
 <div class="back-gradient"></div>	
-	<div class="container">    
+	<div class="container">
         <div id="loginbox" style="margin-top:0%;" class="login">                    
-<h2>Barangay 5 Zone 1</h2> 
+<a href="{{ url('/') }}" style="text-decoration:none"><h2>Barangay 5 Zone 1</h2></a>
 
                            
 	<form id="loginform" class="form-horizontal" role="form" action="{{URL::Route('loggedIn')}}" method="post" >
@@ -145,7 +145,8 @@
 		</div>
 
 		</div> 
-		<p style="text-align: center"><a href="{{ url('/password/reset') }}"><button type="button" class="btn btn-danger"  style="width:280px;">Forgot Password?</button></a></p>
+		<!-- <p style="text-align: center"><a href="{{ url('/password/reset') }}"><button type="button" class="btn btn-danger"  style="width:280px;">Forgot Password?</button></a></p> -->
+		<p style="text-align: center"><a href="{{URL::Route('resetOptions')}}"><button type="button" class="btn btn-danger"  style="width:280px;">Forgot Password?</button></a></p>
 	</form>	
 
 
@@ -153,19 +154,8 @@
 	<script>
 		swal({!! Session::get('sweet_alert.alert') !!});
 	</script>
-@endif					
-	
-<!-- <script> 	
-		function notMe(){
-			var x = $('#username').val();
-			if(x != null || x != ''){
-				$('a').attr('href', 'forget.php?username='+ x).html('<button class="btn btn-danger"  style="width:280px;">Forgot Password?</button>');
-			}
-			else{
-				$('a').html('<button disabled class="btn btn-danger"  style="width:280px;">Forgot Password?</button>');
-			}
-		}
-</script>	 -->	
+@endif				
+
 </body>
 		
 </html>

@@ -174,4 +174,93 @@ class LoginController extends Controller
         return redirect('login');
     }
 
+    public function resetOptions(){
+        return view('admin.resetOption');
+    }
+
+    public function resetPass(){
+        return view('admin.resetPass');
+    }
+
+    public function resetPasswordUpdate($id){
+      $data = Request::all();
+      $update = User::where('id', '=', $id)->first();
+      $update['password'] = bcrypt($data['password']);
+      $update->save();
+
+      if((Auth::attempt(['email' =>$data['email'], 'password' => $data['password']])) || (Auth::attempt(['username' =>$data['email'], 'password' => $data['password']]))) {
+          $audit_trail = new AuditTrail;
+          $audit_trail['user_id'] = Auth::user()->id;
+          $audit_trail['action'] = "Logged-in";
+          $audit_trail['user_role'] = Auth::user()->user_type;
+          $audit_trail->save();
+          if(Auth::user()->user_type == "Admin"){
+              return Redirect::route('dashboard');
+          }else{
+              return 'standard user';
+              // Alert::message("Error!", "Invalid Credentials", "error"); 
+              // return redirect('login');
+          }
+          
+      }
+      else{
+      //     Alert::message("Error!", "Invalid Credentials", "error"); 
+          return redirect('login');
+      }
+
+    }
+
+    public function checkUser(){
+      $email = Request::all();
+      $exist = User::where('email', '=', $email['email'])->exists();
+      $exist1 = User::where('username', '=', $email['email'])->exists();
+      if($exist){
+        $result = User::where('email', '=', $email['email'])->get();
+      }else if($exist1){
+        // Alert::message("Error!", "User not found!", "error"); 
+        $result = User::where('username', '=', $email['email'])->get();
+      }
+      return response()->json(['data'=> $result]);
+    }
+
+    public function resetPassword(){
+
+          $answer = Request::all();
+          
+          $exist = User::where('email', '=', $answer['email'])->exists();
+          $exist1 = User::where('username', '=', $answer['email'])->exists();
+          if($exist){
+            $userInfo = User::where('email', '=', $answer['email'])->first();
+
+            if($userInfo['security_answer'] == $answer['answer']) {
+
+                $userInfo = User::where('email', '=', $answer['email'])->first();
+                return view('admin.resetPassword')
+                  ->with('userInfo', $userInfo);
+            }
+            else{
+                Alert::message("", "Invalid Answer!", "error"); 
+                return redirect::back();
+            }
+
+
+          }else if($exist1){
+            $userInfo2 = User::where('username', '=', $answer['email'])->first();
+            if($userInfo2['security_answer'] == $answer['answer']) {
+
+                $userInfo = User::where('username', '=', $answer['email'])->first();
+                return view('admin.resetPassword')
+                  ->with('userInfo', $userInfo);
+                
+            }
+            else{
+                Alert::message("", "Invalid Answer!", "error"); 
+                return redirect::back();
+            }
+          }
+
+
+    }
+
+
 }

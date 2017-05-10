@@ -99,7 +99,12 @@ Route::group(['middleware' => ['auth']], function(){
 });
 Route::group(['middleware' => ['guest']], function(){
 	Route::get('/login', array('uses' => 'LoginController@login', 'as' => 'login'));
+	Route::get('/reset_options', array('uses' => 'LoginController@resetOptions', 'as' => 'resetOptions'));
+	Route::get('/reset_password', array('uses' => 'LoginController@resetPass', 'as' => 'resetPass'));
 	Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+	Route::get('/reset', array('uses' => 'LoginController@checkUser', 'as' => 'checkUser'));
+	Route::post('/reset_password_via_question/{id}', array('uses' => 'LoginController@resetPasswordUpdate', 'as' => 'resetPasswordUpdate'));
+	Route::post('/reset_via_question', array('uses' => 'LoginController@resetPassword', 'as' => 'resetPassword'));
 	Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
 	Route::post('password/reset', 'Auth\PasswordController@reset');
 });
