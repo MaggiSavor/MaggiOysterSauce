@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
 
-    <title>Add Resident</title>
+    <title>Update Resident</title>
 
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -49,8 +49,35 @@
                     <div class="panel-body">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <form method="post" id="resident">
-                          <input type="hidden" value="{{$info['resident_id']}}" name="residentId">
+                          <input type="hidden" value="{{$info['id']}}" name="residentId">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                      <label for="InputStatus">Role</label>
+                                          <select class="form-control" name="role" id="inputRole" >
+                                          <?php
+                                          if($info['gender'] == "Male"){
+                                          echo '
+                                            <option value="Husband"'; if($info['role'] == "Husband"){ echo ' selected';} echo '>Husband</option>
+                                            <option value="Son"'; if($info['role'] == "Son"){ echo ' selected';} echo '>Son</option>';
+                                          }
+                                          else{
+                                          echo'
+                                            <option value="Wife"'; if($info['role'] == "Wife"){ echo ' selected';} echo '>Wife</option>
+                                            <option value="Daughter"'; if($info['role'] == "Daughter"){ echo ' selected';} echo '>Daughter</option>';
+                                          }
+                                          ?>
+                                          </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputResStatus">Resident Status</label>
+                                            <select class="form-control" name="resStatus" id="inputResStatus" >
+                                                <option value="Active" <?php if($info['resident_status'] == "Active"){ echo ' selected';} ?> >Active</option>
+                                                <option value="Deceased" <?php if($info['resident_status'] == "Deceased"){ echo ' selected';} ?> >Deceased</option>
+                                                <option value="Transferred" <?php if($info['resident_status'] == "Transferred"){ echo ' selected';} ?> >Transferred</option>
+                                            </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label class="control-label">First Name *</label>
@@ -68,11 +95,11 @@
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Address *</label>
-                                        <input type="text" name="houseNo" class="form-control input-xs" id="InputHouseNo" value="{{$info['house_no']}}" placeholder="House No">
+                                        <input type="text" name="houseNo" class="form-control input-xs" id="inputHouseNo" value="{{$info['house_no']}}" placeholder="House No">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="control-label">Street *</label>
-                                        <select class="form-control" name="street" id="InputStreet" >
+                                        <select class="form-control" name="street" id="inputStreet" >
                                             <option hidden value="">--Select Street--</option>
                                             <option value="P. Ortega" <?php if($info['street'] == "P. Ortega"){ echo ' selected';} ?> >P. Ortega</option>
                                             <option value="Asuncion" <?php if($info['street'] == "Asuncion"){ echo ' selected';} ?> >Asuncion</option>
@@ -82,11 +109,21 @@
                                             <option value="Sto. Cristo" <?php if($info['street'] == "Sto. Cristo"){ echo ' selected';} ?> >Sto. Cristo</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-4" id="defaultHouse" style="display: block;">
                                         <label for="InputHouseID" id="householdID">Household ID:</label>
                                         <br>
-                                        <label>{{$info['household_id']}}</label>
+                                        <label id="labelHouse">{{$info['household_id']}}</label>
                                         <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$info['household_id']}}">
+                                        <button type="button" id="newHouse" class="btn btn-success">New</button>
+                                        <button type="button" id="transferHouse" class="btn btn-warning">Transfer</button>
+                                    </div>
+                                    <div class="form-group col-md-4" id="transferHouseForm" style="display: none;">
+                                        <label for="InputHouseID" id="householdID">Household ID:</label>
+                                        <br>
+                                        <label>Transfer To:</label>
+                                        <input type="text" class="form-control input-xs" id="transferHouseName" placeholder="Input Name" id="houseID">
+                                        <button type="button" id="transHouse" class="btn btn-success">Transfer</button>
+                                        <button type="button" id="hideHouse" class="btn btn-warning">Cancel</button>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -141,22 +178,33 @@
                                         <label for="InputReligion">Religion</label>
                                         <input type="text" name="religion" class="form-control input-xs" id="InputReligion" value="{{$info['religion']}}">
                                     </div>
-                                    <div class="form-group col-md-4"><br>
+                                    <div class="form-group col-md-4" id="defaultFamily" style="display: block;"><br>
                                         <label for="InputFamID" id="famID">Family ID:</label><br>
-                                        <label>{{$info['family_id']}}</label>
+                                        <label id="labelFamily">{{$info['family_id']}}</label>
                                         <input type="hidden" name="familyID"class="form-control input-xs" id="familyID" placeholder="Family Id" value="{{$info['family_id']}}">
+                                        <input type="hidden" name="oldFamilyID"class="form-control input-xs" id="oldFamilyID" placeholder="Family Id" value="{{$info['family_id']}}">
+                                        <button type="button" id="newFamily" class="btn btn-success">New</button>
+                                        <button type="button" id="transferFamily" class="btn btn-warning">Transfer</button>
+                                    </div>
+                                    <div class="form-group col-md-4" id="transferFamilyForm" style="display: none;">
+                                        <label for="InputFamilyID" id="familyID">Family ID:</label>
+                                        <br>
+                                        <label>Transfer To:</label>
+                                        <input type="text" class="form-control input-xs" id="transferFamilyName" placeholder="Input Name" id="houseID">
+                                        <button type="button" id="transFam" class="btn btn-success">Transfer</button>
+                                        <button type="button" id="hideFam" class="btn btn-warning">Cancel</button>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
-                                        <input type="hidden" value="{{$info['household_head']}}" id="househead">
-                                        <label for="householdhead"><input type="checkbox" name="househead" id="housecheck" value="yes">
+                                        <input type="hidden" value="{{$info['household_head']}}" name="househead" id="househead">
+                                        <label for="householdhead"><input type="checkbox" id="housecheck">
                                         <strong>Household Head</strong>
                                         </label>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="hidden" value="{{$info['family_head']}}" id="familyhead">
-                                        <label for="familyhead"><input type="checkbox" name="familyhead" id="familycheck" value="yes">
+                                        <input type="hidden" value="{{$info['family_head']}}" name="familyhead" id="familyhead">
+                                        <label for="familyhead"><input type="checkbox" id="familycheck">
                                         <strong>Family Head</strong>
                                         </label>
                                     </div>
@@ -334,9 +382,9 @@
                     type: "success",
                     showConfirmButton: false
                   });
-                  // setTimeout(function(){
-                  //            location.reload();
-                  //       }, 2000); 
+                  setTimeout(function(){
+                             location.reload();
+                        }, 2000); 
                 }
               },error: function(data){
                   swal("Error!", "Something went wrong", "error");
@@ -354,21 +402,179 @@
     </script>
     <script>
     $('document').ready(function(){
-        if($('#househead').val() == "yes"){
-            $('#housecheck').prop('checked', true);
-        }
+      if($('#househead').val() == "yes"){
+          $('#housecheck').prop('checked', true);
+      }
 
-        if($('#familyhead').val() == "yes"){
-            $('#familycheck').prop('checked', true);
-        }
+      if($('#familyhead').val() == "yes"){
+          $('#familycheck').prop('checked', true);
+      }
 
-        if($('#votercheck').val() == "yes"){
-            $('#voter').prop('checked', true);
+      if($('#votercheck').val() == "yes"){
+          $('#voter').prop('checked', true);
+      }
+      else{
+          $('#nonvoter').prop('checked', true);   
+      }
+
+      $('#inputResStatus').change(function(){
+        if(this.value == 'Transferred' || this.value == 'Deceased'){
+          $('#housecheck').prop('checked', false);
+          $('#familycheck').prop('checked', false);
+        }
+      })
+
+      $('#housecheck').click(function(){
+
+        if($('#housecheck').prop('checked') == true){
+          $('#househead').val('yes');
+          var id = $('#houseID').val();
+            $.ajax({
+            method: 'GET',
+            url: '{{ URL::route("checkHead")}}',
+            data:{
+              'type' : 'household', 
+              'id': id
+            },
+            success:function(data)
+            {
+              if(data == 'exist'){
+                swal({title:"Existing Household Head!", 
+                  text: "You will overwrite the existing Household Head",
+                  type: "warning"
+                })
+              }
+            }
+          })
         }
         else{
-            $('#nonvoter').prop('checked', true);   
+          $('#househead').val('no');
+          // alert('no')
         }
+      })
+      $('#familycheck').click(function(){
+        if($('#familycheck').prop('checked') == true){
+          $('#familyhead').val('yes');
+          var id = $('#familyID').val();
+            $.ajax({
+            method: 'GET',
+            url: '{{ URL::route("checkHead")}}',
+            data:{
+              'type' : 'family', 
+              'id': id
+            },
+            success:function(data)
+            {
+              if(data == 'exist'){
+                swal({title:"Existing Family Head!", 
+                  text: "You will overwrite the existing Family Head",
+                  type: "warning"
+                })
+              }
+            }
+          })
+        }
+        else{
+          $('#familyhead').val('no');
+          // alert('no')
+        }
+      })
+
+      $('#newHouse').click(function(){
+        $('#housecheck').prop('checked', true);
+        $.ajax({
+          method: 'GET',
+          url: '{{ URL::route("getHouseId")}}',
+          data:{'type': 'new'},
+          success:function(data)
+          {
+            console.log(data)
+            $('#houseID').val(data);
+            $('#labelHouse').text(data);
+            $('#inputHouseNo').val("");
+            $('#inputStreet').val("");
+          }
+        })
+      })
+
+      $('#transferHouse').click(function(){
+        $('#defaultHouse').css('display','none');
+        $('#transferHouseForm').css('display','block');
+      })
+
+      $('#hideHouse').click(function(){
+        $('#defaultHouse').css('display','block');
+        $('#transferHouseForm').css('display','none');
+      })
+      
+      $('#transHouse').click(function(){
+        var name = $('#transferHouseName').val();
+        $.ajax({
+          method: 'GET',
+          url: '{{ URL::route("getHouseId")}}',
+          data:{
+            'type' : 'transfer',
+            'name' : name
+          },
+          success:function(data)
+          {
+            console.log(data)
+            $('#defaultHouse').css('display','block');
+            $('#transferHouseForm').css('display','none');
+            $('#houseID').val(data.household_id);
+            $('#labelHouse').text(data.household_id);
+            $('#inputHouseNo').val(data.house_no);
+            $("#inputStreet").val(data.street);
+          }
+        })
+      })
+
+      $('#newFamily').click(function(){
+        $('#familycheck').prop('checked', true);
+        $.ajax({
+          method: 'GET',
+          url: '{{ URL::route("getFamilyId")}}',
+          data:{'type': 'new'},
+          success:function(data)
+          {
+            console.log(data)
+            $('#familyID').val(data);
+            $('#labelFamily').text(data);
+          }
+        })
+      })
+
+      $('#transferFamily').click(function(){
+        $('#defaultFamily').css('display','none');
+        $('#transferFamilyForm').css('display','block');
+      })
+
+      $('#hideFam').click(function(){
+        $('#defaultFamily').css('display','block');
+        $('#transferFamilyForm').css('display','none');
+      })
     })
+
+    $('#transFam').click(function(){
+        var name = $('#transferFamilyName').val();
+        $.ajax({
+          method: 'GET',
+          url: '{{ URL::route("getFamilyId")}}',
+          data:{
+            'type' : 'transfer',
+            'name' : name
+          },
+          success:function(data)
+          {
+            console.log(data)
+            $('#defaultFamily').css('display','block');
+            $('#transferFamilyForm').css('display','none');
+            $('#familyID').val(data);
+            $('#labelFamily').text(data);
+          }
+        })
+      })
+
     </script>
   
 </body>

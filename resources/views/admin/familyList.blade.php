@@ -73,15 +73,15 @@
                           </thead>
                           <tbody>
                            @foreach($residentInfo as $resident)
-                              <tr class="data" style="cursor:pointer">
+                              <tr class="data" style="cursor:pointer" data-toggle="tooltip" title="Click for more options!">
                                 <td></td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['resident_id']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['firstname']}} {{$resident['middlename']}} {{$resident['lastname']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['house_no']}} {{$resident['street']}} Tondo, Manila</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['gender']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['status']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['household_id']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['family_id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['firstname']}} {{$resident['middlename']}} {{$resident['lastname']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['house_no']}} {{$resident['street']}} Tondo, Manila</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['gender']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['status']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['household_id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['family_id']}}</td>
                               </tr>
                           @endforeach
                           </tbody>
@@ -98,7 +98,7 @@
 <!-- Modal -->
     
 @foreach($residentInfo as $residentinfo)
-    <div class="modal fade" id="statusModal{{$residentinfo['resident_id']}}" role="dialog">
+    <div class="modal fade" id="statusModal{{$residentinfo['id']}}" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -119,7 +119,7 @@
 
       
           <div class="modal-body">
-          <a href="{{URL::Route('updateResident',$residentinfo['resident_id'])}}"><button class="btn btn-success">Update</button></a>
+          <a href="{{URL::Route('updateResident',$residentinfo['id'])}}"><button class="btn btn-success">Update</button></a>
             <div class="table-responsive card-box">
             <h3>Personal Information</h3>
             <center><label>Household ID: {{$residentinfo['household_id']}}</label>
@@ -134,7 +134,7 @@
                     <tr class="">
                       <td></td>
                       <td><b>Resident ID</b></td>
-                      <td class="id" style="min-width: 350px">{{$residentinfo['resident_id']}}</td>
+                      <td class="id" style="min-width: 350px">{{$residentinfo['id']}}</td>
                     </tr>
                     <tr class="">
                       <td></td>
@@ -249,7 +249,7 @@
                     <tr class="">
                       <td></td>
                       <td><b>Resident ID</b></td>
-                      <td class="id" style="min-width: 350px">{{$residentinfo['resident_id']}}</td>
+                      <td class="id" style="min-width: 350px">{{$residentinfo['id']}}</td>
                     </tr>
                   </tbody>
               </table>
@@ -447,6 +447,9 @@
         });
     </script>
     <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip(); 
+    });
     $('#bday').change(function(){
         var Bdate =$('#bday').val();
         var Bday = +new Date(Bdate);

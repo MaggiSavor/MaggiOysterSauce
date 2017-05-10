@@ -40,6 +40,9 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::post('/add_member', array('uses' => 'ResidentController@addMember', 'as' => 'addMember'));
 		Route::get('/update_resident/{id}', array('uses' => 'ResidentController@updateResident', 'as' => 'updateResident'));
 		Route::post('/save_update', array('uses' => 'ResidentController@saveUpdate', 'as' => 'saveUpdate'));
+		Route::get('/get_house_id', array('uses' => 'ResidentController@getHouseId', 'as' => 'getHouseId'));
+		Route::get('/get_family_id', array('uses' => 'ResidentController@getFamilyId', 'as' => 'getFamilyId'));
+		Route::get('/check_head', array('uses' => 'ResidentController@checkHead', 'as' => 'checkHead'));
 			
 		//end of resident
 

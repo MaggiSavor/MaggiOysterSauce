@@ -73,15 +73,15 @@
                           </thead>
                           <tbody>
                            @foreach($residentInfo as $resident)
-                              <tr class="data" style="cursor:pointer">
+                              <tr class="data" style="cursor:pointer" data-toggle="tooltip" title="Click for more options!">
                                 <td></td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['resident_id']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['firstname']}} {{$resident['middlename']}} {{$resident['lastname']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['house_no']}} {{$resident['street']}} Tondo, Manila</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['gender']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['status']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['household_id']}}</td>
-                                <td data-toggle="modal" data-target="#statusModal{{$resident['resident_id']}}">{{$resident['family_id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['firstname']}} {{$resident['middlename']}} {{$resident['lastname']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['house_no']}} {{$resident['street']}} Tondo, Manila</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['gender']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['status']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['household_id']}}</td>
+                                <td data-toggle="modal" data-target="#statusModal{{$resident['id']}}">{{$resident['family_id']}}</td>
                               </tr>
                           @endforeach
                           </tbody>
@@ -243,6 +243,8 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+        
           var oTable = $('#datatable').DataTable({
             "orderCellsTop": false,
             "searchHighlight" : true,
