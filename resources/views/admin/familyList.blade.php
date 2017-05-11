@@ -109,7 +109,7 @@
           <ul class="nav nav-tabs" id="tabContent">
             <li class="active"><a href="#details{{$residentinfo['id']}}" data-toggle="tab">Personal Information</a></li>
             <li class="listmember"   value="{{$residentinfo['family_id']}}"><a href="#members{{$residentinfo['id']}}" data-toggle="tab">Family Members</a></li>
-            <li><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family Member</a></li>
+            <li class="addNewMember" value="{{$residentinfo['family_id']}}"><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family Member</a></li>
           </ul>
   
       <div class="tab-content">
@@ -264,7 +264,7 @@
 
         <div class="tab-pane" id="addMember{{$residentinfo['id']}}">
           <div class="modal-body">
-                        <form id="resident" method="POST" action="{{URL::Route('addMember')}}">
+                        <form id="resident{{$residentinfo['family_id']}}" class="resident">
                         
                             <div class="row">
                                 <div class="col-md-12">
@@ -390,25 +390,11 @@
                                         <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group col-md-4">
-                                        <label for='householdhead'>
-                                        <input type="checkbox" name="houseHead" id="houseHead" value="yes">
-                                        <strong>Household Head</strong>
-                                        </label>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for='familyhead'>
-                                        <input type="checkbox" name="familyHead" id="familyHead" value="yes" >
-                                        <strong>Family Head</strong>
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                             <div class="pull-right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
-                                <button id="register" type="submit" name="" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                                <button id="register{{$residentinfo['family_id']}}" type="submit" name="" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
                             </div>
                         </form>
           </div>   
@@ -546,144 +532,147 @@
       })
     </script>
     <script>
-    // $('document').ready(function(){
-    // $('#resident').formValidation({
-    //         framework: 'bootstrap',
-    //         // Only disabled elements are excluded
-    //         // The invisible elements belonging to inactive tabs must be validated
-    //         // excluded: [':disabled'],
-    //         excluded: [':hidden'],
-    //         icon: {
-    //             // valid: 'glyphicon glyphicon-ok',
-    //             // invalid: 'glyphicon glyphicon-remove',
-    //             // validating: 'glyphicon glyphicon-refresh'
-    //         },
-    //         fields: {
-    //           fname: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Firstname is required"
-    //                  }
-    //               }
-    //             },
-    //             mname: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Middlename is required"
-    //                  }
-    //               }
-    //             },
-    //             lname: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Lastname is required"
-    //                  }
-    //               }
-    //             },
-    //             houseNo: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "House No is required"
-    //                  }
-    //               }
-    //             },
-    //             status: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: 'Marital status is required'
-    //                 }
-    //               }
-    //             },
-    //             street: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Street is required"
-    //                  }
-    //               }
-    //             },
-    //             birthdate: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Birthdate is required"
-    //                  }
-    //               }
-    //             },
-    //             religion: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Religion is required"
-    //                  }
-    //               }
-    //             },
-    //             nationality: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Nationality is required"
-    //                  }
-    //               }
-    //             },
-    //             voter: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "This is required"
-    //                  }
-    //               }
-    //             },
-    //             role: {
-    //               validators: {
-    //                 notEmpty: {
-    //                   message: "Role is required"
-    //                  }
-    //               }
-    //             },
-    //         }
-    // })
-    // .on('err.field.fv', function(e, data) {
-    //   e.preventDefault();
-
-    //    var $form = $(e.target),
-    //      fv    = $form.data('formValidation');
-         
-      // $('#register').focus(function(e){
+      $('.addNewMember').click(function(){
+        
+        var id = this.value;
+        
+      //  $('#resident'+id).formValidation({
+      //     framework: 'bootstrap',
+      //     // Only disabled elements are excluded
+      //     // The invisible elements belonging to inactive tabs must be validated
+      //     // excluded: [':disabled'],
+      //     excluded: [':hidden'],
+      //     icon: {
+      //         // valid: 'glyphicon glyphicon-ok',
+      //         // invalid: 'glyphicon glyphicon-remove',
+      //         // validating: 'glyphicon glyphicon-refresh'
+      //     },
+      //     fields: {
+      //       fname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Firstname is required"
+      //              }
+      //           }
+      //         },
+      //         mname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Middlename is required"
+      //              }
+      //           }
+      //         },
+      //         lname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Lastname is required"
+      //              }
+      //           }
+      //         },
+      //         houseNo: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "House No is required"
+      //              }
+      //           }
+      //         },
+      //         status: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: 'Marital status is required'
+      //             }
+      //           }
+      //         },
+      //         street: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Street is required"
+      //              }
+      //           }
+      //         },
+      //         birthdate: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Birthdate is required"
+      //              }
+      //           }
+      //         },
+      //         religion: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Religion is required"
+      //              }
+      //           }
+      //         },
+      //         nationality: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Nationality is required"
+      //              }
+      //           }
+      //         },
+      //         voter: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "This is required"
+      //              }
+      //           }
+      //         },
+      //         role: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Role is required"
+      //              }
+      //           }
+      //         },
+      //     }
+      // })
+      // .on('err.field.fv', function(e, data) {
       //   e.preventDefault();
-      //   swal({
-      //     title: "Are you sure?",
-      //       text: "You are trying to register new resident.",
-      //       type: "warning",
-      //       showCancelButton: true,
-      //       confirmButtonColor: "#DD6B55",
-      //       confirmButtonText: "Yes",
-      //       closeOnConfirm: false,
-      //       closeOnCancel: false
-      //   },
-      //   function(isConfirm){
-      //     if(isConfirm){
-      //       var info = $('#resident').serialize()
-      //       $.ajax({
-      //         method: 'POST',
-      //         url: "{{URL::Route('saveResident')}}",
-      //         headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
-      //         dataType: 'JSON',
-      //         data: info,
-      //         success: function(data){
-      //           if(data.success == "yes"){
-      //             swal({
-      //               title:"Saved!", 
-      //               text: "New resident has been registered!",
-      //               type: "success"
-      //             });
-      //           }
-      //         },error: function(data){
-      //             swal("Error!", "Something went wrong", "error");
-      //           }
-      //       });
-      //     }
-      //     else {
-      //       swal("Cancelled", "Something went wrong!", "error");
-      //     }
-      //   });
-      // });
-// });        
+
+      //    var $form = $(e.target),
+      //      fv    = $form.data('formValidation');
+           
+        $('#register'+id).focus(function(e){
+          e.preventDefault();
+          swal({
+            title: "Are you sure?",
+              text: "You are trying to register new resident.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+              var info = $('#resident'+id).serialize()
+              $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('addMember')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: info,
+                success: function(data){
+                  if(data.success == "yes"){
+                    swal({
+                      title:"Saved!", 
+                      text: "New resident has been registered!",
+                      type: "success"
+                    });
+                  }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
+        });
+      })  
     </script>
 
 </body>

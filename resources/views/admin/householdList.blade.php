@@ -109,7 +109,7 @@
           <ul class="nav nav-tabs" id="tabContent">
             <li class="active"><a href="#details{{$residentinfo['id']}}" data-toggle="tab">Personal Information</a></li>
             <li class="listmember" value="{{$residentinfo['household_id']}}"><a href="#members{{$residentinfo['id']}}" data-toggle="tab">Household</a></li>
-            <li><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family</a></li>
+            <li class="addNewFam" value="{{$residentinfo['household_id']}}"><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family</a></li>
           </ul>
   
       <div class="tab-content">
@@ -246,7 +246,7 @@
                 </thead>
                   <tbody class="row{{$residentinfo['household_id']}}">
                     <tr>
-                      
+                      <!-- Info is appended here! -->
                     </tr>
                   </tbody>
               </table>
@@ -263,7 +263,7 @@
 
         <div class="tab-pane" id="addMember{{$residentinfo['id']}}">
           <div class="modal-body">
-                        <form id="resident" method="POST" action="{{URL::Route('addMember')}}">
+                        <form id="resident{{$residentinfo['household_id']}}" class="resident">
                         
                             <div class="row">
                                 <div class="col-md-12">
@@ -393,7 +393,7 @@
                             <div class="pull-right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
-                                <button id="register" type="submit" name="" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
+                                <button id="register{{$residentinfo['household_id']}}" type="button" name="" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>
                             </div>
                         </form>
           </div>   
@@ -431,6 +431,27 @@
             var bar = ($(this).data('value'));
             $('#page-wrapper').css({background: 'linear-gradient(0deg, rgba('+bar+'), rgba('+bar+')), url("{!! asset("assets/images/'+bg+'")!!}") no-repeat center center fixed', 'background-size' : '100%'});
         });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+      
+      $('.bday').change(function(){
+          var Bdate =$('.bday').val();
+          var Bday = +new Date(Bdate);
+          //Q4A = Bdate + ". You are " + ~~ ((Date.now() - Bday) / (31557600000));
+          age = ~~ ((Date.now() - Bday) / (31557600000));  
+          var theBday = $('.resultBday');
+          theBday.innerHTML = age;
+
+          if(age >= 18){
+              $('.voter').attr('hidden', false);
+          }
+          else if(age <18){
+              $('.voter').attr('hidden', true);
+          }
+        })
+      });
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -495,14 +516,18 @@
               row.remove();
 
               for(i=0;i<data.length;i++){
-                  $('.row'+houseId ).append('<tr><td></td><td><b>'+data[i]["lastname"]+' Family</b></td><td><a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="seeMore'+data[i]["family_id"]+'" name="true" onclick="hey('+data[i]["family_id"]+')">Show more</a></td></tr>');
+                  $('.row'+houseId ).append('<tr><td></td><td><b>'+data[i]["lastname"]+' Family</b></td><td><a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="seeMore'+data[i]["family_id"]+'" name="true" onclick="show('+data[i]["family_id"]+')">Show more</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="moveFam'+data[i]["family_id"]+'" name="true" onclick="trans('+data[i]["family_id"]+')" data-toggle="tooltip" title="Transfer to another household">Transfer Family</a></td></tr>');
               }
+               $('[data-toggle="tooltip"]').tooltip(); 
             }
         })
       })
 
-      function hey(id){
+      function show(id){
         if($('#seeMore'+id).attr('name') == 'true'){
+          $('#moveFam'+id).text('Transfer Family');
+          $('#moveFam'+id).attr('name','true');
+          $('.container'+id).remove();
           $('#seeMore'+id).attr('name','false');
 
           $('#seeMore'+id).text('Show less');
@@ -527,6 +552,179 @@
           $('.members'+id).remove();
         }
       }
+      function trans(id){
+        if($('#moveFam'+id).attr('name') == 'true'){
+          $('#seeMore'+id).text('Show more');
+          $('#seeMore'+id).attr('name','true');
+          $('.members'+id).remove();
+          $('#moveFam'+id).attr('name','false');
+
+          $('#moveFam'+id).text('Cancel');
+          var row = $('#moveFam'+id).closest('tr');
+          row.after('<tr class="container'+id+'"><td></td><td>Transfer to which household?</td><td><input type="text" placeholder="Input household head name">&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30">Transfer</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30">New</a></td><td><b>Household ID:'+id+'</b></td></tr>');
+          // $.ajax({
+          //     method: 'GET',
+          //     url: '{{ URL::route("getMembers")}}',
+          //     data:{
+          //       'id' : id,
+          //     },
+          //     success:function(data)
+          //     {
+          //         for(i=0;i<data.length;i++){
+          //           row.after('<tr class="members'+id+'"><td></td><td>'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
+          //         }
+          //     }
+          // })
+        }
+        else{
+          $('#moveFam'+id).text('Transfer Family');
+          $('#moveFam'+id).attr('name','true');
+          $('.container'+id).remove();
+        }
+      }
+    </script>
+    <script>
+      $('.addNewFam').click(function(){
+        
+        var id = this.value;
+
+      //  $('#resident'+id).formValidation({
+      //     framework: 'bootstrap',
+      //     // Only disabled elements are excluded
+      //     // The invisible elements belonging to inactive tabs must be validated
+      //     // excluded: [':disabled'],
+      //     excluded: [':hidden'],
+      //     icon: {
+      //         // valid: 'glyphicon glyphicon-ok',
+      //         // invalid: 'glyphicon glyphicon-remove',
+      //         // validating: 'glyphicon glyphicon-refresh'
+      //     },
+      //     fields: {
+      //       fname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Firstname is required"
+      //              }
+      //           }
+      //         },
+      //         mname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Middlename is required"
+      //              }
+      //           }
+      //         },
+      //         lname: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Lastname is required"
+      //              }
+      //           }
+      //         },
+      //         houseNo: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "House No is required"
+      //              }
+      //           }
+      //         },
+      //         status: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: 'Marital status is required'
+      //             }
+      //           }
+      //         },
+      //         street: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Street is required"
+      //              }
+      //           }
+      //         },
+      //         birthdate: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Birthdate is required"
+      //              }
+      //           }
+      //         },
+      //         religion: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Religion is required"
+      //              }
+      //           }
+      //         },
+      //         nationality: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Nationality is required"
+      //              }
+      //           }
+      //         },
+      //         voter: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "This is required"
+      //              }
+      //           }
+      //         },
+      //         role: {
+      //           validators: {
+      //             notEmpty: {
+      //               message: "Role is required"
+      //              }
+      //           }
+      //         },
+      //     }
+      // })
+      // .on('err.field.fv', function(e, data) {
+      //   e.preventDefault();
+
+      //    var $form = $(e.target),
+      //      fv    = $form.data('formValidation');
+           
+        $('#register'+id).focus(function(e){
+          e.preventDefault();
+          swal({
+            title: "Are you sure?",
+              text: "You are trying to register new resident.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+              var info = $('#resident'+id).serialize()
+              $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('addFamily')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: info,
+                success: function(data){
+                  if(data.success == "yes"){
+                    swal({
+                      title:"Saved!", 
+                      text: "New resident has been registered!",
+                      type: "success"
+                    });
+                  }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
+        });
+      })  
     </script>
 </body>
 
