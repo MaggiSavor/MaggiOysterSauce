@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>Secretary</td>
                                     <td>{{$sec['fullname']}}
-                                    <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#secModal{{$sec['id']}}" type="button"><span class="glyphicon glyphicon-edit"></span></button></td>
+                                    <!-- <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#secModal{{$sec['id']}}" type="button"><span class="glyphicon glyphicon-edit"></span></button> --></td>
                                 </tr>
                                 <tr>
                                     <td>Treasurer</td>

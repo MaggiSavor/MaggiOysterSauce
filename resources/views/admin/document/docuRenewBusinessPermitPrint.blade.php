@@ -44,6 +44,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
+                    <form method="post" action="{{URL::Route('addBusinessPermit')}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
@@ -68,11 +69,11 @@
                                 </div>
                             </div>
                         </div> 
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="pull-right">
                             <button id="print" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
                         </div>
-
-                        
+                    </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>

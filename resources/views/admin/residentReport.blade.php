@@ -192,7 +192,7 @@
                for(i=0; i< data.resident.length; i++){
                 if(data.resident.length != 0){
                   $('#resident').dataTable().fnAddData([
-                        data.resident[i]['resident_id'],
+                        data.resident[i]['id'],
                         data.resident[i]['fullname'],
                         data.resident[i]['house_no']+' '+data.resident[i]['street'],
                         data.resident[i]['gender'],
@@ -237,7 +237,7 @@
                  for(i=0; i< data.all.length; i++){
                   if(data.all.length != 0){
                     $('#resident').dataTable().fnAddData([
-                        data.all[i]['resident_id'],
+                        data.all[i]['id'],
                         data.all[i]['fullname'],
                         data.all[i]['house_no']+' '+data.all[i]['street'],
                         data.all[i]['gender'],
@@ -262,7 +262,7 @@
                  for(i=0; i< data.voter.length; i++){
                   if(data.voter.length != 0){
                     $('#resident').dataTable().fnAddData([
-                        data.voter[i]['resident_id'],
+                        data.voter[i]['id'],
                         data.voter[i]['fullname'],
                         data.voter[i]['house_no']+' '+data.voter[i]['street'],
                         data.voter[i]['gender'],
@@ -287,7 +287,7 @@
                  for(i=0; i< data.senior.length; i++){
                   if(data.senior.length != 0){
                     $('#resident').dataTable().fnAddData([
-                        data.senior[i]['resident_id'],
+                        data.senior[i]['id'],
                         data.senior[i]['fullname'],
                         data.senior[i]['house_no']+' '+data.senior[i]['street'],
                         data.senior[i]['gender'],
@@ -312,7 +312,7 @@
                  for(i=0; i< data.gender.length; i++){
                   if(data.gender.length != 0){
                     $('#resident').dataTable().fnAddData([
-                        data.gender[i]['resident_id'],
+                        data.gender[i]['id'],
                         data.gender[i]['fullname'],
                         data.gender[i]['house_no']+' '+data.gender[i]['street'],
                         data.gender[i]['gender'],

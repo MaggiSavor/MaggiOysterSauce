@@ -43,7 +43,8 @@
                         Resident Details
                     </div>
                     <!-- /.panel-heading -->
-                    <div class="panel-body">
+                <div class="panel-body">
+                <form method="post" action="{{URL::Route('addCert')}}">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group col-md-6">
@@ -52,7 +53,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label">Age</label>
-                                <input type="text" name="age" class="form-control" id="title" value="{{$cert['birthdate']}}" readonly="">
+                                <input type="text" name="age" class="form-control" id="title" value="<?php $birthDate = explode("-", $cert['birthdate']); $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[0], $birthDate[0]))) > date("md") ? ((date("Y") - $birthDate[0]) - 1) : (date("Y") - $birthDate[0]));echo $age;?>" readonly="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label">Status</label>
@@ -69,79 +70,78 @@
                         <div class="form-group col-md-12">
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Application for employment
+                                    <input type="radio" name="reasons" class="same" value="Option1">Application for employment
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">School Requirement
+                                    <input type="radio" name="reasons" class="same" value="Option2">School Requirement
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Hospital/Medical Purposes
+                                    <input type="radio" name="reasons" class="same" value="Option3">Hospital/Medical Purposes
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Processing of Calamity
+                                    <input type="radio" name="reasons" class="same" value="Option4">Processing of Calamity
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Travel Abroad
+                                    <input type="radio" name="reasons" class="same" value="Option5">Travel Abroad
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Transfer of Residency
+                                    <input type="radio" name="reasons" class="same" value="Option6">Transfer of Residency
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">SSS/GSIS/PAGIBIG/PHILHEALTH Req.
+                                    <input type="radio" name="reasons" class="same" value="Option7">SSS/GSIS/PAGIBIG/PHILHEALTH Req.
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">NBI/POLICE Clearance
+                                    <input type="radio" name="reasons" class="same" value="Option8">NBI/POLICE Clearance
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">TIN/BIR Requirement
+                                    <input type="radio" name="reasons" class="same" value="Option9">TIN/BIR Requirement
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">DSWD Requirement
+                                    <input type="radio" name="reasons" class="same" value="Option10">DSWD Requirement
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same">Bank Transaction
+                                    <input type="radio" name="reasons" class="same" value="Option11">Bank Transaction
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" id="idFor">ID For
+                                    <input type="radio" name="reasons" id="idFor" value="Option12">ID For
                                     <input type="text" name="idFor" class="form-control" id="id">
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" id="others">Others
+                                    <input type="radio" name="reasons" id="others" value="Option13">Others
                                     <input type="text" name="others" class="form-control" id="other">
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <br>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="pull-right">
-                        <button id="print" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
+                        <button id="print" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
                     </div>
-
+                </form>
                         
                     </div>
                     <!-- /.panel-body -->

@@ -44,110 +44,113 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group col-md-3">
-                                <label class="control-label">ID No.</label>
-                                <input type="text" name="idNo" class="form-control" id="title" value="{{$bid['id']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Name</label>
-                                <input type="text" name="name" class="form-control" id="title" value="{{$bid['fullname']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Date of Birth</label>
-                                <input type="text" name="status" class="form-control" id="cname" value="{{$bid['birthdate']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Address</label>
-                                <input type="text" name="address" class="form-control" id="dname" value="{{$bid['house_no']}} {{$bid['street']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Place of Birth</label>
-                                <input type="text" name="place" class="form-control" id="title" placeholder="Place of Birth" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Blood Type</label>
-                                <input type="text" name="bloodType" class="form-control" id="title" placeholder="Blood Type" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Height</label>
-                                <input type="text" name="height" class="form-control" id="cname" placeholder="Height" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Weight</label>
-                                <input type="text" name="weight" class="form-control" id="dname" placeholder="Weight" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Status</label>
-                                <input type="text" name="status" class="form-control" id="title" value="{{$bid['status']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Occupation</label>
-                                <input type="text" name="occupation" class="form-control" id="title" value="{{$bid['occupation']}}" readonly="">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Tin No.</label>
-                                <input type="text" name="tin" class="form-control" id="cname" placeholder="Tin No." required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Contact</label>
-                                <input type="text" name="contact" class="form-control" id="dname" placeholder="Contact" required>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label>In case of emergency</label>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Name</label>
-                                <input type="text" name="ename" class="form-control" id="cname" placeholder="Name" list="resident" autocomplete="off">
-                            </div>
-                            <datalist id="resident">
-                                @foreach($res as $resident)
-                                  <option>{{$resident['fullname']}}</option>
-                                @endforeach
-                            </datalist>
-                            <div class='form-group col-md-6'>
-                                  <label class='col-lg-12 control-label' for='relation'>Relation</label>
-                                  <div class='col-lg-12'>
-                                    <select class="form-control" name="relation" id="relation">
-                                        <option value="Guardian">Guardian</option>
-                                        <option>Father</option>
-                                        <option>Mother</option>
-                                        <option>Sibling</option>
-                                        <option>Relatives</option>
-                                    </select>
-                                  </div>
+                    <form method="post" action="{{URL::Route('addBarangayId')}}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">ID No.</label>
+                                    <input type="text" name="idNo" class="form-control" id="title" value="{{$bid['id']}}" readonly="">
                                 </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Address</label>
-                                <input type="text" name="eaddress" class="form-control" id="dname" placeholder="Address">
-                            </div>
-                            <div class="form-group col-md-6">
-                            <label>Contact:</label>
-                                <div class="col-md-12">
-                                    <label class="radio">
-                                        <input type="radio" name="contact" id="mob">Mobile
-                                    </label>
-                                        <input type="text" name="mobile" class="form-control contact" id="mobile" placeholder="(+63)">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Name</label>
+                                    <input type="text" name="name" class="form-control" id="title" value="{{$bid['fullname']}}" readonly="">
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="radio">
-                                        <input type="radio" name="contact" id="tel">Telephone
-                                    </label>
-                                        <input type="text" name="telephone" class="form-control contact" id="telephone" placeholder="(2)">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Date of Birth</label>
+                                    <input type="text" name="bday" class="form-control" id="cname" value="{{$bid['birthdate']}}" readonly="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Address</label>
+                                    <input type="text" name="address" class="form-control" id="dname" value="{{$bid['house_no']}} {{$bid['street']}}" readonly="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Place of Birth</label>
+                                    <input type="text" name="place" class="form-control" id="title" placeholder="Place of Birth" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Blood Type</label>
+                                    <input type="text" name="bloodType" class="form-control" id="title" placeholder="Blood Type" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Height</label>
+                                    <input type="text" name="height" class="form-control" id="cname" placeholder="Height" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Weight</label>
+                                    <input type="text" name="weight" class="form-control" id="dname" placeholder="Weight" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Status</label>
+                                    <input type="text" name="status" class="form-control" id="title" value="{{$bid['status']}}" readonly="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Occupation</label>
+                                    <input type="text" name="occupation" class="form-control" id="title" value="{{$bid['occupation']}}" readonly="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Tin No.</label>
+                                    <input type="text" name="tin" class="form-control" id="cname" placeholder="Tin No." required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Contact</label>
+                                    <input type="text" name="contact" class="form-control" id="dname" placeholder="Contact" required>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <label>In case of emergency</label>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Name</label>
+                                    <input type="text" name="ename" class="form-control" id="cname" placeholder="Name" list="resident" autocomplete="off">
+                                </div>
+                                <datalist id="resident">
+                                    @foreach($res as $resident)
+                                      <option>{{$resident['fullname']}}</option>
+                                    @endforeach
+                                </datalist>
+                                <div class='form-group col-md-6'>
+                                      <label class='col-lg-12 control-label' for='relation'>Relation</label>
+                                      <div class='col-lg-12'>
+                                        <select class="form-control" name="relation" id="relation">
+                                            <option value="Guardian">Guardian</option>
+                                            <option>Father</option>
+                                            <option>Mother</option>
+                                            <option>Sibling</option>
+                                            <option>Relatives</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Address</label>
+                                    <input type="text" name="eaddress" class="form-control" id="dname" placeholder="Address">
+                                </div>
+                                <div class="form-group col-md-6">
+                                <label>Contact:</label>
+                                    <div class="col-md-12">
+                                        <label class="radio">
+                                            <input type="radio" id="mob">Mobile
+                                        </label>
+                                            <input type="text" name="mobile" class="form-control contact" id="mobile" placeholder="(+63)">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="radio">
+                                            <input type="radio" id="tel">Telephone
+                                        </label>
+                                            <input type="text" name="telephone" class="form-control contact" id="telephone" placeholder="(2)">
+                                            <input type="hidden" name="dexp" id="dexp">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     <br>
                     <br>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="pull-right">
                         <button id="print" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
                     </div>
 
-                        
+                    </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -160,6 +163,17 @@
 
     
     <script src="../assets/js/bootstrap-toggle.js"></script>
+    <script>
+    $(document).ready(function(){
+        var mydateStart = new Date();
+        var monthStart = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"][mydateStart.getMonth()];
+        var start = monthStart + ' ' + mydateStart.getDate() + ', ' + (mydateStart.getFullYear() + 1);
+        
+        $('#dexp').val(start);
+
+    })
+    </script>
     <script>
         $(document).ready(function() {
             $('#mobile').hide();

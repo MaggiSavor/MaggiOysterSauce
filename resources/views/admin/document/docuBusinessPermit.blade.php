@@ -46,12 +46,18 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
+                    <form method="post" action="{{URL::Route('addBusinessPermit')}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Name</label>
-                                    <input type="text" name="name" class="form-control" id="title">
+                                    <input type="text" name="name" class="form-control" id="title" list="resident" autocomplete="off">
                                 </div>
+                                <datalist id="resident">
+                                    @foreach($res as $resident)
+                                      <option>{{$resident['fullname']}}</option>
+                                    @endforeach
+                                </datalist>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Business Name</label>
                                     <input type="text" name="bname" class="form-control" id="title">
@@ -68,11 +74,14 @@
                                     <label class="control-label">OR Number</label>
                                     <input type="text" name="orNum" class="form-control" id="dname">
                                 </div>
+                                    <input type="hidden" name="dateExpired" class="form-control" id="dexp" value="">
                             </div>
                         </div> 
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="pull-right">
-                            <button id="print" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Save and Print</button>
+                            <button id="print" type="submit" name="tryy" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
                         </div>  
+                    </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -129,6 +138,17 @@
 
     
     <script src="../assets/js/bootstrap-toggle.js"></script>
+    <script>
+    $(document).ready(function(){
+        var mydateStart = new Date();
+        var monthStart = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"][mydateStart.getMonth()];
+        var start = monthStart + ' ' + mydateStart.getDate() + ', ' + (mydateStart.getFullYear() + 1);
+        
+        $('#dexp').val(start);
+
+    })
+    </script>
     <script type="text/javascript">
       $(document).ready(function(){
           $(document).ready(function() {
