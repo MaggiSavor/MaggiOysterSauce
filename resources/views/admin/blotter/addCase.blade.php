@@ -198,7 +198,12 @@
                         validators: {
                             notEmpty: {
                                 message: 'Please enter a value'
+                            },
+                            stringLength: {
+                                max: 250,
+                                message: 'Description must be less than 250 characters'
                             }
+                            
                         }
                     }
                 }

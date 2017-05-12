@@ -33,7 +33,7 @@
         <div id="page-wrapper" style="padding-top: 0%;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blotter List</h1>
+                    <h1 class="page-header">Letter of File Action</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                            Letter of File Action
+                            Blotter List
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -138,7 +138,7 @@
                   <!-- /.panel -->
                 </div>
                 <div id="printableArea{{$summons['case_id']}}" hidden style="position: absolute;">
-                    <img src="../assets/images/fileaction.jpg" style="height: 11in; width: 8.5in;">
+                    <img src="{{ URL::asset('assets/images/blotter.jpg') }}" style="height: 11in; width: 8.5in;">
                     <p style="position:absolute; left:28%; top:41.5%;">{{$summons['complainant_fullname']}}</p>
                     <p style="position:absolute; left:28%; top:44.5%;">{{$summons['defendant_fullname']}}</p>
                     <p style="position:absolute; left:20%; top:16%;">{{$summons['complainant_fullname']}}</p>

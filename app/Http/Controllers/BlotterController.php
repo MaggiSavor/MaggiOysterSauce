@@ -26,6 +26,34 @@ class BlotterController extends Controller
 	    return view('admin.blotter.addCase');
 	}
 
+	public function updateBlotter($id){
+	$update = Blotter::where('id', '=', $id)->first(); 
+	    return view('admin.blotter.updateBlotter')
+        	->with("update",$update);
+	}
+
+	public function editBlotter($id){
+		$edit = Request::all();
+	    $info = Blotter::find($id);
+	    $info['case_status'] = $edit['casestatus'];
+	    $info['summon_date'] = $edit['summondate'];
+	    $info['summon_time'] = $edit['summontime'];
+	    $info->save();
+
+	    $summon = Request::all();
+        $case = new CaseHistory;
+        $case['case_id'] = $summon['case_id'];
+        $case['complainant_fullname'] = $summon['cname'];
+        $case['defendant_fullname'] = $summon['dname'];
+        $case['case_title'] = $summon['case_title'];
+        $case['case_status'] = $summon['casestatus'];
+        $case['case_desc'] = $summon['reason'];
+        $case['issued'] = '';
+        $case->save();
+
+        return response()->json(array('success' =>'Successfully Saved!'));  
+	}
+
 	public function addBlotter(){
 	   $addBlotter = Request::all();
 	   
@@ -96,34 +124,34 @@ class BlotterController extends Controller
 	}
 
 	public function blotterAgreement(){
-		$agreement = Blotter::where('case_status', '!=', 'Case Closed' )
+		$summon = Blotter::where('case_status', '!=', 'Case Closed' )
 								->where('case_status', '!=', 'Dismissed')
 									->where('case_status', '!=', 'Turn Over')
 										->where('case_status', '!=', 'Transferred')->get();
 	    return view('admin.blotter.blotterAgreement')
-	    	->with('agreement', $agreement);
+	    	->with('summon', $summon);
 	}
 
 	public function summonPrint($id){
-		$summondetails = Blotter::where('case_id', '=', $id)->first();
+		$summondetails = Blotter::where('id', '=', $id)->first();
 	    return view('admin.blotter.blotterSummonPrint')
 	    	->with('summondetails', $summondetails);
 	}
 
 	public function fileActionPrint($id){
-		$fileaction = Blotter::where('case_id', '=', $id)->first();
+		$fileaction = Blotter::where('id', '=', $id)->first();
 	    return view('admin.blotter.blotterFileActionPrint')
 	    	->with('fileaction', $fileaction);
 	}
 
 	public function blotterDetailsPrints($id){
-		$details = Blotter::where('case_id', '=', $id)->first();
+		$details = Blotter::where('id', '=', $id)->first();
 	    return view('admin.blotter.blotterDetailsPrint')
 	    	->with('details', $details);
 	}
 
 	public function agreementPrint($id){
-		$agree = Blotter::where('case_id', '=', $id)->first();
+		$agree = Blotter::where('id', '=', $id)->first();
 	    return view('admin.blotter.blotterAgreementPrint')
 	    	->with('agree', $agree);
 	}
@@ -154,6 +182,20 @@ class BlotterController extends Controller
         $case['case_status'] = $summon['status'];
         $case['case_desc'] = 'Printing of Blotter Details';
         $case['issued'] = 'Blotter Details';
+        $case->save();
+        return response()->json(array('success' =>'Successfully Saved!'));
+	}
+
+	public function blotterAgreementsPrint(){
+		$summon = Request::all();
+        $case = new CaseHistory;
+        $case['case_id'] = $summon['caseID'];
+        $case['complainant_fullname'] = $summon['cname'];
+        $case['defendant_fullname'] = $summon['dname'];
+        $case['case_title'] = $summon['title'];
+        $case['case_status'] = $summon['status'];
+        $case['case_desc'] = 'sd';
+        $case['issued'] = 'Agreement Letter';
         $case->save();
         return response()->json(array('success' =>'Successfully Saved!'));
 	}

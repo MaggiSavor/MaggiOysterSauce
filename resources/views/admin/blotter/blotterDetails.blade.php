@@ -33,7 +33,7 @@
         <div id="page-wrapper" style="padding-top: 0%;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blotter List</h1>
+                    <h1 class="page-header">Blotter Details</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                            Blotter Details
+                            Blotter List
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -119,7 +119,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group col-md-12">
                                                     <label class="control-label">Case Details</label>
-                                                    <textarea name="cname" class="form-control" id="cname" style="height: 100px;" readonly="">{{$summons['case_description']}}</textarea>
+                                                    <textarea name="desc" class="form-control" id="desc" style="height: 100px;" readonly="">{{$summons['case_description']}}</textarea>
                                                 </div>
                                             </div>
                                             <input type="hidden" id="caseID" name="caseID" value="{{$summons['case_id']}}">

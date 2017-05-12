@@ -79,15 +79,15 @@
                                     @foreach($blotterLists as $blotterList)
                                     <tr class="data" style="cursor:pointer" data-toggle="tooltip" title="Click for more details!">
                                        <td></td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_id}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_type}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_title}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->complainant_fullname}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->defendant_fullname}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_status}}</td>
-                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->created_at}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->id}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->case_type}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->case_title}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->complainant_fullname}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->defendant_fullname}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->case_status}}</td>
+                                       <td data-toggle="modal" data-target="#myModal{{$blotterList['id']}}">{{$blotterList->created_at}}</td>
                                        <td>
-                                         <button class="btn btn-success btn-sm" type="button">Update</button>
+                                        <a href="{{URL::Route('updateBlotter', $blotterList['id'])}}"><button class="btn btn-success btn-sm" type="button">Update</button></a> 
                                        </td>
                                     </tr>
                                     @endforeach
@@ -107,11 +107,11 @@
         <!-- /#page-wrapper -->
         @foreach($blotterLists as $blotterList)
         <?php
-          $caseHist = CaseHistory::where('case_id', '=', $blotterList['case_id'])->get();
+          $caseHist = CaseHistory::where('case_id', '=', $blotterList['id'])->get();
         ?>
           
           <!-- Modal -->
-          <div class="modal fade" id="myModal{{$blotterList['case_id']}}" role="dialog">
+          <div class="modal fade" id="myModal{{$blotterList['id']}}" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -126,17 +126,17 @@
                       <div class="panel-body">
                           <!-- Nav tabs -->
                           <ul class="nav nav-tabs">
-                              <li class="active"><a href="#info{{$blotterList['case_id']}}" data-toggle="tab">Blotter Information</a>
+                              <li class="active"><a href="#info{{$blotterList['id']}}" data-toggle="tab">Blotter Information</a>
                               </li>
-                              <li><a href="#History{{$blotterList['case_id']}}" data-toggle="tab">History</a>
+                              <li><a href="#History{{$blotterList['id']}}" data-toggle="tab">History</a>
                               </li>
                           </ul>
 
                           <!-- Tab panes -->
                           <div class="tab-content">
-                              <div class="tab-pane fade in active" id="info{{$blotterList['case_id']}}">
+                              <div class="tab-pane fade in active" id="info{{$blotterList['id']}}">
                                   <div class="table-responsive card-box">
-                                    <h3>Case Number: {{$blotterList->case_id}}</h3>
+                                    <h3>Case Number: {{$blotterList->id}}</h3>
                                       <table class="table table-hover mails m-0 table table-actions-bar" width="100%">
                                         <thead>
                                           <tr>
@@ -212,8 +212,8 @@
                                       </table>
                                   </div>
                               </div>
-                              <div class="tab-pane fade" id="History{{$blotterList['case_id']}}">
-                                  <h3>Case Number: {{$blotterList->case_id}}</h3>
+                              <div class="tab-pane fade" id="History{{$blotterList['id']}}">
+                                  <h3>Case Number: {{$blotterList->id}}</h3>
                                   <hr/>
                                   
                                   <table class="table table-hover mails m-0 table table-actions-bar" width="100%">
