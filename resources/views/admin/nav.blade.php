@@ -208,7 +208,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                 @endforeach
                 <li style="display:{{$message}};">
                     <a class="text-center" >
-                        <strong>No Hearing Scheduled Today.</strong>
+                        <strong>No Summon Scheduled Today.</strong>
                         <i class=""></i>
                     </a>
                 </li>

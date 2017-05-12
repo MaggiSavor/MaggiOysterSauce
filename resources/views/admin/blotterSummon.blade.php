@@ -70,7 +70,7 @@
                                        <td>{{$summons['case_status']}}</td>
                                        <td>{{$summons['case_date']}}</td>
                                        <!-- <td><a href="{{URL::Route('summonPrint', $summons['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Reprint Summon Letter</button></a></td> -->
-                                       <td><button type="button" class="btn btn-success" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['case_id']}}"> <span class="glyphicon glyphicon-file"></span> Reprint Summon Letter</button></td>
+                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['case_id']}}" value="{{$summons['case_id']}}"> <span class="glyphicon glyphicon-file"></span> Reprint Summon Letter</button></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -87,9 +87,8 @@
         </div>
         <!-- /#page-wrapper -->
         @foreach($summon as $summons)
-          
-          <!-- Modal -->
-          <div class="modal fade" id="myModal{{$summons['case_id']}}" role="dialog">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal{{$summons['case_id']}}" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -101,28 +100,34 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="tab-pane fade in active" id="info{{$summons['case_id']}}">
-                                <div class="card-box">
-                                <h3>{{$summons['case_title']}}</h3>
-                                <h4><center>Case Number: {{$summons->case_id}}</center></h4>
-                                    <div class="col-md-12" style="padding-top: 5%;">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Complainant</label>
-                                            <input type="text" name="cname" class="form-control" id="cname" value="{{$summons['complainant_fullname']}}" readonly="">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Defendant</label>
-                                            <input type="text" name="dname" class="form-control" id="dname" value="{{$summons['defendant_fullname']}}" readonly="">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Summon Date</label>
-                                            <input type="text" name="sdate" class="form-control" id="sdate" value="{{$summons['summon_date']}}" readonly="">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Summon Time</label>
-                                            <input type="text" name="stime" class="form-control" id="stime" value="{{$summons['summon_time']}}" readonly="">
+                                <form id="blotter{{$summons['case_id']}}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="card-box">
+                                        <h3>{{$summons['case_title']}}</h3>
+                                        <h4><center>Case Number: {{$summons->case_id}}</center></h4>
+                                        <div class="col-md-12" style="padding-top: 5%;">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">Complainant</label>
+                                                <input type="text" name="cname" class="form-control" id="cname" value="{{$summons['complainant_fullname']}}" readonly="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">Defendant</label>
+                                                <input type="text" name="dname" class="form-control" id="dname" value="{{$summons['defendant_fullname']}}" readonly="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">Summon Date</label>
+                                                <input type="text" name="sdate" class="form-control" id="sdate" value="{{$summons['summon_date']}}" readonly="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">Summon Time</label>
+                                                <input type="text" name="stime" class="form-control" id="stime" value="{{$summons['summon_time']}}" readonly="">
+                                            </div>
+                                            <input type="hidden" id="caseID" name="caseID" value="{{$summons['case_id']}}">
+                                            <input type="hidden" name="title" value="{{$summons['case_title']}}">
+                                            <input type="hidden" name="status" value="{{$summons['case_status']}}">
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -144,11 +149,11 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" onclick="printDiv('printableArea{{$summons['case_id']}}')"><span class="glyphicon glyphicon-print"></span> Print</button>
+                    <button type="submit" id="print" class="btn btn-danger print" value="{{$summons['case_id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         @endforeach 
     </div>
     <!-- /#wrapper -->
@@ -178,28 +183,65 @@
       });
     </script>
     <script type="text/javascript">
-        //Get the HTML of whole page
+
         var oldPage = document.body.innerHTML;
+        $('.print').focus(function(e){
+           var caseID = $(this).val();
+           // e.preventDefault();
+           swal({
+             title: "Are you sure?",
+               text: "Once you click yes, it will be saved in the database even if you cancel printing.",
+               type: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#DD6B55",
+               confirmButtonText: "Yes",
+               closeOnConfirm: false,
+               closeOnCancel: false
+           },
+           function(isConfirm){
+             var transfer = $("#blotter"+caseID);
+             var dataString = transfer.serialize();
+             if(isConfirm){
+               $.ajax({
+                 method: 'POST',
+                 url: "{{URL::Route('blotterSummonPrint')}}",
+                 headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                 dataType: 'JSON',
+                 processData : false,
+                 data: dataString,
+                 success: function(data){
+                    if(data.success == "Successfully Saved!"){
+                        window.location.reload();
+                        swal("Saved!", "New case has been saved!", "success");
+                    }
 
-        function printDiv(divID) {
-            //Get the HTML of div
-            var divElements = document.getElementById(divID).innerHTML;
-            //Reset the page's HTML with div's HTML only
-            document.body.innerHTML = 
-              "<html><head><title></title></head><body>" + 
-              divElements + "</body>";
+                 },error: function(data){
+                    window.location.reload();
+                    swal("Something went wrong!");
+                 }
+               });
+               //Get the HTML of div
+               var divElements = document.getElementById('printableArea'+caseID).innerHTML;
+               //Reset the page's HTML with div's HTML only
+               document.body.innerHTML = 
+                 "<html><head><title></title></head><body>" + 
+                 divElements + "</body>";
 
-            //Print Page
-            window.print();
+               //Print Page
+               window.print();
 
-            //Restore orignal HTML
-            // history.go(0); 
-            document.body.innerHTML = oldPage;
-            window.location.reload();
+               //Restore orignal HTML
+               // history.go(0); 
+               // document.body.innerHTML = oldPage;
+               
+             }
+             else {
+               swal("Cancelled", "", "error");
+             }
+           });
 
-          
-        }
-        
+
+        })
     </script>
 
 </body>

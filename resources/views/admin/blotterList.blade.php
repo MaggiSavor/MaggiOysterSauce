@@ -232,7 +232,7 @@
                                             <tr class="">
                                               <td>{{$caseHis->case_status}}</td>
                                               <td>{{$caseHis->case_desc}}</td>
-                                              <td>{{$caseHis->status_date}}</td>
+                                              <td>{{$caseHis->created_at}}</td>
                                               <td>{{$caseHis->summon_date}}</td>
                                               <td>{{$caseHis->issued}}</td>
                                               <td><button class="btn btn-success btn-sm" type="button">Add Description</button></td>
