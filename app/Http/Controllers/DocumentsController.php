@@ -83,7 +83,7 @@ class DocumentsController extends Controller
 						->orderBy('term_year', 'desc')->first();
 		$kag7 = BarangayOfficial::where('position', '=', 'kagawad7')
 						->orderBy('term_year', 'desc')->first();
-		$permit = BusinessPermit::all();
+		$permit = BusinessPermit::distinct()->select('business_name')->groupBy('date_issued')->get();
 	    return view('admin.document.docuBusinessPermit')
 	    	->with('permit', $permit)
 	    		->with('res', $res)

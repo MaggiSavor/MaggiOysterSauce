@@ -88,7 +88,7 @@ class LoginController extends Controller
                 if(Auth::user()->user_type == "Admin"){
                     return Redirect::route('dashboard');
                 }else{
-                    return 'standard user';
+                    return Redirect::route('home');
                     // Alert::message("Error!", "Invalid Credentials", "error"); 
                     // return redirect('login');
                 }

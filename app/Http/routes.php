@@ -137,6 +137,31 @@ Route::group(['middleware' => ['auth']], function(){
 
 	});
 });
+Route::group(['middleware' => ['auth']], function(){
+	Route::group(array('prefix' => 'standard/'), function(){
+		Route::get('/home', array('uses' => 'StandardUserController@home', 'as' => 'home'));
+		Route::get('/resident', array('uses' => 'StandardUserController@resident', 'as' => 'resident'));
+		Route::get('/resident_list', array('uses' => 'StandardUserController@residentList', 'as' => 'residentList'));
+		Route::get('/household_list', array('uses' => 'StandardUserController@householdList', 'as' => 'householdList'));
+		Route::get('/family_list', array('uses' => 'StandardUserController@familyList', 'as' => 'familyList'));
+		Route::get('/female_list', array('uses' => 'StandardUserController@femaleList', 'as' => 'femaleList'));
+		Route::get('/male_list', array('uses' => 'StandardUserController@maleList', 'as' => 'maleList'));
+		Route::get('/voter_list', array('uses' => 'StandardUserController@voterList', 'as' => 'voterList'));
+		Route::get('/senior_list', array('uses' => 'StandardUserController@seniorList', 'as' => 'seniorList'));
+		Route::get('/transferred_list', array('uses' => 'StandardUserController@transferredList', 'as' => 'transferredList'));
+		Route::get('/documents_list', array('uses' => 'StandardUserController@documentsList', 'as' => 'documentsList'));
+		Route::get('/certificate_list', array('uses' => 'StandardUserController@certificateList', 'as' => 'certificateList'));
+		Route::get('/good_moral_list', array('uses' => 'StandardUserController@goodMoralList', 'as' => 'goodMoralList'));
+		Route::get('/indigency_list', array('uses' => 'StandardUserController@indigencyList', 'as' => 'indigencyList'));
+		Route::get('/barangay_id_list', array('uses' => 'StandardUserController@idList', 'as' => 'idList'));
+		Route::get('/business_permit_list', array('uses' => 'StandardUserController@permitList', 'as' => 'permitList'));
+		Route::get('/blotter_list', array('uses' => 'StandardUserController@blotterList', 'as' => 'blotterList'));
+		Route::get('/officials', array('uses' => 'StandardUserController@officials', 'as' => 'officials'));
+		Route::get('/officials_history', array('uses' => 'StandardUserController@officialsHistory', 'as' => 'officialsHistory'));
+		Route::get('/get_officials', array('uses' => 'StandardUserController@getOfficials', 'as' => 'getOfficials'));
+		Route::get('/valid_resident', array('uses' => 'StandardUserController@validResident', 'as' => 'validResident'));
+	});
+});
 Route::group(['middleware' => ['guest']], function(){
 	Route::get('/login', array('uses' => 'LoginController@login', 'as' => 'login'));
 	Route::get('/reset_options', array('uses' => 'LoginController@resetOptions', 'as' => 'resetOptions'));
