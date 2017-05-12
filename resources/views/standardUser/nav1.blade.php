@@ -241,13 +241,13 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="{{URL::Route('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="{{URL::Route('home1')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Residents<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{URL::Route('resident')}}">View Residents</a>
+                            <a href="{{URL::Route('resident1')}}">View Residents</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -256,10 +256,10 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-table fa-fw"></i> Officials<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{URL::Route('officials')}}">View Officials</a>
+                            <a href="{{URL::Route('officials1')}}">View Officials</a>
                         </li>
                         <li>
-                            <a href="{{URL::Route('officialsHistory')}}">Officials History</a>
+                            <a href="{{URL::Route('officialsHistory1')}}">Officials History</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -268,7 +268,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-edit fa-fw"></i> Blotter<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{URL::Route('blotterList')}}">View Blotter</a>
+                            <a href="{{URL::Route('blotterList1')}}">View Blotter</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -277,7 +277,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> Documents<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{URL::Route('documentsList')}}">Issued Documents</a>
+                            <a href="{{URL::Route('documentsList1')}}">Issued Documents</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

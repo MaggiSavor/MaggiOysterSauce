@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{URL::Route('residentList')}}">
+                            <a href="{{URL::Route('residentList1')}}">
                                 <div class="panel-footer" style="color:#002a40;">
                                     <span class="pull-left">View List</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{URL::Route('householdList')}}">
+                            <a href="{{URL::Route('householdList1')}}">
                                 <div class="panel-footer" style="color:#002a40;">
                                     <span class="pull-left">View List</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{URL::Route('familyList')}}">
+                            <a href="{{URL::Route('familyList1')}}">
                                 <div class="panel-footer" style="color:#002a40;">
                                     <span class="pull-left">View List</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::Route('femaleList')}}">
+                        <a href="{{URL::Route('femaleList1')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::Route('maleList')}}">
+                        <a href="{{URL::Route('maleList1')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -159,7 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::Route('voterList')}}">
+                        <a href="{{URL::Route('voterList1')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::Route('seniorList')}}">
+                        <a href="{{URL::Route('seniorList1')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::Route('transferredList')}}">
+                        <a href="{{URL::Route('transferredList1')}}">
                             <div class="panel-footer" style="color:#002a40;">
                                 <span class="pull-left">View List</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

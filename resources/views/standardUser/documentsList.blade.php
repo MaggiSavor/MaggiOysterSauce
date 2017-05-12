@@ -42,7 +42,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('certificateList')}}" class="">
+                            <a href="{{URL::Route('certificateList1')}}" class="">
                                 <div class="img" style="width: 100%; height:10%;"><img src="../assets/images/bclogo.jpg" alt="6"></div>
                             </a>
                         </div>
@@ -51,7 +51,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('goodMoralList')}}" class="">
+                            <a href="{{URL::Route('goodMoralList1')}}" class="">
                                 <div class="img"><img src="../assets/images/gmlogo.jpg" alt="6"></div>
                             </a>
                         </div>
@@ -60,7 +60,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('indigencyList')}}" class="">
+                            <a href="{{URL::Route('indigencyList1')}}" class="">
                                 <div class="img"><img src="../assets/images/coilogo.jpg" alt="6"></div>
                             </a>
                         </div>
@@ -69,7 +69,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('idList')}}" class="">
+                            <a href="{{URL::Route('idList1')}}" class="">
                                 <div class="img"><img src="../assets/images/bidlogo.jpg" alt="6"></div>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div style="width: 100%; height:100%;" class="panel-body ih-item square effect13 left_to_right">
-                            <a href="{{URL::Route('permitList')}}" class="">
+                            <a href="{{URL::Route('permitList1')}}" class="">
                                 <div class="img"><img src="../assets/images/bpermitlogo.jpg" alt="6"></div>
                             </a>
                         </div>
