@@ -17,6 +17,11 @@ use Redirect;
 class AdminController extends Controller
 {
 	public function dashboard(){
+		$myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+		$date = date("Y-m-d");
+
+		$result = Resident::where('resident_status','=','Active')->whereBetween('created_at', [$myDate, $date])->count();
+
 	   	$resident = Resident::where('resident_status', '=', 'Active')->count();
 		$male = Resident::where('gender', '=', 'Male')
 							->where('resident_status', '=', 'Active')->count();
@@ -59,7 +64,8 @@ class AdminController extends Controller
 							    							->with('swindling',$swindling)
 							    								->with('sexual',$sexual)
 							    									->with('murder',$murder)
-							    										->with('illegal',$illegal);
+							    										->with('illegal',$illegal)
+							    											->with('result',$result);
 	}
 
 	public function settings(){

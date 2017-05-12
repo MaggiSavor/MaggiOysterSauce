@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::post('/register_user', array('uses' => 'LoginController@registerUser', 'as' => 'registerUser'));
 
 		//Resident
+		Route::get('/new_resident', array('uses' => 'ResidentController@newResidents', 'as' => 'newResidents'));
 		Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));
 		Route::get('/add_resident', array('uses' => 'ResidentController@addResident', 'as' => 'addResident'));
 		Route::post('/save_resident', array('uses' => 'ResidentController@saveResident', 'as' => 'saveResident'));

@@ -8,6 +8,15 @@ use Redirect;
 
 class ResidentController extends Controller
 {
+	public function newResidents(){
+		$myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+		$date = date("Y-m-d");
+
+		$residentInfo = Resident::where('resident_status','=','Active')->whereBetween('created_at', [$myDate, $date])->get();
+
+	    return view('admin.newResidentList')
+	    	->with('residentInfo', $residentInfo);
+	}
 	public function resident(){
 		$allResident = Resident::where('resident_status','=','Active')->count();
 		$household = Resident::where('resident_status','=','Active')
