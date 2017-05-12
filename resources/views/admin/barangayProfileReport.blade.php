@@ -41,7 +41,7 @@
             </div>
             <div class="row" style="padding-bottom: 5%;">
                 <div class="col-lg-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-success" id="printableArea">
                         <div class="panel-heading">
                             Graphical Representation / Barangay Profile
                         </div>
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <button type="reset" class="btn btn-danger" name="reset" id="reset"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                    <button type="submit" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
                                     
                                 </div>
                             </div>
@@ -149,6 +149,30 @@
         }
 
         graphDonut( ['#5ea9e8', '#5ee89d', '#e5484f', '#ffc0c0', '#fff867', '#fba16c','#4eeed3'] );
+    </script>
+    <script type="text/javascript">
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+              "<html><head><title></title></head><body>" + 
+              divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            // history.go(0); 
+            document.body.innerHTML = oldPage;
+            window.location.reload();
+
+          
+        }
+        
     </script>
 
 </body>

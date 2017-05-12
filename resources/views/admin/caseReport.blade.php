@@ -42,7 +42,7 @@
             </div>
             <div class="row" style="padding-bottom: 5%;">
               <div class="col-lg-12">
-                <div class="panel panel-success">
+                <div class="panel panel-success" id="printableArea">
                     <div class="panel-heading">
                         Graphical Representation / Case
                     </div>
@@ -70,7 +70,7 @@
                                     <div id="morris-bar-chart" style="width:120%"></div>
                                 </div>
                                 <div class="card-box pull-right" style="background-color: #eeeeee;">
-                                    <table class="table table-hover mails m-0 table table-actions-bar">
+                                    <table class="table table-hover mails m-0 table table-actions-bar" id="case1">
                                         <thead>
                                             <tr>
                                                 <th>Total number of</th>
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="pull-right">
-                                <button type="reset" class="btn btn-danger" name="reset" id="reset"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                <button type="submit" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
                                 
                             </div>
                         </div>
@@ -191,6 +191,7 @@
                            <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="case">
                                <thead>
                                    <tr>
+                                    <th> </th>
                                     <th>Case ID</th>
                                     <th>Case Title</th>
                                     <th>Complainant Name</th>
@@ -205,11 +206,11 @@
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
+                                    <td>-</td>
                                 </tr> 
                                </tbody>
                            </table>
-                           <button type="submit" class="btn btn-danger btn-small btn pull-right">
-                            <span class = "glyphicon glyphicon-print"> Print</span>
+                           
                            <!-- /.table-responsive -->
                        </div>
                        <!-- /.panel-body -->
@@ -338,6 +339,7 @@
                for(i=0; i< data.case.length; i++){
                 if(data.case.length != 0){
                   $('#case').dataTable().fnAddData([
+                        '<td></td>',
                         data.case[i]['case_id'],
                         data.case[i]['case_title'],
                         data.case[i]['complainant_fullname'],
@@ -383,6 +385,7 @@
                  // console.log(data[i]['id'])
                 if(data.all.length != 0){
                   $('#case').dataTable().fnAddData([
+                      '<td></td>',
                       data.all[i]['case_id'],
                       data.all[i]['case_title'],
                       data.all[i]['complainant_fullname'],
@@ -409,6 +412,7 @@
                  // console.log(data[i]['id'])
                 if(data.case.length != 0){
                   $('#case').dataTable().fnAddData([
+                      '<td></td>',
                       data.case[i]['case_id'],
                       data.case[i]['case_title'],
                       data.case[i]['complainant_fullname'],
@@ -426,27 +430,78 @@
          }) 
     </script>
     <script type="text/javascript">
-      $(document).ready(function(){
-          $(document).ready(function() {
-            var t = $('#case').DataTable({
-                responsive: true,
-                searchHighlight: true,
-                "columnDefs": [
-                    { 
-                      "sortable" : false, 
-                      "searchable": false,
-                      "targets": 0
+      $(document).ready(function() {
+        var t = $('#case').DataTable({
+                    "dom": "lBfrtip",
+            responsive: true,
+            searchHighlight: true,
+            "columnDefs": [
+                { 
+                  "sortable" : false, 
+                  "searchable": false,
+                  "targets": [0]
+                }
+            ],
+            "order": [[ 1, 'asc' ]],
+            buttons: 
+            [
+            {
+              text: '<i class="fa fa-print"></i> PRINT ',
+              extend: 'print',
+                  exportOptions: {
+                    modifier: {
+                        page: 'current'
                     }
-                ],
-                "order": [[ 1, 'asc' ]]
-            });
-            t.on( 'order.dt search.dt', function () {
-                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                    cell.innerHTML = i+1;
-                } );
-            } ).draw();
+                  },  
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend(
+                            
+                          '<img src="{{ URL::asset("assets/images/header.jpg") }}" style="display: block; width:100%;" />'
+                        ).find('table').addClass('printer');
+      
+                    // $(win.document.body).find( 'table' )
+                    //     .addClass( 'compact' )
+                    //     .removeClass('table-hover table-striped table-actions-bar')
+                    //     .css( {'background-color': 'none', 'background': 'url("http://localhost:8000/assets/images/avatar.png")', });
+                }
+
+            }
+            ],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+
       });
+    </script>
+
+     <script type="text/javascript">
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+              "<html><head><title></title></head><body>" + 
+              divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            // history.go(0); 
+            document.body.innerHTML = oldPage;
+            window.location.reload();
+
+          
+        }
+        
     </script>
 
     
