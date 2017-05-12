@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+<style type="">
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
+@media print {
+    td {width: 1500%}
+}
+
+
+</style>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +24,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="print.css" media="print" />
+
 
     <title>BRIMS - Barangay Profile Report</title>
 
@@ -41,7 +55,8 @@
             </div>
             <div class="row" style="padding-bottom: 5%;">
                 <div class="col-lg-12">
-                    <div class="panel panel-success" id="printableArea">
+                    <div class="panel panel-success" id="printableArea" >
+                    <img src="../assets/images/header.jpg" hidden>
                         <div class="panel-heading">
                             Graphical Representation / Barangay Profile
                         </div>
@@ -62,10 +77,11 @@
                                     </div>
 
                                     <div class="col-lg-8">
+
                                         <div id="pie-chart"></div>
                                     </div>
                                     <div class="card-box pull-right" style="background-color: #eeeeee;">
-                                        <table class="table table-hover mails m-0 table table-actions-bar">
+                                        <table class="table table-hover mails m-0 table table-actions-bar" id="">
                                             <thead>
                                                 <tr>
                                                     <th>Total number of</th>
@@ -106,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <button type="submit" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                    <button type="submit" id="printPageButton" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
                                     
                                 </div>
                             </div>
@@ -173,6 +189,55 @@
           
         }
         
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var t = $('#kkk').DataTable({
+                    "dom": "lBfrtip",
+            responsive: false,
+            searchHighlight: false,
+            "columnDefs": [
+                { 
+                  "sortable" : false, 
+                  "searchable": false,
+                  "targets": [0]
+                }
+            ],
+            "order": [[ 1, 'asc' ]],
+            buttons: 
+            [
+            {
+              text: '<i class="fa fa-print"></i> PRINT ',
+              extend: 'print',
+                  exportOptions: {
+                    modifier: {
+                        page: 'current'
+                    }
+                  },  
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend(
+                            
+                          '<img src="{{ URL::asset("assets/images/header.jpg") }}" style="display: block; width:100%;" />'
+                        ).find('table').addClass('printer');
+      
+                    // $(win.document.body).find( 'table' )
+                    //     .addClass( 'compact' )
+                    //     .removeClass('table-hover table-striped table-actions-bar')
+                    //     .css( {'background-color': 'none', 'background': 'url("http://localhost:8000/assets/images/avatar.png")', });
+                }
+
+            }
+            ],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        });
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+
+      });
     </script>
 
 </body>

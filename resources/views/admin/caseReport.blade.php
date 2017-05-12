@@ -3,6 +3,18 @@
 
 <head>
 
+<style type="">
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
+@media print {
+    td {width: 1500%}
+}
+
+</style>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +24,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="print.css" media="print" />
 
     <title>BRIMS - Case Report</title>
 
@@ -127,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
+                                <button id="printPageButton" type="submit" class="btn btn-danger" onclick="printDiv('printableArea')"><span class="glyphicon glyphicon-print"></span> Print</button>
                                 
                             </div>
                         </div>
@@ -340,7 +353,7 @@
                 if(data.case.length != 0){
                   $('#case').dataTable().fnAddData([
                         '<td></td>',
-                        data.case[i]['case_id'],
+                        data.case[i]['id'],
                         data.case[i]['case_title'],
                         data.case[i]['complainant_fullname'],
                         data.case[i]['defendant_fullname'],
@@ -386,7 +399,7 @@
                 if(data.all.length != 0){
                   $('#case').dataTable().fnAddData([
                       '<td></td>',
-                      data.all[i]['case_id'],
+                      data.all[i]['id'],
                       data.all[i]['case_title'],
                       data.all[i]['complainant_fullname'],
                       data.all[i]['defendant_fullname'],
@@ -413,7 +426,7 @@
                 if(data.case.length != 0){
                   $('#case').dataTable().fnAddData([
                       '<td></td>',
-                      data.case[i]['case_id'],
+                      data.case[i]['id'],
                       data.case[i]['case_title'],
                       data.case[i]['complainant_fullname'],
                       data.case[i]['defendant_fullname'],
