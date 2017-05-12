@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{!! asset('assets/sweetalert-master/dist/sweetalert.css')!!}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet"/>
 
-    <title>Add Officials</title>
+    <title>BRIMS - Add Officials</title>
 
 
 </head>
@@ -20,7 +20,6 @@
 <body>
 
     <div id="wrapper">
-
         <!-- Navigation -->
         @include('admin.nav')
 
@@ -32,83 +31,85 @@
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row" style="padding-bottom: 5%;">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        New Barangay Officials
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <form method="post" id="addOfficials">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group col-md-4">
-                                        <label class="control-label">Term Start Year</label>
-                                        <input type="text" name="startyear" class="form-control input-xs"  id="InputStart" placeholder="Term Start Year" value="<?php echo date('Y'); ?>" readonly>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label class="control-label">Term End Year</label>
-                                        <input type="text" name="endyear" class="form-control input-xs" id="InputEnd" placeholder="Term End Year" value="<?php echo date('Y')+3; ?>" readonly>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="termYear" id="term">
-                                <div class="col-md-12">
-                                    <h3 class="pull-left" style="margin-left: 10px">Barangay Officials</h3>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Chairman</label>
-                                        <input type="text" name="chairman" class="form-control" id="Chairman" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Secretary</label>
-                                        <input type="text" name="secretary" class="form-control" id="Secretary" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Treasurer</label>
-                                        <input type="text" name="treasurer" class="form-control"  id="Treasurer" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad1</label>
-                                        <input type="text" name="kag1" class="form-control" id="Kag1" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad2</label>
-                                        <input type="text" name="kag2" class="form-control" id="Kag2" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad3</label>
-                                        <input type="text" name="kag3" class="form-control" id="Kag3" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad4</label>
-                                        <input type="text" name="kag4" class="form-control" id="Kag4" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad5</label>
-                                        <input type="text" name="kag5" class="form-control" id="Kag5" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad6</label>
-                                        <input type="text" name="kag6" class="form-control" id="Kag6" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Brgy Kagawad7</label>
-                                        <input type="text" name="kag7" class="form-control" id="Kag7" placeholder="Full Name" list="selectOfficials" autocomplete="off">
-                                    </div>
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <div class="col-xs-12">
-                                        <button type="submit" id="addOff" class="btn btn-success btn-rounded btn-small btn pull-right"><span class = "glyphicon glyphicon-plus"></span> Add Officials</button>
-                                    </div>
-                                </div>
-                            </div>
-                                <datalist id="selectOfficials">
-                                    @foreach($officials as $off)
-                                      <option>{{$off['fullname']}}</option>
-                                    @endforeach
-                                </datalist>
-                        </form>
-                    </div>
-                    <!-- /.panel-body -->
+                <div class="col-lg-12">
+                  <div class="panel panel-success">
+                      <div class="panel-heading">
+                          New Barangay Officials
+                      </div>
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                          <form method="post" id="addOfficials">
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="form-group col-md-4">
+                                          <label class="control-label">Term Start Year</label>
+                                          <input type="text" name="startyear" class="form-control input-xs"  id="InputStart" placeholder="Term Start Year" value="<?php echo date('Y'); ?>" readonly>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                          <label class="control-label">Term End Year</label>
+                                          <input type="text" name="endyear" class="form-control input-xs" id="InputEnd" placeholder="Term End Year" value="<?php echo date('Y')+3; ?>" readonly>
+                                      </div>
+                                  </div>
+                                  <input type="hidden" name="termYear" id="term">
+                                  <div class="col-md-12">
+                                      <h3 class="pull-left" style="margin-left: 10px">Barangay Officials</h3>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Chairman</label>
+                                          <input type="text" name="chairman" class="form-control" id="Chairman" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Secretary</label>
+                                          <input type="text" name="secretary" class="form-control" id="Secretary" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Treasurer</label>
+                                          <input type="text" name="treasurer" class="form-control"  id="Treasurer" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad1</label>
+                                          <input type="text" name="kag1" class="form-control" id="Kag1" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad2</label>
+                                          <input type="text" name="kag2" class="form-control" id="Kag2" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad3</label>
+                                          <input type="text" name="kag3" class="form-control" id="Kag3" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad4</label>
+                                          <input type="text" name="kag4" class="form-control" id="Kag4" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad5</label>
+                                          <input type="text" name="kag5" class="form-control" id="Kag5" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad6</label>
+                                          <input type="text" name="kag6" class="form-control" id="Kag6" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label class="control-label">Brgy Kagawad7</label>
+                                          <input type="text" name="kag7" class="form-control" id="Kag7" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                      </div>
+                                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                      <div class="col-xs-12">
+                                          <button type="submit" id="addOff" class="btn btn-success btn-rounded btn-small btn pull-right"><span class = "glyphicon glyphicon-plus"></span> Add Officials</button>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <datalist id="selectOfficials">
+                                      @foreach($officials as $off)
+                                        <option>{{$off['fullname']}}</option>
+                                      @endforeach
+                                  </datalist>
+                          </form>
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
                 </div>
             </div>        
         </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ID Report</title>
+    <title>BRIMS - ID Report</title>
 
     
 
@@ -38,11 +38,12 @@
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row" style="padding-bottom: 5%;">
+              <div class="col-lg-12">
                 <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Barangay ID
-                    </div>
-                    <!-- /.panel-heading -->
+                  <div class="panel-heading">
+                      Barangay ID
+                  </div>
+                  <!-- /.panel-heading -->
                   <form method="get">
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -101,10 +102,12 @@
                            </table>
                            <button type="submit" class="btn btn-danger btn-small btn pull-right">
                             <span class = "glyphicon glyphicon-print"> Print</span>
+                            </button>
                            <!-- /.table-responsive -->
                        </div>
                        <!-- /.panel-body -->
                 </div>
+              </div>
             </div>        
         </div>
         <!-- /#page-wrapper -->

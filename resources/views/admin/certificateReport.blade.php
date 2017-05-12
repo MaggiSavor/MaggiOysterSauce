@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Certificate</title>
+    <title>BRIMS - Certificate</title>
 
     
 
@@ -37,71 +37,74 @@
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row" style="padding-bottom: 5%;">
+              <div class="col-lg-12">
                 <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Certificate
-                    </div>
+                  <div class="panel-heading">
+                      Certificate
+                  </div>
                     <!-- /.panel-heading -->
                   <form method="get" action="{{URL::Route('certDate')}}">
                     <div class="panel-body">
-                        <div class="col-md-12">
-                            <div class="form-group col-md-4">
-                                <label for="InputStart">Start Date</label>
-                                <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="InputStart">End Date</label>
-                                <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="InputStart">Filter</label>
-                                <div class="dropdown">
-                                  <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
-                                    aria-haspopup="true" 
-                                    aria-expanded="true">
-                                    --
-                                    Select--
-                                    <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
-                                        <li id="cert" value="Certificate"><a href="#">Certificate</a></li>
-                                        <li id="goodMoral" value="Good Moral"><a href="#">Good Moral</a></li>
-                                        <li id="indigency" value="Indigency"><a href="#">Indigency</a></li>
-                                  </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                                <button type="button" id="generate" class="btn btn-warning" >Generate</button>
-                            </div>
+                      <div class="col-md-12">
+                          <div class="form-group col-md-4">
+                              <label for="InputStart">Start Date</label>
+                              <input type="date" id="dateStart" name="dateStart" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label for="InputStart">End Date</label>
+                              <input type="date" id="dateEnd" name="dateEnd" min="1954-10-01" max="<?php echo date('Y-m-d');?>" class="form-control"/>
+                          </div>
+                          <div class="form-group col-md-4">
+                          <label for="InputStart">Filter</label>
+                              <div class="dropdown">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="filter" data-toggle="dropdown"
+                                  aria-haspopup="true" 
+                                  aria-expanded="true">
+                                  --
+                                  Select--
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="selectFilter">
+                                      <li id="cert" value="Certificate"><a href="#">Certificate</a></li>
+                                      <li id="goodMoral" value="Good Moral"><a href="#">Good Moral</a></li>
+                                      <li id="indigency" value="Indigency"><a href="#">Indigency</a></li>
+                                </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="pull-right">
+                        <button type="button" id="generate" class="btn btn-warning" >Generate</button>
+                      </div>
                     </div>
                   </form>
                     <hr>
-                    <!-- /.panel-body -->
-                    <div class="panel-body">
+                  <!-- /.panel-body -->
+                  <div class="panel-body">
                     <h3 class="title">Certificate Report </h3>
-                           <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="certificate">
-                               <thead>
-                                   <tr>
-                                    <th>Certificate ID</th>
-                                    <th>Name</th>
-                                    <th>Date Issued</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr> 
-                               </tbody>
-                           </table>
-                           <button type="submit" class="btn btn-danger btn-small btn pull-right">
-                            <span class = "glyphicon glyphicon-print"> Print</span>
-                           <!-- /.table-responsive -->
-                       </div>
-                       <!-- /.panel-body -->
+                      <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="certificate">
+                        <thead>
+                          <tr>
+                            <th>Certificate ID</th>
+                            <th>Name</th>
+                            <th>Date Issued</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                          </tr> 
+                        </tbody>
+                      </table>
+                      <button type="submit" class="btn btn-danger btn-small btn pull-right">
+                        <span class = "glyphicon glyphicon-print"> Print</span>
+                      </button>
+                     <!-- /.table-responsive -->
+                  </div>
+                   <!-- /.panel-body -->
                 </div>
+              </div>
             </div>        
         </div>
         <!-- /#page-wrapper -->

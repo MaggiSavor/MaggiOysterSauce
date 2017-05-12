@@ -7,33 +7,33 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <style type="text/css">
-      .modal-dialog{
-          overflow-y: initial !important
-      }
-      .modal-body{
-          height: 400px;
-          overflow-y: auto;
-      }
-      .data:hover{
-          color:red;
-      }
-    </style>
-    <title>Blotter List</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<style type="text/css">
+  .modal-dialog{
+      overflow-y: initial !important
+  }
+  .modal-body{
+      height: 400px;
+      overflow-y: auto;
+  }
+  .data:hover{
+      color:red;
+  }
+</style>
+<title>BRIMS - Blotter List</title>
 
-    
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 </head>
 
@@ -77,7 +77,7 @@
                                </thead>
                                <tbody>
                                     @foreach($blotterLists as $blotterList)
-                                    <tr class="data" style="cursor:pointer">
+                                    <tr class="data" style="cursor:pointer" data-toggle="tooltip" title="Click for more details!">
                                        <td></td>
                                        <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_id}}</td>
                                        <td data-toggle="modal" data-target="#myModal{{$blotterList['case_id']}}">{{$blotterList->case_type}}</td>
@@ -257,39 +257,39 @@
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
         @endforeach  
     </div>
     <!-- /#wrapper -->
 
     
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../assets/raphael/raphael.min.js"></script>
-    <script src="../assets/morrisjs/morris.min.js"></script>
-    <script src="../assets/data/morris-data.js"></script>
-    <script type="text/javascript">
-        
-        $(document).ready(function() {
-            var t = $('#dataTables-example').DataTable({
-                responsive: true,
-                searchHighlight: true,
-                "columnDefs": [
-                    { 
-                      "sortable" : false, 
-                      "searchable": false,
-                      "targets": 8
-                    }
-                ],
-                "order": [[ 1, 'asc' ]]
-            });
-            t.on( 'order.dt search.dt', function () {
-                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                    cell.innerHTML = i+1;
-                } );
-            } ).draw();
-        });
-    </script>
+<!-- Morris Charts JavaScript -->
+<script src="../assets/raphael/raphael.min.js"></script>
+<script src="../assets/morrisjs/morris.min.js"></script>
+<script src="../assets/data/morris-data.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+      var t = $('#dataTables-example').DataTable({
+          responsive: true,
+          searchHighlight: true,
+          "columnDefs": [
+              { 
+                "sortable" : false, 
+                "searchable": false,
+                "targets": 8
+              }
+          ],
+          "order": [[ 1, 'asc' ]]
+      });
+      t.on( 'order.dt search.dt', function () {
+          t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+              cell.innerHTML = i+1;
+          } );
+      } ).draw();
+  });
+</script>
 
 </body>
 

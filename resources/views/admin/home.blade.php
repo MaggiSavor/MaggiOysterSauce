@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard</title>
+    <title>BRIMS - Dashboard</title>
 
     
 
@@ -130,174 +130,172 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="row" style="padding-bottom: 5%;">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Graphical Representation / Barangay Profile
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">      
-                            <div class='col-md-12'>
-                                <div class='card-box'>
-                                  <input type="hidden" id="resident" value="{{$resident}}">
-                                  <input type="hidden" id="male" value="{{$male}}">
-                                  <input type="hidden" id="female" value="{{$female}}">
-                                  <input type="hidden" id="senior" value="{{$senior}}">
-                                  <input type="hidden" id="voter" value="{{$voter}}">
-                                  <input type="hidden" id="household" value="{{$household['household_id']}}">
-                                  <input type="hidden" id="family" value="{{$family['family_id']}}">
-                                    <h4 class='text-dark header-title m-t-0'>Residents Population</h4>
-                                    
-                                </div>
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Graphical Representation / Barangay Profile
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="form-group">      
+                                <div class='col-md-12'>
+                                    <div class='card-box'>
+                                      <input type="hidden" id="resident" value="{{$resident}}">
+                                      <input type="hidden" id="male" value="{{$male}}">
+                                      <input type="hidden" id="female" value="{{$female}}">
+                                      <input type="hidden" id="senior" value="{{$senior}}">
+                                      <input type="hidden" id="voter" value="{{$voter}}">
+                                      <input type="hidden" id="household" value="{{$household['household_id']}}">
+                                      <input type="hidden" id="family" value="{{$family['family_id']}}">
+                                        <h4 class='text-dark header-title m-t-0'>Residents Population</h4>
+                                        
+                                    </div>
 
-                                <div class="col-lg-8">
-                                    <div id="pie-chart"></div>
-                                </div>
-                                <div class="card-box pull-right" style="background-color: #eeeeee;">
-                                    <table class="table table-hover mails m-0 table table-actions-bar">
-                                        <thead>
-                                            <tr>
-                                                <th>Total number of</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>Resident Population</strong></td>
-                                                <td><i>{{$resident}}</i></td>   
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Male</strong></td>
-                                                <td><i>{{$male}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Female</strong></td>
-                                                <td><i>{{$female}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Senior Citizen</strong></td>
-                                                <td><i>{{$senior}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Voters</strong></td>
-                                                <td><i>{{$voter}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Number of Household</strong></td>
-                                                <td><i>{{$household['household_id']}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Number of Family</strong></td>
-                                                <td><i>{{$family['family_id']}}</i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="col-lg-8">
+                                        <div id="pie-chart"></div>
+                                    </div>
+                                    <div class="card-box pull-right" style="background-color: #eeeeee;">
+                                        <table class="table table-hover mails m-0 table table-actions-bar">
+                                            <thead>
+                                                <tr>
+                                                    <th>Total number of</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Resident Population</strong></td>
+                                                    <td><i>{{$resident}}</i></td>   
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Male</strong></td>
+                                                    <td><i>{{$male}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Female</strong></td>
+                                                    <td><i>{{$female}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Senior Citizen</strong></td>
+                                                    <td><i>{{$senior}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Voters</strong></td>
+                                                    <td><i>{{$voter}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Number of Household</strong></td>
+                                                    <td><i>{{$household['household_id']}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Number of Family</strong></td>
+                                                    <td><i>{{$family['family_id']}}</i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                </div> 
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Graphical Representation / Case
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="form-group">      
+                                <div class='col-md-12'>
+                                    <div class='card-box'>
+                                      <input type="hidden" id="alarms" value="{{$alarms}}">
+                                      <input type="hidden" id="false" value="{{$false}}">
+                                      <input type="hidden" id="physical" value="{{$physical}}">
+                                      <input type="hidden" id="abandonment" value="{{$abandonment}}">
+                                      <input type="hidden" id="tresspass" value="{{$tresspass}}">
+                                      <input type="hidden" id="threats" value="{{$threats}}">
+                                      <input type="hidden" id="theft" value="{{$theft}}">
+                                      <input type="hidden" id="swindling" value="{{$swindling}}">
+                                      <input type="hidden" id="sexual" value="{{$sexual}}">
+                                      <input type="hidden" id="murder" value="{{$murder}}">
+                                      <input type="hidden" id="illegal" value="{{$illegal}}">
+                                        <h4 class='text-dark header-title m-t-0'>Case Rate</h4>
+                                        
+                                    </div>
 
-                <div class="row" style="padding-bottom: 5%;">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Graphical Representation / Case
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">      
-                            <div class='col-md-12'>
-                                <div class='card-box'>
-                                  <input type="hidden" id="alarms" value="{{$alarms}}">
-                                  <input type="hidden" id="false" value="{{$false}}">
-                                  <input type="hidden" id="physical" value="{{$physical}}">
-                                  <input type="hidden" id="abandonment" value="{{$abandonment}}">
-                                  <input type="hidden" id="tresspass" value="{{$tresspass}}">
-                                  <input type="hidden" id="threats" value="{{$threats}}">
-                                  <input type="hidden" id="theft" value="{{$theft}}">
-                                  <input type="hidden" id="swindling" value="{{$swindling}}">
-                                  <input type="hidden" id="sexual" value="{{$sexual}}">
-                                  <input type="hidden" id="murder" value="{{$murder}}">
-                                  <input type="hidden" id="illegal" value="{{$illegal}}">
-                                    <h4 class='text-dark header-title m-t-0'>Case Rate</h4>
-                                    
-                                </div>
-
-                                <div class="col-lg-8">
-                                    <div id="morris-bar-chart" style="width:120%"></div>
-                                </div>
-                                <div class="card-box pull-right" style="background-color: #eeeeee;">
-                                    <table class="table table-hover mails m-0 table table-actions-bar">
-                                        <thead>
-                                            <tr>
-                                                <th>Total number of</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>Alarms and Scandals</strong></td>
-                                                <td><i>{{$alarms}}</i></td>   
-                                            </tr>
-                                            <tr>
-                                                <td><strong>False Identities</strong></td>
-                                                <td><i>{{$false}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Physical Injury</strong></td>
-                                                <td><i>{{$physical}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Abandonment</strong></td>
-                                                <td><i>{{$abandonment}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Tresspass</strong></td>
-                                                <td><i>{{$tresspass}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Threats</strong></td>
-                                                <td><i>{{$threats}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Theft</strong></td>
-                                                <td><i>{{$theft}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Swindling</strong></td>
-                                                <td><i>{{$swindling}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Sexual Assault</strong></td>
-                                                <td><i>{{$sexual}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Murder</strong></td>
-                                                <td><i>{{$murder}}</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Illegal Drug</strong></td>
-                                                <td><i>{{$illegal}}</i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="col-lg-8">
+                                        <div id="morris-bar-chart" style="width:120%"></div>
+                                    </div>
+                                    <div class="card-box pull-right" style="background-color: #eeeeee;">
+                                        <table class="table table-hover mails m-0 table table-actions-bar">
+                                            <thead>
+                                                <tr>
+                                                    <th>Total number of</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Alarms and Scandals</strong></td>
+                                                    <td><i>{{$alarms}}</i></td>   
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>False Identities</strong></td>
+                                                    <td><i>{{$false}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Physical Injury</strong></td>
+                                                    <td><i>{{$physical}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Abandonment</strong></td>
+                                                    <td><i>{{$abandonment}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tresspass</strong></td>
+                                                    <td><i>{{$tresspass}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Threats</strong></td>
+                                                    <td><i>{{$threats}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Theft</strong></td>
+                                                    <td><i>{{$theft}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Swindling</strong></td>
+                                                    <td><i>{{$swindling}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Sexual Assault</strong></td>
+                                                    <td><i>{{$sexual}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Murder</strong></td>
+                                                    <td><i>{{$murder}}</i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Illegal Drug</strong></td>
+                                                    <td><i>{{$illegal}}</i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-            </div> 
-
-                
             </div>
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 

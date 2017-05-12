@@ -95,7 +95,7 @@ class LoginController extends Controller
                 
             }
             else{
-                Alert::message("Error!", "Invalid Credentials", "error"); 
+                Alert::message("", "Invalid Credentials", "error"); 
                 return redirect('login');
             }
         
@@ -111,7 +111,7 @@ class LoginController extends Controller
 
         
         Auth::logout();
-        Alert::message("Success!", "Successfully logged out", "success"); 
+        Alert::message("", "Successfully logged out", "success"); 
         return redirect('login');
     }
 

@@ -143,14 +143,6 @@
     .panel{
         background: rgba(255, 255, 255, 0.8)!important;
     }
-    *.icon-blue {color: #0088cc}
-*.icon-grey {color: grey}
-    i {   
-        width:100px;
-        text-align:center;
-        vertical-align:middle;
-        position: relative;
-    }
 
     .badge:after{
         content:"2";
@@ -180,7 +172,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{URL('/')}}">Barangay 5 Zone 21</a>
+        <a class="navbar-brand" href="{{URL('/')}}">Barangay 5 Zone 1</a>
     </div>
     <!-- /.navbar-header -->
     <?php
@@ -195,8 +187,8 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
     ?>
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" >
-                <i class="fa fa-envelope fa-5x fa-border icon-grey badge" style="color: red;"></i> <i class="fa fa-caret-down"></i>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-messages scrollable-menu">
 

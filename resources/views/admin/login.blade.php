@@ -4,7 +4,7 @@
 <!doctype html>    
 <html>
 <head>
-	<title> LOGIN PAGE </title>
+	<title>BRIMS - login </title>
 	<link href="{!! asset('assets/css/bootstrap-theme.min.css') !!}" rel="stylesheet" type="text/css" />
 	<link href="{!! asset('assets/css/bootstrap.css') !!}" rel="stylesheet" type="text/css" />
 	<link href="{!! asset('assets/css/bootstrap.min.css') !!}" rel="stylesheet" type="text/css" />

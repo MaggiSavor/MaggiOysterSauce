@@ -13,7 +13,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-    <title>Case Report</title>
+    <title>BRIMS - Case Report</title>
 
     
 
@@ -41,6 +41,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row" style="padding-bottom: 5%;">
+              <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         Graphical Representation / Case
@@ -133,12 +134,14 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
+              </div>
             </div> 
             <div class="row" style="padding-bottom: 5%;">
+              <div class="col-lg-12">
                 <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Cases
-                    </div>
+                  <div class="panel-heading">
+                      Cases
+                  </div>
                     <!-- /.panel-heading -->
                   <form method="get">
                     <div class="panel-body">
@@ -211,6 +214,7 @@
                        </div>
                        <!-- /.panel-body -->
                 </div>
+              </button>
             </div>        
         </div>
         <!-- /#page-wrapper -->
