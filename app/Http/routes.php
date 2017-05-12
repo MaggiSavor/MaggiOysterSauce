@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::post('/add_indigency', array('uses' => 'DocumentsController@addIndigency', 'as' => 'addIndigency'));
 		Route::post('/add_business_permit', array('uses' => 'DocumentsController@addBusinessPermit', 'as' => 'addBusinessPermit'));
 		Route::post('/add_barangay_id', array('uses' => 'DocumentsController@addBarangayId', 'as' => 'addBarangayId'));
+		Route::get('/get_add', array('uses' => 'DocumentsController@getAdd', 'as' => 'getAdd'));
 		//end of documents
 
 		//reports

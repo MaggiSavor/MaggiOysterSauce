@@ -51,7 +51,7 @@
                                     <tr>
                                        <th></th>
                                        <th>Resident ID</th>
-                                       <th>Name</th>
+                                       <th id="sample">Name</th>
                                        <th>Address</th>
                                        <th>Action</th>
                                    </tr>
@@ -64,7 +64,7 @@
                                        <td>{{$residentList->fullname}}</td>
                                        <td>{{$residentList['house_no']}} {{$residentList['street']}} Tondo, Manila</td>
                                        <!-- <td><a href="{{URL::Route('certPrint', $residentList['id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></a></td> -->
-                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$residentList['id']}}" value="{{$residentList['id']}}" onClick="lmao()"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></td>
+                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$residentList['id']}}" value="{{$residentList['id']}}"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></td>
                                     </tr>
                                     @endforeach
                                     
@@ -83,11 +83,11 @@
         <!-- /#page-wrapper -->
         @foreach($residentLists as $res)
         <!-- Modal -->
-        <div class="modal fade" id="myModal{{$res['id']}}" role="dialog">
+        <div class="modal fade" id="myModal{{$res['id']}}" role="dialog" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <button type="button" class="close cancel" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Details</h4>
                 </div>
                 <div class="modal-body">
@@ -123,69 +123,69 @@
                                             <div class="form-group col-md-12">
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option1" required="">Application for employment
+                                                        <input type="radio" name="reasons" class="reason" value="Option1" required="">Application for employment
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option2">School Requirement
+                                                        <input type="radio" name="reasons" class="reason" value="Option2">School Requirement
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option3">Hospital/Medical Purposes
+                                                        <input type="radio" name="reasons" class="reason" value="Option3">Hospital/Medical Purposes
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option4">Processing of Calamity
+                                                        <input type="radio" name="reasons" class="reason" value="Option4">Processing of Calamity
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option5">Travel Abroad
+                                                        <input type="radio" name="reasons" class="reason" value="Option5">Travel Abroad
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option6">Transfer of Residency
+                                                        <input type="radio" name="reasons" class="reason" value="Option6">Transfer of Residency
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option7">SSS/GSIS/PAGIBIG/PHILHEALTH Req.
+                                                        <input type="radio" name="reasons" class="reason" value="Option7">SSS/GSIS/PAGIBIG/PHILHEALTH Req.
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option8">NBI/POLICE Clearance
+                                                        <input type="radio" name="reasons" class="reason" value="Option8">NBI/POLICE Clearance
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option9">TIN/BIR Requirement
+                                                        <input type="radio" name="reasons" class="reason" value="Option9">TIN/BIR Requirement
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option10">DSWD Requirement
+                                                        <input type="radio" name="reasons" class="reason" value="Option10">DSWD Requirement
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="reasons" class="same" value="Option11">Bank Transaction
+                                                        <input type="radio" name="reasons" class="reason" value="Option11">Bank Transaction
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
                                                         <input type="radio" name="reasons" class="idFor" value="Option12">ID For
-                                                        <input type="text" name="idFor" class="form-control id" id="id" required="">
+                                                        <input type="text" name="idFor" class="form-control id" id="id{{$res['id']}}" required="" placeholder="ID for">
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="radio-inline">
                                                         <input type="radio" name="reasons" class="others" value="Option13">Others
-                                                        <input type="text" name="others" class="form-control other" id="other" required="">
+                                                        <input type="text" name="others" class="form-control other" id="other{{$res['id']}}" required="" placeholder="Others">
                                                     </label>
                                                 </div>
                                             </div>
@@ -203,53 +203,132 @@
                     <p style="position:absolute; left:80%; top:30%; " class="age"></p>
                     <p style="position:absolute; left:15%; top:31.8%; ">{{$res['status']}}</p>
                     <p style="position:absolute; left:41%; top:33.8%; ">{{$res['house_no']}} {{$res['street']}}, Tondo, Manila</p>
+                    <p style="position:absolute; left:8.7%; top:47.4%;" class="radio"><b></b></p>
+                    <p style="position:absolute; left:22%; top:64%;" class="reasonss"></p>
+                    <p style="position:absolute; left:65%; top:61%;" class="reasonsID"></p>
+                    <p style="position:absolute; left:64%; top:81%;">{{$chairman['fullname']}}</p>
                     <?php
-                    $date = date("F j, Y");
-                    echo '<p style="position:absolute; left:24%; top:66%;">'.$date.'</p>';
+                    $date1 = date("d");
+                    $date2 = date("F");
+                    $date3 = date("Y") - 2000;
+                    echo '<p style="position:absolute; left:79%; top:71.3%;">'.$date1.'</p>
+                        <p style="position:absolute; left:11.7%; top:73%;">'.$date2.'</p>
+                        <p style="position:absolute; left:33%; top:73%;">'.$date3.'</p>';
                     ?>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
                     <button type="submit" id="print" class="btn btn-danger print" value="{{$res['id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
                 </div>
               </div>
             </div>
         </div>
         @endforeach 
-
     </div>
     <!-- /#wrapper -->
 
     <script src="../assets/js/bootstrap-toggle.js"></script>
     <script type="text/javascript">
-        function lmao(){
-            alert('age');
+         
+    $('.cj').click(function(){
+        var id = $(this).val();
+        var age = $('#resAge'+id).val();
+        $('.age').html(age);
+    })
+    $('.id').on('keyup',function(){
+            $('.reasonsID').html( $(this).val());
+    });
+    $('.other').on('keyup',function(){
+            $('.reasonss').html( $(this).val());
+    });
+
+    $("input:radio[name=reasons]").click(function() {
+        var reason = $(this).val();
+        $('.radio').html(reason);
+        var check = '(&#x2713)';
+        
+
+        if(reason == "Option1"){
+            $('.radio').css({"left": "8.7%", "top": "47%"});
+            $('.radio').html(check);
+        }else if(reason == "Option2"){
+            $('.radio').css({"left": "52.3%", "top": "47%"});
+            $('.radio').html(check);
+        }else if(reason == "Option3"){
+            $('.radio').css({"left": "8.7%", "top": "49.8%"});
+            $('.radio').html(check);
+        }else if(reason == "Option4"){
+            $('.radio').css({"left": "52.3%", "top": "49.8%"});
+            $('.radio').html(check);
+        }else if(reason == "Option5"){
+            $('.radio').css({"left": "8.7%", "top": "52.7%"});
+            $('.radio').html(check);
+        }else if(reason == "Option6"){
+            $('.radio').css({"left": "52.3%", "top": "52.7%"});
+            $('.radio').html(check);
+        }else if(reason == "Option7"){
+            $('.radio').css({"left": "8.7%", "top": "55.4%"});
+            $('.radio').html(check);
+        }else if(reason == "Option8"){
+            $('.radio').css({"left": "52.3%", "top": "55.4%"});
+            $('.radio').html(check);
+        }else if(reason == "Option9"){
+            $('.radio').css({"left": "8.7%", "top": "58.1%"});
+            $('.radio').html(check);
+        }else if(reason == "Option10"){
+            $('.radio').css({"left": "52.3%", "top": "58.1%"});
+            $('.radio').html(check);
+        }else if(reason == "Option11"){
+            $('.radio').css({"left": "8.7%", "top": "60.8%"});
+            $('.radio').html(check);
+        }else if(reason == "Option12"){
+            $('.radio').css({"left": "52.3%", "top": "60.8%"});
+            $('.radio').html(check);
+        }else if(reason == "Option13"){
+            $('.radio').css({"left": "8.7%", "top": "63.5%"});
+            $('.radio').html(check);
         }
-       
+    })
+
+    $('.cancel').click(function(){
+        $('.reason').html("");
+        $('.idFor').html("");
+        $('.others').html("");
+        $('.other').val("");
+        $('.id').val("");
+        $('.id').hide();
+        $('.other').hide();
+        $('.reason').prop("checked", false);
+        $('.idFor').prop("checked", false);
+        $('.others').prop("checked", false);
+    })
+
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.id').hide();
             $('.other').hide();
 
-            $('.idFor').click(function(){
-                $('.id').show();
-                $('.other').hide();
-                $('.id').attr('required', true);
-                $('.other').removeAttr('required');
-            })
-            $('.others').click(function(){
-                $('.id').hide();
-                $('.other').show();
-                $('.other').attr('required', true);
-                $('.id').removeAttr('required');
-            })
-            $('.same').click(function(){
-                $('.id').hide();
-                $('.other').hide();
-                $('.id').removeAttr('required');
-                $('.other').removeAttr('required');
+            $("input:radio[name=reasons]").click(function() {
+                var value = $(this).val();
+
+                if(value == "Option12"){
+                    $('.id').show();
+                    $('.other').hide();
+                    $('.id').attr('required', true);
+                    $('.other').removeAttr('required');
+                }else if(value == "Option13"){
+                    $('.id').hide();
+                    $('.other').show();
+                    $('.other').attr('required', true);
+                    $('.id').removeAttr('required');
+                }else{
+                    $('.id').hide();
+                    $('.other').hide();
+                    $('.id').removeAttr('required');
+                    $('.other').removeAttr('required');
+                }
             })
         })
     </script>

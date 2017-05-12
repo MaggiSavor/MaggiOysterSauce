@@ -102,7 +102,7 @@
                             <div class="col-md-12">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Name</label>
-                                    <input type="text" name="ename" class="form-control" id="cname" placeholder="Name" list="resident" autocomplete="off">
+                                    <input type="text" name="ename" class="form-control" id="cname" placeholder="Name" list="resident" autocomplete="off" required="">
                                 </div>
                                 <datalist id="resident">
                                     @foreach($res as $resident)
@@ -112,7 +112,7 @@
                                 <div class='form-group col-md-6'>
                                       <label class='col-lg-12 control-label' for='relation'>Relation</label>
                                       <div class='col-lg-12'>
-                                        <select class="form-control" name="relation" id="relation">
+                                        <select class="form-control" name="relation" id="relation" required="">
                                             <option value="Guardian">Guardian</option>
                                             <option>Father</option>
                                             <option>Mother</option>
@@ -123,7 +123,7 @@
                                     </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Address</label>
-                                    <input type="text" name="eaddress" class="form-control" id="dname" placeholder="Address">
+                                    <input type="text" name="eaddress" class="form-control" id="dname" placeholder="Address" required="">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label>Contact:</label>
@@ -131,13 +131,13 @@
                                         <label class="radio">
                                             <input type="radio" id="mob">Mobile
                                         </label>
-                                            <input type="text" name="mobile" class="form-control contact" id="mobile" placeholder="(+63)">
+                                            <input type="text" name="mobile" class="form-control contact" id="mobile" placeholder="(+63)" required="">
                                     </div>
                                     <div class="col-md-12">
                                         <label class="radio">
                                             <input type="radio" id="tel">Telephone
                                         </label>
-                                            <input type="text" name="telephone" class="form-control contact" id="telephone" placeholder="(2)">
+                                            <input type="text" name="telephone" class="form-control contact" id="telephone" placeholder="(2)" required="">
                                             <input type="hidden" name="dexp" id="dexp">
                                     </div>
                                 </div>
@@ -163,6 +163,7 @@
 
     
     <script src="../assets/js/bootstrap-toggle.js"></script>
+    <script src="../assets/js/bootstrap-toggle.js"></script>
     <script>
     $(document).ready(function(){
         var mydateStart = new Date();
@@ -182,10 +183,14 @@
             $('#mob').click(function(){
                 $('#mobile').show();
                 $('#telephone').hide();
+                $('#mobile').attr('required', true);
+                $('#telephone').removeAttr('required');
             })
             $('#tel').click(function(){
                 $('#mobile').hide();
                 $('#telephone').show();
+                $('#telephone').attr('required', true);
+                $('#mobile').removeAttr('required');
             })
         })
     </script>

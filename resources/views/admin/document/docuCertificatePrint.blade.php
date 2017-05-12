@@ -70,7 +70,7 @@
                         <div class="form-group col-md-12">
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="reasons" class="same" value="Option1">Application for employment
+                                    <input type="radio" name="reasons" class="same" value="Option1" required="">Application for employment
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
@@ -126,18 +126,17 @@
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
                                     <input type="radio" name="reasons" id="idFor" value="Option12">ID For
-                                    <input type="text" name="idFor" class="form-control" id="id">
+                                    <input type="text" name="idFor" class="form-control" id="id" required="">
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="radio-inline">
                                     <input type="radio" name="reasons" id="others" value="Option13">Others
-                                    <input type="text" name="others" class="form-control" id="other">
+                                    <input type="text" name="others" class="form-control" id="other" required="">
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="pull-right">
                         <button id="print" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-print"> </span> Print</button>
                     </div>
@@ -155,6 +154,7 @@
 
     
     <script src="../assets/js/bootstrap-toggle.js"></script>
+    <script src="../assets/jquery/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#id').hide();
@@ -163,14 +163,20 @@
             $('#idFor').click(function(){
                 $('#id').show();
                 $('#other').hide();
+                $('#id').attr('required', true);
+                $('#other').removeAttr('required');
             })
             $('#others').click(function(){
                 $('#id').hide();
                 $('#other').show();
+                $('#other').attr('required', true);
+                $('#id').removeAttr('required');
             })
             $('.same').click(function(){
                 $('#id').hide();
                 $('#other').hide();
+                $('#id').removeAttr('required');
+                $('#other').removeAttr('required');
             })
         })
     </script>
