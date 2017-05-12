@@ -57,11 +57,13 @@
                                 <input type="text" name="cname" class="form-control" id="cname" value="{{$fileaction['complainant_fullname']}}" readonly="">
                             </div>
                             <div class="form-group col-md-6">
+
+
                                 <label class="control-label">Defendant Name</label>
                                 <input type="text" name="dname" class="form-control" id="dname" value="{{$fileaction['defendant_fullname']}}" readonly="">
                             </div>
                             <div class="form-group col-md-6">
-                            <label>Reasons:</label>
+                                <label>Reasons:</label>
                                 <div class="col-md-12">
                                   <div class="radio">
                                       <input type="radio" value="Obey summons or to appear for hearing" name="reasons">

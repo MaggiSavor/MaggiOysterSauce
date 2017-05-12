@@ -63,14 +63,14 @@
                                     @foreach($summon as $summons)
                                     <tr>
                                        <td></td>
-                                       <td>{{$summons['case_id']}}</td>
+                                       <td>{{$summons['id']}}</td>
                                        <td>{{$summons['case_title']}}</td>
                                        <td>{{$summons['complainant_fullname']}}</td>
                                        <td>{{$summons['defendant_fullname']}}</td>
                                        <td>{{$summons['case_status']}}</td>
                                        <td>{{$summons['case_date']}}</td>
                                        <!-- <td><a href="{{URL::Route('summonPrint', $summons['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Reprint Summon Letter</button></a></td> -->
-                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['case_id']}}" value="{{$summons['case_id']}}"> <span class="glyphicon glyphicon-file"></span> Print Blotter Details</button></td>
+                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['id']}}" value="{{$summons['id']}}"> <span class="glyphicon glyphicon-file"></span> Print Blotter Details</button></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -88,7 +88,7 @@
         <!-- /#page-wrapper -->
         @foreach($summon as $summons)
         <!-- Modal -->
-        <div class="modal fade" id="myModal{{$summons['case_id']}}" role="dialog">
+        <div class="modal fade" id="myModal{{$summons['id']}}" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -99,12 +99,12 @@
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="tab-pane fade in active" id="info{{$summons['case_id']}}">
-                                <form id="blotter{{$summons['case_id']}}" method="post">
+                            <div class="tab-pane fade in active" id="info{{$summons['id']}}">
+                                <form id="blotter{{$summons['id']}}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="card-box">
                                         <h3>{{$summons['case_title']}}</h3>
-                                        <h4><center>Case Number: {{$summons->case_id}}</center></h4>
+                                        <h4><center>Case Number: {{$summons->id}}</center></h4>
                                         <div class="col-md-12" style="padding-top: 5%;">
                                             <div class="col-md-12">
                                                 <div class="form-group col-md-6">
@@ -122,7 +122,7 @@
                                                     <textarea name="desc" class="form-control" id="desc" style="height: 100px;" readonly="">{{$summons['case_description']}}</textarea>
                                                 </div>
                                             </div>
-                                            <input type="hidden" id="caseID" name="caseID" value="{{$summons['case_id']}}">
+                                            <input type="hidden" id="caseID" name="caseID" value="{{$summons['id']}}">
                                             <input type="hidden" name="title" value="{{$summons['case_title']}}">
                                             <input type="hidden" name="status" value="{{$summons['case_status']}}">
                                         </div>
@@ -134,7 +134,7 @@
                         <!-- /.panel-body -->
                   <!-- /.panel -->
                 </div>
-                <div id="printableArea{{$summons['case_id']}}" hidden style="position: absolute;">
+                <div id="printableArea{{$summons['id']}}" hidden style="position: absolute;">
                     <img src="../assets/images/blotter.jpg" style="height: 11in; width: 8.5in;">
                     <p style="position:absolute; left:23%; top:27.5%;">{{$summons['case_title']}}</p>
                     <p style="position:absolute; left:10%; top:34.2%"">{{$summons['complainant_fullname']}}</p>
@@ -150,7 +150,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" id="print" class="btn btn-danger print" value="{{$summons['case_id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
+                    <button type="submit" id="print" class="btn btn-danger print" value="{{$summons['id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
                 </div>
               </div>
             </div>

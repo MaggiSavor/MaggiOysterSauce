@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/update_blotter/{id}', array('uses' => 'BlotterController@updateBlotter', 'as' => 'updateBlotter'));
 		Route::post('/edit_blotter/{id}', array('uses' => 'BlotterController@editBlotter', 'as' => 'editBlotter'));
 		Route::post('/blotter_agreement_print', array('uses' => 'BlotterController@blotterAgreementsPrint', 'as' => 'blotterAgreementsPrint'));
+		Route::post('/file_action_print', array('uses' => 'BlotterController@blotterFileActionPrint', 'as' => 'blotterFileActionPrint'));
 
 		// endo of blotter
 

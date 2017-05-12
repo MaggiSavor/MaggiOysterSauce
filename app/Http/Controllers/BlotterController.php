@@ -172,6 +172,22 @@ class BlotterController extends Controller
         return response()->json(array('success' =>'Successfully Saved!'));
 	}
 
+	public function blotterFileActionPrint(){
+		$summon = Request::all();
+        $case = new CaseHistory;
+        $case['case_id'] = $summon['caseID'];
+        $case['complainant_fullname'] = $summon['cname'];
+        $case['defendant_fullname'] = $summon['dname'];
+        $case['case_title'] = $summon['title'];
+        $case['case_status'] = $summon['status'];
+        $case['case_desc'] = 'Printing of File Action';
+        $case['issued'] = 'File Action';
+        $case['summon_date'] = '';
+        $case['summon_time'] = '';
+        $case->save();
+        return response()->json(array('success' =>'Successfully Saved!'));
+	}
+
 	public function blotterDetailsPrint(){
 		$summon = Request::all();
         $case = new CaseHistory;

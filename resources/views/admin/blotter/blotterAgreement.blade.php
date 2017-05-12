@@ -74,14 +74,14 @@ use App\Models\BarangayOfficial;
                                     @foreach($summon as $summons)
                                     <tr>
                                        <td></td>
-                                       <td>{{$summons['case_id']}}</td>
+                                       <td>{{$summons['id']}}</td>
                                        <td>{{$summons['case_title']}}</td>
                                        <td>{{$summons['complainant_fullname']}}</td>
                                        <td>{{$summons['defendant_fullname']}}</td>
                                        <td>{{$summons['case_status']}}</td>
                                        <td>{{$summons['case_date']}}</td>
                                        <!-- <td><a href="{{URL::Route('summonPrint', $summons['case_id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Reprint Summon Letter</button></a></td> -->
-                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['case_id']}}" value="{{$summons['case_id']}}"> <span class="glyphicon glyphicon-file"></span> Print Agreement Letter</button></td>
+                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$summons['id']}}" value="{{$summons['id']}}"> <span class="glyphicon glyphicon-file"></span> Print Agreement Letter</button></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -99,7 +99,7 @@ use App\Models\BarangayOfficial;
         <!-- /#page-wrapper -->
         @foreach($summon as $summons)
         <!-- Modal -->
-        <div class="modal fade" id="myModal{{$summons['case_id']}}" role="dialog">
+        <div class="modal fade" id="myModal{{$summons['id']}}" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -110,12 +110,12 @@ use App\Models\BarangayOfficial;
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="tab-pane fade in active" id="info{{$summons['case_id']}}">
-                                <form id="blotter{{$summons['case_id']}}" method="post">
+                            <div class="tab-pane fade in active" id="info{{$summons['id']}}">
+                                <form id="blotter{{$summons['id']}}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="card-box">
                                         <h3>{{$summons['case_title']}}</h3>
-                                        <h4><center>Case Number: {{$summons->case_id}}</center></h4>
+                                        <h4><center>Case Number: {{$summons->id}}</center></h4>
                                         <div class="col-md-12" style="padding-top: 5%;">
                                             <div class="col-md-12">
                                                 <div class="form-group col-md-6">
@@ -130,10 +130,10 @@ use App\Models\BarangayOfficial;
                                             <div class="col-md-12">
                                                 <div class="form-group col-md-12">
                                                     <label class="control-label">Agreement</label>
-                                                    <textarea name="agreement" class="form-control agree" maxlength="300" id="agreement{{$summons['case_id']}}" style="height: 100px;"></textarea>
+                                                    <textarea name="agreement" class="form-control agree" maxlength="300" id="agreement{{$summons['id']}}" style="height: 100px;"></textarea>
                                                 </div>
                                             </div>
-                                            <input type="hidden" id="caseID" name="caseID" value="{{$summons['case_id']}}">
+                                            <input type="hidden" id="caseID" name="caseID" value="{{$summons['id']}}">
                                             <input type="hidden" name="title" value="{{$summons['case_title']}}">
                                             <input type="hidden" name="status" value="{{$summons['case_status']}}">
                                         </div>
@@ -149,12 +149,12 @@ use App\Models\BarangayOfficial;
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" id="print" class="btn btn-danger print" value="{{$summons['case_id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
+                    <button type="submit" id="print" class="btn btn-danger print" value="{{$summons['id']}}"><span class="glyphicon glyphicon-print" ></span> Print</button>
                 </div>
               </div>
             </div>
         </div>
-        <div id="printableArea{{$summons['case_id']}}" hidden style="position: absolute; " >
+        <div id="printableArea{{$summons['id']}}" hidden style="position: absolute; " >
             <img src="../assets/images/agreement.jpg"  class="page" >
             <p style="position:absolute; left:12%; top:23%;">{{$summons['complainant_fullname']}}</p>
             <p style="position:absolute; left:12%; top:29%;">{{$summons['defendant_fullname']}}</p>
