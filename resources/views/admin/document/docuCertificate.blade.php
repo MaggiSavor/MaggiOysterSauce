@@ -64,7 +64,7 @@
                                        <td>{{$residentList->fullname}}</td>
                                        <td>{{$residentList['house_no']}} {{$residentList['street']}} Tondo, Manila</td>
                                        <!-- <td><a href="{{URL::Route('certPrint', $residentList['id'])}}"><button type="button" class="btn btn-success" name="issue" id="issue"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></a></td> -->
-                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$residentList['id']}}" value="{{$residentList['id']}}"> <span class="glyphicon glyphicon-file" onClick="lmao()"></span> Issue Certificate</button></td>
+                                       <td><button type="button" class="btn btn-success cj" name="issue" id="issue" data-toggle="modal" data-target="#myModal{{$residentList['id']}}" value="{{$residentList['id']}}" onClick="lmao()"> <span class="glyphicon glyphicon-file"></span> Issue Certificate</button></td>
                                     </tr>
                                     @endforeach
                                     
