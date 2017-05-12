@@ -8,7 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <style type="text/css">
+      .printer table{
+          counter-reset: rowNumber;
+      }
+       
+      .printer tr {
+          counter-increment: rowNumber;
+      }
+       
+      .printer tr td:first-child::before {
+          content: counter(rowNumber);
+          min-width: 1em;
+          margin-right: 0.5em;
+      }
+    </style>
     <title>BRIMS - Resident Report</title>
 
     
@@ -86,6 +100,7 @@
                               <table width="100%" class="table table-hover mails m-0 table table-actions-bar" id="resident">
                                 <thead>
                                   <tr>
+                                    <th></th>
                                     <th>Resident ID</th>
                                     <th>Full Name</th>
                                     <th>Address</th>
@@ -95,6 +110,7 @@
                                 </thead>
                                 <tbody>
                                   <tr>
+                                    <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
@@ -195,6 +211,7 @@
                for(i=0; i< data.resident.length; i++){
                 if(data.resident.length != 0){
                   $('#resident').dataTable().fnAddData([
+                        '<td></td>',
                         data.resident[i]['id'],
                         data.resident[i]['fullname'],
                         data.resident[i]['house_no']+' '+data.resident[i]['street'],
@@ -240,6 +257,7 @@
                  for(i=0; i< data.all.length; i++){
                   if(data.all.length != 0){
                     $('#resident').dataTable().fnAddData([
+                        '<td></td>',
                         data.all[i]['id'],
                         data.all[i]['fullname'],
                         data.all[i]['house_no']+' '+data.all[i]['street'],
@@ -265,6 +283,7 @@
                  for(i=0; i< data.voter.length; i++){
                   if(data.voter.length != 0){
                     $('#resident').dataTable().fnAddData([
+                        '<td></td>',
                         data.voter[i]['id'],
                         data.voter[i]['fullname'],
                         data.voter[i]['house_no']+' '+data.voter[i]['street'],
@@ -290,6 +309,7 @@
                  for(i=0; i< data.senior.length; i++){
                   if(data.senior.length != 0){
                     $('#resident').dataTable().fnAddData([
+                        '<td></td>',
                         data.senior[i]['id'],
                         data.senior[i]['fullname'],
                         data.senior[i]['house_no']+' '+data.senior[i]['street'],
@@ -315,6 +335,7 @@
                  for(i=0; i< data.gender.length; i++){
                   if(data.gender.length != 0){
                     $('#resident').dataTable().fnAddData([
+                        '<td></td>',
                         data.gender[i]['id'],
                         data.gender[i]['fullname'],
                         data.gender[i]['house_no']+' '+data.gender[i]['street'],
@@ -335,7 +356,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
           $(document).ready(function() {
-            var t = $('#resident').DataTable({
+            var t = $('#s').DataTable({
                 responsive: true,
                 searchHighlight: true,
                 // searching: false,
@@ -357,7 +378,55 @@
         });
       });
     </script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var t = $('#resident').DataTable({
+                "dom": "lBfrtip",
+        responsive: true,
+        searchHighlight: true,
+        "columnDefs": [
+            { 
+              "sortable" : false, 
+              "searchable": false,
+              "targets": [0]
+            }
+        ],
+        "order": [[ 1, 'asc' ]],
+        buttons: 
+        [
+        {
+          text: 'Print',
+          extend: 'print',
+              exportOptions: {
+                modifier: {
+                    page: 'current'
+                }
+              },  
+            customize: function ( win ) {
+                $(win.document.body)
+                    .prepend(
+                        
+                      '<img src="{{ URL::asset("assets/images/header.jpg") }}" style="display: block; width:100%;" />'
+                    ).find('table').addClass('printer');
+  
+                // $(win.document.body).find( 'table' )
+                //     .addClass( 'compact' )
+                //     .removeClass('table-hover table-striped table-actions-bar')
+                //     .css( {'background-color': 'none', 'background': 'url("http://localhost:8000/assets/images/avatar.png")', });
+            }
 
+        }
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    });
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+  });
+</script>
 
 </body>
 

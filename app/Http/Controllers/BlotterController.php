@@ -17,13 +17,13 @@ class BlotterController extends Controller
 	public function blotterList(){
 	$blotterLists = Blotter::all();
 	$caseHistory = CaseHistory::all();
-	return view('admin.blotterList')
+	return view('admin.blotter.blotterList')
 		->with('blotterLists', $blotterLists)
 			->with('caseHistory', $caseHistory);
 	}
 
 	public function addCase(){
-	    return view('admin.addCase');
+	    return view('admin.blotter.addCase');
 	}
 
 	public function addBlotter(){
@@ -67,61 +67,64 @@ class BlotterController extends Controller
 	}
 
 	public function blotterDocuments(){
-	    return view('admin.blotterDocuments');
+	    return view('admin.blotter.blotterDocuments');
 	}
+
 	public function blotterSummon(){
 		$summon = Blotter::where('case_status', '!=', 'Case Closed' )
 								->where('case_status', '!=', 'Dismissed')
 									->where('case_status', '!=', 'Turn Over')
 										->where('case_status', '!=', 'Transferred')->get();
-	    return view('admin.blotterSummon')
+	    return view('admin.blotter.blotterSummon')
 	    	->with('summon', $summon);
 	}
+
 	public function blotterFileAction(){
 		$summon = Blotter::where('case_status', '!=', 'Case Closed' )
 								->where('case_status', '!=', 'Dismissed')
 									->where('case_status', '!=', 'Turn Over')
 										->where('case_status', '!=', 'Transferred')->get();
-	    return view('admin.blotterFileAction')
+	    return view('admin.blotter.blotterFileAction')
 	    	->with('summon', $summon);
 	}
 
 	public function blotterDetails(){
-		$detail = Blotter::all();
-	    return view('admin.blotterDetails')
-	    	->with('detail', $detail);
+		$summon = Blotter::all();
+	    return view('admin.blotter.blotterDetails')
+	    	->with('summon', $summon);
 
 	}
+
 	public function blotterAgreement(){
 		$agreement = Blotter::where('case_status', '!=', 'Case Closed' )
 								->where('case_status', '!=', 'Dismissed')
 									->where('case_status', '!=', 'Turn Over')
 										->where('case_status', '!=', 'Transferred')->get();
-	    return view('admin.blotterAgreement')
+	    return view('admin.blotter.blotterAgreement')
 	    	->with('agreement', $agreement);
 	}
 
 	public function summonPrint($id){
 		$summondetails = Blotter::where('case_id', '=', $id)->first();
-	    return view('admin.blotterSummonPrint')
+	    return view('admin.blotter.blotterSummonPrint')
 	    	->with('summondetails', $summondetails);
 	}
 
 	public function fileActionPrint($id){
 		$fileaction = Blotter::where('case_id', '=', $id)->first();
-	    return view('admin.blotterFileActionPrint')
+	    return view('admin.blotter.blotterFileActionPrint')
 	    	->with('fileaction', $fileaction);
 	}
 
-	public function blotterDetailsPrint($id){
+	public function blotterDetailsPrints($id){
 		$details = Blotter::where('case_id', '=', $id)->first();
-	    return view('admin.blotterDetailsPrint')
+	    return view('admin.blotter.blotterDetailsPrint')
 	    	->with('details', $details);
 	}
 
 	public function agreementPrint($id){
 		$agree = Blotter::where('case_id', '=', $id)->first();
-	    return view('admin.blotterAgreementPrint')
+	    return view('admin.blotter.blotterAgreementPrint')
 	    	->with('agree', $agree);
 	}
 
@@ -137,6 +140,20 @@ class BlotterController extends Controller
         $case['issued'] = 'Summon Letter';
         $case['summon_date'] = $summon['sdate'];
         $case['summon_time'] = $summon['stime'];
+        $case->save();
+        return response()->json(array('success' =>'Successfully Saved!'));
+	}
+
+	public function blotterDetailsPrint(){
+		$summon = Request::all();
+        $case = new CaseHistory;
+        $case['case_id'] = $summon['caseID'];
+        $case['complainant_fullname'] = $summon['cname'];
+        $case['defendant_fullname'] = $summon['dname'];
+        $case['case_title'] = $summon['title'];
+        $case['case_status'] = $summon['status'];
+        $case['case_desc'] = 'Printing of Blotter Details';
+        $case['issued'] = 'Blotter Details';
         $case->save();
         return response()->json(array('success' =>'Successfully Saved!'));
 	}

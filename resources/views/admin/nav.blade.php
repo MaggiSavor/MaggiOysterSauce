@@ -32,6 +32,7 @@
 <!-- DataTables Search Higlight CSS -->
 <link href="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css') }}" rel="stylesheet">
 <link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+<link href="{{ URL::asset('assets/datatables/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 <!-- <link href="../assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
 <link href="//cdn.datatables.net/plug-ins/1.10.15/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet"> -->
 
@@ -358,6 +359,9 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
 <script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.js') }}"></script>
 <script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/dataTables.searchHighlight.min.js') }}"></script>
 <script src="{{ URL::asset('assets/datatables-plugins/searchHighlight/jquery.highlight.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/datatables-plugins/buttons.print.min.js') }}"></script>
+
 <!-- <script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../assets/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../assets/datatables-responsive/dataTables.responsive.js"></script>
