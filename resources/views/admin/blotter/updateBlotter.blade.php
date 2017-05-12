@@ -135,7 +135,7 @@
                                 <div class="form-group col-sm-12"" id="options" style="display: none;">
                                     <label for="inputStatus" class="col-sm-3 col-sm-offset-1 control-label">Select Reason:</label>
                                     <div class="col-sm-6">
-                                    <select  name="reason" class="form-control" >
+                                    <select id="reason" name="reason" class="form-control" >
                                                 <option value="option1">Obey summons or to appear for hearing</option>
                                                 <option value="option2">No settlement/conciliation was reached</option>
                                                 <option value="option3">Settlement has been repudiated</option>
@@ -159,7 +159,6 @@
             </div>
         </div>
         <!-- /#page-wrapper -->
-c
     </div>
     <!-- /#wrapper -->
     <div id="printableArea" hidden style="position: absolute;">
@@ -175,12 +174,42 @@ c
         echo '<p style="position:absolute; left:24%; top:66%;">'.$date.'</p>';
         ?>
     </div>
-    
+    <div id="printableArea2" hidden style="position: absolute;">
+       <img src="../assets/images/fileaction.jpg" style="height: 11in; width: 8.5in;">
+         <p style="position:absolute; left:30%; top:41.5%;">{{$update['complainant_fullname']}}</p>
+         <p style="position:absolute; left:30%; top:44.5%;">{{$update['defendant_fullname']}}</p>
+         <p style="position:absolute; left:20%; top:16%;">{{$update['complainant_fullname']}}</p>
+         <p style="position:absolute; left:20%; top:25%;">{{$update['defendant_fullname']}}</p>
+         <p style="position:absolute; left:11%; top:50%;">{{$update['defendant_fullname']}}</p>
+         <?php
+           $date1 = date("d");
+           $date2 = date("F");
+           $date3 = date("Y") - 2000;
+           echo '<p style="position:absolute; left:13%; top:64.2%;">'.$date1.'</p>';
+           echo '<p style="position:absolute; left:30%; top:64.2%;">'.$date2.'</p>';
+           echo '<p style="position:absolute; left:47.5%; top:64.2%;">'.$date3.'</p>';
+           $failed = 'option1';
+           if ($failed == 'option1') {
+           echo '<p style="position:absolute; left:11%; top:50%;">&#10004;</p>';
+           }
+           elseif ($failed == 'option2') {
+           echo'<p style="position:absolute; left:11%; top:53%;">&#10004;</p>';
+           }
+           elseif ($failed == 'option3') {
+           echo '<p style="position:absolute; left:11%; top:56%;">&#10004;</p>';
+           }
+         ?>
+    </div>
 
     <!-- Morris Charts JavaScript -->
     <script src="../assets/raphael/raphael.min.js"></script>
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
+    <script type="text/javascript">
+        $('#button3').on('click',function(){
+            
+        });
+    </script>
     <script type="text/javascript">
         var curstatus = document.getElementById("curstatus").value;
         switch(curstatus){
@@ -418,6 +447,61 @@ c
                    success: function(data){
                       if(data.success == "Successfully Saved!"){
                          
+                          swal("Saved!", "New case has been saved!", "success");
+                      }
+
+                   },error: function(data){
+                      swal("Something went wrong!");
+                   }
+                 });
+                 //Restore orignal HTML
+                 // history.go(0); 
+                 // document.body.innerHTML = oldPage;
+                 
+               }
+               else {
+                 swal("Cancelled", "", "error");
+               }
+             });
+          })
+      </script>
+      <script type="text/javascript">
+          var oldPage = document.body.innerHTML;
+          $('#button3').focus(function(e){
+             // e.preventDefault();
+             swal({
+               title: "Are you sure?",
+                 text: "You are about to update a record.",
+                 type: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#DD6B55",
+                 confirmButtonText: "Yes",
+                 closeOnConfirm: false,
+                 closeOnCancel: false
+             },
+             function(isConfirm){
+               var transfer = $("#post_form");
+               var dataString = transfer.serialize();
+               if(isConfirm){
+                 $.ajax({
+                   method: 'POST',
+                   url: "{{URL::Route('editBlotter', $update['id'])}}",
+                   headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                   dataType: 'JSON',
+                   processData : false,
+                   data: dataString,
+                   success: function(data){
+                      if(data.success == "Successfully Saved!"){
+                          var divElements = document.getElementById('printableArea2').innerHTML;
+                          //Reset the page's HTML with div's HTML only
+                          document.body.innerHTML = 
+                            "<html><head><title></title></head><body>" + 
+                            divElements + "</body>";
+
+                          //Print Page
+                          window.print();
+
+                          window.location.reload();
                           swal("Saved!", "New case has been saved!", "success");
                       }
 
