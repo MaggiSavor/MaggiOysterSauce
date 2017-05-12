@@ -145,7 +145,6 @@
                                     <label for="inputDesc" class="col-sm-3 col-sm-offset-1 control-label">Case Description:</label>
                                         <div class="col-sm-6">
                                           <textarea class="form-control" name="description" rows="3" placeholder="Case Description" required></textarea>
-                                          
                                         </div>
                                   </div>
                                   <br>
@@ -189,6 +188,13 @@
                         }
                     },
                     rate: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please enter a value'
+                            }
+                        }
+                    },
+                    description: {
                         validators: {
                             notEmpty: {
                                 message: 'Please enter a value'

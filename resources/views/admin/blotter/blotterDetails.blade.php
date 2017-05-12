@@ -116,6 +116,12 @@
                                                     <input type="text" name="dname" class="form-control" id="dname" value="{{$summons['defendant_fullname']}}" readonly="">
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-12">
+                                                    <label class="control-label">Case Details</label>
+                                                    <textarea name="cname" class="form-control" id="cname" style="height: 100px;" readonly="">{{$summons['case_description']}}</textarea>
+                                                </div>
+                                            </div>
                                             <input type="hidden" id="caseID" name="caseID" value="{{$summons['case_id']}}">
                                             <input type="hidden" name="title" value="{{$summons['case_title']}}">
                                             <input type="hidden" name="status" value="{{$summons['case_status']}}">

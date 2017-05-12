@@ -143,10 +143,8 @@
                     <p style="position:absolute; left:12%; top:40.4%;">{{$summons['summon_date']}} at {{$summons['summon_time']}}</p>
                     <?php
                     $date = date("F j, Y");
-                    $chairman = BarangayOfficial::where('position', '=', 'chairman')->orderBy('term_year', 'desc')->first();
                     echo '<p style="position:absolute; left:24%; top:66%;">'.$date.'</p>';
                     ?>
-                    <p style="position:absolute; left:60%; top:84.6%;">{{$chairman}}</p>
                 </div>
 
                 <div class="modal-footer">
@@ -185,13 +183,14 @@
       });
     </script>
     <script type="text/javascript">
+
         var oldPage = document.body.innerHTML;
         $('.print').focus(function(e){
            var caseID = $(this).val();
            // e.preventDefault();
            swal({
              title: "Are you sure?",
-               text: "Once you click yes, it will be saved in the database even if you cancel printing.",
+               text: "Once you click yes, it will be saved even if you cancel printing.",
                type: "warning",
                showCancelButton: true,
                confirmButtonColor: "#DD6B55",
