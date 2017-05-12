@@ -110,11 +110,15 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('id_reports', array('uses' => 'ReportsController@returnIdReport', 'as' => 'returnIdReport'));
 		Route::get('permit_reports', array('uses' => 'ReportsController@returnPermitReport', 'as' => 'returnPermitReport'));
 		Route::get('cert_reports', array('uses' => 'ReportsController@returnCert', 'as' => 'returnCert'));
+		Route::get('good_moral_reports', array('uses' => 'ReportsController@returnGoodMoral', 'as' => 'returnGoodMoral'));
+		Route::get('indigency_reports', array('uses' => 'ReportsController@returnIndigency', 'as' => 'returnIndigency'));
 		Route::get('date_resident', array('uses' => 'ReportsController@resDate', 'as' => 'resDate'));
 		Route::get('date_case', array('uses' => 'ReportsController@caseDate', 'as' => 'caseDate'));
 		Route::get('date_id', array('uses' => 'ReportsController@idDate', 'as' => 'idDate'));
 		Route::get('date_permit', array('uses' => 'ReportsController@permitDate', 'as' => 'permitDate'));
 		Route::get('date_cert', array('uses' => 'ReportsController@certDate', 'as' => 'certDate'));
+		Route::get('date_good_moral', array('uses' => 'ReportsController@goodMoralDate', 'as' => 'goodMoralDate'));
+		Route::get('date_indigency', array('uses' => 'ReportsController@indigencyDate', 'as' => 'indigencyDate'));
 		// end of reports
 
 	});
