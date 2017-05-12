@@ -77,6 +77,10 @@
                                                 <option value="Transferred" <?php if($info['resident_status'] == "Transferred"){ echo ' selected';} ?> >Transferred</option>
                                             </select>
                                     </div>
+                                    <div class="form-group col-md-4" id="transToWhere"hidden>
+                                        <label class="control-label">Transfer to where?</label>
+                                        <input type="text" name="transfer" class="form-control input-xs" id="InputTransfer" placeholder="Input Place/Barangay">
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
@@ -114,6 +118,7 @@
                                         <br>
                                         <label id="labelHouse">{{$info['household_id']}}</label>
                                         <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="houseID" value="{{$info['household_id']}}">
+                                        <input type="hidden" name="oldHouseholdID"class="form-control input-xs" id="oldHouseholdID" value="{{$info['household_id']}}">
                                         <button type="button" id="newHouse" class="btn btn-success">New</button>
                                         <button type="button" id="transferHouse" class="btn btn-warning">Transfer</button>
                                     </div>
@@ -121,10 +126,15 @@
                                         <label for="InputHouseID" id="householdID">Household ID:</label>
                                         <br>
                                         <label>Transfer To:</label>
-                                        <input type="text" class="form-control input-xs" id="transferHouseName" placeholder="Input Name" id="houseID">
+                                        <input type="text" class="form-control input-xs" id="transferHouseName" list="selectFamily" placeholder="Input Name" id="houseID">
                                         <button type="button" id="transHouse" class="btn btn-success">Transfer</button>
                                         <button type="button" id="hideHouse" class="btn btn-warning">Cancel</button>
                                     </div>
+                                    <datalist id="selectHouse">
+                                      @foreach($househead as $house)
+                                        <option>{{$house['fullname']}}</option>
+                                      @endforeach
+                                    </datalist>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
@@ -190,10 +200,15 @@
                                         <label for="InputFamilyID" id="familyID">Family ID:</label>
                                         <br>
                                         <label>Transfer To:</label>
-                                        <input type="text" class="form-control input-xs" id="transferFamilyName" placeholder="Input Name" id="houseID">
+                                        <input type="text" class="form-control input-xs" id="transferFamilyName" list="selectFamily" placeholder="Input Name" id="houseID">
                                         <button type="button" id="transFam" class="btn btn-success">Transfer</button>
                                         <button type="button" id="hideFam" class="btn btn-warning">Cancel</button>
                                     </div>
+                                    <datalist id="selectFamily">
+                                      @foreach($familyhead as $fam)
+                                        <option>{{$fam['fullname']}}</option>
+                                      @endforeach
+                                    </datalist>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
@@ -418,9 +433,18 @@
       }
 
       $('#inputResStatus').change(function(){
-        if(this.value == 'Transferred' || this.value == 'Deceased'){
+        if(this.value == 'Transferred'){
+          $('#transToWhere').attr('hidden', false);  
           $('#housecheck').prop('checked', false);
           $('#familycheck').prop('checked', false);
+        }
+        else if(this.value == 'Deceased'){
+          $('#transToWhere').attr('hidden', true); 
+          $('#housecheck').prop('checked', false);
+          $('#familycheck').prop('checked', false);
+        }
+        else{
+          $('#transToWhere').attr('hidden', true); 
         }
       })
 
@@ -482,6 +506,9 @@
 
       $('#newHouse').click(function(){
         $('#housecheck').prop('checked', true);
+        $('#househead').val('yes');
+        $('#familycheck').prop('checked', true);
+        $('#familyhead').val('yes');
         $.ajax({
           method: 'GET',
           url: '{{ URL::route("getHouseId")}}',

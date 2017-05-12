@@ -9,18 +9,18 @@ use Redirect;
 class ResidentController extends Controller
 {
 	public function resident(){
-		$allResident = Resident::where('resident_status','=','active')->count();
-		$household = Resident::where('resident_status','=','active')
+		$allResident = Resident::where('resident_status','=','Active')->count();
+		$household = Resident::where('resident_status','=','Active')
 			->where('household_head','=','yes')->count();
-		$family = Resident::where('resident_status','=','active')
+		$family = Resident::where('resident_status','=','Active')
 			->where('family_head','=','yes')->count();
-		$female = Resident::where('resident_status','=','active')
+		$female = Resident::where('resident_status','=','Active')
 			->where('gender','=','Female')->count();
-		$male = Resident::where('resident_status','=','active')
+		$male = Resident::where('resident_status','=','Active')
 			->where('gender','=','Male')->count();
-		$voter = Resident::where('resident_status','=','active')
+		$voter = Resident::where('resident_status','=','Active')
 			->where('voter','=','voter')->count();
-		$senior = Resident::where('resident_status','=','active')
+		$senior = Resident::where('resident_status','=','Active')
 			->whereYear('birthdate','<=',1955)->count();
 		$transfer = Resident::where('resident_status','=','Transferred')->count();
 	    return view('admin.resident')
@@ -34,11 +34,15 @@ class ResidentController extends Controller
 								    	->with('transfer', $transfer);
 		}
 	public function addResident(){
-		$houseID = Resident::select('household_id')->where('resident_status','=','active')->orderby('household_id', 'DESC')->first();
-		$familyID = Resident::select('family_id')->where('resident_status','=','active')->orderby('family_id', 'DESC')->first();
+		$houseID = Resident::select('household_id')->where('resident_status','=','Active')->orderby('household_id', 'DESC')->first();
+		$familyID = Resident::select('family_id')->where('resident_status','=','Active')->orderby('family_id', 'DESC')->first();
+		$mother = Resident::where('gender', '=', 'Female')->where('resident_status', '=', 'Active')->get();
+		$father = Resident::where('gender', '=', 'Male')->where('resident_status', '=', 'Active')->get();
 	    return view('admin.addResident')
 	    	->with('houseID',$houseID)
-	    		->with('familyID',$familyID);
+	    		->with('familyID',$familyID)
+	    			->with('mother', $mother)
+	    				->with('father', $father);
 	    // return $familyID;
 	}
 	public function saveResident(){
@@ -99,8 +103,12 @@ class ResidentController extends Controller
 	}
 	public function updateResident($id){
 		$info = Resident::where('id','=',$id)->first();
+		$househead = Resident::where('household_head','=','yes')->get();
+		$familyhead = Resident::where('family_head','=','yes')->get();		
 	    return view('admin.updateResident')
-	    	->with('info', $info);
+	    	->with('info', $info)
+	    		->with('househead', $househead)
+	    			->with('familyhead', $familyhead);
 	}
 	public function saveUpdate(){
 		$info = Request::all();
@@ -129,35 +137,53 @@ class ResidentController extends Controller
 	    $saveInfo['religion'] = $info['religion'];
 	    $saveInfo['family_id'] = $info['familyID'];
 	    $saveInfo['fullname'] = $info['fname'].' '.$info['mname'].' '.$info['lname'];
-    	$saveInfo['household_head'] = $info['househead'];
-	    $saveInfo['family_head'] = $info['familyhead'];
 	    if($info['familyhead'] == 'yes'){
-		 	Resident::where('family_id','=', $info['oldFamilyID'])->update(['family_id' => $info['familyID']]);
-		 	Resident::where('family_head','=', 'yes')->update(['family_head' => 'no']);
+		 	Resident::where('family_id','=' , $info['oldFamilyID'])->update(['family_id' => $info['familyID']]);
+		 	Resident::where('family_id','=', $info['oldFamilyID'])->where('family_head','=', 'yes')->where('id','!=', $info['residentId'])->update(['family_head' => 'no']);
 	    }
 	    if($info['househead'] == 'yes'){
-	    	Resident::where('household_head','=', 'yes')->update(['household_head' => 'no']);
+	    	Resident::where('household_id','=', $info['oldHouseholdID'])->where('household_head','=', 'yes')->where('id','!=', $info['residentId'])->update(['household_head' => 'no']);
 	    }
+	    $saveInfo['household_head'] = $info['househead'];
+	    $saveInfo['family_head'] = $info['familyhead'];
+	    $saveInfo['transfer_to'] = $info['transfer'];
 	 	$saveInfo->save(); 
 
 		
 	 	if($saveInfo){
 	      return response()->json(['success' =>'yes']);
 	    }
-	 	// return $saveInfo[0];
 
+	}
+	public function transferExisting(){
+		$data = Request::all();
+
+		if($data['type'] == 'existing'){
+			$transferId =  Resident::select('household_id','house_no','street')->where('fullname','=',$data['name'])->first();
+			Resident::where('family_id','=', $data['id'])->update(['household_id' => $transferId['household_id']]);
+			Resident::where('family_id','=', $data['id'])->update(['house_no' => $transferId['house_no']]);
+			Resident::where('family_id','=', $data['id'])->update(['street' => $transferId['street']]);
+			Resident::where('family_id','=', $data['id'])->where('household_head','=', 'yes')->update(['household_head' => 'no']);
+			return response()->json(['success' =>'yes']);
+		}
+		else{
+			$newId =  Resident::select('household_id')->where('resident_status','=','Active')->orderby('household_id', 'DESC')->first();
+			Resident::where('family_id','=', $data['id'])->update(['household_id' => ($newId['household_id'] + 1)]);
+			Resident::where('family_id','=', $data['id'])->where('family_head','=', 'yes')->update(['household_head' => 'yes']);
+			return response()->json(['success' =>'yes']);
+		}
+		// return response($data);
 	}
 	public function getHouseId(){
 		$data = Request::all();
 
 		if($data['type'] == 'new'){
-			$newId =  Resident::select('household_id')->where('resident_status','=','active')->orderby('household_id', 'DESC')->first();
+			$newId =  Resident::select('household_id')->where('resident_status','=','Active')->orderby('household_id', 'DESC')->first();
 			return response($newId['household_id'] + 1);
 		}
-		else{
+		else if($data['type'] == 'transfer'){
 			$transferId =  Resident::select('household_id','house_no','street')->where('fullname','=',$data['name'])->first();
 			return response($transferId);
-			// return response($data);
 		}
 
 	}
@@ -165,7 +191,7 @@ class ResidentController extends Controller
 		$data = Request::all();
 
 		if($data['type'] == 'new'){
-			$newId =  Resident::select('family_id')->where('resident_status','=','active')->orderby('family_id', 'DESC')->first();
+			$newId =  Resident::select('family_id')->where('resident_status','=','Active')->orderby('family_id', 'DESC')->first();
 			return response($newId['family_id'] + 1);
 		}
 		else{
@@ -293,67 +319,94 @@ class ResidentController extends Controller
 	}
 
 	public function residentList(){
-		$residentInfo = Resident::where('resident_status','=','active')->get();
+		$residentInfo = Resident::where('resident_status','=','Active')->get();
 	    return view('admin.residentList')
 	    	->with('residentInfo', $residentInfo);
 	}
 	public function householdList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->where('household_head','=','yes')->get();
+		$mother = Resident::where('gender', '=', 'Female')->where('resident_status', '=', 'Active')->get();
+		$father = Resident::where('gender', '=', 'Male')->where('resident_status', '=', 'Active')->get();
+		$househead = Resident::where('household_head','=','yes')->get();
 	    return view('admin.householdList')
-	    	->with('residentInfo', $residentInfo);
+	    	->with('residentInfo', $residentInfo)
+	    		->with('mother', $mother)
+	    			->with('father', $father)
+	    				->with('househead', $househead);
 	}
 	public function getFamily(){
 		$data = Request::all();
 
-		$families = Resident::where('resident_status','=','active')
+		$families = Resident::where('resident_status','=','Active')
 			->where('household_id','=', $data['id'])
 				->where('family_head','=', 'yes')->get();
 
 		return response($families);
 	}
 	public function familyList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->where('family_head','=','yes')->get();
+		$mother = Resident::where('gender', '=', 'Female')->where('resident_status', '=', 'Active')->get();
+		$father = Resident::where('gender', '=', 'Male')->where('resident_status', '=', 'Active')->get();
 	    return view('admin.familyList')
-	    	->with('residentInfo', $residentInfo);
+	    	->with('residentInfo', $residentInfo)
+	    		->with('mother', $mother)
+	    			->with('father', $father);
 	}
 	public function getMembers(){
 		$data = Request::all();
 
-		$family = Resident::where('resident_status','=','active')
+		$family = Resident::where('resident_status','=','Active')
 			->where('family_id','=', $data['id'])->get();
 
 		return response($family);
 	}
 	public function femaleList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->where('gender','=','Female')->get();
 	    return view('admin.femaleList')
 	    	->with('residentInfo', $residentInfo);
 	}
 	public function maleList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->where('gender','=','Male')->get();
 	    return view('admin.maleList')
 	    	->with('residentInfo', $residentInfo);
 	}
 	public function voterList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->where('voter','=','voter')->get();
 	    return view('admin.voterList')
 	    	->with('residentInfo', $residentInfo);
 	}
 	public function seniorList(){
-		$residentInfo = Resident::where('resident_status','=','active')
+		$residentInfo = Resident::where('resident_status','=','Active')
 			->whereYear('birthdate','<=',1955)->get();
 	    return view('admin.seniorList')
 	    	->with('residentInfo', $residentInfo);
 	}
 	public function transferredList(){
-		$residentInfo = Resident::where('resident_status','=','transferred')->get();
+		$residentInfo = Resident::where('resident_status','=','Transferred')->get();
 	    return view('admin.transferredList')
 	    	->with('residentInfo', $residentInfo);
 	}
+	public function checkParents(){
+		$data = Request::all();
 
+		$mom = Resident::where('family_id','=', $data['fam'])->where('role','=','Wife')->first();
+		$dad = Resident::where('family_id','=', $data['fam'])->where('role','=','Husband')->first();
+		return response()->json(['mom'=> $mom, 'dad' => $dad]);
+	}
+	public function transferAddress(){
+		$data = Request::all();
+
+		Resident::where('family_id','=', $data['id'])->update(['resident_status' => 'Transferred']);
+		Resident::where('family_id','=', $data['id'])->update(['household_head' => 'no']);
+		Resident::where('family_id','=', $data['id'])->update(['family_head' => 'no']);
+		Resident::where('family_id','=', $data['id'])->update(['transfer_to' => $data['address']]);
+
+		return response()->json(['success'=> 'yes']);		
+		
+	}
 }

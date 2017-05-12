@@ -165,14 +165,24 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
-                                            <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
+                                            <input type="text" name="mother" class="form-control input-xs" id="InputMother" list="selectMother" placeholder="Mothers Name" >
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="InputFather">Father's Name:</label>
-                                            <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
+                                            <input type="text" name="father" class="form-control input-xs" id="InputFather" list="selectFather" placeholder="Fathers Name" >
                                         </div>
                                     </div>
                                 </div>
+                                <datalist id="selectMother">
+                                      @foreach($mother as $mom)
+                                        <option>{{$mom['fullname']}}</option>
+                                      @endforeach
+                                  </datalist>
+                                <datalist id="selectFather">
+                                  @foreach($father as $dad)
+                                    <option>{{$dad['fullname']}}</option>
+                                  @endforeach
+                                </datalist>
                                 <div class="pull-right">
                                     <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
                                     <button id="register" type="submit" name="tryy" class="btn btn-warning"><span class="glyphicon glyphicon-plus"> </span> Register</button>

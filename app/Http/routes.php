@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/check_head', array('uses' => 'ResidentController@checkHead', 'as' => 'checkHead'));
 		Route::get('/get_members', array('uses' => 'ResidentController@getMembers', 'as' => 'getMembers'));
 		Route::get('/get_family', array('uses' => 'ResidentController@getFamily', 'as' => 'getFamily'));
+		Route::get('/check_parents', array('uses' => 'ResidentController@checkParents', 'as' => 'checkParents'));
+		Route::post('/transfer_exisiting', array('uses' => 'ResidentController@transferExisting', 'as' => 'transferExisting'));
+		Route::post('/transfer_address', array('uses' => 'ResidentController@transferAddress', 'as' => 'transferAddress'));
 			
 		//end of resident
 

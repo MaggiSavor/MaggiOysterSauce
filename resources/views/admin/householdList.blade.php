@@ -108,7 +108,7 @@
 
           <ul class="nav nav-tabs" id="tabContent">
             <li class="active"><a href="#details{{$residentinfo['id']}}" data-toggle="tab">Personal Information</a></li>
-            <li class="listmember" value="{{$residentinfo['household_id']}}"><a href="#members{{$residentinfo['id']}}" data-toggle="tab">Household</a></li>
+            <li class="listmember" id="{{$residentinfo['id']}}" value="{{$residentinfo['household_id']}}"><a href="#members{{$residentinfo['id']}}" data-toggle="tab">Household</a></li>
             <li class="addNewFam" value="{{$residentinfo['household_id']}}"><a href="#addMember{{$residentinfo['id']}}" data-toggle="tab">Add Family</a></li>
           </ul>
   
@@ -238,6 +238,7 @@
           <div class="modal-body">
             <div class="table-responsive card-box">
             <h3>Families in the Household</h3>
+            <input type="hidden" name="householdID" class="form-control input-xs"  placeholder="Household id" id="house{{$residentinfo['id']}}" value="{{$residentinfo['household_id']}}">
             <center><label>Household ID: {{$residentinfo['household_id']}}</label></center>
               <table class="table table-hover mails m-0 table table-actions-bar">
                   <thead>
@@ -382,14 +383,29 @@
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
-                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
+                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" list="selectMother" placeholder="Mothers Name" >
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="InputFather">Father's Name:</label>
-                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
+                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" list="selectFather" placeholder="Fathers Name" >
                                     </div>
                                 </div>
                             </div>
+                            <datalist id="selectMother">
+                              @foreach($mother as $mom)
+                                <option>{{$mom['fullname']}}</option>
+                              @endforeach
+                            </datalist>
+                            <datalist id="selectFather">
+                              @foreach($father as $dad)
+                                <option>{{$dad['fullname']}}</option>
+                              @endforeach
+                            </datalist>
+                            <datalist id="selectHouse">
+                              @foreach($househead as $house)
+                                <option>{{$house['fullname']}}</option>
+                              @endforeach
+                            </datalist>
                             <div class="pull-right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="reset"class="btn btn-warning" name="reset" id="reset">Reset</button>
@@ -504,6 +520,7 @@
     <script>
       $('.listmember').click(function(){
         var houseId = this.value;
+        var resID = this.id;
         $.ajax({
             method: 'GET',
             url: '{{ URL::route("getFamily")}}',
@@ -516,7 +533,7 @@
               row.remove();
 
               for(i=0;i<data.length;i++){
-                  $('.row'+houseId ).append('<tr><td></td><td><b>'+data[i]["lastname"]+' Family</b></td><td><a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="seeMore'+data[i]["family_id"]+'" name="true" onclick="show('+data[i]["family_id"]+')">Show more</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="moveFam'+data[i]["family_id"]+'" name="true" onclick="trans('+data[i]["family_id"]+')" data-toggle="tooltip" title="Transfer to another household">Transfer Family</a></td></tr>');
+                  $('.row'+houseId ).append('<tr><td></td><td><b>'+data[i]["lastname"]+' Family</b></td><td><a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="seeMore'+data[i]["family_id"]+'" name="true" onclick="show('+data[i]["family_id"]+')">Show more</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="moveFam'+data[i]["family_id"]+'" name="true" onclick="trans('+data[i]["family_id"]+','+resID+')" data-toggle="tooltip" title="Transfer to another household">Transfer Household</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" id="other'+data[i]["family_id"]+'" name="true" onclick="other('+data[i]["family_id"]+')" data-toggle="tooltip" title="Transfer to another barangay">Transfer Address</a></td></tr>');
               }
                $('[data-toggle="tooltip"]').tooltip(); 
             }
@@ -529,6 +546,9 @@
           $('#moveFam'+id).attr('name','true');
           $('.container'+id).remove();
           $('#seeMore'+id).attr('name','false');
+          $('#other'+id).text('Transfer Household');
+          $('#other'+id).attr('name','true');
+          $('.box'+id).remove();
 
           $('#seeMore'+id).text('Show less');
           var row = $('#seeMore'+id).closest('tr');
@@ -552,35 +572,211 @@
           $('.members'+id).remove();
         }
       }
-      function trans(id){
+      function trans(id,id2){
         if($('#moveFam'+id).attr('name') == 'true'){
           $('#seeMore'+id).text('Show more');
           $('#seeMore'+id).attr('name','true');
           $('.members'+id).remove();
           $('#moveFam'+id).attr('name','false');
-
           $('#moveFam'+id).text('Cancel');
+          $('#other'+id).text('Transfer Household');
+          $('#other'+id).attr('name','true');
+          $('.box'+id).remove();
+
+          var houseID = $('#house'+id2).val();
+
           var row = $('#moveFam'+id).closest('tr');
-          row.after('<tr class="container'+id+'"><td></td><td>Transfer to which household?</td><td><input type="text" placeholder="Input household head name">&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30">Transfer</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30">New</a></td><td><b>Household ID:'+id+'</b></td></tr>');
-          // $.ajax({
-          //     method: 'GET',
-          //     url: '{{ URL::route("getMembers")}}',
-          //     data:{
-          //       'id' : id,
-          //     },
-          //     success:function(data)
-          //     {
-          //         for(i=0;i<data.length;i++){
-          //           row.after('<tr class="members'+id+'"><td></td><td>'+data[i]["firstname"]+' '+data[i]["middlename"]+' '+data[i]["lastname"]+'</td><td><a href="update_resident/'+data[i]["id"]+'" class="btn btn-default btn-md waves-effect waves-light m-b-30">Update</a></td></tr>');
-          //         }
-          //     }
-          // })
+          row.after('<tr class="container'+id+'"><td></td><td>Transfer to which household?</td><td><input type="text"  onchange="getname('+houseID+')" id="name'+houseID+'" placeholder="Input household head name"list="selectHouse">&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" data-toggle="tooltip" title="Transfer to an existing household!" onclick="transferExisting('+houseID+','+id+')">Transfer</a>&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" data-toggle="tooltip" onclick="transferNew('+id+')" title="Transfer to a new household!">New</a></td><td><b id="toChange'+houseID+'">Household ID:'+houseID+'</b></td></tr>');
+          $('[data-toggle="tooltip"]').tooltip(); 
         }
         else{
-          $('#moveFam'+id).text('Transfer Family');
+          $('#moveFam'+id).text('Transfer Household');
           $('#moveFam'+id).attr('name','true');
           $('.container'+id).remove();
         }
+      }
+
+      function other(id){
+        if($('#other'+id).attr('name') == 'true'){
+          $('#seeMore'+id).text('Show more');
+          $('#seeMore'+id).attr('name','true');
+          $('.members'+id).remove();
+          $('#moveFam'+id).text('Transfer Household');
+          $('#moveFam'+id).attr('name','true');
+          $('.container'+id).remove();
+          $('#other'+id).attr('name','false');
+          $('#other'+id).text('Cancel');
+
+
+          var row = $('#other'+id).closest('tr');
+          row.after('<tr class="box'+id+'"><td></td><td>Transfer to where?</td><td><input type="text" id="address'+id+'" placeholder="Input place/barangay">&nbsp;&nbsp;<a class="btn btn-default btn-md waves-effect waves-light m-b-30" data-toggle="tooltip" title="Transfer to this address!" onclick="transferAdd('+id+')">Transfer</a></td></tr>');
+          $('[data-toggle="tooltip"]').tooltip();
+        }
+        else{
+          $('#other'+id).text('Transfer Household');
+          $('#other'+id).attr('name','true');
+          $('.box'+id).remove();
+        }
+      }
+
+      function transferAdd(id){
+        var address = $('#address'+id).val();
+        swal({
+            title: "Are you sure?",
+              text: "You are trying to tranfer this family to another place/barangay.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+              var name = $('#name'+id).val();
+               $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('transferAddress')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: {
+                  'address': address,
+                  'id'  : id,
+                },
+                success: function(data){
+                  console.log(data)
+                  if(data.success == "yes"){
+                    swal({
+                      title:"Saved!", 
+                      text: "Family has been transferred!",
+                      type: "success"
+                    });
+                    setTimeout(function(){
+                             location.reload();
+                        }, 2000); 
+                  }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+              
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
+        
+      }
+
+      function getname(id){
+        var name = $('#name'+id).val();
+
+         $.ajax({
+              method: 'GET',
+              url: '{{ URL::route("getHouseId")}}',
+              data:{
+                'name' : name,
+                'type' : 'transfer'
+              },
+              success:function(data)
+              {
+                  $('#toChange'+id).text('Household ID:'+data.household_id);
+              }
+          })
+      }
+
+      function transferExisting(id,id2){
+        swal({
+            title: "Are you sure?",
+              text: "You are trying to move this family to an existing household.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+              var name = $('#name'+id).val();
+               $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('transferExisting')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: {
+                  'name': name,
+                  'id'  : id2,
+                  'type': 'existing'
+                },
+                success: function(data){
+                  console.log(data)
+                  if(data.success == "yes"){
+                    swal({
+                      title:"Saved!", 
+                      text: "Family has been transferred!",
+                      type: "success"
+                    });
+                    setTimeout(function(){
+                             location.reload();
+                        }, 2000); 
+                  }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+              
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
+      }
+
+      function transferNew(id){
+        swal({
+            title: "Are you sure?",
+              text: "You are trying to move this family to a new household.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+               $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('transferExisting')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: {
+                  'type': 'transNew',
+                  'id'  : id
+                },
+                success: function(data){
+                  console.log(data)
+                  if(data.success == "yes"){
+                    swal({
+                      title:"Saved!", 
+                      text: "Family has been transferred!",
+                      type: "success"
+                    });
+                    setTimeout(function(){
+                             location.reload();
+                        }, 2000); 
+                  }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+              
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
       }
     </script>
     <script>

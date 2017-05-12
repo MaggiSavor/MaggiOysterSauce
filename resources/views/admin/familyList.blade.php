@@ -270,7 +270,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label for="InputFName">Role:</label>
-                                        <select class="form-control" name="role" id="InputRole" >
+                                        <select class="form-control" name="role" id="InputRole" onchange="change(this,{{$residentinfo['family_id']}})">
                                             <option hidden value="">--Select Role--</option>
                                             <option value="Husband">Husband</option>
                                             <option value="Wife">Wife</option>
@@ -383,13 +383,24 @@
                                 <div class="col-md-12">
                                     <div class="form-group col-md-4">
                                         <label for="InputMother">Mother's Name:&nbsp;&nbsp;</label>
-                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" placeholder="Mothers Name" >
+                                        <input type="text" name="mother" class="form-control input-xs" id="InputMother" list="selectMother" placeholder="Mothers Name" >
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="InputFather">Father's Name:</label>
-                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" placeholder="Fathers Name" >
+                                        <input type="text" name="father" class="form-control input-xs" id="InputFather" list="selectFather" placeholder="Fathers Name" >
                                     </div>
                                 </div>
+                                <datalist id="selectMother">
+                                  @foreach($mother as $mom)
+                                    <option>{{$mom['fullname']}}</option>
+                                  @endforeach
+                                </datalist>
+                                <datalist id="selectFather">
+                                  @foreach($father as $dad)
+                                    <option>{{$dad['fullname']}}</option>
+                                  @endforeach
+                                </datalist>
+
                             </div>
                             <div class="pull-right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -530,6 +541,28 @@
             }
         })
       })
+      function change(text, id){
+        if(text.value == 'Son' || text.value == 'Daughter'){
+          $.ajax({
+            method: 'GET',
+            url: '{{ URL::route("checkParents")}}',
+            data:{
+              'fam' : id
+            },
+            success:function(data)
+            {
+                console.log(data)
+                $('#InputMother').val(data.mom['firstname']+' '+data.mom['middlename']+' '+data.mom['lastname']);
+                $('#InputFather').val(data.dad['firstname']+' '+data.dad['middlename']+' '+data.dad['lastname']);
+
+            }
+          })
+        }
+        else{
+          $('#InputMother').val('');
+          $('#InputFather').val('');
+        }
+      }
     </script>
     <script>
       $('.addNewMember').click(function(){
