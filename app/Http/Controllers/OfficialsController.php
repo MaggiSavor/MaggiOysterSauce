@@ -201,6 +201,18 @@ public function addNew(){
     return Redirect::back();
 
     }
+    public function getOfficials(){
+    	$data = Request::all();
 
+    	$officials = BarangayOfficial::where('term_year','=', $data['year'])->get();
 
+    	return response($officials);
+    }
+    public function validResident(){
+    	$data = Request::all();
+
+    	$check = Resident::where('fullname','=', $data['name'])->count();
+
+    	return response($check);
+    }
 }

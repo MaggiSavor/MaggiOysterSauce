@@ -535,6 +535,8 @@
       })
       
       $('#transHouse').click(function(){
+        $('#housecheck').prop('checked', false);
+        $('#househead').val('no');
         var name = $('#transferHouseName').val();
         $.ajax({
           method: 'GET',
@@ -558,6 +560,7 @@
 
       $('#newFamily').click(function(){
         $('#familycheck').prop('checked', true);
+        $('#familyhead').val('yes');
         $.ajax({
           method: 'GET',
           url: '{{ URL::route("getFamilyId")}}',
@@ -584,6 +587,8 @@
 
     $('#transFam').click(function(){
         var name = $('#transferFamilyName').val();
+        $('#familycheck').prop('checked', false);
+        $('#familyhead').val('no');
         $.ajax({
           method: 'GET',
           url: '{{ URL::route("getFamilyId")}}',

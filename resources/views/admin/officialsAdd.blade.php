@@ -57,43 +57,43 @@
                                   <div class="col-md-12">
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Chairman</label>
-                                          <input type="text" name="chairman" class="form-control" id="Chairman" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="chairman" class="form-control" id="0" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Secretary</label>
-                                          <input type="text" name="secretary" class="form-control" id="Secretary" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="secretary" class="form-control" id="1" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Treasurer</label>
-                                          <input type="text" name="treasurer" class="form-control"  id="Treasurer" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="treasurer" class="form-control"  id="2" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad1</label>
-                                          <input type="text" name="kag1" class="form-control" id="Kag1" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag1" class="form-control" id="3" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad2</label>
-                                          <input type="text" name="kag2" class="form-control" id="Kag2" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag2" class="form-control" id="4" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad3</label>
-                                          <input type="text" name="kag3" class="form-control" id="Kag3" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag3" class="form-control" id="5" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad4</label>
-                                          <input type="text" name="kag4" class="form-control" id="Kag4" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag4" class="form-control" id="6" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad5</label>
-                                          <input type="text" name="kag5" class="form-control" id="Kag5" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag5" class="form-control" id="7" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad6</label>
-                                          <input type="text" name="kag6" class="form-control" id="Kag6" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag6" class="form-control" id="8" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label class="control-label">Brgy Kagawad7</label>
-                                          <input type="text" name="kag7" class="form-control" id="Kag7" placeholder="Full Name" list="selectOfficials" autocomplete="off">
+                                          <input type="text" name="kag7" class="form-control" id="9" placeholder="Full Name" list="selectOfficials" autocomplete="off">
                                       </div>
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                       <div class="col-xs-12">
@@ -141,38 +141,112 @@
         });      
       });
     </script>
-    <!-- <script>
-        $('#Chairman, #Secretary, #Treasurer, #Kag1, #Kag2, #Kag3, #Kag4, #Kag5, #Kag6, #Kag7').on('change', function(){
-            var chair = $('#Chairman').val();
-            var sec = $('#Secretary').val();
-            var tre = $('#Treasurer').val();
-            var kag1 = $('#Kag1').val();
-            var kag2 = $('#Kag2').val();
-            var kag3 = $('#Kag3').val();
-            var kag4 = $('#Kag4').val();
-            var kag5 = $('#Kag5').val();
-            var kag6 = $('#Kag6').val();
-            var kag7 = $('#Kag7').val();
-
-            if (chair === sec || chair === tre || chair === kag1 || chair === kag2 || chair === kag3 || chair === kag4 || chair === kag5 || chair === kag6 || chair === kag7){
-                sweetAlert({
-                  title:'ERROR!!!',
-                  text: 'Duplicate Record!!',
-                  type:'error'
-                },function(isConfirm){
-                      // $('#Secretary').val("");
-                });
-            }else if (sec == tre || sec == kag1 || sec == kag2 || sec == kag3 || sec == kag4 || sec == kag5 || sec == kag6 || sec == kag7){
-                sweetAlert({
-                  title:'ERROR!!!',
-                  text: 'Duplicate Record!!',
-                  type:'error'
-                },function(isConfirm){
-                      // $('#Secretary').val("");
-                });
+    <script>
+      $('.form-control').change(function(){
+        var name = $(this)
+        $.ajax({
+          method: 'GET',
+          url: '{{ URL::route("validResident")}}',
+          data:{
+            'name' : name.val()
+          },
+          success:function(data)
+          {
+            console.log(data)
+            if(data == 0){
+              swal("Error!", "Not a resident!", "error");
+              name.val("");
             }
+          }
         })
-    </script> -->
+      })
+    </script>
+    <script>
+    $('#addOff').click(function(){
+      var chair = $('[name="chairman"]').val();
+      var sec = $('[name="secretary"]').val();
+      var kag1 = $('[name="kag2"]').val();
+      var kag2 = $('[name="kag2"]').val();
+      var kag3 = $('[name="kag3"]').val();
+      var kag4 = $('[name="kag4"]').val();
+      var kag5 = $('[name="kag5"]').val();
+      var kag6 = $('[name="kag6"]').val();
+      var kag7 = $('[name="kag7"]').val();
+      // alert($('.form-control').length)
+      for(i=0;i<$('.form-control').length;i++){
+        if(chair == $('#'+i).val()){
+          swal("Error!", "Chairman is duplicated", "error");
+          break;
+        }
+        if(sec == $('#'+i).val()){
+          swal("Error!", "Secretary is duplicated", "error");
+          break;
+        }
+        if(kag1 == $('#'+i).val()){
+          swal("Error!", "Kagawad 1 is duplicated", "error");
+          break;
+        }
+        if(kag2 == $('#'+i).val()){
+          swal("Error!", "Kagawad 2 is duplicated", "error");
+          break;
+        }
+        if(kag3 == $('#'+i).val()){
+          swal("Error!", "Kagawad 3 is duplicated", "error");
+          break;
+        }
+        if(kag4 == $('#'+i).val()){
+          swal("Error!", "Kagawad 4 is duplicated", "error");
+          break;
+        }
+        if(kag5 == $('#'+i).val()){
+          swal("Error!", "Kagawad 5 is duplicated", "error");
+          break;
+        }
+        if(kag6 == $('#'+i).val()){
+          swal("Error!", "Kagawad 6 is duplicated", "error");
+          break;
+        }
+        if(kag7 == $('#'+i).val()){
+          swal("Error!", "Kagawad 7 is duplicated", "error");
+          break;
+        }
+      }
+
+
+    })
+        // $('#Chairman, #Secretary, #Treasurer, #Kag1, #Kag2, #Kag3, #Kag4, #Kag5, #Kag6, #Kag7').on('change', function(){
+            // var chair = $('#Chairman').val();
+            // var sec = $('#Secretary').val();
+            // var tre = $('#Treasurer').val();
+            // var kag1 = $('#Kag1').val();
+            // var kag2 = $('#Kag2').val();
+            // var kag3 = $('#Kag3').val();
+            // var kag4 = $('#Kag4').val();
+            // var kag5 = $('#Kag5').val();
+            // var kag6 = $('#Kag6').val();
+            // var kag7 = $('#Kag7').val();
+
+        //     if (chair === sec || chair === tre || chair === kag1 || chair === kag2 || chair === kag3 || chair === kag4 || chair === kag5 || chair === kag6 || chair === kag7){
+        //         sweetAlert({
+        //           title:'ERROR!!!',
+        //           text: 'Duplicate Record!!',
+        //           type:'error'
+        //         },function(isConfirm){
+        //               // $('#Secretary').val("");
+        //         });
+        //     }else if (sec == tre || sec == kag1 || sec == kag2 || sec == kag3 || sec == kag4 || sec == kag5 || sec == kag6 || sec == kag7){
+        //         sweetAlert({
+        //           title:'ERROR!!!',
+        //           text: 'Duplicate Record!!',
+        //           type:'error'
+        //         },function(isConfirm){
+        //               // $('#Secretary').val("");
+        //         });
+        //     }
+        // })
+
+
+    </script>
     <script>
     $('document').ready(function(){
     $('#addOfficials').formValidation({
@@ -258,7 +332,7 @@
                 },
             }
     })
-    .on('success.form.fv', function(e) {
+    .on('err.form.fv', function(e) {
           e.preventDefault();
 
           var $form = $(e.target),        // The form instance

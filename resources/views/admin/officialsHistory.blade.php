@@ -65,53 +65,53 @@
                                     <th>Term Year</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody id="tbl">
+                                    <tr class="rem">
                                         <td>Chairman</td>
                                         <td>{{$chairman['fullname']}}</td>
                                         <td>{{$chairman['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Secretary</td>
                                         <td>{{$sec['fullname']}}</td>
                                         <td>{{$sec['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Treasurer</td>
                                         <td>{{$tre['fullname']}}</td>
                                         <td>{{$tre['term_year']}}</td>
                                     </tr> 
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 1</td>
                                         <td>{{$kag1['fullname']}}</td>
                                         <td>{{$kag1['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 2</td>
                                         <td>{{$kag2['fullname']}}</td>
                                         <td>{{$kag2['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 3</td>
                                         <td>{{$kag3['fullname']}}</td>
                                         <td>{{$kag3['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 4</td>
                                         <td>{{$kag4['fullname']}}</td>
                                         <td>{{$kag4['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 5</td>
                                         <td>{{$kag5['fullname']}}</td>
                                         <td>{{$kag5['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 6</td>
                                         <td>{{$kag6['fullname']}}</td>
                                         <td>{{$kag6['term_year']}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="rem">
                                         <td>Kagawad 7</td>
                                         <td>{{$kag7['fullname']}}</td>
                                         <td>{{$kag7['term_year']}}</td>
@@ -144,10 +144,27 @@
         $liYear = $selectYear.find('li');
 
         $selectYear.click(function() {
+                var rem = $('.rem');
+                rem.remove();
           var filter = $(this);
          $('#yearFilter').html(filter.text()+' <span class="caret"></span>');
          console.log(filter.text())
-         })
+                rem.remove();
+          $.ajax({
+              method: 'GET',
+              url: '{{ URL::route("getOfficials")}}',
+              data:{
+                'year' : filter.text()
+              },
+              success:function(data)
+              {
+                 for(i=0;i<data.length;i++){
+                    $('#tbl').append('<tr class="rem"><td>'+data[i]['position']+'</td><td>'+data[i]['fullname']+'</td><td>'+data[i]['term_year']+'</td></tr>')
+                 }
+
+              }
+            })
+        })
 
     </script>
 
