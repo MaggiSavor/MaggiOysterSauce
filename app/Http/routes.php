@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth', 'admin']], function(){
 	Route::group(array('prefix' => 'admin/'), function(){
 		Route::get('/sample', array('uses' => 'AdminController@sample', 'as' => 'sample'));
 		Route::get('/dashboard', array('uses' => 'AdminController@dashboard', 'as' => 'dashboard'));
@@ -137,7 +137,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 	});
 });
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth', 'user']], function(){
 	Route::group(array('prefix' => 'standard/'), function(){
 		Route::get('/home', array('uses' => 'StandardUserController@home', 'as' => 'home1'));
 		Route::get('/resident', array('uses' => 'StandardUserController@resident', 'as' => 'resident1'));
