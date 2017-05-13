@@ -173,7 +173,7 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{URL('/')}}">Barangay 5 Zone 1</a>
+        <a class="navbar-brand" href="{{URL('/')}}">Barangay 5 Zone 1 </a>
     </div>
     <!-- /.navbar-header -->
     <?php
@@ -197,12 +197,13 @@ body{background: #eee ;font-family: 'Open Sans', sans-serif;}h3{font-size: 30px;
                 <li>
                     <a href="#">
                         <div>
-                            <strong>{{$caseHis->case_title}}</strong>
+                            <strong>Case no: {{$caseHis->id}} - {{$caseHis->case_title}}</strong>
                             <span class="pull-right text-muted">
                                 <em>{{$caseHis->summon_time}}</em>
                             </span>
                         </div>
-                        <div>{{$caseHis->complainant_fullname}}</div>
+                        <div>Complainant: {{$caseHis->complainant_fullname}}</div>
+                        <div>Defendant: {{$caseHis->defendant_fullname}}</div>
                     </a>
                 </li>
                 <li class="divider"></li>
