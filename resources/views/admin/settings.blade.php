@@ -158,7 +158,6 @@
                                     <div class="tab">
                                       <button class="tablinks" onclick="openCity(event, 'manageUser')" id="defaultOpen">Manage Users</button>
                                       <button class="tablinks" onclick="openCity(event, 'addUser')">Add Users</button>
-                                      <button class="tablinks" onclick="openCity(event, 'tab')">Tab</button>
                                     </div>
 
                                     <div id="manageUser" class="tabcontent">
@@ -190,8 +189,8 @@
                                                             <td>{{$user->fullname}}</td>
                                                             <td>{{$user->email}}</td>
                                                             <td>{{$user->username}}</td>
-                                                            <td><button type="button" class="btn btn-success" name="Update" id="Update" >
-                                                                <span class="glyphicon glyphicon-edit"> </span> Update
+                                                            <td><button type="button" onclick="del({{$user->id}})" class="btn btn-warning" name="Update" id="Update" >
+                                                                <span class="glyphicon glyphicon-edit"> </span> Delete
                                                             </button></td>
                                                         </tr>
                                                         @endforeach
@@ -221,8 +220,8 @@
                                                                 <input id="SearchName" name="SearchName" class="form-control" placeholder="Full Name" list="listid" autocomplete="auto">
 
                                                                 <datalist id='listid'>
-                                                                @foreach($residents as $resident)
-                                                                  <option value="{{$resident['fullname']}}">{{$resident['resident_id']}}</option>
+                                                                @foreach($officials as $official)
+                                                                  <option value="{{$resident['fullname']}}">{{$official['resident_id']}}</option>
                                                                 @endforeach
                                                                 </datalist>
                                                             </div>
@@ -297,10 +296,6 @@
                                         <!-- /.panel -->
                                     </div>
 
-                                    <div id="tab" class="tabcontent">
-                                      <h3>Tokyo</h3>
-                                      <p>Tokyo is the capital of Japan.</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -323,6 +318,48 @@
     <script src="../assets/morrisjs/morris.min.js"></script>
     <script src="../assets/data/morris-data.js"></script>
     <script src="../assets/js/bootstrap-toggle.js"></script>
+    <script>
+        function del(id){
+        swal({
+            title: "Are you sure?",
+              text: "You are about to delete this user.",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: false
+          },
+          function(isConfirm){
+            if(isConfirm){
+               $.ajax({
+                method: 'POST',
+                url: "{{URL::Route('deleteUser')}}",
+                headers:{'X-CSRF-Token': $('input[name="_token"]').val()},
+                dataType: 'JSON',
+                data: {
+                  'id'  : id,
+                },
+                success: function(data){
+                 if(data.success == "Successfully Deleted!"){
+                    swal("Deleted!", "User has been deleted!", "success");
+                    $("#registerUser")[0].reset();
+                }else if(data.error == "Cannot!"){
+                    swal("Error!", "Cannot delete own account!", "error");
+                }
+                },error: function(data){
+                    swal("Error!", "Something went wrong", "error");
+                  }
+              });
+              
+            }
+            else {
+              swal("Cancelled", "Something went wrong!", "error");
+            }
+          });
+
+        }
+    </script>
     <script type="text/javascript">
         //toggle background button 
         $(document).ready(function() {

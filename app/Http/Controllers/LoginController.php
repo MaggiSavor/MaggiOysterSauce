@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Resident;
 use App\Models\Settings;
+use App\Models\BarangayOfficial;
 use App\Models\User;
 use App\Models\AuditTrail;
 use Request;
@@ -36,7 +37,7 @@ class LoginController extends Controller
            return response()->json(array('error' =>'User Exists!'));
        }
        else{
-        $resident = Resident::where('fullname', $addUser['SearchName'])->exists();
+        $resident = BarangayOfficial::where('fullname', $addUser['SearchName'])->exists();
         if ($resident){
           try{
             //users

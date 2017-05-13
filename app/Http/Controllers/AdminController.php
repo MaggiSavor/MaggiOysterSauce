@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Models\User;
 use App\Models\Resident;
 use App\Models\Blotter;
+use App\Models\BarangayOfficial;
 use App\Models\Settings;
 use Request;
 use Auth;
@@ -72,10 +73,12 @@ class AdminController extends Controller
 		$settings = Settings::where('id','=',(Auth::user()->id))->first();
 		$users = User::all();
 		$residents = Resident::all();
+		$officials = BarangayOfficial::all();
 		    return view('admin.settings')
 		    	->with('users', $users)
 		    		->with('residents', $residents)
-		    			->with('settings', $settings);	
+		    			->with('settings', $settings)
+		    				->with('officials', $officials);	
 	}
 
 	public function sample(){

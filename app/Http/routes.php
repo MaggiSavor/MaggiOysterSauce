@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function(){
 		Route::get('/settings', array('uses' => 'AdminController@settings', 'as' => 'settings'));
 		Route::post('/save_settings/{id}', array('uses' => 'SettingsController@saveSettings', 'as' => 'saveSettings'));
 		Route::post('/register_user', array('uses' => 'LoginController@registerUser', 'as' => 'registerUser'));
-
+		Route::post('/delete_user', array('uses' => 'SettingsController@deleteUser', 'as' => 'deleteUser'));
 		//Resident
 		Route::get('/new_resident', array('uses' => 'ResidentController@newResidents', 'as' => 'newResidents'));
 		Route::get('/resident', array('uses' => 'ResidentController@resident', 'as' => 'resident'));

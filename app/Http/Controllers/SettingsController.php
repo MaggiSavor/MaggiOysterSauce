@@ -28,5 +28,19 @@ class SettingsController extends Controller
 	          return response()->json(["error" => "yes"] );
 	    }
    }
+   public function deleteUser(){
+   	$data = Request::all();
+
+   	$deleteuser = User::where('id','=', $data['id'])->first();
+   
+
+   	if($data['id'] == (Auth::user()->id)){
+   		return response()->json(array('error' =>'Cannot!'));
+   	}else{
+   		$deleteuser->delete();
+        return response()->json(array('success' =>'Successfully Deleted!')); 
+   	}
+
+   }
 
 }
