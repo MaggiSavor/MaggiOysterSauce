@@ -195,11 +195,11 @@ public function addNew(){
 }
 	public function updateSecretary($id){
     $data= Request::all();
-    $update = BarangayOfficial::find($id);
+    $update = BarangayOfficial::where('id','=', $id)->first();
     $update['fullname'] = $data['secretary'];
     $update->save();
-    return Redirect::back();
 
+    return redirect::back();
     }
     public function getOfficials(){
     	$data = Request::all();
