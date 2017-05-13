@@ -334,7 +334,7 @@
                 },
             }
     })
-    .on('err.field.fv', function(e, data) {
+    .on('err.form.fv', function(e, data) {
       e.preventDefault();
 
        var $form = $(e.target),

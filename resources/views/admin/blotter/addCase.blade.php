@@ -208,7 +208,7 @@
                     }
                 }
             })
-            .on('err.field.fv', function(e) {
+            .on('err.form.fv', function(e) {
                     e.preventDefault();
 
                         var $form = $(e.target),        // The form instance
