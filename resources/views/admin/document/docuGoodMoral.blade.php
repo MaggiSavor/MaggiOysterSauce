@@ -213,28 +213,26 @@
                  data: dataString,
                  success: function(data){
                     if(data.success == "Successfully Saved!"){
+                        //Get the HTML of div
+                       var divElements = document.getElementById('printableArea'+certID).innerHTML;
+                       //Reset the page's HTML with div's HTML only
+                       document.body.innerHTML = 
+                         "<html><head><title></title></head><body>" + 
+                         divElements + "</body>";
+
+                       //Print Page
+                       window.print();
                         window.location.reload();
                         swal("Saved!", "New case has been saved!", "success");
+                    }else if(data.error == "Cannot issue!"){
+                          swal("Error!", "This person has an on-going case!", "error");
                     }
 
                  },error: function(data){
-                    window.location.reload();
                     swal("Something went wrong!");
                  }
                });
-               //Get the HTML of div
-               var divElements = document.getElementById('printableArea'+certID).innerHTML;
-               //Reset the page's HTML with div's HTML only
-               document.body.innerHTML = 
-                 "<html><head><title></title></head><body>" + 
-                 divElements + "</body>";
-
-               //Print Page
-               window.print();
-
-               //Restore orignal HTML
-               // history.go(0); 
-               // document.body.innerHTML = oldPage;
+               
                
              }
              else {

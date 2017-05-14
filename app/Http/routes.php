@@ -155,7 +155,7 @@ Route::group(['middleware' => ['auth', 'user']], function(){
 		Route::get('/indigency_list', array('uses' => 'StandardUserController@indigencyList', 'as' => 'indigencyList1'));
 		Route::get('/barangay_id_list', array('uses' => 'StandardUserController@idList', 'as' => 'idList1'));
 		Route::get('/business_permit_list', array('uses' => 'StandardUserController@permitList', 'as' => 'permitList1'));
-		Route::get('/blotter_list', array('uses' => 'StandardUserController@blotterList', 'as' => 'blotterList11'));
+		Route::get('/blotter_list', array('uses' => 'StandardUserController@blotterList', 'as' => 'blotterList1'));
 		Route::get('/officials', array('uses' => 'StandardUserController@officials', 'as' => 'officials1'));
 		Route::get('/officials_history', array('uses' => 'StandardUserController@officialsHistory', 'as' => 'officialsHistory1'));
 		Route::get('/get_officials', array('uses' => 'StandardUserController@getOfficials', 'as' => 'getOfficials'));

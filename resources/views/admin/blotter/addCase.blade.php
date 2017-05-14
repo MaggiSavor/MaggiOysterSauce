@@ -119,7 +119,7 @@
                                   <div class="form-group col-sm-12">  
                                     <label for="inputDNmae" class="col-sm-2 col-sm-offset-2 control-label">Defendant Name:</label>
                                         <div class="col-sm-6">
-                                          <input type="text" name="dname" class="form-control" id="inputDName" placeholder="Full Name" required>
+                                          <input type="text" list="listid" autocomplete="off" name="dname" class="form-control" id="inputDName" placeholder="Full Name" required>
                                         </div>
                                   </div>
                                   <div class="form-group col-sm-12">  
@@ -146,6 +146,11 @@
                                         <div class="col-sm-6">
                                           <textarea class="form-control" name="description" rows="3" placeholder="Case Description" required></textarea>
                                         </div>
+                                        <datalist id="listid">
+                                          @foreach($res as $res)
+                                            <option>{{$res['fullname']}}</option>
+                                          @endforeach
+                                      </datalist>
                                   </div>
                                   <br>
                                 <button type="submit" id="addCase" name="addCase" class="btn btn-success btn-small btn pull-right"><span class = "glyphicon glyphicon-plus"></span> Add Blotter</button>

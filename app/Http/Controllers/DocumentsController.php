@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Models\Resident;
 use App\Models\Certification;
+use App\Models\Blotter;
 use App\Models\Indigency;
 use App\Models\GoodMoral;
 use App\Models\BarangayId;
@@ -189,15 +190,28 @@ class DocumentsController extends Controller
 	}
 	public function addGoodMoral(){
 		$data = Request::all();
-		$goodMoral = new GoodMoral;
+		$def = Blotter::where('defendant_fullname', $data['name'])
+								->where('case_rate','=','major')
+									->where('case_status', '!=', 'Case Closed')->exists();
+        if($def){
+            return response()->json(array('error' =>'Cannot issue!'));
+        }else{
+        	try{
+        		$goodMoral = new GoodMoral;
 	    
-	    $goodMoral['name'] = $data['name'];
-	    $goodMoral['age'] = $data['age'];
-	    $goodMoral['status'] = $data['status'];
-	    $goodMoral['address'] = $data['address'];
-	    $goodMoral->save();
-	    return response()->json(array('success' =>'Successfully Saved!'));
-	}
+			    $goodMoral['name'] = $data['name'];
+			    $goodMoral['age'] = $data['age'];
+			    $goodMoral['status'] = $data['status'];
+			    $goodMoral['address'] = $data['address'];
+			    $goodMoral->save();
+			    return response()->json(array('success' =>'Successfully Saved!'));
+			}catch(Exception $e){
+	           		return response()->json(array('error' =>'Error Occured!'));
+	        }
+        }
+        	
+    }
+		
 	public function addIndigency(){
 		$data = Request::all();
 		$indigency = new Indigency;

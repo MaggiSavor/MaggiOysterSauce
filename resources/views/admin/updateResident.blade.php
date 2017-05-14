@@ -436,12 +436,16 @@
         if(this.value == 'Transferred'){
           $('#transToWhere').attr('hidden', false);  
           $('#housecheck').prop('checked', false);
+          $('#househead').val('no');
           $('#familycheck').prop('checked', false);
+          $('#familyhead').val('no');
         }
         else if(this.value == 'Deceased'){
           $('#transToWhere').attr('hidden', true); 
           $('#housecheck').prop('checked', false);
+          $('#househead').val('no');
           $('#familycheck').prop('checked', false);
+          $('#familyhead').val('no');
         }
         else{
           $('#transToWhere').attr('hidden', true); 

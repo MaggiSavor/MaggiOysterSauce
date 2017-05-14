@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Models\CaseHistory;
 use App\Models\Blotter;
+use App\Models\Resident;
 use Request;
 use Auth;
 use Redirect;
@@ -23,7 +24,9 @@ class BlotterController extends Controller
 	}
 
 	public function addCase(){
-	    return view('admin.blotter.addCase');
+		$res = Resident::where('resident_status', '=', 'Active')->get();
+	    return view('admin.blotter.addCase')
+	    	->with('res', $res);
 	}
 
 	public function updateBlotter($id){

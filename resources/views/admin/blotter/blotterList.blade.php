@@ -224,7 +224,6 @@
                                             <th>Date Added</th>
                                             <th>Summon Date</th>
                                             <th>Issued Documents</th>
-                                            <th>Action</th>
                                           </tr>
                                         </thead>
                                           <tbody>
@@ -235,7 +234,6 @@
                                               <td>{{$caseHis->created_at}}</td>
                                               <td>{{$caseHis->summon_date}}</td>
                                               <td>{{$caseHis->issued}}</td>
-                                              <td><button class="btn btn-success btn-sm" type="button">Add Description</button></td>
                                             </tr>
                                             @endforeach 
                                           </tbody>

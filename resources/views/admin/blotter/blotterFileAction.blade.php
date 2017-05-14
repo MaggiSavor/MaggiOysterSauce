@@ -118,15 +118,15 @@
                                                  <label>Reasons:</label>
                                                  <div class="col-md-12">
                                                   <div class="radio">
-                                                      <input id="radio1" type="radio" value="Obey summons or to appear for hearing" name="reasons">
+                                                      <input id="radio1" type="radio" value="Option1" name="reasons">
                                                       <label for="radio1" class="control-label">Obey summons or to appear for hearing</label>
                                                   </div>
                                                   <div class="radio">
-                                                      <input id="radio2" type="radio" value="No settlement/conciliation was reached" name="reasons">
+                                                      <input id="radio2" type="radio" value="Option2" name="reasons">
                                                       <label for="radio2" class="control-label">No settlement/conciliation was reached</label>
                                                   </div>
                                                    <div class="radio">
-                                                      <input id="radio3" type="radio" value="Settlement has been repudiated" name="reasons">
+                                                      <input id="radio3" type="radio" value="Option3" name="reasons">
                                                       <label for="radio3" class="control-label">Settlement has been repudiated</label>
                                                   </div>
                                                 </div>
@@ -149,6 +149,7 @@
                       <p style="position:absolute; left:30%; top:44.5%;">{{$summons['defendant_fullname']}}</p>
                       <p style="position:absolute; left:20%; top:16%;">{{$summons['complainant_fullname']}}</p>
                       <p style="position:absolute; left:20%; top:25%;">{{$summons['defendant_fullname']}}</p>
+                      <p style="position:absolute; left:20%; top:25%;" class="radios"></p>
                       <?php
                         $date1 = date("d");
                         $date2 = date("F");
@@ -193,6 +194,25 @@
             } ).draw();
         });
       });
+    </script>
+    <script>
+      $("input:radio[name=reasons]").click(function() {
+        var reason = $(this).val();
+        $('.radios').html(reason);
+        var check = '(&#x2713)';
+        
+
+        if(reason == "Option1"){
+            $('.radios').css({"left": "11%", "top": "49%"});
+            $('.radios').html(check);
+        }else if(reason == "Option2"){
+            $('.radios').css({"left": "11%", "top": "52%"});
+            $('.radios').html(check);
+        }else if(reason == "Option3"){
+            $('.radios').css({"left": "11%", "top": "55%"});
+            $('.radios').html(check);
+        }
+    })
     </script>
    <script type="text/javascript">
         var oldPage = document.body.innerHTML;

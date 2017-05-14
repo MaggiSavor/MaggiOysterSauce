@@ -135,7 +135,7 @@
                                 <div class="form-group col-sm-12"" id="options" style="display: none;">
                                     <label for="inputStatus" class="col-sm-3 col-sm-offset-1 control-label">Select Reason:</label>
                                     <div class="col-sm-6">
-                                    <select id="reason" name="reason" class="form-control" >
+                                    <select id="reason" name="reason" class="form-control reason" >
                                                 <option value="option1">Obey summons or to appear for hearing</option>
                                                 <option value="option2">No settlement/conciliation was reached</option>
                                                 <option value="option3">Settlement has been repudiated</option>
@@ -181,6 +181,7 @@
          <p style="position:absolute; left:20%; top:16%;">{{$update['complainant_fullname']}}</p>
          <p style="position:absolute; left:20%; top:25%;">{{$update['defendant_fullname']}}</p>
          <p style="position:absolute; left:11%; top:50%;">{{$update['defendant_fullname']}}</p>
+         <p style="position:absolute; left:20%; top:25%;" class="radios"></p>
          <?php
            $date1 = date("d");
            $date2 = date("F");
@@ -209,6 +210,24 @@
         $('#button3').on('click',function(){
             
         });
+    </script>
+    <script>
+      $(".reason").click(function() {
+        var reason = $(this).val();
+        $('.radios').html(reason);
+        var check = '(&#x2713)';
+        alert(reason)
+        if(reason == "Option1"){
+            $('.radios').css({"left": "11%", "top": "49%"});
+            $('.radios').html(check);
+        }else if(reason == "Option2"){
+            $('.radios').css({"left": "11%", "top": "52%"});
+            $('.radios').html(check);
+        }else if(reason == "Option3"){
+            $('.radios').css({"left": "11%", "top": "55%"});
+            $('.radios').html(check);
+        }
+    })
     </script>
     <script type="text/javascript">
         var curstatus = document.getElementById("curstatus").value;
